@@ -1,0 +1,328 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
+		9E6696F5134B15CA00B9E0F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F4134B15CA00B9E0F4 /* Foundation.framework */; };
+		9E6696F7134B15CA00B9E0F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */; };
+		9E6696F9134B15CA00B9E0F4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F8134B15CA00B9E0F4 /* CoreData.framework */; };
+		9E6696FF134B15CA00B9E0F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E6696FD134B15CA00B9E0F4 /* InfoPlist.strings */; };
+		9E669702134B15CA00B9E0F4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669701134B15CA00B9E0F4 /* main.m */; };
+		9E669705134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */; };
+		9E669708134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */; };
+		9E66970C134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */; };
+		9E66970F134B15CB00B9E0F4 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66970D134B15CB00B9E0F4 /* MainWindow_iPhone.xib */; };
+		9E669713134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */; };
+		9E669716134B15CB00B9E0F4 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E6696F2134B15CA00B9E0F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9E6696F4134B15CA00B9E0F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9E6696F8134B15CA00B9E0F4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9E6696FC134B15CA00B9E0F4 /* E-Tipitaka-Info.plist */ = {isa = PBXFileReference; path = "E-Tipitaka-Info.plist"; sourceTree = "<group>"; };
+		9E6696FE134B15CA00B9E0F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9E669700134B15CA00B9E0F4 /* E-Tipitaka-Prefix.pch */ = {isa = PBXFileReference; path = "E-Tipitaka-Prefix.pch"; sourceTree = "<group>"; };
+		9E669701134B15CA00B9E0F4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */ = {isa = PBXFileReference; path = E_TipitakaAppDelegate.h; sourceTree = "<group>"; };
+		9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = E_TipitakaAppDelegate.m; sourceTree = "<group>"; };
+		9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = E_Tipitaka.xcdatamodel; sourceTree = "<group>"; };
+		9E66970A134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.h */ = {isa = PBXFileReference; name = E_TipitakaAppDelegate_iPhone.h; path = iPhone/E_TipitakaAppDelegate_iPhone.h; sourceTree = "<group>"; };
+		9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = E_TipitakaAppDelegate_iPhone.m; path = iPhone/E_TipitakaAppDelegate_iPhone.m; sourceTree = "<group>"; };
+		9E66970E134B15CB00B9E0F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		9E669711134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.h */ = {isa = PBXFileReference; name = E_TipitakaAppDelegate_iPad.h; path = iPad/E_TipitakaAppDelegate_iPad.h; sourceTree = "<group>"; };
+		9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = E_TipitakaAppDelegate_iPad.m; path = iPad/E_TipitakaAppDelegate_iPad.m; sourceTree = "<group>"; };
+		9E669715134B15CB00B9E0F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9E6696EB134B15CA00B9E0F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */,
+				9E6696F5134B15CA00B9E0F4 /* Foundation.framework in Frameworks */,
+				9E6696F7134B15CA00B9E0F4 /* CoreGraphics.framework in Frameworks */,
+				9E6696F9134B15CA00B9E0F4 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9E6696E3134B15C900B9E0F4 = {
+			isa = PBXGroup;
+			children = (
+				9E6696FA134B15CA00B9E0F4 /* E-Tipitaka */,
+				9E6696F1134B15CA00B9E0F4 /* Frameworks */,
+				9E6696EF134B15CA00B9E0F4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9E6696EF134B15CA00B9E0F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9E6696F1134B15CA00B9E0F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E6696F2134B15CA00B9E0F4 /* UIKit.framework */,
+				9E6696F4134B15CA00B9E0F4 /* Foundation.framework */,
+				9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */,
+				9E6696F8134B15CA00B9E0F4 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9E6696FA134B15CA00B9E0F4 /* E-Tipitaka */ = {
+			isa = PBXGroup;
+			children = (
+				9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */,
+				9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */,
+				9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */,
+				9E669709134B15CB00B9E0F4 /* iPhone */,
+				9E669710134B15CB00B9E0F4 /* iPad */,
+				9E6696FB134B15CA00B9E0F4 /* Supporting Files */,
+			);
+			path = "E-Tipitaka";
+			sourceTree = "<group>";
+		};
+		9E6696FB134B15CA00B9E0F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9E6696FC134B15CA00B9E0F4 /* E-Tipitaka-Info.plist */,
+				9E6696FD134B15CA00B9E0F4 /* InfoPlist.strings */,
+				9E669700134B15CA00B9E0F4 /* E-Tipitaka-Prefix.pch */,
+				9E669701134B15CA00B9E0F4 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9E669709134B15CB00B9E0F4 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				9E66970A134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.h */,
+				9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */,
+				9E66970D134B15CB00B9E0F4 /* MainWindow_iPhone.xib */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+		9E669710134B15CB00B9E0F4 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				9E669711134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.h */,
+				9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */,
+				9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9E6696ED134B15CA00B9E0F4 /* E-Tipitaka */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E669719134B15CB00B9E0F4 /* Build configuration list for PBXNativeTarget "E-Tipitaka" */;
+			buildPhases = (
+				9E6696EA134B15CA00B9E0F4 /* Sources */,
+				9E6696EB134B15CA00B9E0F4 /* Frameworks */,
+				9E6696EC134B15CA00B9E0F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "E-Tipitaka";
+			productName = "E-Tipitaka";
+			productReference = 9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9E6696E5134B15C900B9E0F4 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 9E6696E8134B15C900B9E0F4 /* Build configuration list for PBXProject "E-Tipitaka" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9E6696E3134B15C900B9E0F4;
+			productRefGroup = 9E6696EF134B15CA00B9E0F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9E6696ED134B15CA00B9E0F4 /* E-Tipitaka */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9E6696EC134B15CA00B9E0F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E6696FF134B15CA00B9E0F4 /* InfoPlist.strings in Resources */,
+				9E66970F134B15CB00B9E0F4 /* MainWindow_iPhone.xib in Resources */,
+				9E669716134B15CB00B9E0F4 /* MainWindow_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9E6696EA134B15CA00B9E0F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E669702134B15CA00B9E0F4 /* main.m in Sources */,
+				9E669705134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m in Sources */,
+				9E669708134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld in Sources */,
+				9E66970C134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m in Sources */,
+				9E669713134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9E6696FD134B15CA00B9E0F4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E6696FE134B15CA00B9E0F4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9E66970D134B15CB00B9E0F4 /* MainWindow_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E66970E134B15CB00B9E0F4 /* en */,
+			);
+			name = MainWindow_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E669715134B15CB00B9E0F4 /* en */,
+			);
+			name = MainWindow_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9E669717134B15CB00B9E0F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9E669718134B15CB00B9E0F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9E66971A134B15CB00B9E0F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
+				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9E66971B134B15CB00B9E0F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
+				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9E6696E8134B15C900B9E0F4 /* Build configuration list for PBXProject "E-Tipitaka" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E669717134B15CB00B9E0F4 /* Debug */,
+				9E669718134B15CB00B9E0F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9E669719134B15CB00B9E0F4 /* Build configuration list for PBXNativeTarget "E-Tipitaka" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E66971A134B15CB00B9E0F4 /* Debug */,
+				9E66971B134B15CB00B9E0F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */,
+			);
+			currentVersion = 9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */;
+			path = E_Tipitaka.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9E6696E5134B15C900B9E0F4 /* Project object */;
+}
