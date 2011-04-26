@@ -10,9 +10,33 @@
 
 @implementation E_TipitakaAppDelegate_iPhone
 
+//@synthesize window;
+@synthesize rootController;
+
 - (void)dealloc
 {
 	[super dealloc];
+    //[window release];
+    [rootController release];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Override point for customization after application launch.
+
+    // hide status bar
+    [application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    
+    // create database for the first time
+    [super createEditableCopyOfDatabaseIfNeeded];
+    
+
+    [self.window addSubview:rootController.view];    
+
+    
+    
+    [self.window makeKeyAndVisible];
+    return YES;
 }
 
 @end

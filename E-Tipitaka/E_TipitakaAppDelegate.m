@@ -7,6 +7,7 @@
 //
 
 #import "E_TipitakaAppDelegate.h"
+#import "ZipArchive.h"
 
 @implementation E_TipitakaAppDelegate
 
@@ -19,9 +20,40 @@
 
 @synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
 
+// Creates a writable copy of the bundled default database in the application Documents directory.
+- (void)createEditableCopyOfDatabaseIfNeeded {
+    // First, test for existence.
+    BOOL success;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
+    success = [fileManager fileExistsAtPath:writableDBPath];
+    if (success) return;
+    // The writable database does not exist, so copy the default to the appropriate location.
+    
+    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] 
+                               stringByAppendingPathComponent:@"E_Tipitaka.sqlite.zip"];
+    
+    // unzip the database file
+    ZipArchive *za = [[ZipArchive alloc] init];
+    if ([za UnzipOpenFile:defaultDBPath]) {
+        success = [za UnzipFileTo:documentsDirectory overWrite:YES];
+        [za UnzipCloseFile];
+    }
+    [za release];
+    
+    //success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+    if (!success) {
+        NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -59,6 +91,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
+    
     [self saveContext];
 }
 

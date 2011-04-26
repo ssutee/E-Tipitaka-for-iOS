@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E1721F61366C4C00011891C /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1721F51366C4C00011891C /* libz.1.2.3.dylib */; };
+		9E1722031366C4F90011891C /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721F91366C4F90011891C /* ioapi.c */; };
+		9E1722041366C4F90011891C /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721FB1366C4F90011891C /* mztools.c */; };
+		9E1722051366C4F90011891C /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721FD1366C4F90011891C /* unzip.c */; };
+		9E1722061366C4F90011891C /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721FF1366C4F90011891C /* zip.c */; };
+		9E1722071366C4F90011891C /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E1722021366C4F90011891C /* ZipArchive.mm */; };
+		9E1722091366C6400011891C /* E_Tipitaka.sqlite.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9E1722081366C6400011891C /* E_Tipitaka.sqlite.zip */; };
 		9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
 		9E6696F5134B15CA00B9E0F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F4134B15CA00B9E0F4 /* Foundation.framework */; };
 		9E6696F7134B15CA00B9E0F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */; };
@@ -16,30 +23,138 @@
 		9E669705134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */; };
 		9E669708134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */; };
 		9E66970C134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */; };
-		9E66970F134B15CB00B9E0F4 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66970D134B15CB00B9E0F4 /* MainWindow_iPhone.xib */; };
 		9E669713134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */; };
 		9E669716134B15CB00B9E0F4 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */; };
+		9E66973E134C574A00B9E0F4 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669737134C574A00B9E0F4 /* History.m */; };
+		9E66973F134C574A00B9E0F4 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669739134C574A00B9E0F4 /* Content.m */; };
+		9E669740134C574A00B9E0F4 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66973B134C574A00B9E0F4 /* Bookmark.m */; };
+		9E669741134C574A00B9E0F4 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66973D134C574A00B9E0F4 /* Item.m */; };
+		9E669745134C584300B9E0F4 /* TapDetectingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669744134C584300B9E0F4 /* TapDetectingWindow.m */; };
+		9E66974D134C5AFD00B9E0F4 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66974C134C5AFD00B9E0F4 /* MainWindow_iPhone.xib */; };
+		9E669754134C5C7B00B9E0F4 /* ReadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66974E134C5C7800B9E0F4 /* ReadViewController.xib */; };
+		9E669755134C5C7B00B9E0F4 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66974F134C5C7800B9E0F4 /* SearchViewController.xib */; };
+		9E669756134C5C7B00B9E0F4 /* BookListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669750134C5C7900B9E0F4 /* BookListTableViewController.xib */; };
+		9E669757134C5C7B00B9E0F4 /* BookmarkAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669751134C5C7900B9E0F4 /* BookmarkAddViewController.xib */; };
+		9E669758134C5C7B00B9E0F4 /* BookmarkListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669752134C5C7A00B9E0F4 /* BookmarkListViewController.xib */; };
+		9E669759134C5C7B00B9E0F4 /* SearchHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669753134C5C7A00B9E0F4 /* SearchHistoryViewController.xib */; };
+		9E66976A134C5D3600B9E0F4 /* ReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66975B134C5CF500B9E0F4 /* ReadViewController.m */; };
+		9E66976B134C5D3600B9E0F4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66975D134C5CF600B9E0F4 /* SearchViewController.m */; };
+		9E66976C134C5D3600B9E0F4 /* BookListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66975F134C5CF800B9E0F4 /* BookListTableViewController.m */; };
+		9E66976D134C5D3600B9E0F4 /* BookmarkAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669761134C5CFE00B9E0F4 /* BookmarkAddViewController.m */; };
+		9E66976E134C5D3600B9E0F4 /* BookmarkListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669763134C5D0600B9E0F4 /* BookmarkListViewController.m */; };
+		9E66976F134C5D3600B9E0F4 /* SearchHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669765134C5D1000B9E0F4 /* SearchHistoryViewController.m */; };
+		9E669770134C5D3600B9E0F4 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669767134C5D1F00B9E0F4 /* iToast.m */; };
+		9E669771134C5D3600B9E0F4 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669769134C5D2D00B9E0F4 /* Utils.m */; };
+		9E669773134C5DA300B9E0F4 /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E669772134C5DA200B9E0F4 /* Data.plist */; };
+		9E669776134C8FCE00B9E0F4 /* icon_arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669774134C8FC500B9E0F4 /* icon_arrow_left.png */; };
+		9E669777134C8FCE00B9E0F4 /* icon_arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669775134C8FC900B9E0F4 /* icon_arrow_right.png */; };
+		9E66977A134C8FEB00B9E0F4 /* icon_zoom_in.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669778134C8FE400B9E0F4 /* icon_zoom_in.png */; };
+		9E66977B134C8FEB00B9E0F4 /* icon_zoom_out.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669779134C8FE600B9E0F4 /* icon_zoom_out.png */; };
+		9E66977D134C902800B9E0F4 /* icon_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E66977C134C902500B9E0F4 /* icon_save.png */; };
+		9E66977F134C903900B9E0F4 /* icon_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E66977E134C903600B9E0F4 /* icon_refresh.png */; };
+		9E669785134C9F7A00B9E0F4 /* 06-magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669782134C9F6D00B9E0F4 /* 06-magnify.png */; };
+		9E669786134C9F7A00B9E0F4 /* 28-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669783134C9F6F00B9E0F4 /* 28-star.png */; };
+		9E669787134C9F7A00B9E0F4 /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669784134C9F7300B9E0F4 /* 179-notepad.png */; };
+		9E6697CB134CBF1A00B9E0F4 /* ReadView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697CA134CBF1900B9E0F4 /* ReadView_iPad.xib */; };
+		9E6697E1134ECC2400B9E0F4 /* Icom-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DA134ECC2400B9E0F4 /* Icom-Small-50.png */; };
+		9E6697E2134ECC2400B9E0F4 /* Icom-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DB134ECC2400B9E0F4 /* Icom-Small@2x.png */; };
+		9E6697E3134ECC2400B9E0F4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DC134ECC2400B9E0F4 /* Icon.png */; };
+		9E6697E4134ECC2400B9E0F4 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DD134ECC2400B9E0F4 /* Icon-72.png */; };
+		9E6697E5134ECC2400B9E0F4 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */; };
+		9E6697E6134ECC2400B9E0F4 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */; };
+		9E6697E7134ECC2400B9E0F4 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */; };
+		9EA21D0B134F3EBE00C17FD6 /* Pages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA21D0A134F3EBC00C17FD6 /* Pages.plist */; };
+		9EA21D0E134F5C6400C17FD6 /* Items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA21D0D134F5C6000C17FD6 /* Items.plist */; };
+		9EA859F4135011F6002195A6 /* Names.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA859F3135011F6002195A6 /* Names.plist */; };
+		9EC2A854136267FA0082BBB7 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EC2A853136267FA0082BBB7 /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E1721F51366C4C00011891C /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		9E1721F81366C4F90011891C /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		9E1721F91366C4F90011891C /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		9E1721FA1366C4F90011891C /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		9E1721FB1366C4F90011891C /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		9E1721FC1366C4F90011891C /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		9E1721FD1366C4F90011891C /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		9E1721FE1366C4F90011891C /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		9E1721FF1366C4F90011891C /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		9E1722001366C4F90011891C /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		9E1722011366C4F90011891C /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		9E1722021366C4F90011891C /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
+		9E1722081366C6400011891C /* E_Tipitaka.sqlite.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = E_Tipitaka.sqlite.zip; sourceTree = "<group>"; };
 		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6696F2134B15CA00B9E0F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E6696F4134B15CA00B9E0F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9E6696F8134B15CA00B9E0F4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		9E6696FC134B15CA00B9E0F4 /* E-Tipitaka-Info.plist */ = {isa = PBXFileReference; path = "E-Tipitaka-Info.plist"; sourceTree = "<group>"; };
+		9E6696FC134B15CA00B9E0F4 /* E-Tipitaka-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "E-Tipitaka-Info.plist"; sourceTree = "<group>"; };
 		9E6696FE134B15CA00B9E0F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9E669700134B15CA00B9E0F4 /* E-Tipitaka-Prefix.pch */ = {isa = PBXFileReference; path = "E-Tipitaka-Prefix.pch"; sourceTree = "<group>"; };
+		9E669700134B15CA00B9E0F4 /* E-Tipitaka-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "E-Tipitaka-Prefix.pch"; sourceTree = "<group>"; };
 		9E669701134B15CA00B9E0F4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */ = {isa = PBXFileReference; path = E_TipitakaAppDelegate.h; sourceTree = "<group>"; };
+		9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = E_TipitakaAppDelegate.h; sourceTree = "<group>"; };
 		9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = E_TipitakaAppDelegate.m; sourceTree = "<group>"; };
 		9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = E_Tipitaka.xcdatamodel; sourceTree = "<group>"; };
-		9E66970A134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.h */ = {isa = PBXFileReference; name = E_TipitakaAppDelegate_iPhone.h; path = iPhone/E_TipitakaAppDelegate_iPhone.h; sourceTree = "<group>"; };
+		9E66970A134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = E_TipitakaAppDelegate_iPhone.h; path = iPhone/E_TipitakaAppDelegate_iPhone.h; sourceTree = "<group>"; };
 		9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = E_TipitakaAppDelegate_iPhone.m; path = iPhone/E_TipitakaAppDelegate_iPhone.m; sourceTree = "<group>"; };
-		9E66970E134B15CB00B9E0F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
-		9E669711134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.h */ = {isa = PBXFileReference; name = E_TipitakaAppDelegate_iPad.h; path = iPad/E_TipitakaAppDelegate_iPad.h; sourceTree = "<group>"; };
+		9E669711134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = E_TipitakaAppDelegate_iPad.h; path = iPad/E_TipitakaAppDelegate_iPad.h; sourceTree = "<group>"; };
 		9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = E_TipitakaAppDelegate_iPad.m; path = iPad/E_TipitakaAppDelegate_iPad.m; sourceTree = "<group>"; };
 		9E669715134B15CB00B9E0F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
+		9E669736134C574A00B9E0F4 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
+		9E669737134C574A00B9E0F4 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
+		9E669738134C574A00B9E0F4 /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Content.h; sourceTree = "<group>"; };
+		9E669739134C574A00B9E0F4 /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Content.m; sourceTree = "<group>"; };
+		9E66973A134C574A00B9E0F4 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
+		9E66973B134C574A00B9E0F4 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
+		9E66973C134C574A00B9E0F4 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		9E66973D134C574A00B9E0F4 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		9E669743134C584300B9E0F4 /* TapDetectingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectingWindow.h; sourceTree = "<group>"; };
+		9E669744134C584300B9E0F4 /* TapDetectingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectingWindow.m; sourceTree = "<group>"; };
+		9E66974C134C5AFD00B9E0F4 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		9E66974E134C5C7800B9E0F4 /* ReadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadViewController.xib; sourceTree = "<group>"; };
+		9E66974F134C5C7800B9E0F4 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		9E669750134C5C7900B9E0F4 /* BookListTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookListTableViewController.xib; sourceTree = "<group>"; };
+		9E669751134C5C7900B9E0F4 /* BookmarkAddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkAddViewController.xib; sourceTree = "<group>"; };
+		9E669752134C5C7A00B9E0F4 /* BookmarkListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkListViewController.xib; sourceTree = "<group>"; };
+		9E669753134C5C7A00B9E0F4 /* SearchHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchHistoryViewController.xib; sourceTree = "<group>"; };
+		9E66975A134C5CF400B9E0F4 /* ReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadViewController.h; sourceTree = "<group>"; };
+		9E66975B134C5CF500B9E0F4 /* ReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadViewController.m; sourceTree = "<group>"; };
+		9E66975C134C5CF500B9E0F4 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		9E66975D134C5CF600B9E0F4 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		9E66975E134C5CF700B9E0F4 /* BookListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListTableViewController.h; sourceTree = "<group>"; };
+		9E66975F134C5CF800B9E0F4 /* BookListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookListTableViewController.m; sourceTree = "<group>"; };
+		9E669760134C5CFB00B9E0F4 /* BookmarkAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkAddViewController.h; sourceTree = "<group>"; };
+		9E669761134C5CFE00B9E0F4 /* BookmarkAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkAddViewController.m; sourceTree = "<group>"; };
+		9E669762134C5D0200B9E0F4 /* BookmarkListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkListViewController.h; sourceTree = "<group>"; };
+		9E669763134C5D0600B9E0F4 /* BookmarkListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkListViewController.m; sourceTree = "<group>"; };
+		9E669764134C5D0A00B9E0F4 /* SearchHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHistoryViewController.h; sourceTree = "<group>"; };
+		9E669765134C5D1000B9E0F4 /* SearchHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHistoryViewController.m; sourceTree = "<group>"; };
+		9E669766134C5D1800B9E0F4 /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
+		9E669767134C5D1F00B9E0F4 /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
+		9E669768134C5D2500B9E0F4 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		9E669769134C5D2D00B9E0F4 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		9E669772134C5DA200B9E0F4 /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
+		9E669774134C8FC500B9E0F4 /* icon_arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow_left.png; sourceTree = "<group>"; };
+		9E669775134C8FC900B9E0F4 /* icon_arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow_right.png; sourceTree = "<group>"; };
+		9E669778134C8FE400B9E0F4 /* icon_zoom_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_zoom_in.png; sourceTree = "<group>"; };
+		9E669779134C8FE600B9E0F4 /* icon_zoom_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_zoom_out.png; sourceTree = "<group>"; };
+		9E66977C134C902500B9E0F4 /* icon_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_save.png; sourceTree = "<group>"; };
+		9E66977E134C903600B9E0F4 /* icon_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_refresh.png; sourceTree = "<group>"; };
+		9E669782134C9F6D00B9E0F4 /* 06-magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify.png"; sourceTree = "<group>"; };
+		9E669783134C9F6F00B9E0F4 /* 28-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star.png"; sourceTree = "<group>"; };
+		9E669784134C9F7300B9E0F4 /* 179-notepad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad.png"; sourceTree = "<group>"; };
+		9E6697CA134CBF1900B9E0F4 /* ReadView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadView_iPad.xib; sourceTree = "<group>"; };
+		9E6697DA134ECC2400B9E0F4 /* Icom-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icom-Small-50.png"; sourceTree = "<group>"; };
+		9E6697DB134ECC2400B9E0F4 /* Icom-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icom-Small@2x.png"; sourceTree = "<group>"; };
+		9E6697DC134ECC2400B9E0F4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		9E6697DD134ECC2400B9E0F4 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		9EA21D0A134F3EBC00C17FD6 /* Pages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pages.plist; sourceTree = "<group>"; };
+		9EA21D0D134F5C6000C17FD6 /* Items.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Items.plist; sourceTree = "<group>"; };
+		9EA859F3135011F6002195A6 /* Names.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Names.plist; sourceTree = "<group>"; };
+		9EC2A853136267FA0082BBB7 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E1721F61366C4C00011891C /* libz.1.2.3.dylib in Frameworks */,
 				9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */,
 				9E6696F5134B15CA00B9E0F4 /* Foundation.framework in Frameworks */,
 				9E6696F7134B15CA00B9E0F4 /* CoreGraphics.framework in Frameworks */,
@@ -57,9 +173,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E1721F71366C4F90011891C /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				9E1721F81366C4F90011891C /* crypt.h */,
+				9E1721F91366C4F90011891C /* ioapi.c */,
+				9E1721FA1366C4F90011891C /* ioapi.h */,
+				9E1721FB1366C4F90011891C /* mztools.c */,
+				9E1721FC1366C4F90011891C /* mztools.h */,
+				9E1721FD1366C4F90011891C /* unzip.c */,
+				9E1721FE1366C4F90011891C /* unzip.h */,
+				9E1721FF1366C4F90011891C /* zip.c */,
+				9E1722001366C4F90011891C /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
 		9E6696E3134B15C900B9E0F4 = {
 			isa = PBXGroup;
 			children = (
+				9E1721F51366C4C00011891C /* libz.1.2.3.dylib */,
+				9EC2A853136267FA0082BBB7 /* Entitlements.plist */,
 				9E6696FA134B15CA00B9E0F4 /* E-Tipitaka */,
 				9E6696F1134B15CA00B9E0F4 /* Frameworks */,
 				9E6696EF134B15CA00B9E0F4 /* Products */,
@@ -88,9 +222,59 @@
 		9E6696FA134B15CA00B9E0F4 /* E-Tipitaka */ = {
 			isa = PBXGroup;
 			children = (
+				9E1721F71366C4F90011891C /* minizip */,
+				9E1722011366C4F90011891C /* ZipArchive.h */,
+				9E1722021366C4F90011891C /* ZipArchive.mm */,
+				9E669736134C574A00B9E0F4 /* History.h */,
+				9E669737134C574A00B9E0F4 /* History.m */,
+				9E669738134C574A00B9E0F4 /* Content.h */,
+				9E669739134C574A00B9E0F4 /* Content.m */,
+				9E66973A134C574A00B9E0F4 /* Bookmark.h */,
+				9E66973B134C574A00B9E0F4 /* Bookmark.m */,
+				9E66973C134C574A00B9E0F4 /* Item.h */,
+				9E66973D134C574A00B9E0F4 /* Item.m */,
+				9E669743134C584300B9E0F4 /* TapDetectingWindow.h */,
+				9E669744134C584300B9E0F4 /* TapDetectingWindow.m */,
 				9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */,
 				9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */,
+				9E66975A134C5CF400B9E0F4 /* ReadViewController.h */,
+				9E66975B134C5CF500B9E0F4 /* ReadViewController.m */,
+				9E66975C134C5CF500B9E0F4 /* SearchViewController.h */,
+				9E66975D134C5CF600B9E0F4 /* SearchViewController.m */,
+				9E66975E134C5CF700B9E0F4 /* BookListTableViewController.h */,
+				9E66975F134C5CF800B9E0F4 /* BookListTableViewController.m */,
+				9E669760134C5CFB00B9E0F4 /* BookmarkAddViewController.h */,
+				9E669761134C5CFE00B9E0F4 /* BookmarkAddViewController.m */,
+				9E669762134C5D0200B9E0F4 /* BookmarkListViewController.h */,
+				9E669763134C5D0600B9E0F4 /* BookmarkListViewController.m */,
+				9E669764134C5D0A00B9E0F4 /* SearchHistoryViewController.h */,
+				9E669765134C5D1000B9E0F4 /* SearchHistoryViewController.m */,
+				9E669766134C5D1800B9E0F4 /* iToast.h */,
+				9E669767134C5D1F00B9E0F4 /* iToast.m */,
+				9E669768134C5D2500B9E0F4 /* Utils.h */,
+				9E669769134C5D2D00B9E0F4 /* Utils.m */,
 				9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */,
+				9E1722081366C6400011891C /* E_Tipitaka.sqlite.zip */,
+				9E669772134C5DA200B9E0F4 /* Data.plist */,
+				9EA21D0A134F3EBC00C17FD6 /* Pages.plist */,
+				9EA21D0D134F5C6000C17FD6 /* Items.plist */,
+				9EA859F3135011F6002195A6 /* Names.plist */,
+				9E669774134C8FC500B9E0F4 /* icon_arrow_left.png */,
+				9E669775134C8FC900B9E0F4 /* icon_arrow_right.png */,
+				9E669778134C8FE400B9E0F4 /* icon_zoom_in.png */,
+				9E669779134C8FE600B9E0F4 /* icon_zoom_out.png */,
+				9E66977C134C902500B9E0F4 /* icon_save.png */,
+				9E66977E134C903600B9E0F4 /* icon_refresh.png */,
+				9E669782134C9F6D00B9E0F4 /* 06-magnify.png */,
+				9E669783134C9F6F00B9E0F4 /* 28-star.png */,
+				9E669784134C9F7300B9E0F4 /* 179-notepad.png */,
+				9E6697DA134ECC2400B9E0F4 /* Icom-Small-50.png */,
+				9E6697DB134ECC2400B9E0F4 /* Icom-Small@2x.png */,
+				9E6697DC134ECC2400B9E0F4 /* Icon.png */,
+				9E6697DD134ECC2400B9E0F4 /* Icon-72.png */,
+				9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */,
+				9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */,
+				9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */,
 				9E669709134B15CB00B9E0F4 /* iPhone */,
 				9E669710134B15CB00B9E0F4 /* iPad */,
 				9E6696FB134B15CA00B9E0F4 /* Supporting Files */,
@@ -114,7 +298,13 @@
 			children = (
 				9E66970A134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.h */,
 				9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */,
-				9E66970D134B15CB00B9E0F4 /* MainWindow_iPhone.xib */,
+				9E66974C134C5AFD00B9E0F4 /* MainWindow_iPhone.xib */,
+				9E66974E134C5C7800B9E0F4 /* ReadViewController.xib */,
+				9E66974F134C5C7800B9E0F4 /* SearchViewController.xib */,
+				9E669750134C5C7900B9E0F4 /* BookListTableViewController.xib */,
+				9E669751134C5C7900B9E0F4 /* BookmarkAddViewController.xib */,
+				9E669752134C5C7A00B9E0F4 /* BookmarkListViewController.xib */,
+				9E669753134C5C7A00B9E0F4 /* SearchHistoryViewController.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -125,6 +315,7 @@
 				9E669711134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.h */,
 				9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */,
 				9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */,
+				9E6697CA134CBF1900B9E0F4 /* ReadView_iPad.xib */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -177,8 +368,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E6696FF134B15CA00B9E0F4 /* InfoPlist.strings in Resources */,
-				9E66970F134B15CB00B9E0F4 /* MainWindow_iPhone.xib in Resources */,
 				9E669716134B15CB00B9E0F4 /* MainWindow_iPad.xib in Resources */,
+				9E66974D134C5AFD00B9E0F4 /* MainWindow_iPhone.xib in Resources */,
+				9E669754134C5C7B00B9E0F4 /* ReadViewController.xib in Resources */,
+				9E669755134C5C7B00B9E0F4 /* SearchViewController.xib in Resources */,
+				9E669756134C5C7B00B9E0F4 /* BookListTableViewController.xib in Resources */,
+				9E669757134C5C7B00B9E0F4 /* BookmarkAddViewController.xib in Resources */,
+				9E669758134C5C7B00B9E0F4 /* BookmarkListViewController.xib in Resources */,
+				9E669759134C5C7B00B9E0F4 /* SearchHistoryViewController.xib in Resources */,
+				9E669773134C5DA300B9E0F4 /* Data.plist in Resources */,
+				9E669776134C8FCE00B9E0F4 /* icon_arrow_left.png in Resources */,
+				9E669777134C8FCE00B9E0F4 /* icon_arrow_right.png in Resources */,
+				9E66977A134C8FEB00B9E0F4 /* icon_zoom_in.png in Resources */,
+				9E66977B134C8FEB00B9E0F4 /* icon_zoom_out.png in Resources */,
+				9E66977D134C902800B9E0F4 /* icon_save.png in Resources */,
+				9E66977F134C903900B9E0F4 /* icon_refresh.png in Resources */,
+				9E669785134C9F7A00B9E0F4 /* 06-magnify.png in Resources */,
+				9E669786134C9F7A00B9E0F4 /* 28-star.png in Resources */,
+				9E669787134C9F7A00B9E0F4 /* 179-notepad.png in Resources */,
+				9E6697CB134CBF1A00B9E0F4 /* ReadView_iPad.xib in Resources */,
+				9E6697E1134ECC2400B9E0F4 /* Icom-Small-50.png in Resources */,
+				9E6697E2134ECC2400B9E0F4 /* Icom-Small@2x.png in Resources */,
+				9E6697E3134ECC2400B9E0F4 /* Icon.png in Resources */,
+				9E6697E4134ECC2400B9E0F4 /* Icon-72.png in Resources */,
+				9E6697E5134ECC2400B9E0F4 /* Icon-Small.png in Resources */,
+				9E6697E6134ECC2400B9E0F4 /* Icon@2x.png in Resources */,
+				9E6697E7134ECC2400B9E0F4 /* iTunesArtwork in Resources */,
+				9EA21D0B134F3EBE00C17FD6 /* Pages.plist in Resources */,
+				9EA21D0E134F5C6400C17FD6 /* Items.plist in Resources */,
+				9EA859F4135011F6002195A6 /* Names.plist in Resources */,
+				9EC2A854136267FA0082BBB7 /* Entitlements.plist in Resources */,
+				9E1722091366C6400011891C /* E_Tipitaka.sqlite.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +414,24 @@
 				9E669708134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld in Sources */,
 				9E66970C134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m in Sources */,
 				9E669713134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m in Sources */,
+				9E66973E134C574A00B9E0F4 /* History.m in Sources */,
+				9E66973F134C574A00B9E0F4 /* Content.m in Sources */,
+				9E669740134C574A00B9E0F4 /* Bookmark.m in Sources */,
+				9E669741134C574A00B9E0F4 /* Item.m in Sources */,
+				9E669745134C584300B9E0F4 /* TapDetectingWindow.m in Sources */,
+				9E66976A134C5D3600B9E0F4 /* ReadViewController.m in Sources */,
+				9E66976B134C5D3600B9E0F4 /* SearchViewController.m in Sources */,
+				9E66976C134C5D3600B9E0F4 /* BookListTableViewController.m in Sources */,
+				9E66976D134C5D3600B9E0F4 /* BookmarkAddViewController.m in Sources */,
+				9E66976E134C5D3600B9E0F4 /* BookmarkListViewController.m in Sources */,
+				9E66976F134C5D3600B9E0F4 /* SearchHistoryViewController.m in Sources */,
+				9E669770134C5D3600B9E0F4 /* iToast.m in Sources */,
+				9E669771134C5D3600B9E0F4 /* Utils.m in Sources */,
+				9E1722031366C4F90011891C /* ioapi.c in Sources */,
+				9E1722041366C4F90011891C /* mztools.c in Sources */,
+				9E1722051366C4F90011891C /* unzip.c in Sources */,
+				9E1722061366C4F90011891C /* zip.c in Sources */,
+				9E1722071366C4F90011891C /* ZipArchive.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,14 +444,6 @@
 				9E6696FE134B15CA00B9E0F4 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		9E66970D134B15CB00B9E0F4 /* MainWindow_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9E66970E134B15CB00B9E0F4 /* en */,
-			);
-			name = MainWindow_iPhone.xib;
 			sourceTree = "<group>";
 		};
 		9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */ = {
@@ -239,7 +469,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -254,7 +484,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -270,6 +500,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -283,11 +514,47 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
+		};
+		9EC2A851136265CD0082BBB7 /* Ad Hoc Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Ad Hoc Distribution";
+		};
+		9EC2A852136265CD0082BBB7 /* Ad Hoc Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
+				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Ad Hoc Distribution";
 		};
 /* End XCBuildConfiguration section */
 
@@ -297,6 +564,7 @@
 			buildConfigurations = (
 				9E669717134B15CB00B9E0F4 /* Debug */,
 				9E669718134B15CB00B9E0F4 /* Release */,
+				9EC2A851136265CD0082BBB7 /* Ad Hoc Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -306,8 +574,10 @@
 			buildConfigurations = (
 				9E66971A134B15CB00B9E0F4 /* Debug */,
 				9E66971B134B15CB00B9E0F4 /* Release */,
+				9EC2A852136265CD0082BBB7 /* Ad Hoc Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

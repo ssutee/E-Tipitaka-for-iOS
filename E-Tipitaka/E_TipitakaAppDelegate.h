@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TapDetectingWindow.h"
 
 @interface E_TipitakaAppDelegate : NSObject <UIApplicationDelegate> {
-
+    TapDetectingWindow *window;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet TapDetectingWindow *window;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
@@ -20,5 +21,6 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (void)createEditableCopyOfDatabaseIfNeeded;
 
 @end
