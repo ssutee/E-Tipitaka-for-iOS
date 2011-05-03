@@ -32,13 +32,19 @@
         self.search.selectedScopeButtonIndex = kPaliScope;
         self.scope = kPaliScope;
         self.search.placeholder = @"ภาษาบาลี";
+        self.navigationItem.title = @"ค้นหา (บาลี)";        
         self.navigationItem.leftBarButtonItem.title = @"ไทย";
     } else if(self.search.selectedScopeButtonIndex == kPaliScope) {
         self.search.selectedScopeButtonIndex = kThaiScope;
         self.scope = kThaiScope;
         self.search.placeholder = @"ภาษาไทย";
+        self.navigationItem.title = @"ค้นหา (ไทย)";        
         self.navigationItem.leftBarButtonItem.title = @"บาลี";
     }
+	self.search.text = @"";
+	[self resetSearch];
+	[table reloadData];
+    
 }
 
 -(IBAction)showSearchHistory:(id)sender {
@@ -384,10 +390,14 @@
     
 	if (self.search.selectedScopeButtonIndex == kThaiScope) {
 		self.search.placeholder = @"ภาษาไทย";
-        self.navigationItem.leftBarButtonItem.title = @"บาลี";       
+        self.navigationItem.leftBarButtonItem.title = @"บาลี";
+        self.navigationItem.title = @"ค้นหา (ไทย)";
+        //self.title = @"ค้นหา (ไทย)";
 	} else {
 		self.search.placeholder = @"ภาษาบาลี";
         self.navigationItem.leftBarButtonItem.title = @"ไทย";                
+        self.navigationItem.title = @"ค้นหา (บาลี)";        
+        //self.title = @"ค้นหา (บาลี)";
 	}
     
 	self.search.showsCancelButton = NO;	
@@ -729,8 +739,10 @@
 	scope = selectedScope;
 	if (scope == kThaiScope) {
 		searchBar.placeholder = @"ภาษาไทย";
+        self.navigationItem.title = @"ค้นหา (ไทย)";        
 	} else {
 		searchBar.placeholder = @"ภาษาบาลี";
+        self.navigationItem.title = @"ค้นหา (บาลี)";        
 	}	
 }
 
