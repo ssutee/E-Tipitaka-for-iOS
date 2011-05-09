@@ -575,7 +575,7 @@
 	//self.dataDictionary = [[NSMutableDictionary alloc] initWithDictionary:[Utils readData]];
 	//[dataDictionary release];
     self.dataDictionary = [Utils readData];
-    NSLog(@"%@", self.dataDictionary);
+    //NSLog(@"%@", self.dataDictionary);
 	//NSLog(@"retain dataDictionary %d",[dataDictionary retainCount]);
 	
 }
@@ -1170,6 +1170,13 @@
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
+    
+    [self dismissAllPopoverControllers];
+    
+    [searchPopoverController release];
+    self.searchPopoverController = nil;
+    [bookmarkPopoverController release];
+    self.bookmarkPopoverController = nil;
     
     // Release any cached data, images, etc. that aren't in use.
 }

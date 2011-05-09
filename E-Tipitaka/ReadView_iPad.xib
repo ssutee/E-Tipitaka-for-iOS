@@ -154,7 +154,7 @@
 					<object class="IBUIWebView" id="540575712">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 66}, {768, 938}}</string>
+						<string key="NSFrame">{{0, 74}, {768, 930}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="50393659">
@@ -168,7 +168,7 @@
 					<object class="IBUILabel" id="887358500">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
-						<string key="NSFrame">{{0, 44}, {768, 22}}</string>
+						<string key="NSFrame">{{0, 44}, {768, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="540575712"/>
@@ -183,7 +183,7 @@
 						<string key="IBUIText">หน้าที่</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">18</double>
+							<double key="NSSize">22</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<reference key="IBUITextColor" ref="50393659"/>
@@ -194,7 +194,7 @@
 						</object>
 						<string key="IBUIShadowOffset">{0, 1}</string>
 						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
+						<float key="IBUIMinimumFontSize">20</float>
 						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUILabel" id="1042911001">
@@ -431,8 +431,8 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="21117755"/>
 							<reference ref="887358500"/>
-							<reference ref="540575712"/>
 							<reference ref="1042911001"/>
+							<reference ref="540575712"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>

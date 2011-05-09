@@ -105,6 +105,8 @@
     return 0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath { return 60;
+}
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -132,7 +134,13 @@
     
     NSString *label = [[NSString alloc] initWithFormat:@"%d. %@", volume, [bookInfo objectAtIndex:0]];
     cell.textLabel.text = [Utils arabic2thai:label];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:22];
     cell.detailTextLabel.text = [bookInfo objectAtIndex:1];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:20];
+
+
+    //NSLog(@"%@ %f", cell.textLabel.font.fontName, cell.textLabel.font.pointSize);
+    //NSLog(@"%@ %f", cell.detailTextLabel.font.fontName, cell.detailTextLabel.font.pointSize);
     
 	[label release];
 	

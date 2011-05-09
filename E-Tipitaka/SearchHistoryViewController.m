@@ -230,10 +230,10 @@
     
         History *history = [self.historyData objectAtIndex:indexPath.row];
         
-        for(Content *content in history.contents) {
+        //for(Content *content in history.contents) {
             //[history removeContentsObject:content];
             //[content removeHistoriesObject:history];
-        }
+        //}
         
         [context deleteObject:history];
         
@@ -274,7 +274,7 @@
     NSInteger row = indexPath.row;
     
     SearchViewController *searchController = [self.navigationController.viewControllers objectAtIndex:0];
-
+    
     [searchController loadHistory:[self.historyData objectAtIndex:row]];
 
     [self.navigationController popToRootViewControllerAnimated:YES];
