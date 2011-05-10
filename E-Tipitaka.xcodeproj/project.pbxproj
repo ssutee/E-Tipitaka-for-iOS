@@ -14,6 +14,8 @@
 		9E1722061366C4F90011891C /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721FF1366C4F90011891C /* zip.c */; };
 		9E1722071366C4F90011891C /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E1722021366C4F90011891C /* ZipArchive.mm */; };
 		9E1722091366C6400011891C /* E_Tipitaka.sqlite.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9E1722081366C6400011891C /* E_Tipitaka.sqlite.zip */; };
+		9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D7137862D00092521B /* Icon-Small@2x.png */; };
+		9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D8137862D00092521B /* Icon-Small-50.png */; };
 		9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
 		9E6696F5134B15CA00B9E0F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F4134B15CA00B9E0F4 /* Foundation.framework */; };
 		9E6696F7134B15CA00B9E0F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */; };
@@ -56,8 +58,6 @@
 		9E669786134C9F7A00B9E0F4 /* 28-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669783134C9F6F00B9E0F4 /* 28-star.png */; };
 		9E669787134C9F7A00B9E0F4 /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669784134C9F7300B9E0F4 /* 179-notepad.png */; };
 		9E6697CB134CBF1A00B9E0F4 /* ReadView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697CA134CBF1900B9E0F4 /* ReadView_iPad.xib */; };
-		9E6697E1134ECC2400B9E0F4 /* Icom-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DA134ECC2400B9E0F4 /* Icom-Small-50.png */; };
-		9E6697E2134ECC2400B9E0F4 /* Icom-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DB134ECC2400B9E0F4 /* Icom-Small@2x.png */; };
 		9E6697E3134ECC2400B9E0F4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DC134ECC2400B9E0F4 /* Icon.png */; };
 		9E6697E4134ECC2400B9E0F4 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DD134ECC2400B9E0F4 /* Icon-72.png */; };
 		9E6697E5134ECC2400B9E0F4 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */; };
@@ -88,6 +88,8 @@
 		9E1722011366C4F90011891C /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 		9E1722021366C4F90011891C /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		9E1722081366C6400011891C /* E_Tipitaka.sqlite.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = E_Tipitaka.sqlite.zip; sourceTree = "<group>"; };
+		9E3DA8D7137862D00092521B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		9E3DA8D8137862D00092521B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6696F2134B15CA00B9E0F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E6696F4134B15CA00B9E0F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -149,8 +151,6 @@
 		9E669783134C9F6F00B9E0F4 /* 28-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star.png"; sourceTree = "<group>"; };
 		9E669784134C9F7300B9E0F4 /* 179-notepad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad.png"; sourceTree = "<group>"; };
 		9E6697CA134CBF1900B9E0F4 /* ReadView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadView_iPad.xib; sourceTree = "<group>"; };
-		9E6697DA134ECC2400B9E0F4 /* Icom-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icom-Small-50.png"; sourceTree = "<group>"; };
-		9E6697DB134ECC2400B9E0F4 /* Icom-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icom-Small@2x.png"; sourceTree = "<group>"; };
 		9E6697DC134ECC2400B9E0F4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		9E6697DD134ECC2400B9E0F4 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -278,12 +278,12 @@
 				9E669782134C9F6D00B9E0F4 /* 06-magnify.png */,
 				9E669783134C9F6F00B9E0F4 /* 28-star.png */,
 				9E669784134C9F7300B9E0F4 /* 179-notepad.png */,
-				9E6697DA134ECC2400B9E0F4 /* Icom-Small-50.png */,
-				9E6697DB134ECC2400B9E0F4 /* Icom-Small@2x.png */,
 				9E6697DC134ECC2400B9E0F4 /* Icon.png */,
 				9E6697DD134ECC2400B9E0F4 /* Icon-72.png */,
 				9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */,
 				9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */,
+				9E3DA8D7137862D00092521B /* Icon-Small@2x.png */,
+				9E3DA8D8137862D00092521B /* Icon-Small-50.png */,
 				9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */,
 				9EA8F3F213782BB800BEE728 /* Default-Landscape~ipad.png */,
 				9EA8F3F313782BB800BEE728 /* Default-Portrait~ipad.png */,
@@ -402,8 +402,6 @@
 				9E669786134C9F7A00B9E0F4 /* 28-star.png in Resources */,
 				9E669787134C9F7A00B9E0F4 /* 179-notepad.png in Resources */,
 				9E6697CB134CBF1A00B9E0F4 /* ReadView_iPad.xib in Resources */,
-				9E6697E1134ECC2400B9E0F4 /* Icom-Small-50.png in Resources */,
-				9E6697E2134ECC2400B9E0F4 /* Icom-Small@2x.png in Resources */,
 				9E6697E3134ECC2400B9E0F4 /* Icon.png in Resources */,
 				9E6697E4134ECC2400B9E0F4 /* Icon-72.png in Resources */,
 				9E6697E5134ECC2400B9E0F4 /* Icon-Small.png in Resources */,
@@ -419,6 +417,8 @@
 				9EA8F3F913782BB800BEE728 /* Default.png in Resources */,
 				9EA8F3FA13782BB800BEE728 /* Default@2x.png in Resources */,
 				9EA8F3FB13782BB800BEE728 /* Default~ipad.png in Resources */,
+				9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */,
+				9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +541,40 @@
 			};
 			name = Release;
 		};
+		9EA8F3FC1378507B00BEE728 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Distribution;
+		};
+		9EA8F3FD1378507B00BEE728 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sutee Sudprasert";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
+				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B59D3411-D720-4F29-B289-AD285D3C21BD";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
 		9EC2A851136265CD0082BBB7 /* Ad Hoc Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -584,20 +618,22 @@
 			buildConfigurations = (
 				9E669717134B15CB00B9E0F4 /* Debug */,
 				9E669718134B15CB00B9E0F4 /* Release */,
+				9EA8F3FC1378507B00BEE728 /* Distribution */,
 				9EC2A851136265CD0082BBB7 /* Ad Hoc Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 		9E669719134B15CB00B9E0F4 /* Build configuration list for PBXNativeTarget "E-Tipitaka" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9E66971A134B15CB00B9E0F4 /* Debug */,
 				9E66971B134B15CB00B9E0F4 /* Release */,
+				9EA8F3FD1378507B00BEE728 /* Distribution */,
 				9EC2A852136265CD0082BBB7 /* Ad Hoc Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 /* End XCConfigurationList section */
 
