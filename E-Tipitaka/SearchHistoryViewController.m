@@ -30,7 +30,41 @@
     
 }
 
+-(void) deleteJunkRecords {
+	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
+	
+	NSManagedObjectContext *context = [appDelegate managedObjectContext];
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	
+	NSEntityDescription *entity = [NSEntityDescription 
+								   entityForName:@"History" 
+								   inManagedObjectContext:context];	
+	[fetchRequest setEntity:entity];
+	NSPredicate *pred = [NSPredicate
+                         predicateWithFormat:@"(lang == nil)"];
+	
+	[fetchRequest setPredicate:pred];
+        
+	NSError *error1;			
+	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error1];
+    [fetchRequest release];
+
+	NSError *error2;    
+    for (History *history in fetchedObjects) {
+        if ([history.contents count] == 0) {
+            NSLog(@"delete %@", history.keywords);
+            [context deleteObject:history];
+            if (![context save:&error2]) {
+                NSLog(@"Whoops, couldn't save: %@", [error2 localizedDescription]);
+            }                  
+        }
+    }
+}
+
 -(void) reloadData {
+    
+    [self deleteJunkRecords];
+    
 	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	
 	NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -41,8 +75,8 @@
 								   inManagedObjectContext:context];	
 	[fetchRequest setEntity:entity];
 	NSPredicate *pred = [NSPredicate 
-                         predicateWithFormat:@"(ANY contents.lang == %@)",
-                         [self.language lowercaseString]];
+                         predicateWithFormat:@"(ANY contents.lang == %@ OR lang == %@)",
+                         [self.language lowercaseString], [self.language lowercaseString]];
 	
 	[fetchRequest setPredicate:pred];
 

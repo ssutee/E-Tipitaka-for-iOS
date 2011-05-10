@@ -13,6 +13,7 @@
 @implementation History
 @dynamic keywords;
 @dynamic contents;
+@dynamic lang;
 
 - (void)addContentsObject:(Content *)value {    
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];

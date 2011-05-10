@@ -16,6 +16,7 @@
 }
 @property (nonatomic, retain) NSString * keywords;
 @property (nonatomic, retain) NSSet* contents;
+@property (nonatomic, retain) NSString * lang;
 
 - (void)addContentsObject:(Content *)value;
 - (void)removeContentsObject:(Content *)value;

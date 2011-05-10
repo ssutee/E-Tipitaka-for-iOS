@@ -205,6 +205,13 @@
             history = [NSEntityDescription
                        insertNewObjectForEntityForName:@"History" inManagedObjectContext:context];        
             history.keywords = [NSString stringWithString:self.keywords];
+			
+            if(scope == kThaiScope) {
+				history.lang = @"thai";
+			}
+			else {
+				history.lang = @"pali";
+			}
         }
 		
         NSEntityDescription *entity = [NSEntityDescription 
