@@ -25,6 +25,7 @@
 
 @synthesize toolbar;
 @synthesize titleLabel;
+@synthesize pageNumberLabel;
 @synthesize htmlView;
 @synthesize dataDictionary;
 @synthesize pagesDictionary;
@@ -49,6 +50,8 @@
 @synthesize gotoActionSheet;
 @synthesize itemOptionsActionSheet;
 @synthesize toastText;
+@synthesize pageSlider;
+@synthesize bottomToolbar;
 //@synthesize indicator;
 
 #pragma mark - Managing the detail item
@@ -417,10 +420,10 @@
              [self.itemOptionsActionSheet cancelButtonIndex] animated:YES];
         }
         if (tagNumber == kItemOptionsActionSheet) {
-            [actionSheet showFromBarButtonItem:self.languageButton animated:YES];
+            [actionSheet showFromBarButtonItem:gotoButton animated:YES];
         }
         else if (tagNumber == kBookmarkOptionsActionSheet) {
-            [actionSheet showFromBarButtonItem:self.noteButton animated:YES];
+            [actionSheet showFromBarButtonItem:noteButton animated:YES];
         }
     }
     self.itemOptionsActionSheet = actionSheet;
@@ -443,17 +446,38 @@
 	NSNumber *page = [dict valueForKey:@"Page"];
 	NSNumber *volume = [dict valueForKey:@"Volume"];
 	
-	NSString *newLabel;
+    NSInteger maxPage = [self getMaximumPageValue:language ofVolume:volume];
+
+    if (pageSlider.maximumValue != maxPage) {
+        pageSlider.maximumValue = maxPage;
+    }
+    pageSlider.value = [page floatValue];
+    
+	NSString *newLabel1, *newLabel2;
 	
 	if([language isEqualToString:@"Thai"]) {
-		newLabel = [[NSString alloc] initWithFormat:@"พระไตรปิฎก (ภาษาไทย) เล่มที่ %@ หน้าที่ %@", volume, page];
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            newLabel1 = [[NSString alloc] initWithFormat:@"พระไตรปิฎก (ภาษาไทย) เล่มที่ %@", volume];
+        } else {
+            newLabel1 = [[NSString alloc] initWithFormat:@"พระไตรปิฎก (ภาษาไทย) เล่มที่ %@ หน้าที่ %@", 
+                         volume, page];
+        }
 	} else {
-		newLabel = [[NSString alloc] initWithFormat:@"พระไตรปิฎก (ภาษาบาลี) เล่มที่ %@ หน้าที่ %@", volume, page];
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            newLabel1 = [[NSString alloc] initWithFormat:@"พระไตรปิฎก (ภาษาบาลี) เล่มที่ %@", volume];
+        } else {
+            newLabel1 = [[NSString alloc] initWithFormat:@"พระไตรปิฎก (ภาษาบาลี) เล่มที่ %@ หน้าที่ %@", 
+                         volume, page];            
+        }
 	}
 
-    self.titleLabel.text = [Utils arabic2thai:newLabel];
+    newLabel2 = [[NSString alloc] initWithFormat:@"หน้าที่ %@ / %d", page, maxPage];
     
-	[newLabel release];
+    self.titleLabel.text = [Utils arabic2thai:newLabel1];
+    self.pageNumberLabel.text = [Utils arabic2thai:newLabel2];
+    
+	[newLabel1 release];
+    [newLabel2 release];
 	
 	NSString *newTitle = [NSString alloc];
 	if([volume intValue] <= 8) {
@@ -589,7 +613,7 @@
 	NSNumber *paliVolume = [[dataDictionary valueForKey:@"Pali"] valueForKey:@"Volume"];
 	NSNumber *thaiVolume = [[dataDictionary valueForKey:@"Thai"] valueForKey:@"Volume"];
 	
-    NSLog(@"pali=%@ thai=%@", paliVolume, thaiVolume);
+//    NSLog(@"pali=%@ thai=%@", paliVolume, thaiVolume);
     
 	if ([language isEqualToString:@"Thai"]) {
 		// save scroll position for Thai
@@ -706,9 +730,18 @@
             UIPopoverController *poc = [[UIPopoverController alloc]
                                         initWithContentViewController:navController];
             controller.popoverController = poc;
-            [poc presentPopoverFromBarButtonItem:titleButton 
-                        permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                        animated:YES];
+            if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+                [poc presentPopoverFromRect:CGRectMake(309, 82, 151, 29) 
+                                     inView:self.view 
+                   permittedArrowDirections:UIPopoverArrowDirectionUp 
+                                   animated:YES];
+            } else {
+                [poc presentPopoverFromRect:CGRectMake(277, 82, 151, 29) 
+                                     inView:self.view 
+                   permittedArrowDirections:UIPopoverArrowDirectionUp 
+                                   animated:YES];                
+            }
+            
             [navController release];
         }
 
@@ -844,7 +877,7 @@
                                                       animated:YES];
         } else {
             [self dismissAllPopoverControllers];
-            [gotoActionSheet showFromBarButtonItem:sender animated:YES];
+            [gotoActionSheet showFromBarButtonItem:gotoButton animated:YES];
         }
     }
 }
@@ -859,7 +892,7 @@
                                                       animated:YES];
         } else {
             [self dismissAllPopoverControllers];            
-            [languageActionSheet showFromBarButtonItem:sender animated:YES];
+            [languageActionSheet showFromBarButtonItem:languageButton animated:YES];
         }
     }
 }
@@ -871,8 +904,7 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self dismissAllPopoverControllers];
     }
-    //indicator.hidden = NO;
-    //dispatch_async(dispatch_get_global_queue(0, 0), ^{
+
     NSString *language = [dataDictionary valueForKey:@"Language"];
     NSMutableDictionary *dict = [dataDictionary valueForKey:language];
     
@@ -894,11 +926,6 @@
         [dataDictionary setValue:dict forKey:language];
         [self updateReadingPage];
     } 
-    //    dispatch_async(dispatch_get_main_queue(), ^{
-            //indicator.hidden = YES;
-    //    });
-    //});
-	
 }  
 
 -(IBAction)backButtonClicked:(id)sender {
@@ -908,23 +935,26 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self dismissAllPopoverControllers];
     }
-    //indicator.hidden = NO;
-    //dispatch_async(dispatch_get_global_queue(0, 0), ^{    
+
     NSString *language = [dataDictionary valueForKey:@"Language"];
     NSMutableDictionary *dict = [dataDictionary valueForKey:language];
     
     NSNumber *page = [dict valueForKey:@"Page"];
     if ([page intValue] > 1) {
+        // reset scroll position
+        if ([language isEqualToString:@"Thai"]) {
+            thaiScrollPosition = 0;
+        } else {
+            paliScrollPosition = 0;
+        }
+        
         page = [NSNumber numberWithInt:[page intValue]-1];
+        
         [dict setValue:page forKey:@"Page"];
         
         [dataDictionary setValue:dict forKey:language];
         [self updateReadingPage];			
     }
-    //   dispatch_async(dispatch_get_main_queue(), ^{
-            //indicator.hidden = YES;
-     //   });        
-    //});
 }
 
 -(IBAction)noteButtonClicked:(id)sender {
@@ -985,8 +1015,9 @@
             [_searchPopoverController dismissPopoverAnimated:YES];
         } else {
             [self dismissAllPopoverControllers];
-            [_searchPopoverController presentPopoverFromBarButtonItem:searchButton
-                                             permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            [_searchPopoverController presentPopoverFromBarButtonItem:searchButton 
+                                             permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                             animated:YES];
         }
     } 
     else {
@@ -1000,7 +1031,7 @@
         [self dismissAllPopoverControllers];
         [poc presentPopoverFromBarButtonItem:searchButton 
                     permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                    animated:YES];
+                                    animated:YES];        
         self.searchPopoverController = poc;
         [poc release];
         [searchViewController release];
@@ -1015,7 +1046,8 @@
         } else {
             [self dismissAllPopoverControllers];
             [_bookmarkPopoverController presentPopoverFromBarButtonItem:bookmarkButton
-                                             permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                                               permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                               animated:YES];
         }
     }
     else {
@@ -1026,14 +1058,43 @@
         UIPopoverController *poc = [[UIPopoverController alloc]
                                     initWithContentViewController:navController];
         [self dismissAllPopoverControllers];
-        [poc presentPopoverFromBarButtonItem:bookmarkButton 
-                    permittedArrowDirections:UIPopoverArrowDirectionAny 
+        [poc presentPopoverFromBarButtonItem:bookmarkButton
+                    permittedArrowDirections:UIPopoverArrowDirectionAny
                                     animated:YES];
         self.bookmarkPopoverController = poc;
         [poc release];
         [bookmarkListViewController release];
         [navController release];
     }
+}
+
+-(IBAction)sliderValueChanged:(UISlider *)sender {
+    self.scrollToItem = NO;
+    self.scrollToKeyword = NO;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self dismissAllPopoverControllers];
+    }
+    
+    NSString *language = [dataDictionary valueForKey:@"Language"];
+    NSMutableDictionary *dict = [dataDictionary valueForKey:language];
+    
+    NSNumber *page = [dict valueForKey:@"Page"];
+
+    // reset scroll position
+    if ([language isEqualToString:@"Thai"]) {
+        thaiScrollPosition = 0;
+    } else {
+        paliScrollPosition = 0;
+    }
+    
+    page = [NSNumber numberWithInt: round(sender.value)];
+    
+    [dict setValue:page forKey:@"Page"];
+    
+    [dataDictionary setValue:dict forKey:language];
+    [self updateReadingPage];			
+  
 }
 
 #pragma mark -
@@ -1079,6 +1140,8 @@
 	
 	self.scrollToItem = NO;
     self.scrollToKeyword = NO;
+    
+    pageSlider.minimumValue = 1;
     
     toastText.hidden = YES;
     //indicator.hidden = YES;
@@ -1187,6 +1250,8 @@
     // e.g. self.myOutlet = nil;
 	self.toolbar = nil;
 	self.titleLabel = nil;
+    self.pageNumberLabel = nil;
+    self.pageSlider = nil;
 	self.htmlView = nil;
 	self.dataDictionary = nil;
     self.pagesDictionary = nil;
@@ -1204,6 +1269,7 @@
     self.gotoActionSheet = nil;
     self.itemOptionsActionSheet = nil;
     self.toastText = nil;
+    self.bottomToolbar = nil;
     //self.indicator = nil;
 }
 
@@ -1211,6 +1277,8 @@
 - (void)dealloc {
 	[toolbar release];
 	[titleLabel release];
+    [pageNumberLabel release];
+    [pageSlider release];
 	[htmlView release];
 	[dataDictionary release];
     [pagesDictionary release];
@@ -1231,6 +1299,7 @@
     [gotoActionSheet release];
     [itemOptionsActionSheet release];
     [toastText release];
+    [bottomToolbar release];
     //[indicator release];
     [super dealloc];
 }
@@ -1295,7 +1364,8 @@
                                         [actionSheet showFromToolbar:toolbar];
                                     }
                                     else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                                        [actionSheet showFromBarButtonItem:gotoButton animated:YES];
+                                        [actionSheet showFromRect:CGRectMake(60, 0, 10, 74) 
+                                                           inView:self.view animated:YES];                                        
                                         self.itemOptionsActionSheet = actionSheet;
                                     }
 
@@ -1415,6 +1485,25 @@
     else if(x >= w - 100) {
         [self nextButtonClicked:nil];
         return;
+    } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        // toggle bottom bar and slider
+        bottomToolbar.hidden = !bottomToolbar.hidden;
+        pageSlider.hidden = !pageSlider.hidden;
+        
+        CGRect oldRect = self.htmlView.frame;
+        CGRect newRect;
+        if (bottomToolbar.hidden) {
+            newRect = CGRectMake(oldRect.origin.x, 
+                                 oldRect.origin.y-30, 
+                                 oldRect.size.width, 
+                                 oldRect.size.height+44+30);
+        } else {
+            newRect = CGRectMake(oldRect.origin.x, 
+                                 oldRect.origin.y+30, 
+                                 oldRect.size.width, 
+                                 oldRect.size.height-44-30);            
+        }
+        self.htmlView.frame = newRect;
     }
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

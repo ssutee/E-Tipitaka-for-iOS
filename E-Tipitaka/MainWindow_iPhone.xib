@@ -53,7 +53,6 @@
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -73,12 +72,12 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="678932467">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="878649012">
-						<string key="IBUITitle">ค้นหา</string>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="397995530">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="319663326">
+						<string key="IBUITitle">อ่าน</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">06-magnify.png</string>
+							<string key="NSResourceName">179-notepad.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -90,7 +89,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="797244622">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="651118176">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -102,13 +101,13 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="729946846">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="721155885">
-								<string key="IBUITitle">ค้นหา</string>
+						<object class="IBUIViewController" id="518995702">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="249180254">
+								<string key="IBUITitle">อ่าน</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="678932467"/>
-							<string key="IBUINibName">SearchViewController</string>
+							<reference key="IBUIParentViewController" ref="397995530"/>
+							<string key="IBUINibName">ReadViewController</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -120,12 +119,13 @@
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUINavigationController" id="397995530">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="319663326">
-							<string key="IBUITitle">อ่าน</string>
+					<reference ref="397995530"/>
+					<object class="IBUINavigationController" id="678932467">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="878649012">
+							<string key="IBUITitle">ค้นหา</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">179-notepad.png</string>
+								<string key="NSResourceName">06-magnify.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
@@ -137,7 +137,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="651118176">
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="797244622">
 							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrameSize">{0, 0}</string>
@@ -149,13 +149,13 @@
 						</object>
 						<object class="NSMutableArray" key="IBUIViewControllers">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="518995702">
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="249180254">
-									<string key="IBUITitle">อ่าน</string>
+							<object class="IBUIViewController" id="729946846">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="721155885">
+									<string key="IBUITitle">ค้นหา</string>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
-								<reference key="IBUIParentViewController" ref="397995530"/>
-								<string key="IBUINibName">ReadViewController</string>
+								<reference key="IBUIParentViewController" ref="678932467"/>
+								<string key="IBUINibName">SearchViewController</string>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="IBUIInterfaceOrientation">1</int>
 									<int key="interfaceOrientation">1</int>
@@ -165,7 +165,6 @@
 							</object>
 						</object>
 					</object>
-					<reference ref="678932467"/>
 					<object class="IBUINavigationController" id="675512142">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="339020944">
 							<string key="IBUITitle">รายการบันทึก</string>

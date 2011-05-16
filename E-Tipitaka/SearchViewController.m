@@ -384,7 +384,7 @@
     [languageButton release];	            
 
 
-    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+    self.contentSizeForViewInPopover = CGSizeMake(320.0, 500.0);
     
 	UIBarButtonItem *historyButton = [[UIBarButtonItem alloc]
 									   initWithTitle:@"ประวัติค้นหา"

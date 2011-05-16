@@ -135,7 +135,7 @@
 
 
 - (void)viewDidLoad {
-    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+    self.contentSizeForViewInPopover = CGSizeMake(320.0, 500.0);
 
     self.title = @"รายการบันทึก";
     
@@ -260,7 +260,8 @@
 		[text release];
 		cell.detailTextLabel.text = bookmark.text;
 	}
-    
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:22];    
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:20];  
     return cell;
 }
 
@@ -294,6 +295,9 @@
 */
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath { 
+    return 60;
+}
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

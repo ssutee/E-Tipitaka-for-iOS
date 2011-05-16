@@ -24,6 +24,7 @@
 <UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate, UIPopoverControllerDelegate, UISplitViewControllerDelegate>
 {
 	UILabel *titleLabel;
+    UILabel *pageNumberLabel;
 	UIToolbar *toolbar;
 	UIWebView *htmlView;
 	NSMutableDictionary *dataDictionary;
@@ -49,14 +50,17 @@
     UIBarButtonItem *bookmarkButton;
     UIBarButtonItem *gotoButton;
     UIBarButtonItem *titleButton;
+    UIToolbar *bottomToolBar;
     UIActionSheet *languageActionSheet;
     UIActionSheet *gotoActionSheet;
     UIActionSheet *itemOptionsActionSheet;
     UILabel *toastText;
+    UISlider *pageSlider;
     //UIActivityIndicatorView *indicator;
 }
 
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
+@property(nonatomic, retain) IBOutlet UILabel *pageNumberLabel;
 @property(nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property(nonatomic, retain) IBOutlet UIWebView *htmlView;
 @property(nonatomic, retain) IBOutlet UILabel *toastText;
@@ -65,6 +69,7 @@
 @property(nonatomic, retain) NSDictionary *itemsDictionary;
 @property(nonatomic, retain) NSArray *alterItems;
 @property(nonatomic, retain) NSString *keywords;
+
 @property(assign) BOOL scrollToItem;
 @property(assign) BOOL scrollToKeyword;
 @property(assign) NSInteger savedItemNumber;
@@ -83,6 +88,8 @@
 @property (nonatomic, retain) UIActionSheet *languageActionSheet;
 @property (nonatomic, retain) UIActionSheet *gotoActionSheet;
 @property (nonatomic, retain) UIActionSheet *itemOptionsActionSheet;
+@property (nonatomic, retain) IBOutlet UISlider *pageSlider;
+@property (nonatomic, retain) IBOutlet UIToolbar *bottomToolbar;
 
 -(IBAction)gotoButtonClicked:(id)sender;
 -(IBAction)nextButtonClicked:(id)sender;
@@ -94,6 +101,7 @@
 -(IBAction)decreaseFontSize:(id)sender;
 -(IBAction)showSearchView:(id)sender;
 -(IBAction)showBookmarkListView:(id)sender;
+-(IBAction)sliderValueChanged:(id)sender;
 
 -(void) updateLanguageButtonTitle;
 -(void) updateReadingPage;

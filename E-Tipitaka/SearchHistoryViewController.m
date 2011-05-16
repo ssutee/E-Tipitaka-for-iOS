@@ -229,10 +229,16 @@
                 initWithFormat:@"%4d หน้า: วิ.(%d) สุต.(%d) อภิ.(%d)", 
                 [history.contents count] ,n1, n2, n3];
         cell.detailTextLabel.text = [Utils arabic2thai:text];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:22];    
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:20];        
         [text release];
     }
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath { 
+    return 60;
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

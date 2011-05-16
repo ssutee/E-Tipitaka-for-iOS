@@ -87,7 +87,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-    self.contentSizeForViewInPopover = CGSizeMake(320.0, 431.0);
+    self.contentSizeForViewInPopover = CGSizeMake(500, 431.0);
     
 	NSDictionary *dataDictionary = [Utils readData];
 	

@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J567</string>
+		<string key="IBDocument.SystemVersion">10J869</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">462.00</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">300</string>
@@ -51,7 +51,7 @@
 						<string key="NSFrameSize">{320, 21}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="96605834"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4wNzYzMzI0NTk4OSAwLjQ0ODY5NDE3MiAwLjQ4OTEzMDQzNDgAA</bytes>
@@ -67,6 +67,11 @@
 							<bytes key="NSWhite">MQA</bytes>
 						</object>
 						<reference key="IBUIHighlightedColor" ref="171431322"/>
+						<object class="NSColor" key="IBUIShadowColor" id="371336878">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						</object>
+						<string key="IBUIShadowOffset">{0, 1}</string>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
@@ -77,7 +82,7 @@
 						<string key="NSFrame">{{0, 20}, {320, 347}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="750084360"/>
+						<reference key="NSNextKeyView" ref="781420953"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -91,6 +96,7 @@
 						<string key="NSFrame">{{0, 323}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<float key="IBUIAlpha">0.80000001192092896</float>
@@ -169,10 +175,8 @@
 						<string key="NSFrame">{{96, 183}, {128, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
-						</object>
+						<reference key="NSNextKeyView" ref="750084360"/>
+						<reference key="IBUIBackgroundColor" ref="371336878"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<float key="IBUIAlpha">0.69999998807907104</float>
@@ -197,11 +201,8 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="64289306"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MQA</bytes>
-					<object class="NSColorSpace" key="NSCustomColorSpace">
-						<int key="NSID">2</int>
-					</object>
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MC4wNzYzMzI0NTk4OSAwLjQ0ODY5NDE3MiAwLjQ4OTEzMDQzNDgAA</bytes>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -335,9 +336,9 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="64289306"/>
-							<reference ref="96605834"/>
 							<reference ref="750084360"/>
 							<reference ref="781420953"/>
+							<reference ref="96605834"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -498,7 +499,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">48</int>
+			<int key="maxID">53</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -519,10 +520,12 @@
 							<string>noteButtonClicked:</string>
 							<string>showBookmarkListView:</string>
 							<string>showSearchView:</string>
+							<string>sliderValueChanged:</string>
 							<string>toggleLanguage:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -548,6 +551,7 @@
 							<string>noteButtonClicked:</string>
 							<string>showBookmarkListView:</string>
 							<string>showSearchView:</string>
+							<string>sliderValueChanged:</string>
 							<string>toggleLanguage:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -589,6 +593,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">sliderValueChanged:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">toggleLanguage:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -603,6 +611,8 @@
 							<string>htmlView</string>
 							<string>languageButton</string>
 							<string>noteButton</string>
+							<string>pageNumberLabel</string>
+							<string>pageSlider</string>
 							<string>searchButton</string>
 							<string>titleButton</string>
 							<string>titleLabel</string>
@@ -616,6 +626,8 @@
 							<string>UIWebView</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
+							<string>UILabel</string>
+							<string>UISlider</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UILabel</string>
@@ -632,6 +644,8 @@
 							<string>htmlView</string>
 							<string>languageButton</string>
 							<string>noteButton</string>
+							<string>pageNumberLabel</string>
+							<string>pageSlider</string>
 							<string>searchButton</string>
 							<string>titleButton</string>
 							<string>titleLabel</string>
@@ -659,6 +673,14 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">noteButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">pageNumberLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">pageSlider</string>
+								<string key="candidateClassName">UISlider</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">searchButton</string>
