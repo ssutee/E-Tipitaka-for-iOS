@@ -572,6 +572,24 @@
 					</object>
 					<int key="connectionID">67</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">startUpdatingPage:</string>
+						<reference key="source" ref="662515144"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">77</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">startUpdatingPage:</string>
+						<reference key="source" ref="662515144"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">8</int>
+					</object>
+					<int key="connectionID">78</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -874,7 +892,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">76</int>
+			<int key="maxID">78</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -896,10 +914,12 @@
 							<string>showBookmarkListView:</string>
 							<string>showSearchView:</string>
 							<string>sliderValueChanged:</string>
+							<string>startUpdatingPage:</string>
 							<string>toggleLanguage:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -927,6 +947,7 @@
 							<string>showBookmarkListView:</string>
 							<string>showSearchView:</string>
 							<string>sliderValueChanged:</string>
+							<string>startUpdatingPage:</string>
 							<string>toggleLanguage:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -969,6 +990,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">sliderValueChanged:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">startUpdatingPage:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

@@ -102,6 +102,7 @@
 -(IBAction)showSearchView:(id)sender;
 -(IBAction)showBookmarkListView:(id)sender;
 -(IBAction)sliderValueChanged:(id)sender;
+-(IBAction)startUpdatingPage:(id)sender;
 
 -(void) updateLanguageButtonTitle;
 -(void) updateReadingPage;

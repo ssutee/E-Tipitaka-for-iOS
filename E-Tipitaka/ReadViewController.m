@@ -432,22 +432,9 @@
 	
 }
 
--(void) updateReadingPage {
-	[self updateReadingPage:keywords];
-}
-
--(void) updateReadingPage:(NSString *)query {
-	if(!dataDictionary)
-		return;
-
-	NSString *language = [dataDictionary valueForKey:@"Language"];
-	NSDictionary *dict = [dataDictionary valueForKey:language];
-	
-	NSNumber *page = [dict valueForKey:@"Page"];
-	NSNumber *volume = [dict valueForKey:@"Volume"];
-	
+-(void) updatePageTitle:(NSString *)language volume:(NSNumber *) volume page:(NSNumber *) page {
     NSInteger maxPage = [self getMaximumPageValue:language ofVolume:volume];
-
+    
     if (pageSlider.maximumValue != maxPage) {
         pageSlider.maximumValue = maxPage;
     }
@@ -470,14 +457,31 @@
                          volume, page];            
         }
 	}
-
+    
     newLabel2 = [[NSString alloc] initWithFormat:@"หน้าที่ %@ / %d", page, maxPage];
     
     self.titleLabel.text = [Utils arabic2thai:newLabel1];
     self.pageNumberLabel.text = [Utils arabic2thai:newLabel2];
     
 	[newLabel1 release];
-    [newLabel2 release];
+    [newLabel2 release];    
+}
+
+-(void) updateReadingPage {
+	[self updateReadingPage:keywords];
+}
+
+-(void) updateReadingPage:(NSString *)query {
+	if(!dataDictionary)
+		return;
+
+	NSString *language = [dataDictionary valueForKey:@"Language"];
+	NSDictionary *dict = [dataDictionary valueForKey:language];
+	
+	NSNumber *page = [dict valueForKey:@"Page"];
+	NSNumber *volume = [dict valueForKey:@"Volume"];
+	
+    [self updatePageTitle:language volume:volume page:page];
 	
 	NSString *newTitle = [NSString alloc];
 	if([volume intValue] <= 8) {
@@ -1079,7 +1083,7 @@
     NSString *language = [dataDictionary valueForKey:@"Language"];
     NSMutableDictionary *dict = [dataDictionary valueForKey:language];
     
-    NSNumber *page = [dict valueForKey:@"Page"];
+    NSNumber *volume = [dict valueForKey:@"Volume"];
 
     // reset scroll position
     if ([language isEqualToString:@"Thai"]) {
@@ -1088,13 +1092,17 @@
         paliScrollPosition = 0;
     }
     
-    page = [NSNumber numberWithInt: round(sender.value)];
+    NSNumber *page = [NSNumber numberWithInt: round(sender.value)];
     
     [dict setValue:page forKey:@"Page"];
     
     [dataDictionary setValue:dict forKey:language];
-    [self updateReadingPage];			
-  
+    
+    [self updatePageTitle:language volume:volume page:page];
+}
+
+-(IBAction) startUpdatingPage:(id)sender {
+    [self updateReadingPage];
 }
 
 #pragma mark -
@@ -1138,6 +1146,8 @@
     mWindow.viewToObserve = htmlView;
     mWindow.controllerThatObserves = self;	
 	
+    pageSlider.continuous = YES;
+    
 	self.scrollToItem = NO;
     self.scrollToKeyword = NO;
     
