@@ -3,6 +3,8 @@ build/*
 *.ipa
 *.pbxuser
 *.mode1v3
+userinterfacestate.xcuserstate
+UserInterfaceState.xcuserstate
 
 # old skool
 .svn
