@@ -140,7 +140,7 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
-    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+    self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
     
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
 								   initWithTitle:@"แก้ไข"
@@ -162,8 +162,8 @@
     self.historyData = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
+    self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
     [super viewWillAppear:animated];
 }
 

@@ -28,6 +28,7 @@
 	NSInteger scope;
 	BOOL isSearching;
     BOOL isNewKeywords;
+    BOOL notFound;
 }
 
 @property(nonatomic, retain) ReadViewController *readViewController;

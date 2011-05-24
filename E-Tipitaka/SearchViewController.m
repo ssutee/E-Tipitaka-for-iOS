@@ -168,6 +168,12 @@
     [results setValue:array0 forKey:@"0"];
     self.categories = newKeys;
     
+    if([array1 count]+[array2 count]+[array3 count] == 0) {
+        notFound = YES;
+    } else {
+        notFound = NO;
+    }    
+    
     [table reloadData];
     
     [array0 release];
@@ -322,6 +328,12 @@
 					[array0 addObject:[NSNumber numberWithInt:0]];
 				}
                 
+                if([array1 count]+[array2 count]+[array3 count] == 0) {
+                    notFound = YES;
+                } else {
+                    notFound = NO;
+                }
+                
                 NSError *error;
                 if (![context save:&error]) {
                     NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -367,10 +379,19 @@
 }
 */
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
+    [super viewWillAppear:animated];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 4.0f);
+    progressBar.transform = transform;
+    
+    self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
+    
     NSMutableArray *array = [[NSMutableArray alloc] init];
     self.clickedItems = array;
     [array release];
@@ -383,8 +404,6 @@
     self.navigationItem.leftBarButtonItem = languageButton;
     [languageButton release];	            
 
-
-    self.contentSizeForViewInPopover = CGSizeMake(320.0, 500.0);
     
 	UIBarButtonItem *historyButton = [[UIBarButtonItem alloc]
 									   initWithTitle:@"ประวัติค้นหา"
@@ -426,7 +445,11 @@
 	
 	[table reloadData];
 	
-
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self 
+//                                             selector:@selector(presentSearchPopover) 
+//                                                 name:UIKeyboardDidHideNotification object:nil];
+    
     [super viewDidLoad];
 }
 
@@ -462,6 +485,9 @@
 
 
 - (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self 
+//                                                    name:UIKeyboardDidHideNotification 
+//                                                  object:nil];
 	[table release];
 	[search release];
 	[progressBar release];
@@ -595,7 +621,20 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	NSString *category = [categories objectAtIndex:section];
 	NSArray *resultSection = [results objectForKey:category];
+    if (section == 0 && notFound) {
+        return [resultSection count]+2;
+    }
 	return [resultSection count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath { 
+	NSUInteger section = [indexPath section];
+	NSUInteger row = [indexPath row];
+
+    if (notFound && section == 0 && (row == 3 || row == 4)) {
+        return 80;
+    }
+    return 40;
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -613,7 +652,10 @@
 				 initWithStyle:UITableViewCellStyleDefault 
 				 reuseIdentifier:SectionsTableIdentifier] autorelease];
 	}
-
+    
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:22];
+    cell.textLabel.textAlignment = UITextAlignmentLeft;
+    
 	if (section > 0) {
 		Content *content = [resultSection objectAtIndex:row];
 		NSString *text = [[NSString alloc] initWithFormat:@"เล่มที่ %@ หน้าที่ %@", content.volume, content.page];
@@ -634,10 +676,23 @@
 			label = [[NSString alloc] initWithFormat:@"พระอภิธรรมปิฎก %@ หน้า", [resultSection objectAtIndex:row]];			
 			cell.textLabel.text = [Utils arabic2thai:label];
 			[label release];
-		}
-
+		} else if(row == 3) {
+            cell.textLabel.font = [UIFont systemFontOfSize:44];
+            cell.textLabel.textAlignment = UITextAlignmentCenter;
+            cell.textLabel.text = [NSString stringWithFormat:@"ไม่พบคำว่า \"%@\"", keywords];
+        } else if(row == 4) {
+            cell.textLabel.font = [UIFont systemFontOfSize:44];
+            cell.textLabel.textAlignment = UITextAlignmentCenter;
+            if (scope == kThaiScope) {
+                cell.textLabel.text = @"ในพระไตรปิฎก (ภาษาไทย)";
+            } else {
+                cell.textLabel.text = @"ในพระไตรปิฎก (ภาษาบาลี)";                
+            }
+        }
 	}
-
+    
+    
+    
 	return cell;			
 }
 
@@ -721,7 +776,7 @@
         }        
         NSPredicate *pred = [NSPredicate 
                              predicateWithFormat:
-                             @"(keywords == %@ && ANY contents.lang == %@)", searchTerm, lang];
+                             @"(keywords == %@ && lang == %@)", searchTerm, lang];
         [fetchRequest setPredicate:pred];
         
         NSError *error;			
@@ -737,7 +792,7 @@
             //NSLog(@"this keywords was already used to search.");
         }
         [self handleSearchForTerm:searchTerm];
-        [searchBar resignFirstResponder];        
+        [searchBar resignFirstResponder]; 
 	}
 	
 }

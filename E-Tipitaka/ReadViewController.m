@@ -1013,15 +1013,48 @@
     [self updateLanguageButtonTitle];
 }
 
+//-(void)presentSearchPopover {
+//    if (_searchPopoverController != nil && [_searchPopoverController isPopoverVisible]) {
+//        [self dismissAllPopoverControllers];
+//        _searchPopoverController.popoverContentSize = CGSizeMake(580, 500);
+//        
+//        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+//            [_searchPopoverController presentPopoverFromRect:CGRectMake(309, 82, 151, 29) 
+//                                                      inView:self.view 
+//                                    permittedArrowDirections:UIPopoverArrowDirectionUp 
+//                                                    animated:YES];
+//        } else {
+//            [_searchPopoverController presentPopoverFromRect:CGRectMake(277, 82, 151, 29) 
+//                                                      inView:self.view 
+//                                    permittedArrowDirections:UIPopoverArrowDirectionUp 
+//                                                    animated:YES];                
+//        }            
+//    }
+//}
+
 -(IBAction)showSearchView:(id)sender {    
     if(_searchPopoverController != nil) {
         if ([_searchPopoverController isPopoverVisible]) {
             [_searchPopoverController dismissPopoverAnimated:YES];
         } else {
             [self dismissAllPopoverControllers];
+
+            _searchPopoverController.popoverContentSize = CGSizeMake(660, 600);            
             [_searchPopoverController presentPopoverFromBarButtonItem:searchButton 
-                                             permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                                             animated:YES];
+                                             permittedArrowDirections:UIPopoverArrowDirectionDown 
+                                                             animated:NO];
+            
+//            if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+//                [_searchPopoverController presentPopoverFromRect:CGRectMake(309, 82, 151, 29) 
+//                                     inView:self.view 
+//                   permittedArrowDirections:UIPopoverArrowDirectionUp 
+//                                   animated:YES];
+//            } else {
+//                [_searchPopoverController presentPopoverFromRect:CGRectMake(277, 82, 151, 29) 
+//                                     inView:self.view 
+//                   permittedArrowDirections:UIPopoverArrowDirectionUp 
+//                                   animated:YES];                
+//            }            
         }
     } 
     else {
@@ -1033,9 +1066,26 @@
         UIPopoverController *poc = [[UIPopoverController alloc]
                                     initWithContentViewController:navController];
         [self dismissAllPopoverControllers];
+
+        poc.popoverContentSize = CGSizeMake(660, 600);
+
         [poc presentPopoverFromBarButtonItem:searchButton 
-                    permittedArrowDirections:UIPopoverArrowDirectionAny 
+                    permittedArrowDirections:UIPopoverArrowDirectionDown 
                                     animated:YES];        
+
+        
+//        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+//            [poc presentPopoverFromRect:CGRectMake(309, 82, 151, 29) 
+//                                 inView:self.view 
+//               permittedArrowDirections:UIPopoverArrowDirectionUp 
+//                               animated:YES];
+//        } else {
+//            [poc presentPopoverFromRect:CGRectMake(277, 82, 151, 29) 
+//                                 inView:self.view 
+//               permittedArrowDirections:UIPopoverArrowDirectionUp 
+//                               animated:YES];                
+//        }
+        
         self.searchPopoverController = poc;
         [poc release];
         [searchViewController release];
@@ -1138,7 +1188,11 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	
+
+//	[[NSNotificationCenter defaultCenter] addObserver:self 
+//                                             selector:@selector(presentSearchPopover) 
+//                                                 name:UIKeyboardDidHideNotification object:nil];
+
     self.pagesDictionary = [Utils readPages];
     self.itemsDictionary = [Utils readItems];
     
@@ -1255,6 +1309,8 @@
 }
 
 - (void)viewDidUnload {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self 
+//                                                    name:UIKeyboardDidHideNotification object:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
