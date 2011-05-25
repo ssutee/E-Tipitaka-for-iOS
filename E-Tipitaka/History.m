@@ -1,8 +1,8 @@
 //
 //  History.m
-//  ETipitaka
+//  E-Tipitaka
 //
-//  Created by Sutee Sudprasert on 3/27/11.
+//  Created by Sutee Sudprasert on 5/25/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
@@ -11,9 +11,10 @@
 
 
 @implementation History
-@dynamic keywords;
-@dynamic contents;
 @dynamic lang;
+@dynamic keywords;
+@dynamic star;
+@dynamic contents;
 
 - (void)addContentsObject:(Content *)value {    
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];

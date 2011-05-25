@@ -1,8 +1,8 @@
 //
 //  History.h
-//  ETipitaka
+//  E-Tipitaka
 //
-//  Created by Sutee Sudprasert on 3/27/11.
+//  Created by Sutee Sudprasert on 5/25/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
@@ -14,11 +14,14 @@
 @interface History : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * keywords;
-@property (nonatomic, retain) NSSet* contents;
 @property (nonatomic, retain) NSString * lang;
+@property (nonatomic, retain) NSString * keywords;
+@property (nonatomic, retain) NSNumber * star;
+@property (nonatomic, retain) NSSet* contents;
 
 - (void)addContentsObject:(Content *)value;
 - (void)removeContentsObject:(Content *)value;
+- (void)addContents:(NSSet *)value;
+- (void)removeContents:(NSSet *)value;
 
 @end

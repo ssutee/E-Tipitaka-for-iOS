@@ -15,6 +15,11 @@
 		9E1722071366C4F90011891C /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E1722021366C4F90011891C /* ZipArchive.mm */; };
 		9E1722091366C6400011891C /* E_Tipitaka.sqlite.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9E1722081366C6400011891C /* E_Tipitaka.sqlite.zip */; };
 		9E326FA7138C03B300ED66AE /* DoubleReadView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FA6138C03B300ED66AE /* DoubleReadView_iPad.xib */; };
+		9E326FB3138D30F700ED66AE /* star_big_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB1138D30F700ED66AE /* star_big_off.png */; };
+		9E326FB4138D30F700ED66AE /* star_big_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB2138D30F700ED66AE /* star_big_on.png */; };
+		9E326FB8138D36D900ED66AE /* star_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB6138D36D900ED66AE /* star_off.png */; };
+		9E326FB9138D36D900ED66AE /* star_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB7138D36D900ED66AE /* star_on.png */; };
+		9E326FC0138D445600ED66AE /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E326FBF138D445600ED66AE /* History.m */; };
 		9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D7137862D00092521B /* Icon-Small@2x.png */; };
 		9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D8137862D00092521B /* Icon-Small-50.png */; };
 		9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
@@ -28,7 +33,6 @@
 		9E66970C134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */; };
 		9E669713134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */; };
 		9E669716134B15CB00B9E0F4 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */; };
-		9E66973E134C574A00B9E0F4 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669737134C574A00B9E0F4 /* History.m */; };
 		9E66973F134C574A00B9E0F4 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669739134C574A00B9E0F4 /* Content.m */; };
 		9E669740134C574A00B9E0F4 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66973B134C574A00B9E0F4 /* Bookmark.m */; };
 		9E669741134C574A00B9E0F4 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66973D134C574A00B9E0F4 /* Item.m */; };
@@ -91,6 +95,13 @@
 		9E1722021366C4F90011891C /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		9E1722081366C6400011891C /* E_Tipitaka.sqlite.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = E_Tipitaka.sqlite.zip; sourceTree = "<group>"; };
 		9E326FA6138C03B300ED66AE /* DoubleReadView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoubleReadView_iPad.xib; sourceTree = "<group>"; };
+		9E326FB1138D30F700ED66AE /* star_big_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_big_off.png; sourceTree = "<group>"; };
+		9E326FB2138D30F700ED66AE /* star_big_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_big_on.png; sourceTree = "<group>"; };
+		9E326FB6138D36D900ED66AE /* star_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_off.png; sourceTree = "<group>"; };
+		9E326FB7138D36D900ED66AE /* star_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_on.png; sourceTree = "<group>"; };
+		9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 3.xcdatamodel"; sourceTree = "<group>"; };
+		9E326FBE138D445600ED66AE /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
+		9E326FBF138D445600ED66AE /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		9E3DA8D7137862D00092521B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		9E3DA8D8137862D00092521B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,8 +121,6 @@
 		9E669711134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = E_TipitakaAppDelegate_iPad.h; path = iPad/E_TipitakaAppDelegate_iPad.h; sourceTree = "<group>"; };
 		9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = E_TipitakaAppDelegate_iPad.m; path = iPad/E_TipitakaAppDelegate_iPad.m; sourceTree = "<group>"; };
 		9E669715134B15CB00B9E0F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		9E669736134C574A00B9E0F4 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
-		9E669737134C574A00B9E0F4 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		9E669738134C574A00B9E0F4 /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Content.h; sourceTree = "<group>"; };
 		9E669739134C574A00B9E0F4 /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Content.m; sourceTree = "<group>"; };
 		9E66973A134C574A00B9E0F4 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
@@ -238,12 +247,12 @@
 				9E1721F71366C4F90011891C /* minizip */,
 				9E1722011366C4F90011891C /* ZipArchive.h */,
 				9E1722021366C4F90011891C /* ZipArchive.mm */,
-				9E669736134C574A00B9E0F4 /* History.h */,
-				9E669737134C574A00B9E0F4 /* History.m */,
 				9E669738134C574A00B9E0F4 /* Content.h */,
 				9E669739134C574A00B9E0F4 /* Content.m */,
 				9E66973A134C574A00B9E0F4 /* Bookmark.h */,
 				9E66973B134C574A00B9E0F4 /* Bookmark.m */,
+				9E326FBE138D445600ED66AE /* History.h */,
+				9E326FBF138D445600ED66AE /* History.m */,
 				9E66973C134C574A00B9E0F4 /* Item.h */,
 				9E66973D134C574A00B9E0F4 /* Item.m */,
 				9E669743134C584300B9E0F4 /* TapDetectingWindow.h */,
@@ -272,6 +281,10 @@
 				9EA21D0A134F3EBC00C17FD6 /* Pages.plist */,
 				9EA21D0D134F5C6000C17FD6 /* Items.plist */,
 				9EA859F3135011F6002195A6 /* Names.plist */,
+				9E326FB6138D36D900ED66AE /* star_off.png */,
+				9E326FB7138D36D900ED66AE /* star_on.png */,
+				9E326FB1138D30F700ED66AE /* star_big_off.png */,
+				9E326FB2138D30F700ED66AE /* star_big_on.png */,
 				9E669774134C8FC500B9E0F4 /* icon_arrow_left.png */,
 				9E669775134C8FC900B9E0F4 /* icon_arrow_right.png */,
 				9E669778134C8FE400B9E0F4 /* icon_zoom_in.png */,
@@ -424,6 +437,10 @@
 				9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */,
 				9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */,
 				9E326FA7138C03B300ED66AE /* DoubleReadView_iPad.xib in Resources */,
+				9E326FB3138D30F700ED66AE /* star_big_off.png in Resources */,
+				9E326FB4138D30F700ED66AE /* star_big_on.png in Resources */,
+				9E326FB8138D36D900ED66AE /* star_off.png in Resources */,
+				9E326FB9138D36D900ED66AE /* star_on.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,7 +456,6 @@
 				9E669708134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld in Sources */,
 				9E66970C134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m in Sources */,
 				9E669713134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m in Sources */,
-				9E66973E134C574A00B9E0F4 /* History.m in Sources */,
 				9E66973F134C574A00B9E0F4 /* Content.m in Sources */,
 				9E669740134C574A00B9E0F4 /* Bookmark.m in Sources */,
 				9E669741134C574A00B9E0F4 /* Item.m in Sources */,
@@ -457,6 +473,7 @@
 				9E1722051366C4F90011891C /* unzip.c in Sources */,
 				9E1722061366C4F90011891C /* zip.c in Sources */,
 				9E1722071366C4F90011891C /* ZipArchive.mm in Sources */,
+				9E326FC0138D445600ED66AE /* History.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,10 +663,11 @@
 		9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */,
 				9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */,
 				9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */,
 			);
-			currentVersion = 9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */;
+			currentVersion = 9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */;
 			path = E_Tipitaka.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -90,6 +90,7 @@
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 	[fetchRequest release];
     self.historyData = [fetchedObjects mutableCopy];
+    [self.tableView reloadData];
 }
 
 -(BOOL) hidesBottomBarWhenPushed {
@@ -129,6 +130,30 @@
         return toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
     }
     return NO;
+}
+
+- (IBAction) starTapped:(id)sender
+{
+    UIButton *senderButton = (UIButton *)sender;
+        
+    History *history = [self.historyData objectAtIndex:senderButton.tag];
+	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
+	
+	NSManagedObjectContext *context = [appDelegate managedObjectContext];
+
+    if ([history.star intValue] == 1) {
+        [history setValue:[NSNumber numberWithBool:NO] forKey:@"star"];
+    } else {
+        [history setValue:[NSNumber numberWithBool:YES] forKey:@"star"];        
+    }
+
+	NSError *error;    
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    
+    [self.tableView reloadData];
+    
 }
 
 #pragma mark - View lifecycle
@@ -230,7 +255,27 @@
                 [history.contents count] ,n1, n2, n3];
         cell.detailTextLabel.text = [Utils arabic2thai:text];
         cell.textLabel.font = [UIFont boldSystemFontOfSize:22];    
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:20];        
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:20]; 
+        
+        
+        UIImage *buttonStar;
+
+        if ([history.star intValue] == 1) {
+            buttonStar = [UIImage imageNamed:@"star_on.png"];
+        } else {
+            buttonStar = [UIImage imageNamed:@"star_off.png"];
+        }
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        button.tag = row;
+        button.frame = CGRectMake(0.0, 0.0, buttonStar.size.width, buttonStar.size.height);
+
+        [button setImage:buttonStar forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(starTapped:) forControlEvents:UIControlEventTouchUpInside];
+
+        cell.accessoryView = button;
+        
         [text release];
     }
     

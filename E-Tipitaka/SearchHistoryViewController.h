@@ -18,5 +18,6 @@
 
 -(void) reloadData;
 -(IBAction)toggleEdit:(id)sender;
+-(IBAction)starTapped:(id)sender;
 
 @end
