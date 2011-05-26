@@ -20,6 +20,13 @@
 		9E326FB8138D36D900ED66AE /* star_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB6138D36D900ED66AE /* star_off.png */; };
 		9E326FB9138D36D900ED66AE /* star_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB7138D36D900ED66AE /* star_on.png */; };
 		9E326FC0138D445600ED66AE /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E326FBF138D445600ED66AE /* History.m */; };
+		9E326FCB138E0ECD00ED66AE /* rate_star_big_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FC9138E0ECD00ED66AE /* rate_star_big_off.png */; };
+		9E326FCC138E0ECD00ED66AE /* rate_star_big_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FCA138E0ECD00ED66AE /* rate_star_big_on.png */; };
+		9E326FD0138E0EE700ED66AE /* rate_star_small_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FCE138E0EE700ED66AE /* rate_star_small_off.png */; };
+		9E326FD1138E0EE700ED66AE /* rate_star_small_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FCF138E0EE700ED66AE /* rate_star_small_on.png */; };
+		9E326FD5138E167200ED66AE /* ic_menu_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FD4138E167200ED66AE /* ic_menu_edit.png */; };
+		9E326FD9138E1B6D00ED66AE /* BookmarkEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E326FD7138E1B6C00ED66AE /* BookmarkEditViewController.m */; };
+		9E326FDA138E1B6D00ED66AE /* BookmarkEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FD8138E1B6C00ED66AE /* BookmarkEditViewController.xib */; };
 		9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D7137862D00092521B /* Icon-Small@2x.png */; };
 		9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D8137862D00092521B /* Icon-Small-50.png */; };
 		9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
@@ -102,6 +109,14 @@
 		9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 3.xcdatamodel"; sourceTree = "<group>"; };
 		9E326FBE138D445600ED66AE /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		9E326FBF138D445600ED66AE /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
+		9E326FC9138E0ECD00ED66AE /* rate_star_big_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate_star_big_off.png; sourceTree = "<group>"; };
+		9E326FCA138E0ECD00ED66AE /* rate_star_big_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate_star_big_on.png; sourceTree = "<group>"; };
+		9E326FCE138E0EE700ED66AE /* rate_star_small_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate_star_small_off.png; sourceTree = "<group>"; };
+		9E326FCF138E0EE700ED66AE /* rate_star_small_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate_star_small_on.png; sourceTree = "<group>"; };
+		9E326FD4138E167200ED66AE /* ic_menu_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu_edit.png; sourceTree = "<group>"; };
+		9E326FD6138E1B6C00ED66AE /* BookmarkEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkEditViewController.h; sourceTree = "<group>"; };
+		9E326FD7138E1B6C00ED66AE /* BookmarkEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkEditViewController.m; sourceTree = "<group>"; };
+		9E326FD8138E1B6C00ED66AE /* BookmarkEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkEditViewController.xib; sourceTree = "<group>"; };
 		9E3DA8D7137862D00092521B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		9E3DA8D8137862D00092521B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +226,92 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
+		9E326FDB138E1BAE00ED66AE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9E1722081366C6400011891C /* E_Tipitaka.sqlite.zip */,
+				9E669772134C5DA200B9E0F4 /* Data.plist */,
+				9EA21D0A134F3EBC00C17FD6 /* Pages.plist */,
+				9EA21D0D134F5C6000C17FD6 /* Items.plist */,
+				9EA859F3135011F6002195A6 /* Names.plist */,
+				9E326FB6138D36D900ED66AE /* star_off.png */,
+				9E326FB7138D36D900ED66AE /* star_on.png */,
+				9E326FB1138D30F700ED66AE /* star_big_off.png */,
+				9E326FB2138D30F700ED66AE /* star_big_on.png */,
+				9E326FC9138E0ECD00ED66AE /* rate_star_big_off.png */,
+				9E326FCA138E0ECD00ED66AE /* rate_star_big_on.png */,
+				9E326FCE138E0EE700ED66AE /* rate_star_small_off.png */,
+				9E326FCF138E0EE700ED66AE /* rate_star_small_on.png */,
+				9E669774134C8FC500B9E0F4 /* icon_arrow_left.png */,
+				9E669775134C8FC900B9E0F4 /* icon_arrow_right.png */,
+				9E669778134C8FE400B9E0F4 /* icon_zoom_in.png */,
+				9E669779134C8FE600B9E0F4 /* icon_zoom_out.png */,
+				9E66977C134C902500B9E0F4 /* icon_save.png */,
+				9E66977E134C903600B9E0F4 /* icon_refresh.png */,
+				9E669782134C9F6D00B9E0F4 /* 06-magnify.png */,
+				9E669783134C9F6F00B9E0F4 /* 28-star.png */,
+				9E669784134C9F7300B9E0F4 /* 179-notepad.png */,
+				9E326FD4138E167200ED66AE /* ic_menu_edit.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		9E326FDC138E1CB900ED66AE /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9E669738134C574A00B9E0F4 /* Content.h */,
+				9E669739134C574A00B9E0F4 /* Content.m */,
+				9E66973A134C574A00B9E0F4 /* Bookmark.h */,
+				9E66973B134C574A00B9E0F4 /* Bookmark.m */,
+				9E326FBE138D445600ED66AE /* History.h */,
+				9E326FBF138D445600ED66AE /* History.m */,
+				9E66973C134C574A00B9E0F4 /* Item.h */,
+				9E66973D134C574A00B9E0F4 /* Item.m */,
+				9E669743134C584300B9E0F4 /* TapDetectingWindow.h */,
+				9E669744134C584300B9E0F4 /* TapDetectingWindow.m */,
+				9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */,
+				9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */,
+				9E66975A134C5CF400B9E0F4 /* ReadViewController.h */,
+				9E66975B134C5CF500B9E0F4 /* ReadViewController.m */,
+				9E66975C134C5CF500B9E0F4 /* SearchViewController.h */,
+				9E66975D134C5CF600B9E0F4 /* SearchViewController.m */,
+				9E66975E134C5CF700B9E0F4 /* BookListTableViewController.h */,
+				9E66975F134C5CF800B9E0F4 /* BookListTableViewController.m */,
+				9E326FD6138E1B6C00ED66AE /* BookmarkEditViewController.h */,
+				9E326FD7138E1B6C00ED66AE /* BookmarkEditViewController.m */,
+				9E669760134C5CFB00B9E0F4 /* BookmarkAddViewController.h */,
+				9E669761134C5CFE00B9E0F4 /* BookmarkAddViewController.m */,
+				9E669762134C5D0200B9E0F4 /* BookmarkListViewController.h */,
+				9E669763134C5D0600B9E0F4 /* BookmarkListViewController.m */,
+				9E669764134C5D0A00B9E0F4 /* SearchHistoryViewController.h */,
+				9E669765134C5D1000B9E0F4 /* SearchHistoryViewController.m */,
+				9E669766134C5D1800B9E0F4 /* iToast.h */,
+				9E669767134C5D1F00B9E0F4 /* iToast.m */,
+				9E669768134C5D2500B9E0F4 /* Utils.h */,
+				9E669769134C5D2D00B9E0F4 /* Utils.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		9E326FDD138E1D2900ED66AE /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				9E6697DD134ECC2400B9E0F4 /* Icon-72.png */,
+				9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */,
+				9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */,
+				9E3DA8D7137862D00092521B /* Icon-Small@2x.png */,
+				9E3DA8D8137862D00092521B /* Icon-Small-50.png */,
+				9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */,
+				9EA8F3F213782BB800BEE728 /* Default-Landscape~ipad.png */,
+				9EA8F3F313782BB800BEE728 /* Default-Portrait~ipad.png */,
+				9EA8F3F413782BB800BEE728 /* Default.png */,
+				9EA8F3F513782BB800BEE728 /* Default@2x.png */,
+				9EA8F3F613782BB800BEE728 /* Default~ipad.png */,
+				9E6697DC134ECC2400B9E0F4 /* Icon.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		9E6696E3134B15C900B9E0F4 = {
 			isa = PBXGroup;
 			children = (
@@ -245,67 +346,12 @@
 			isa = PBXGroup;
 			children = (
 				9E1721F71366C4F90011891C /* minizip */,
+				9E326FDC138E1CB900ED66AE /* Classes */,
 				9E1722011366C4F90011891C /* ZipArchive.h */,
 				9E1722021366C4F90011891C /* ZipArchive.mm */,
-				9E669738134C574A00B9E0F4 /* Content.h */,
-				9E669739134C574A00B9E0F4 /* Content.m */,
-				9E66973A134C574A00B9E0F4 /* Bookmark.h */,
-				9E66973B134C574A00B9E0F4 /* Bookmark.m */,
-				9E326FBE138D445600ED66AE /* History.h */,
-				9E326FBF138D445600ED66AE /* History.m */,
-				9E66973C134C574A00B9E0F4 /* Item.h */,
-				9E66973D134C574A00B9E0F4 /* Item.m */,
-				9E669743134C584300B9E0F4 /* TapDetectingWindow.h */,
-				9E669744134C584300B9E0F4 /* TapDetectingWindow.m */,
-				9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */,
-				9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */,
-				9E66975A134C5CF400B9E0F4 /* ReadViewController.h */,
-				9E66975B134C5CF500B9E0F4 /* ReadViewController.m */,
-				9E66975C134C5CF500B9E0F4 /* SearchViewController.h */,
-				9E66975D134C5CF600B9E0F4 /* SearchViewController.m */,
-				9E66975E134C5CF700B9E0F4 /* BookListTableViewController.h */,
-				9E66975F134C5CF800B9E0F4 /* BookListTableViewController.m */,
-				9E669760134C5CFB00B9E0F4 /* BookmarkAddViewController.h */,
-				9E669761134C5CFE00B9E0F4 /* BookmarkAddViewController.m */,
-				9E669762134C5D0200B9E0F4 /* BookmarkListViewController.h */,
-				9E669763134C5D0600B9E0F4 /* BookmarkListViewController.m */,
-				9E669764134C5D0A00B9E0F4 /* SearchHistoryViewController.h */,
-				9E669765134C5D1000B9E0F4 /* SearchHistoryViewController.m */,
-				9E669766134C5D1800B9E0F4 /* iToast.h */,
-				9E669767134C5D1F00B9E0F4 /* iToast.m */,
-				9E669768134C5D2500B9E0F4 /* Utils.h */,
-				9E669769134C5D2D00B9E0F4 /* Utils.m */,
 				9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */,
-				9E1722081366C6400011891C /* E_Tipitaka.sqlite.zip */,
-				9E669772134C5DA200B9E0F4 /* Data.plist */,
-				9EA21D0A134F3EBC00C17FD6 /* Pages.plist */,
-				9EA21D0D134F5C6000C17FD6 /* Items.plist */,
-				9EA859F3135011F6002195A6 /* Names.plist */,
-				9E326FB6138D36D900ED66AE /* star_off.png */,
-				9E326FB7138D36D900ED66AE /* star_on.png */,
-				9E326FB1138D30F700ED66AE /* star_big_off.png */,
-				9E326FB2138D30F700ED66AE /* star_big_on.png */,
-				9E669774134C8FC500B9E0F4 /* icon_arrow_left.png */,
-				9E669775134C8FC900B9E0F4 /* icon_arrow_right.png */,
-				9E669778134C8FE400B9E0F4 /* icon_zoom_in.png */,
-				9E669779134C8FE600B9E0F4 /* icon_zoom_out.png */,
-				9E66977C134C902500B9E0F4 /* icon_save.png */,
-				9E66977E134C903600B9E0F4 /* icon_refresh.png */,
-				9E669782134C9F6D00B9E0F4 /* 06-magnify.png */,
-				9E669783134C9F6F00B9E0F4 /* 28-star.png */,
-				9E669784134C9F7300B9E0F4 /* 179-notepad.png */,
-				9E6697DC134ECC2400B9E0F4 /* Icon.png */,
-				9E6697DD134ECC2400B9E0F4 /* Icon-72.png */,
-				9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */,
-				9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */,
-				9E3DA8D7137862D00092521B /* Icon-Small@2x.png */,
-				9E3DA8D8137862D00092521B /* Icon-Small-50.png */,
-				9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */,
-				9EA8F3F213782BB800BEE728 /* Default-Landscape~ipad.png */,
-				9EA8F3F313782BB800BEE728 /* Default-Portrait~ipad.png */,
-				9EA8F3F413782BB800BEE728 /* Default.png */,
-				9EA8F3F513782BB800BEE728 /* Default@2x.png */,
-				9EA8F3F613782BB800BEE728 /* Default~ipad.png */,
+				9E326FDD138E1D2900ED66AE /* Icons */,
+				9E326FDB138E1BAE00ED66AE /* Resources */,
 				9E669709134B15CB00B9E0F4 /* iPhone */,
 				9E669710134B15CB00B9E0F4 /* iPad */,
 				9E6696FB134B15CA00B9E0F4 /* Supporting Files */,
@@ -334,6 +380,7 @@
 				9E66974F134C5C7800B9E0F4 /* SearchViewController.xib */,
 				9E669750134C5C7900B9E0F4 /* BookListTableViewController.xib */,
 				9E669751134C5C7900B9E0F4 /* BookmarkAddViewController.xib */,
+				9E326FD8138E1B6C00ED66AE /* BookmarkEditViewController.xib */,
 				9E669752134C5C7A00B9E0F4 /* BookmarkListViewController.xib */,
 				9E669753134C5C7A00B9E0F4 /* SearchHistoryViewController.xib */,
 			);
@@ -441,6 +488,12 @@
 				9E326FB4138D30F700ED66AE /* star_big_on.png in Resources */,
 				9E326FB8138D36D900ED66AE /* star_off.png in Resources */,
 				9E326FB9138D36D900ED66AE /* star_on.png in Resources */,
+				9E326FCB138E0ECD00ED66AE /* rate_star_big_off.png in Resources */,
+				9E326FCC138E0ECD00ED66AE /* rate_star_big_on.png in Resources */,
+				9E326FD0138E0EE700ED66AE /* rate_star_small_off.png in Resources */,
+				9E326FD1138E0EE700ED66AE /* rate_star_small_on.png in Resources */,
+				9E326FD5138E167200ED66AE /* ic_menu_edit.png in Resources */,
+				9E326FDA138E1B6D00ED66AE /* BookmarkEditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +527,7 @@
 				9E1722061366C4F90011891C /* zip.c in Sources */,
 				9E1722071366C4F90011891C /* ZipArchive.mm in Sources */,
 				9E326FC0138D445600ED66AE /* History.m in Sources */,
+				9E326FD9138E1B6D00ED66AE /* BookmarkEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

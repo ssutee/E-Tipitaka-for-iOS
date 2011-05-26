@@ -28,5 +28,17 @@
 
 -(IBAction)toggleEdit:(id)sender;
 -(IBAction)toggleLanguage:(id)sender;
+-(IBAction)editBookmark:(id)sender;
+
+@end
+
+
+@interface EditBookmarkButton : UIButton {
+    NSInteger section;
+    NSInteger row;
+}
+
+@property(assign) NSInteger section;
+@property(assign) NSInteger row;
 
 @end

@@ -75,7 +75,7 @@
 								   inManagedObjectContext:context];	
 	[fetchRequest setEntity:entity];
 	NSPredicate *pred = [NSPredicate 
-                         predicateWithFormat:@"(ANY contents.lang == %@ OR lang == %@)",
+                         predicateWithFormat:@"(lang == %@)",
                          [self.language lowercaseString], [self.language lowercaseString]];
 	
 	[fetchRequest setPredicate:pred];

@@ -7,12 +7,20 @@
 //
 
 #import "BookmarkListViewController.h"
+#import "BookmarkEditViewController.h"
 #import "E_TipitakaAppDelegate.h"
 #import "ReadViewController.h"
 #import "Bookmark.h"
 #import "Item.h"
 #import "Content.h"
 #import "Utils.h"
+
+@implementation EditBookmarkButton
+
+@synthesize section;
+@synthesize row;
+
+@end
 
 
 @implementation BookmarkListViewController
@@ -102,7 +110,7 @@
 		[self.navigationItem.rightBarButtonItem setTitle:@"สำเร็จ"];
 		[self.navigationItem.rightBarButtonItem setStyle:UIBarButtonItemStyleDone];
 	} else {
-		[self.navigationItem.rightBarButtonItem setTitle:@"แก้ไข"];
+		[self.navigationItem.rightBarButtonItem setTitle:@"ลบ"];
 		[self.navigationItem.rightBarButtonItem setStyle:UIBarButtonItemStyleBordered];
 	}
 }
@@ -130,6 +138,28 @@
 
 }
 
+-(IBAction)editBookmark:(id)sender {
+    EditBookmarkButton *button = (EditBookmarkButton *)sender;
+    
+	BookmarkEditViewController *controller = [[BookmarkEditViewController alloc] 
+											   initWithNibName:@"BookmarkEditViewController" 
+                                              bundle:nil];
+    
+    controller.navigationItem.title = @"แก้ไขการจดจำ";
+
+    if (button.section == 0) {
+        controller.bookmark = [[self.bookmarkData valueForKey:kVinaiKey] objectAtIndex:button.row];
+    } else if (button.section == 1) {
+        controller.bookmark = [[self.bookmarkData valueForKey:kSuttanKey] objectAtIndex:button.row];        
+    } else if (button.section == 2) {
+        controller.bookmark = [[self.bookmarkData valueForKey:kAbhidhumKey] objectAtIndex:button.row];                
+    }     
+        
+	[[self navigationController] pushViewController:controller animated:YES];
+	[controller release], controller = nil;    
+    
+}
+
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -140,7 +170,7 @@
     self.title = @"รายการบันทึก";
     
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
-								   initWithTitle:@"แก้ไข"
+								   initWithTitle:@"ลบ"
 								   style:UIBarButtonItemStyleBordered
 								   target:self 
 								   action:@selector(toggleEdit:)];
@@ -259,6 +289,24 @@
 		cell.textLabel.text = [Utils arabic2thai:text];
 		[text release];
 		cell.detailTextLabel.text = bookmark.text;
+        EditBookmarkButton *button = [[EditBookmarkButton alloc] init];
+
+        UIImage *image = [UIImage imageNamed:@"ic_menu_edit.png"];
+        
+        
+        button.frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+        [button setImage:image forState:UIControlStateNormal];
+        
+        [button setSection:section];
+        [button setRow:row];
+
+        //[button setTitle:@"แก้ไข" forState:UIControlStateNormal];
+        
+        [button addTarget:self action:@selector(editBookmark:) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryView = button;
+        
+        [button release];
+        
 	}
     cell.textLabel.font = [UIFont boldSystemFontOfSize:22];    
     cell.detailTextLabel.font = [UIFont systemFontOfSize:20];  
@@ -286,13 +334,12 @@
 }
 
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath { 
@@ -335,7 +382,7 @@
         // Delete the row from the data source.
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 		[tableView reloadData];
-    }   
+    }
 }
 
 
