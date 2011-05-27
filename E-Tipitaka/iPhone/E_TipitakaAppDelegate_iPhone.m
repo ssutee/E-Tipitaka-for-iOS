@@ -10,13 +10,11 @@
 
 @implementation E_TipitakaAppDelegate_iPhone
 
-//@synthesize window;
 @synthesize rootController;
 
 - (void)dealloc
 {
 	[super dealloc];
-    //[window release];
     [rootController release];
 }
 

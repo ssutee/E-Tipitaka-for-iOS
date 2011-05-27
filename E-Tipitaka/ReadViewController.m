@@ -7,6 +7,7 @@
 //
 
 #import "ReadViewController.h"
+#import "DoubleReadViewController.h"
 #import "E_TipitakaAppDelegate.h"
 #import "BookListTableViewController.h"
 #import "BookmarkAddViewController.h"
@@ -16,10 +17,10 @@
 #import "Utils.h"
 #import "Content.h"
 
-@interface ReadViewController ()
-@property (nonatomic, retain) UIPopoverController *popoverController;
-- (void)configureView;
-@end
+//@interface ReadViewController ()
+//@property (nonatomic, retain) UIPopoverController *popoverController;
+////- (void)configureView;
+//@end
 
 @implementation ReadViewController
 
@@ -28,20 +29,22 @@
 @synthesize pageNumberLabel;
 @synthesize htmlView;
 @synthesize dataDictionary;
-@synthesize pagesDictionary;
-@synthesize itemsDictionary;
+//@synthesize pagesDictionary;
+//@synthesize itemsDictionary;
 @synthesize alterItems;
 @synthesize keywords;
 @synthesize scrollToItem;
 @synthesize scrollToKeyword;
 @synthesize savedItemNumber;
 @synthesize fontSize;
-@synthesize popoverController=_myPopoverController;
+//@synthesize popoverController=_myPopoverController;
 @synthesize detailItem=_detailItem;
 @synthesize searchPopoverController=_searchPopoverController;
 @synthesize bookmarkPopoverController=_bookmarkPopoverController;
+@synthesize booklistPopoverController;
 @synthesize searchButton;
 @synthesize languageButton;
+@synthesize booklistButton;
 @synthesize gotoButton;
 @synthesize noteButton;
 @synthesize bookmarkButton;
@@ -59,58 +62,58 @@
 /*
  When setting the detail item, update the view and dismiss the popover controller if it's showing.
  */
-- (void)setDetailItem:(id)newDetailItem
-{
-    if (_detailItem != newDetailItem) {
-        [_detailItem release];
-        _detailItem = [newDetailItem retain];
-        
-        // Update the view.
-        [self configureView];
-    }
-    
-    if (self.popoverController != nil) {
-        [self.popoverController dismissPopoverAnimated:YES];
-    }
-    
-    if(_searchPopoverController != nil) {
-        [_searchPopoverController dismissPopoverAnimated:YES];
-    }
-}
+//- (void)setDetailItem:(id)newDetailItem
+//{
+//    if (_detailItem != newDetailItem) {
+//        [_detailItem release];
+//        _detailItem = [newDetailItem retain];
+//        
+//        // Update the view.
+//        [self configureView];
+//    }
+//    
+//    if (self.popoverController != nil) {
+//        [self.popoverController dismissPopoverAnimated:YES];
+//    }
+//    
+//    if(_searchPopoverController != nil) {
+//        [_searchPopoverController dismissPopoverAnimated:YES];
+//    }
+//}
 
-- (void)configureView
-{
-    // Update the user interface for the detail item.
-    
-    // TODO 
-}
+//- (void)configureView
+//{
+//    // Update the user interface for the detail item.
+//    
+//    // TODO 
+//}
 
-#pragma mark - Split view support
+//#pragma mark - Split view support
 
-- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
-{
-    barButtonItem.title = @"เลือก";
-    NSMutableArray *items = [[self.toolbar items] mutableCopy];
-    [items insertObject:barButtonItem atIndex:0];
-    [self.toolbar setItems:items animated:YES];
-    [items release];
-    self.popoverController = pc;
-}
+//- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
+//{
+//    barButtonItem.title = @"เลือก";
+//    NSMutableArray *items = [[self.toolbar items] mutableCopy];
+//    [items insertObject:barButtonItem atIndex:0];
+//    [self.toolbar setItems:items animated:YES];
+//    [items release];
+//    self.popoverController = pc;
+//}
 
 // Called when the view is shown again in the split view, invalidating the button and popover controller.
-- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    NSMutableArray *items = [[self.toolbar items] mutableCopy];
-    [items removeObjectAtIndex:0];
-    [self.toolbar setItems:items animated:YES];
-    [items release];
-    self.popoverController = nil;
-}
-
-- (void)splitViewController:(UISplitViewController*)svc popoverController:(UIPopoverController*)pc willPresentViewController:(UIViewController *)aViewController
-{
-    [self dismissAllPopoverControllers];
-}
+//- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+//{
+//    NSMutableArray *items = [[self.toolbar items] mutableCopy];
+//    [items removeObjectAtIndex:0];
+//    [self.toolbar setItems:items animated:YES];
+//    [items release];
+//    self.popoverController = nil;
+//}
+//
+//- (void)splitViewController:(UISplitViewController*)svc popoverController:(UIPopoverController*)pc willPresentViewController:(UIViewController *)aViewController
+//{
+//    [self dismissAllPopoverControllers];
+//}
 
 #pragma mark - General Methods
 
@@ -136,7 +139,8 @@
 	
 	
 	itemLabel.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่ข้อที่ ๑ ถึง %d", 
-										 [self getMaximumItemValue:language ofVolume:volume]]];
+										 [ReadViewController getMaximumItemValue:language 
+                                                                        ofVolume:volume]]];
 	[itemAlert addSubview:itemLabel];
 	
 	UIImageView *itemImage = [[UIImageView alloc] 
@@ -193,7 +197,8 @@
 	
 	
 	pageLabel.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่หน้าที่ ๑ ถึง %d", 
-                                         [self getMaximumPageValue:language ofVolume:volume]]];
+                                         [ReadViewController getMaximumPageValue:language 
+                                                                        ofVolume:volume]]];
 	[pageAlert addSubview:pageLabel];
 	
 	UIImageView *pageImage = [[UIImageView alloc] 
@@ -230,11 +235,11 @@
 	[pageLabel release];	
 }
 
--(NSArray *) getContents:(NSString *)language forVolume:(NSNumber *)volume {
-	return [self getContents:language forVolume:volume forPage:nil];
++(NSArray *) getContents:(NSString *)language forVolume:(NSNumber *)volume {
+	return [ReadViewController getContents:language forVolume:volume forPage:nil];
 }
 
--(NSArray *) getContents:(NSString *) language forVolume:(NSNumber *)volume forPage:(NSNumber *)page {
++(NSArray *) getContents:(NSString *) language forVolume:(NSNumber *)volume forPage:(NSNumber *)page {
 	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	
 	NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -353,9 +358,9 @@
 	return [self getItems:language forVolume:volume forPage:nil onlyBegin:begin];
 }
 
--(NSInteger) getMaximumItemValue:(NSString *)language ofVolume:(NSNumber *)volume {
++(NSInteger) getMaximumItemValue:(NSString *)language ofVolume:(NSNumber *)volume {
+    NSDictionary *itemsDictionary = [Utils readItems];
     NSInteger n=0;
-    
     for (NSNumber *i in [[itemsDictionary valueForKey:language] objectAtIndex:[volume intValue]-1]) {
         if ([i intValue] > n) {
             n = [i intValue];
@@ -364,7 +369,8 @@
 	return n;
 }
 
--(NSInteger) getMaximumPageValue:(NSString *)language ofVolume:(NSNumber *)volume {
++(NSInteger) getMaximumPageValue:(NSString *)language ofVolume:(NSNumber *)volume {
+    NSDictionary *pagesDictionary = [Utils readPages];
     NSInteger n = [[[pagesDictionary valueForKey:language] objectAtIndex:[volume intValue]-1] intValue];
     return n;
 }
@@ -433,7 +439,7 @@
 }
 
 -(void) updatePageTitle:(NSString *)language volume:(NSNumber *) volume page:(NSNumber *) page {
-    NSInteger maxPage = [self getMaximumPageValue:language ofVolume:volume];
+    NSInteger maxPage = [ReadViewController getMaximumPageValue:language ofVolume:volume];
     
     if (pageSlider.maximumValue != maxPage) {
         pageSlider.maximumValue = maxPage;
@@ -505,7 +511,7 @@
     
 	[newTitle release];
 	
-	NSArray *fetchedObjects = [self getContents:language forVolume:volume forPage:page];
+	NSArray *fetchedObjects = [ReadViewController getContents:language forVolume:volume forPage:page];
 	
 	if(fetchedObjects == nil) {
 		NSLog(@"Whoops, couldn't fetch");
@@ -517,10 +523,9 @@
 			text = [text stringByReplacingOccurrencesOfString:@"\t" 
 												   withString:@"&nbsp;&nbsp;"];
 			if(query) {
-				self.keywords = [[NSString alloc] initWithString:query];
-				[keywords release];
+				self.keywords = [NSString stringWithString:query];
 				
-				NSArray *tokens = [keywords componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+				NSArray *tokens = [self.keywords componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 				
 				for(NSString *token in tokens) {
 					token = [token stringByReplacingOccurrencesOfString:@"+" withString:@" "];
@@ -577,6 +582,9 @@
     [Utils writeData:dataDictionary];
 }
 
+-(NSString *) convertContenttoHtml:(Content *)content query:(NSString *)query {
+    return nil;
+}
 
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -596,16 +604,7 @@
 }
 
 - (void)reloadData {
-	// load data from plist file
-	//NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithDictionary:[Utils readData]];
-	//self.dataDictionary = plistDict;
-	//[plistDict release];	
-	//self.dataDictionary = [[NSMutableDictionary alloc] initWithDictionary:[Utils readData]];
-	//[dataDictionary release];
     self.dataDictionary = [Utils readData];
-    //NSLog(@"%@", self.dataDictionary);
-	//NSLog(@"retain dataDictionary %d",[dataDictionary retainCount]);
-	
 }
 
 - (void) swapLanguage {
@@ -644,20 +643,30 @@
 	[self updateReadingPage];	
 }
 
-- (void) compareLanguage {
-	NSString *language = [dataDictionary valueForKey:@"Language"];
-	NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
-	NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];			
-	
-	NSArray *items = [self getItems:language forVolume:volume forPage:page onlyBegin:YES];
-	if (items && [items count] > 0) {
-		[self showItemOptions:items withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
-	} else {
-		items = [self getItems:language forVolume:volume forPage:page onlyBegin:NO];
-		if (items && [items count] > 0) {
-			[self showItemOptions:items withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
-		}
-	}	
+- (void) compareLanguage {    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        NSString *language = [dataDictionary valueForKey:@"Language"];
+        NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
+        NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];
+        
+        NSArray *items = [self getItems:language forVolume:volume forPage:page onlyBegin:YES];
+        if (items && [items count] > 0) {
+            [self showItemOptions:items 
+                          withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
+        } else {
+            items = [self getItems:language forVolume:volume forPage:page onlyBegin:NO];
+            if (items && [items count] > 0) {
+                [self showItemOptions:items 
+                              withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
+            }
+        }     
+    }
+    else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        DoubleReadViewController *controller = [[DoubleReadViewController alloc] 
+                                                initWithNibName:@"DoubleReadView_iPad" bundle:nil];
+        [self.navigationController pushViewController:controller animated:YES];
+        [controller release], controller = nil;     
+    }    
 }
 
 - (void) doCompare:(NSInteger)buttonIndex {
@@ -767,14 +776,17 @@
 }
 
 - (void) dismissAllPopoverControllers {
-    if (_myPopoverController != nil && [_myPopoverController isPopoverVisible]) {
-        [_myPopoverController dismissPopoverAnimated:YES];
-    }
+//    if (_myPopoverController != nil && [_myPopoverController isPopoverVisible]) {
+//        [_myPopoverController dismissPopoverAnimated:YES];
+//    }
     if (_searchPopoverController != nil && [_searchPopoverController isPopoverVisible]) {
         [_searchPopoverController dismissPopoverAnimated:YES];
     }
     if (_bookmarkPopoverController != nil && [_bookmarkPopoverController isPopoverVisible]) {
         [_bookmarkPopoverController dismissPopoverAnimated:YES];
+    }
+    if (booklistPopoverController != nil && [booklistPopoverController isPopoverVisible]) {
+        [booklistPopoverController dismissPopoverAnimated:YES];
     }
     if (languageActionSheet != nil && [languageActionSheet isVisible]) {
         [languageActionSheet 
@@ -915,7 +927,7 @@
     NSNumber *page = [dict valueForKey:@"Page"];
     NSNumber *volume = [dict valueForKey:@"Volume"];
     
-    if ([page intValue] < [self getMaximumPageValue:language ofVolume:volume]) {
+    if ([page intValue] < [ReadViewController getMaximumPageValue:language ofVolume:volume]) {
         // reset scroll position
         if ([language isEqualToString:@"Thai"]) {
             thaiScrollPosition = 0;
@@ -1105,7 +1117,8 @@
         }
     }
     else {
-        BookmarkListViewController *bookmarkListViewController = [[BookmarkListViewController alloc] init];
+        BookmarkListViewController *bookmarkListViewController = [[BookmarkListViewController alloc] 
+                                                                  init];
         bookmarkListViewController.readViewController = self;
         UINavigationController *navController = [[UINavigationController alloc] 
                                                  initWithRootViewController:bookmarkListViewController];
@@ -1118,6 +1131,33 @@
         self.bookmarkPopoverController = poc;
         [poc release];
         [bookmarkListViewController release];
+        [navController release];
+    }
+}
+
+-(IBAction)showBooklistTableView:(id)sender {
+    if(booklistPopoverController != nil) {
+        if ([booklistPopoverController isPopoverVisible]) {
+            [booklistPopoverController dismissPopoverAnimated:YES];
+        } else {
+            [self dismissAllPopoverControllers];
+            [booklistPopoverController presentPopoverFromBarButtonItem:booklistButton
+                                              permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                              animated:YES];
+        }
+    } else {
+        BookListTableViewController *booklistTableViewController = [[BookListTableViewController alloc] 
+                                                                    init];
+        UINavigationController *navController = [[UINavigationController alloc] 
+                                                 initWithRootViewController:booklistTableViewController];
+        UIPopoverController *poc = [[UIPopoverController alloc]
+                                    initWithContentViewController:navController];
+        [self dismissAllPopoverControllers];
+        [poc presentPopoverFromBarButtonItem:booklistButton 
+                    permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        self.booklistPopoverController = poc;
+        [poc release];
+        [booklistTableViewController release];
         [navController release];
     }
 }
@@ -1189,12 +1229,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-//	[[NSNotificationCenter defaultCenter] addObserver:self 
-//                                             selector:@selector(presentSearchPopover) 
-//                                                 name:UIKeyboardDidHideNotification object:nil];
-
-    self.pagesDictionary = [Utils readPages];
-    self.itemsDictionary = [Utils readItems];
+//    self.pagesDictionary = [Utils readPages];
+//    self.itemsDictionary = [Utils readItems];
     
     mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
     mWindow.viewToObserve = htmlView;
@@ -1320,9 +1356,9 @@
     self.pageSlider = nil;
 	self.htmlView = nil;
 	self.dataDictionary = nil;
-    self.pagesDictionary = nil;
-    self.itemsDictionary = nil;
-    self.popoverController = nil;
+//    self.pagesDictionary = nil;
+//    self.itemsDictionary = nil;
+//    self.popoverController = nil;
     self.searchPopoverController = nil;
     self.bookmarkPopoverController = nil;
     self.searchButton = nil;
@@ -1347,16 +1383,18 @@
     [pageSlider release];
 	[htmlView release];
 	[dataDictionary release];
-    [pagesDictionary release];
-    [itemsDictionary release];
+//    [pagesDictionary release];
+//    [itemsDictionary release];
 	[alterItems release];
 	[keywords release];
-    [_myPopoverController release];
+//    [_myPopoverController release];
     [_detailItem release];
     [_searchPopoverController release];
     [_bookmarkPopoverController release];
+    [booklistPopoverController release];
     [searchButton release];
     [languageButton release];
+    [booklistButton release];
     [gotoButton release];
     [noteButton release];
     [bookmarkButton release];
@@ -1394,7 +1432,8 @@
 				if ([inputText length] > 0) {
 					if ([inputText intValue]) {
 						if(alertView.tag == kGotoPageAlert) {
-							NSInteger maxPage = [self getMaximumPageValue:language ofVolume:volume];
+							NSInteger maxPage = [ReadViewController getMaximumPageValue:language 
+                                                                               ofVolume:volume];
 							if ([inputText intValue] > 0 && [inputText intValue] <= maxPage) {
 								NSNumber *newPage = [NSNumber numberWithInt:[inputText intValue]];
 								[dict setValue:newPage forKey:@"Page"];
@@ -1404,7 +1443,8 @@
 
 						}
 						else {
-							NSInteger maxItem = [self getMaximumItemValue:language ofVolume:volume];
+							NSInteger maxItem = [ReadViewController getMaximumItemValue:language 
+                                                                               ofVolume:volume];
 							if([inputText intValue] > 0 && [inputText intValue] <= maxItem) {
 								NSNumber *newNumber = [NSNumber numberWithInt:[inputText intValue]];
 								NSArray *results = [self getItems:language forVolume:volume forNumber:newNumber];

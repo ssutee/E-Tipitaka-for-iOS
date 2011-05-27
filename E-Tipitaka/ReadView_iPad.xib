@@ -59,11 +59,11 @@
 						<int key="IBUIBarStyle">1</int>
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIBarButtonItem" id="669227319">
+							<object class="IBUIBarButtonItem" id="145745581">
+								<string key="IBUITitle">เลือก</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<float key="IBUIWidth">5</float>
+								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="21117755"/>
-								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="408280319">
 								<int key="IBUITag">1</int>
@@ -590,6 +590,22 @@
 					</object>
 					<int key="connectionID">78</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">booklistButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="145745581"/>
+					</object>
+					<int key="connectionID">80</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showBooklistTableView:</string>
+						<reference key="source" ref="145745581"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">81</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -638,10 +654,10 @@
 							<reference ref="696919741"/>
 							<reference ref="298491371"/>
 							<reference ref="874913098"/>
-							<reference ref="669227319"/>
 							<reference ref="380610577"/>
 							<reference ref="142996735"/>
 							<reference ref="200289957"/>
+							<reference ref="145745581"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -765,11 +781,6 @@
 						<reference key="parent" ref="245419086"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">70</int>
-						<reference key="object" ref="669227319"/>
-						<reference key="parent" ref="21117755"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">71</int>
 						<reference key="object" ref="380610577"/>
 						<reference key="parent" ref="21117755"/>
@@ -798,6 +809,11 @@
 						<int key="objectID">76</int>
 						<reference key="object" ref="140953668"/>
 						<reference key="parent" ref="245419086"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">79</int>
+						<reference key="object" ref="145745581"/>
+						<reference key="parent" ref="21117755"/>
 					</object>
 				</object>
 			</object>
@@ -831,13 +847,13 @@
 					<string>68.IBPluginDependency</string>
 					<string>69.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
-					<string>70.IBPluginDependency</string>
 					<string>71.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
 					<string>75.IBPluginDependency</string>
 					<string>76.IBPluginDependency</string>
+					<string>79.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
@@ -892,7 +908,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">78</int>
+			<int key="maxID">81</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -911,6 +927,7 @@
 							<string>languageButtonClicked:</string>
 							<string>nextButtonClicked:</string>
 							<string>noteButtonClicked:</string>
+							<string>showBooklistTableView:</string>
 							<string>showBookmarkListView:</string>
 							<string>showSearchView:</string>
 							<string>sliderValueChanged:</string>
@@ -919,6 +936,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -944,6 +962,7 @@
 							<string>languageButtonClicked:</string>
 							<string>nextButtonClicked:</string>
 							<string>noteButtonClicked:</string>
+							<string>showBooklistTableView:</string>
 							<string>showBookmarkListView:</string>
 							<string>showSearchView:</string>
 							<string>sliderValueChanged:</string>
@@ -981,6 +1000,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">showBooklistTableView:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">showBookmarkListView:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -1006,6 +1029,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>booklistButton</string>
 							<string>bookmarkButton</string>
 							<string>bottomToolbar</string>
 							<string>gotoButton</string>
@@ -1022,6 +1046,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIToolbar</string>
 							<string>UIBarButtonItem</string>
@@ -1041,6 +1066,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>booklistButton</string>
 							<string>bookmarkButton</string>
 							<string>bottomToolbar</string>
 							<string>gotoButton</string>
@@ -1057,6 +1083,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">booklistButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">bookmarkButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>

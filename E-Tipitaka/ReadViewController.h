@@ -21,15 +21,15 @@
 #define kGotoItemAlert 2002
 
 @interface ReadViewController : UIViewController 
-<UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate, UIPopoverControllerDelegate, UISplitViewControllerDelegate>
+<UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate>
 {
 	UILabel *titleLabel;
     UILabel *pageNumberLabel;
 	UIToolbar *toolbar;
 	UIWebView *htmlView;
 	NSMutableDictionary *dataDictionary;
-    NSDictionary *pagesDictionary;
-    NSDictionary *itemsDictionary;    
+//    NSDictionary *pagesDictionary;
+//    NSDictionary *itemsDictionary;    
 	BOOL showToolbar;
 	TapDetectingWindow *mWindow;
 	
@@ -44,8 +44,10 @@
     NSInteger fontSize;
     UIPopoverController *searchPopoverController;
     UIPopoverController *bookmarkPopoverController;
+    UIPopoverController *booklistPopoverController;
     UIBarButtonItem *searchButton;
     UIBarButtonItem *languageButton;
+    UIBarButtonItem *booklistButton;
     UIBarButtonItem *noteButton;
     UIBarButtonItem *bookmarkButton;
     UIBarButtonItem *gotoButton;
@@ -65,8 +67,8 @@
 @property(nonatomic, retain) IBOutlet UIWebView *htmlView;
 @property(nonatomic, retain) IBOutlet UILabel *toastText;
 @property(nonatomic, retain) NSDictionary *dataDictionary;
-@property(nonatomic, retain) NSDictionary *pagesDictionary;
-@property(nonatomic, retain) NSDictionary *itemsDictionary;
+//@property(nonatomic, retain) NSDictionary *pagesDictionary;
+//@property(nonatomic, retain) NSDictionary *itemsDictionary;
 @property(nonatomic, retain) NSArray *alterItems;
 @property(nonatomic, retain) NSString *keywords;
 
@@ -78,8 +80,10 @@
 @property (nonatomic, retain) id detailItem;
 @property (nonatomic, retain) UIPopoverController *searchPopoverController;
 @property (nonatomic, retain) UIPopoverController *bookmarkPopoverController;
+@property (nonatomic, retain) UIPopoverController *booklistPopoverController;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *searchButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *languageButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *booklistButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *gotoButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *noteButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *bookmarkButton;
@@ -101,6 +105,7 @@
 -(IBAction)decreaseFontSize:(id)sender;
 -(IBAction)showSearchView:(id)sender;
 -(IBAction)showBookmarkListView:(id)sender;
+-(IBAction)showBooklistTableView:(id)sender;
 -(IBAction)sliderValueChanged:(id)sender;
 -(IBAction)startUpdatingPage:(id)sender;
 
@@ -113,14 +118,16 @@
 -(void) showToast;
 -(void) hideToast:(NSTimer *)theTimer;
 
--(NSInteger) getMaximumItemValue:(NSString *)language ofVolume:(NSNumber *)volume;
--(NSInteger) getMaximumPageValue:(NSString *)language ofVolume:(NSNumber *)volume;
--(NSArray *) getContents:(NSString *)language forVolume:(NSNumber *)volume  forPage:(NSNumber *)page;
--(NSArray *) getContents:(NSString *)language forVolume:(NSNumber *)volume;
++(NSInteger) getMaximumItemValue:(NSString *)language ofVolume:(NSNumber *)volume;
++(NSInteger) getMaximumPageValue:(NSString *)language ofVolume:(NSNumber *)volume;
++(NSArray *) getContents:(NSString *)language forVolume:(NSNumber *)volume forPage:(NSNumber *)page;
++(NSArray *) getContents:(NSString *)language forVolume:(NSNumber *)volume;
 
 -(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forNumber:(NSNumber *)number;
--(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forNumber:(NSNumber *)number forSection:(NSNumber *)section;
--(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forPage:(NSNumber *)page onlyBegin:(BOOL)begin;
+-(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume 
+            forNumber:(NSNumber *)number forSection:(NSNumber *)section;
+-(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume 
+              forPage:(NSNumber *)page onlyBegin:(BOOL)begin;
 -(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume onlyBegin:(BOOL)begin;
 -(NSArray *) getItemsFromContent:(Content *)content;
 

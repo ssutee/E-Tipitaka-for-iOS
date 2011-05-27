@@ -140,11 +140,11 @@
 	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	
 	NSManagedObjectContext *context = [appDelegate managedObjectContext];
-
-    if ([history.star intValue] == 1) {
-        [history setValue:[NSNumber numberWithBool:NO] forKey:@"star"];
+    
+    if (history.state) {
+        history.state = [NSNumber numberWithInteger:([history.state intValue]+1)%4];
     } else {
-        [history setValue:[NSNumber numberWithBool:YES] forKey:@"star"];        
+        history.state = [NSNumber numberWithInteger:1];
     }
 
 	NSError *error;    
@@ -260,10 +260,23 @@
         
         UIImage *buttonStar;
 
-        if ([history.star intValue] == 1) {
-            buttonStar = [UIImage imageNamed:@"star_on.png"];
+        if (history.state) {
+            switch ([history.state intValue]) {
+                case 0:
+                    buttonStar = [UIImage imageNamed:@"stage_01.png"];
+                    break;
+                case 1:
+                    buttonStar = [UIImage imageNamed:@"stage_02.png"];
+                    break;
+                case 2 :
+                    buttonStar = [UIImage imageNamed:@"stage_03.png"];                
+                    break;
+                case 3:
+                    buttonStar = [UIImage imageNamed:@"stage_04.png"];                
+                    break;
+            }
         } else {
-            buttonStar = [UIImage imageNamed:@"star_off.png"];
+            buttonStar = [UIImage imageNamed:@"stage_01.png"];
         }
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

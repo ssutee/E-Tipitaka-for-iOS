@@ -633,6 +633,8 @@
 
     if (notFound && section == 0 && (row == 3 || row == 4)) {
         return 80;
+    } else if(!notFound && section == 0) {
+        return 60;
     }
     return 40;
 }
@@ -649,32 +651,75 @@
 	
 	if(cell == nil) {
 		cell = [[[UITableViewCell alloc]
-				 initWithStyle:UITableViewCellStyleDefault 
+				 initWithStyle:UITableViewCellStyleSubtitle 
 				 reuseIdentifier:SectionsTableIdentifier] autorelease];
 	}
     
     cell.textLabel.font = [UIFont boldSystemFontOfSize:22];
     cell.textLabel.textAlignment = UITextAlignmentLeft;
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:20];
+    cell.detailTextLabel.text = nil;
     
 	if (section > 0) {
 		Content *content = [resultSection objectAtIndex:row];
-		NSString *text = [[NSString alloc] initWithFormat:@"เล่มที่ %@ หน้าที่ %@", content.volume, content.page];
+		NSString *text = [[NSString alloc] 
+                          initWithFormat:@"เล่มที่ %@ หน้าที่ %@", content.volume, content.page];
 		cell.textLabel.text = [Utils arabic2thai:text];
 		[text release];
 
 	} else {
 		NSString *label;
+        NSMutableArray *tmp = [[NSMutableArray alloc] init];
+        NSString *s;
 		if(row == 0) {
-			label = [[NSString alloc] initWithFormat:@"พระวินัยปิฎก %@ หน้า", [resultSection objectAtIndex:row]];
+            s = [NSString stringWithString:@"เล่มที่"];
+            [tmp removeAllObjects];
+            for (Content *content in [results valueForKey:@"1"]) {
+                if (![tmp containsObject:content.volume]) {
+                    [tmp addObject:content.volume];
+                    s = [NSString stringWithFormat:@"%@ %@", s, content.volume];
+                }
+            }
+			label = [[NSString alloc] initWithFormat:@"พบในพระวินัยปิฎก %@ หน้า จาก %d เล่ม", 
+                     [resultSection objectAtIndex:row], [tmp count]];
 			cell.textLabel.text = [Utils arabic2thai:label];
-			[label release];			
+            if ([tmp count] > 0) {
+                cell.detailTextLabel.text = [Utils arabic2thai:s];            
+            }
+			[label release];
+            
+			
 		} else if(row == 1) {
-			label = [[NSString alloc] initWithFormat:@"พระสุตตันตปิฎก %@ หน้า", [resultSection objectAtIndex:row]];			
+            s = [NSString stringWithString:@"เล่มที่"];            
+            [tmp removeAllObjects];
+            for (Content *content in [results valueForKey:@"2"]) {
+                if (![tmp containsObject:content.volume]) {
+                    [tmp addObject:content.volume];
+                    s = [NSString stringWithFormat:@"%@ %@", s, content.volume];                    
+                }
+            }
+			label = [[NSString alloc] initWithFormat:@"พบในพระวินัยปิฎก %@ หน้า จาก %d เล่ม", 
+                     [resultSection objectAtIndex:row], [tmp count]];
 			cell.textLabel.text = [Utils arabic2thai:label];
+            if ([tmp count] > 0) {
+                cell.detailTextLabel.text = [Utils arabic2thai:s];            
+            } 
 			[label release];			
 		} else if(row == 2) {
-			label = [[NSString alloc] initWithFormat:@"พระอภิธรรมปิฎก %@ หน้า", [resultSection objectAtIndex:row]];			
+            s = [NSString stringWithString:@"เล่มที่"];             
+            [tmp removeAllObjects];
+            for (Content *content in [results valueForKey:@"3"]) {
+                if (![tmp containsObject:content.volume]) {
+                    [tmp addObject:content.volume];
+                    s = [NSString stringWithFormat:@"%@ %@", s, content.volume];                    
+                }
+            }
+			label = [[NSString alloc] initWithFormat:@"พบในพระวินัยปิฎก %@ หน้า จาก %d เล่ม", 
+                     [resultSection objectAtIndex:row], [tmp count]];
 			cell.textLabel.text = [Utils arabic2thai:label];
+            if ([tmp count] > 0) {
+                cell.detailTextLabel.text = [Utils arabic2thai:s];            
+            }
 			[label release];
 		} else if(row == 3) {
             cell.textLabel.font = [UIFont systemFontOfSize:44];
@@ -689,6 +734,7 @@
                 cell.textLabel.text = @"ในพระไตรปิฎก (ภาษาบาลี)";                
             }
         }
+        [tmp release], tmp = nil;
 	}
     
     
@@ -709,7 +755,8 @@
 		if([results valueForKey:@"3"]) {
 			count += [[results valueForKey:@"3"] count];
 		}
-		NSString *label = [[NSString alloc] initWithFormat:@"%@ (%d หน้า)", self.keywords, count];
+		NSString *label = [[NSString alloc] 
+                           initWithFormat:@"ผลลัพธ์คำว่า \"%@\" พบทั้งหมด %d หน้า", self.keywords, count];
 		NSString *newLabel = [[NSString alloc] initWithString:[Utils arabic2thai:label]];
 		[newLabel autorelease];
 		[label release];

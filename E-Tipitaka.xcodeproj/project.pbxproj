@@ -27,6 +27,11 @@
 		9E326FD5138E167200ED66AE /* ic_menu_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FD4138E167200ED66AE /* ic_menu_edit.png */; };
 		9E326FD9138E1B6D00ED66AE /* BookmarkEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E326FD7138E1B6C00ED66AE /* BookmarkEditViewController.m */; };
 		9E326FDA138E1B6D00ED66AE /* BookmarkEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FD8138E1B6C00ED66AE /* BookmarkEditViewController.xib */; };
+		9E326FE8138E3EE900ED66AE /* DoubleReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E326FE7138E3EE900ED66AE /* DoubleReadViewController.m */; };
+		9E326FF7138F6EBE00ED66AE /* stage_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FF3138F6EBE00ED66AE /* stage_01.png */; };
+		9E326FF8138F6EBE00ED66AE /* stage_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FF4138F6EBE00ED66AE /* stage_02.png */; };
+		9E326FF9138F6EBE00ED66AE /* stage_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FF5138F6EBE00ED66AE /* stage_03.png */; };
+		9E326FFA138F6EBE00ED66AE /* stage_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FF6138F6EBE00ED66AE /* stage_04.png */; };
 		9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D7137862D00092521B /* Icon-Small@2x.png */; };
 		9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D8137862D00092521B /* Icon-Small-50.png */; };
 		9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
@@ -117,6 +122,13 @@
 		9E326FD6138E1B6C00ED66AE /* BookmarkEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkEditViewController.h; sourceTree = "<group>"; };
 		9E326FD7138E1B6C00ED66AE /* BookmarkEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkEditViewController.m; sourceTree = "<group>"; };
 		9E326FD8138E1B6C00ED66AE /* BookmarkEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkEditViewController.xib; sourceTree = "<group>"; };
+		9E326FE6138E3EE900ED66AE /* DoubleReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleReadViewController.h; sourceTree = "<group>"; };
+		9E326FE7138E3EE900ED66AE /* DoubleReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleReadViewController.m; sourceTree = "<group>"; };
+		9E326FEA138F69C500ED66AE /* E_Tipitaka 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 4.xcdatamodel"; sourceTree = "<group>"; };
+		9E326FF3138F6EBE00ED66AE /* stage_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage_01.png; sourceTree = "<group>"; };
+		9E326FF4138F6EBE00ED66AE /* stage_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage_02.png; sourceTree = "<group>"; };
+		9E326FF5138F6EBE00ED66AE /* stage_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage_03.png; sourceTree = "<group>"; };
+		9E326FF6138F6EBE00ED66AE /* stage_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage_04.png; sourceTree = "<group>"; };
 		9E3DA8D7137862D00092521B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		9E3DA8D8137862D00092521B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -234,6 +246,10 @@
 				9EA21D0A134F3EBC00C17FD6 /* Pages.plist */,
 				9EA21D0D134F5C6000C17FD6 /* Items.plist */,
 				9EA859F3135011F6002195A6 /* Names.plist */,
+				9E326FF3138F6EBE00ED66AE /* stage_01.png */,
+				9E326FF4138F6EBE00ED66AE /* stage_02.png */,
+				9E326FF5138F6EBE00ED66AE /* stage_03.png */,
+				9E326FF6138F6EBE00ED66AE /* stage_04.png */,
 				9E326FB6138D36D900ED66AE /* star_off.png */,
 				9E326FB7138D36D900ED66AE /* star_on.png */,
 				9E326FB1138D30F700ED66AE /* star_big_off.png */,
@@ -395,6 +411,8 @@
 				9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */,
 				9E6697CA134CBF1900B9E0F4 /* ReadView_iPad.xib */,
 				9E326FA6138C03B300ED66AE /* DoubleReadView_iPad.xib */,
+				9E326FE6138E3EE900ED66AE /* DoubleReadViewController.h */,
+				9E326FE7138E3EE900ED66AE /* DoubleReadViewController.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -494,6 +512,10 @@
 				9E326FD1138E0EE700ED66AE /* rate_star_small_on.png in Resources */,
 				9E326FD5138E167200ED66AE /* ic_menu_edit.png in Resources */,
 				9E326FDA138E1B6D00ED66AE /* BookmarkEditViewController.xib in Resources */,
+				9E326FF7138F6EBE00ED66AE /* stage_01.png in Resources */,
+				9E326FF8138F6EBE00ED66AE /* stage_02.png in Resources */,
+				9E326FF9138F6EBE00ED66AE /* stage_03.png in Resources */,
+				9E326FFA138F6EBE00ED66AE /* stage_04.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +550,7 @@
 				9E1722071366C4F90011891C /* ZipArchive.mm in Sources */,
 				9E326FC0138D445600ED66AE /* History.m in Sources */,
 				9E326FD9138E1B6D00ED66AE /* BookmarkEditViewController.m in Sources */,
+				9E326FE8138E3EE900ED66AE /* DoubleReadViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,10 +741,11 @@
 			isa = XCVersionGroup;
 			children = (
 				9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */,
+				9E326FEA138F69C500ED66AE /* E_Tipitaka 4.xcdatamodel */,
 				9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */,
 				9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */,
 			);
-			currentVersion = 9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */;
+			currentVersion = 9E326FEA138F69C500ED66AE /* E_Tipitaka 4.xcdatamodel */;
 			path = E_Tipitaka.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

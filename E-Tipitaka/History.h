@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * lang;
 @property (nonatomic, retain) NSString * keywords;
 @property (nonatomic, retain) NSNumber * star;
+@property (nonatomic, retain) NSNumber * state;
 @property (nonatomic, retain) NSSet* contents;
 
 - (void)addContentsObject:(Content *)value;

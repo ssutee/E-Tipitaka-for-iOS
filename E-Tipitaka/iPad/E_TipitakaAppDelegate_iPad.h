@@ -12,12 +12,14 @@
 #import "BookListTableViewController.h"
 
 @interface E_TipitakaAppDelegate_iPad : E_TipitakaAppDelegate {
-    UISplitViewController *splitViewController;
+//    UISplitViewController *splitViewController;
+    UINavigationController *rootController;
 }
 
-@property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
-@property (nonatomic, retain) IBOutlet ReadViewController *readViewController;
-@property (nonatomic, retain) IBOutlet BookListTableViewController *rootViewController;
+@property (nonatomic, retain) IBOutlet UINavigationController *rootController;
+//@property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
+//@property (nonatomic, retain) IBOutlet ReadViewController *readViewController;
+//@property (nonatomic, retain) IBOutlet BookListTableViewController *rootViewController;
 
 @end
 
