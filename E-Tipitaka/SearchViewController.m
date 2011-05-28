@@ -427,29 +427,16 @@
 	}
     
 	self.search.showsCancelButton = NO;	
-
-	/*
-	//scopeBar.segmentedControlStyle = UISegmentedControlStyleBar; //required for color change
-	for (id subview in self.search.subviews )
-	{
-		if([subview isMemberOfClass:[UISegmentedControl class]])
-		{
-			//UISegmentedControl *scopeBar=(UISegmentedControl *) subview;
-			//scopeBar.segmentedControlStyle = UISegmentedControlStyleBar; //required for color change
-			//scopeBar.tintColor =  [UIColor blackColor];         
-		}
-	}
-     */
+    
+    for(int i =0; i<[search.subviews count]; i++) {
+        if([[search.subviews objectAtIndex:i] isKindOfClass:[UITextField class]])
+            [(UITextField*)[search.subviews objectAtIndex:i] setFont:[UIFont systemFontOfSize:20]];
+    }
 	
 	[self resetSearch];
 	
 	[table reloadData];
 	
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self 
-//                                             selector:@selector(presentSearchPopover) 
-//                                                 name:UIKeyboardDidHideNotification object:nil];
-    
     [super viewDidLoad];
 }
 
