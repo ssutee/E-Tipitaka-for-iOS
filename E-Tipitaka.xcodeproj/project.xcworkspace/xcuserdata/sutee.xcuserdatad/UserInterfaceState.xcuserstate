@@ -12055,9 +12055,9 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>328241109.26931399</real>
-		<string>{1584, 1648}</string>
-		<string>{2629, 283}</string>
+		<real>328241686.191414</real>
+		<string>{6138, 1561}</string>
+		<string>{6229, 102}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -13128,9 +13128,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328240549.03911</real>
-		<string>{563, 1602}</string>
-		<string>{1387, 39}</string>
+		<real>328241986.44910997</real>
+		<string>{20443, 2044}</string>
+		<string>{20854, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -16749,8 +16749,8 @@
 		</dict>
 		<string>IDEDeviceLocation</string>
 		<string>IDEDeviceArchitecture</string>
-		<string>dvtdevice-iphonesimulator:/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk-iPad</string>
-		<string>i386</string>
+		<string>dvtdevice-iphone:7ae12bb9ffb4d8e97135a80197a909860934edff</string>
+		<string>armv7</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -16807,7 +16807,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1275</integer>
+					<integer>1253</integer>
 				</dict>
 			</array>
 		</dict>
@@ -17061,7 +17061,7 @@
 				<integer>1291</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>328241090.77363998</real>
+			<real>328241929.950409</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -17072,7 +17072,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 9:04 AM</string>
+		<string>Today at 9:18 AM</string>
 		<integer>106</integer>
 		<dict>
 			<key>$class</key>
@@ -17404,11 +17404,11 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1325</integer>
+					<integer>1326</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1326</integer>
+					<integer>1327</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -17453,6 +17453,24 @@
 				<integer>1323</integer>
 			</dict>
 		</dict>
+		<string>file://localhost/Users/sutee/Works/obj-c/E-Tipitaka/E-Tipitaka/SearchViewController.m</string>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>99</integer>
+			</dict>
+			<key>NS.base</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>0</integer>
+			</dict>
+			<key>NS.relative</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>1325</integer>
+			</dict>
+		</dict>
 		<string>file://localhost/Users/sutee/Works/obj-c/E-Tipitaka/E-Tipitaka/SearchHistoryViewController.m</string>
 		<dict>
 			<key>$class</key>
@@ -17488,24 +17506,6 @@
 				<integer>364</integer>
 			</dict>
 		</dict>
-		<dict>
-			<key>$class</key>
-			<dict>
-				<key>CF$UID</key>
-				<integer>99</integer>
-			</dict>
-			<key>NS.base</key>
-			<dict>
-				<key>CF$UID</key>
-				<integer>0</integer>
-			</dict>
-			<key>NS.relative</key>
-			<dict>
-				<key>CF$UID</key>
-				<integer>1327</integer>
-			</dict>
-		</dict>
-		<string>file://localhost/Users/sutee/Works/obj-c/E-Tipitaka/E-Tipitaka/SearchViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -26910,7 +26910,7 @@
 		<string>IDEWorkspaceTabControllerDesignAreaSplitView</string>
 		<string>IDEShowUtilities</string>
 		<string>AssistantEditorsLayout</string>
-		<string>SearchHistoryViewController.m</string>
+		<string>SearchViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -27565,7 +27565,7 @@
 				<integer>1868</integer>
 			</dict>
 		</dict>
-		<string>SearchHistoryViewController.m</string>
+		<string>SearchViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -27613,7 +27613,7 @@
 			<key>documentURL</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>807</integer>
+				<integer>851</integer>
 			</dict>
 			<key>timestamp</key>
 			<dict>
@@ -27666,10 +27666,10 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328241109.270271</real>
-		<string>{1584, 1648}</string>
-		<string>{2629, 283}</string>
-		<string>-reloadData</string>
+		<real>328241986.45100898</real>
+		<string>{20443, 2044}</string>
+		<string>{20854, 0}</string>
+		<string>-tableView:cellForRowAtIndexPath:</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
 			<key>$class</key>
@@ -27688,7 +27688,7 @@
 				<integer>1882</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/sutee/Works/obj-c/E-Tipitaka/E-Tipitaka/SearchHistoryViewController.m</string>
+		<string>file://localhost/Users/sutee/Works/obj-c/E-Tipitaka/E-Tipitaka/SearchViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>

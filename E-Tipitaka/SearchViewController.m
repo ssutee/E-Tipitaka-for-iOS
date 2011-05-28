@@ -652,9 +652,15 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SectionsTableIdentifier];
 	
 	if(cell == nil) {
-		cell = [[[UITableViewCell alloc]
-				 initWithStyle:UITableViewCellStyleSubtitle 
-				 reuseIdentifier:SectionsTableIdentifier] autorelease];
+        if (section == 0 && (row == 3 || row == 4)) {
+            cell = [[[UITableViewCell alloc]
+                     initWithStyle:UITableViewCellStyleDefault
+                     reuseIdentifier:SectionsTableIdentifier] autorelease];
+        } else {
+            cell = [[[UITableViewCell alloc]
+                     initWithStyle:UITableViewCellStyleSubtitle 
+                     reuseIdentifier:SectionsTableIdentifier] autorelease];
+        }
 	}
     
     cell.textLabel.font = [UIFont boldSystemFontOfSize:22];
@@ -724,6 +730,7 @@
             }
 			[label release];
 		} else if(row == 3) {
+            
             cell.textLabel.font = [UIFont systemFontOfSize:44];
             cell.textLabel.textAlignment = UITextAlignmentCenter;
             cell.textLabel.text = [NSString stringWithFormat:@"ไม่พบคำว่า \"%@\"", keywords];
