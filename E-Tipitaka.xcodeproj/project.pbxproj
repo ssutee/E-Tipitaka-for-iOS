@@ -129,6 +129,7 @@
 		9E326FF4138F6EBE00ED66AE /* stage_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage_02.png; sourceTree = "<group>"; };
 		9E326FF5138F6EBE00ED66AE /* stage_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage_03.png; sourceTree = "<group>"; };
 		9E326FF6138F6EBE00ED66AE /* stage_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage_04.png; sourceTree = "<group>"; };
+		9E32700C13908F2E00ED66AE /* E_Tipitaka 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 5.xcdatamodel"; sourceTree = "<group>"; };
 		9E3DA8D7137862D00092521B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		9E3DA8D8137862D00092521B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -742,10 +743,11 @@
 			children = (
 				9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */,
 				9E326FEA138F69C500ED66AE /* E_Tipitaka 4.xcdatamodel */,
+				9E32700C13908F2E00ED66AE /* E_Tipitaka 5.xcdatamodel */,
 				9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */,
 				9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */,
 			);
-			currentVersion = 9E326FEA138F69C500ED66AE /* E_Tipitaka 4.xcdatamodel */;
+			currentVersion = 9E32700C13908F2E00ED66AE /* E_Tipitaka 5.xcdatamodel */;
 			path = E_Tipitaka.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
