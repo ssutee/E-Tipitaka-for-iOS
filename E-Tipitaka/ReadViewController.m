@@ -1166,12 +1166,12 @@
     }
 }
 
--(IBAction)showBooklistTableView:(id)sender {
+-(IBAction)showBooklistTableView:(id)sender { 
     if(booklistPopoverController != nil) {
         if ([booklistPopoverController isPopoverVisible]) {
             [booklistPopoverController dismissPopoverAnimated:YES];
         } else {
-            [self dismissAllPopoverControllers];
+            [self dismissAllPopoverControllers];            
             [booklistPopoverController presentPopoverFromBarButtonItem:booklistButton
                                               permittedArrowDirections:UIPopoverArrowDirectionAny 
                                                               animated:YES];
@@ -1180,6 +1180,10 @@
         BookListTableViewController *booklistTableViewController = [[BookListTableViewController alloc] 
                                                                     init];
         booklistTableViewController.readViewController = self;
+        
+
+        booklistTableViewController.title = @"พระไตรปิฎก บาลีสยามรัฐ ๔๕ เล่ม";
+        
         UINavigationController *navController = [[UINavigationController alloc] 
                                                  initWithRootViewController:booklistTableViewController];
         UIPopoverController *poc = [[UIPopoverController alloc]

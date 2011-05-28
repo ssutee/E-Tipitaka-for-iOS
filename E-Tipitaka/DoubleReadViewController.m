@@ -462,7 +462,6 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"%d %d %d", webView.tag, savedItemNumber, scrollToItem);
     if (scrollToItem) {
 		[webView stringByEvaluatingJavaScriptFromString:
 		 [NSString stringWithFormat:

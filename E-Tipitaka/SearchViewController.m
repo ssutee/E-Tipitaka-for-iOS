@@ -391,6 +391,7 @@
     progressBar.transform = transform;
     
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
+
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     self.clickedItems = array;
