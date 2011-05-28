@@ -180,6 +180,32 @@
                                                            forKey:@"Page"];
             [Utils writeData:dict];
             [self updatePage:toLanguage];
+        } else {
+            NSString *message = [[NSString alloc] initWithFormat:@"ไม่พบข้อที่ %@", selectedItem.number];                
+            NSString *title = nil;
+            
+            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(12,20,260,95)]; 
+            textLabel.font = [UIFont systemFontOfSize:18];
+            textLabel.textColor = [UIColor whiteColor];
+            textLabel.textAlignment = UITextAlignmentCenter;
+            textLabel.backgroundColor = [UIColor clearColor];            
+            textLabel.text = [Utils arabic2thai:message];
+            
+            if ([fromLanguage isEqualToString:@"Thai"]) {
+                title = [[NSString alloc] initWithFormat:@"พระไตรปิฎก เล่มที่ %@ (ภาษาบาลี)", volume];                
+            } else if ([fromLanguage isEqualToString:@"Pali"]) {
+                title = [[NSString alloc] initWithFormat:@"พระไตรปิฎก เล่มที่ %@ (ภาษาไทย)", volume];                
+            }
+            
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[Utils arabic2thai:title] 
+                                                             message:@"\n\n"
+                                                            delegate:self cancelButtonTitle:@"ตกลง" 
+                                                   otherButtonTitles:nil] autorelease];
+            [alert addSubview:textLabel];
+            [textLabel release];
+            [message release];
+            [title release];
+            [alert show];            
         }
 	}
 
