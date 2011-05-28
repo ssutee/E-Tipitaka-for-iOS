@@ -273,11 +273,11 @@
 	return fetchedObjects;
 }
 
--(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forNumber:(NSNumber *)number {
++(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forNumber:(NSNumber *)number {
 	return [self getItems:language forVolume:volume forNumber:number forSection:nil];
 }
 
--(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forNumber:(NSNumber *)number forSection:(NSNumber *)section {
++(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forNumber:(NSNumber *)number forSection:(NSNumber *)section {
 	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	
 	NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -315,7 +315,7 @@
 	return fetchedObjects;
 }
 
--(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forPage:(NSNumber *)page onlyBegin:(BOOL)begin {
++(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forPage:(NSNumber *)page onlyBegin:(BOOL)begin {
 	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	
 	NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -354,28 +354,11 @@
 	return fetchedObjects;
 }
 
--(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume onlyBegin:(BOOL)begin {
++(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume onlyBegin:(BOOL)begin {
 	return [self getItems:language forVolume:volume forPage:nil onlyBegin:begin];
 }
 
-+(NSInteger) getMaximumItemValue:(NSString *)language ofVolume:(NSNumber *)volume {
-    NSDictionary *itemsDictionary = [Utils readItems];
-    NSInteger n=0;
-    for (NSNumber *i in [[itemsDictionary valueForKey:language] objectAtIndex:[volume intValue]-1]) {
-        if ([i intValue] > n) {
-            n = [i intValue];
-        }
-    }
-	return n;
-}
-
-+(NSInteger) getMaximumPageValue:(NSString *)language ofVolume:(NSNumber *)volume {
-    NSDictionary *pagesDictionary = [Utils readPages];
-    NSInteger n = [[[pagesDictionary valueForKey:language] objectAtIndex:[volume intValue]-1] intValue];
-    return n;
-}
-
--(NSArray *) getItemsFromContent:(Content *)content {
++(NSArray *) getItemsFromContent:(Content *)content {
 	NSMutableArray *array = [[NSMutableArray alloc] init];
 	
 	for(Item *item in content.items) {
@@ -400,6 +383,25 @@
 	return sortedItems;
 	
 }
+
++(NSInteger) getMaximumItemValue:(NSString *)language ofVolume:(NSNumber *)volume {
+    NSDictionary *itemsDictionary = [Utils readItems];
+    NSInteger n=0;
+    for (NSNumber *i in [[itemsDictionary valueForKey:language] objectAtIndex:[volume intValue]-1]) {
+        if ([i intValue] > n) {
+            n = [i intValue];
+        }
+    }
+	return n;
+}
+
++(NSInteger) getMaximumPageValue:(NSString *)language ofVolume:(NSNumber *)volume {
+    NSDictionary *pagesDictionary = [Utils readPages];
+    NSInteger n = [[[pagesDictionary valueForKey:language] objectAtIndex:[volume intValue]-1] intValue];
+    return n;
+}
+
+
 
 -(void) showItemOptions:(NSArray *)items withTag:(NSInteger)tagNumber withTitle:(NSString *)titleName {
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
@@ -438,13 +440,16 @@
 	
 }
 
--(void) updatePageTitle:(NSString *)language volume:(NSNumber *) volume page:(NSNumber *) page {
++(void) updatePageTitle:(NSString *)language volume:(NSNumber *)volume 
+                   page:(NSNumber *)page slider:(UISlider *)slider 
+             titleLabel:(UILabel *)label1 pageLabel:(UILabel *)label2 {
+    
     NSInteger maxPage = [ReadViewController getMaximumPageValue:language ofVolume:volume];
     
-    if (pageSlider.maximumValue != maxPage) {
-        pageSlider.maximumValue = maxPage;
+    if (slider.maximumValue != maxPage) {
+        slider.maximumValue = maxPage;
     }
-    pageSlider.value = [page floatValue];
+    slider.value = [page floatValue];
     
 	NSString *newLabel1, *newLabel2;
 	
@@ -466,29 +471,76 @@
     
     newLabel2 = [[NSString alloc] initWithFormat:@"หน้าที่ %@ / %d", page, maxPage];
     
-    self.titleLabel.text = [Utils arabic2thai:newLabel1];
-    self.pageNumberLabel.text = [Utils arabic2thai:newLabel2];
+    label1.text = [Utils arabic2thai:newLabel1];
+    label2.text = [Utils arabic2thai:newLabel2];
     
 	[newLabel1 release];
     [newLabel2 release];    
 }
 
--(void) updateReadingPage {
-	[self updateReadingPage:keywords];
++(void) updateWebView:(UIWebView *)webview withContent:(Content *)content fontSize:(NSInteger)size
+         andKeywords:(NSString *)query {
+    NSString *text = [content.text stringByReplacingOccurrencesOfString:@"\n"
+                                                             withString:@"<br>"];
+    text = [text stringByReplacingOccurrencesOfString:@"\t" 
+                                           withString:@"&nbsp;&nbsp;"];
+    if(query) {
+        NSArray *tokens = [query componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        for(NSString *token in tokens) {
+            token = [token stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+            
+            //must use UTF8 for replacing Thai text
+            const char *orig = [text UTF8String];
+            const char *with = [[NSString 
+                                 stringWithFormat:@"<font color=\"#0000FF\" id=\"keywords\" style=\"background-color:yellow;\">%@</font>", token] UTF8String];
+            const char *rep = [token UTF8String];
+            char * result = [Utils replace:orig pattern:rep replacement:with];
+            text = [NSString stringWithUTF8String:result];
+            free(result);
+        }
+    }
+    
+    for (Item *item in content.items) {
+        if ([item.begin boolValue] == YES) {
+            NSString *tmp = [[NSString alloc] initWithFormat:@"[%@]", [Utils arabic2thai:[item.number stringValue]]];
+            
+            text = [text stringByReplacingOccurrencesOfString:tmp 
+                                                   withString:[NSString
+                                                               stringWithFormat:@"<font id=\"i%@\" color=\"#FF0000\">%@</font>", item.number, tmp]];
+            
+            [tmp release];
+        }
+    }
+    
+    NSString *html = [[NSString alloc] 
+                      initWithFormat:
+                      @"<html> \n"
+                      "<head> \n"
+                      "<style type=\"text/css\"> \n"
+                      "body {font-family:arial; font-size:%d; margin: 5; padding: 5;} \n"
+                      "</style> \n"
+                      "<script> \n"
+                      "function ScrollToElement(theElement){ \n"
+                      "   var selectedPosX = 0; \n"
+                      "	  var selectedPosY = 0; \n"  
+                      "   while(theElement != null){ \n"
+                      "      selectedPosX += theElement.offsetLeft; \n"
+                      "      selectedPosY += theElement.offsetTop; \n"
+                      "      theElement = theElement.offsetParent; \n"
+                      "   } \n"
+                      "   window.scrollTo(selectedPosX,selectedPosY); \n"
+                      "} \n"
+                      "</script>"
+                      "</head> \n"
+                      "<body>%@</body> \n"
+                      "</html>", size, text];
+    [webview loadHTMLString:html baseURL:[NSURL URLWithString:@"http://www.etipitaka.com"]];
+    [html release];
+
 }
 
--(void) updateReadingPage:(NSString *)query {
-	if(!dataDictionary)
-		return;
-
-	NSString *language = [dataDictionary valueForKey:@"Language"];
-	NSDictionary *dict = [dataDictionary valueForKey:language];
-	
-	NSNumber *page = [dict valueForKey:@"Page"];
-	NSNumber *volume = [dict valueForKey:@"Volume"];
-	
-    [self updatePageTitle:language volume:volume page:page];
-	
++(NSString *) createHeaderTitle:(NSNumber *)volume {
 	NSString *newTitle = [NSString alloc];
 	if([volume intValue] <= 8) {
 		newTitle = [newTitle initWithFormat:@"%@ เล่มที่ %d", @"พระวินัยปิฎก", [volume intValue]];
@@ -497,7 +549,20 @@
 	} else {
 		newTitle = [newTitle initWithFormat:@"%@ เล่มที่ %d", @"พระอภิธรรมปิฎก", [volume intValue] - 33];		
 	}
+    return  newTitle;
+}
 
+-(void) updateReadingPage {
+	if(!dataDictionary)
+		return;
+
+	NSString *language = [dataDictionary valueForKey:@"Language"];
+	NSDictionary *dict = [dataDictionary valueForKey:language];
+	
+	NSNumber *page = [dict valueForKey:@"Page"];
+	NSNumber *volume = [dict valueForKey:@"Volume"];    
+    
+	NSString *newTitle = [ReadViewController createHeaderTitle:volume];    
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [(UIButton *)self.navigationItem.titleView setTitle:[Utils arabic2thai:newTitle] forState:UIControlStateNormal];
     }
@@ -508,84 +573,36 @@
             }
         }
     }
-    
 	[newTitle release];
-	
+        
+    [ReadViewController updateReadingPage:self.keywords slider:self.pageSlider webview:self.htmlView
+                               titleLabel:self.titleLabel pageLabel:self.pageNumberLabel
+                                 fontSize:self.fontSize language:language volume:volume page:page];
+    
+    [Utils writeData:dataDictionary];
+}
+
++(void) updateReadingPage:(NSString *)query slider:(UISlider *)slider webview:(UIWebView *)webview
+               titleLabel:(UILabel *)label1 pageLabel:(UILabel *)label2 fontSize:(NSInteger)size 
+                 language:(NSString *)language volume:(NSNumber *)volume page:(NSNumber *)page {
+
+    [ReadViewController updatePageTitle:language volume:volume 
+                                   page:page slider:slider 
+                             titleLabel:label1 
+                              pageLabel:label2];
+    	
 	NSArray *fetchedObjects = [ReadViewController getContents:language forVolume:volume forPage:page];
 	
 	if(fetchedObjects == nil) {
 		NSLog(@"Whoops, couldn't fetch");
 	} else {		
 		if ([fetchedObjects count] > 0) {
-			Content *content = [fetchedObjects objectAtIndex:0];			
-			NSString *text = [content.text stringByReplacingOccurrencesOfString:@"\n"
-																	 withString:@"<br>"];
-			text = [text stringByReplacingOccurrencesOfString:@"\t" 
-												   withString:@"&nbsp;&nbsp;"];
-			if(query) {
-				self.keywords = [NSString stringWithString:query];
-				
-				NSArray *tokens = [self.keywords componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-				
-				for(NSString *token in tokens) {
-					token = [token stringByReplacingOccurrencesOfString:@"+" withString:@" "];
-
-                    //must use UTF8 for replacing Thai text
-                    const char *orig = [text UTF8String];
-                    const char *with = [[NSString 
-                                       stringWithFormat:@"<font color=\"#0000FF\" id=\"keywords\" style=\"background-color:yellow;\">%@</font>", token] UTF8String];
-                    const char *rep = [token UTF8String];
-                    char * result = [Utils replace:orig pattern:rep replacement:with];
-                    text = [NSString stringWithUTF8String:result];
-                    free(result);
-				}
-			}
-			
-			for (Item *item in content.items) {
-				if ([item.begin boolValue] == YES) {
-					NSString *tmp = [[NSString alloc] initWithFormat:@"[%@]", [Utils arabic2thai:[item.number stringValue]]];
-					
-					text = [text stringByReplacingOccurrencesOfString:tmp 
-														   withString:[NSString
-																	   stringWithFormat:@"<font id=\"i%@\" color=\"#FF0000\">%@</font>", item.number, tmp]];
-					
-					[tmp release];
-				}
-			}
-			
-			NSString *html = [[NSString alloc] 
-							  initWithFormat:
-							  @"<html> \n"
-							  "<head> \n"
-							  "<style type=\"text/css\"> \n"
-							  "body {font-family:arial; font-size:%d; margin: 5; padding: 5;} \n"
-							  "</style> \n"
-							  "<script> \n"
-							  "function ScrollToElement(theElement){ \n"
-							  "   var selectedPosX = 0; \n"
-							  "	  var selectedPosY = 0; \n"  
-							  "   while(theElement != null){ \n"
-							  "      selectedPosX += theElement.offsetLeft; \n"
-							  "      selectedPosY += theElement.offsetTop; \n"
-							  "      theElement = theElement.offsetParent; \n"
-							  "   } \n"
-							  "   window.scrollTo(selectedPosX,selectedPosY); \n"
-							  "} \n"
-							  "</script>"
-							  "</head> \n"
-							  "<body>%@</body> \n"
-							  "</html>", self.fontSize, text];
-			[htmlView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://www.etipitaka.com"]];
-			[html release];
+			Content *content = [fetchedObjects objectAtIndex:0];	
+            [ReadViewController updateWebView:webview withContent:content 
+                                     fontSize:size andKeywords:query];
 		}
 	}
-    [Utils writeData:dataDictionary];
 }
-
--(NSString *) convertContenttoHtml:(Content *)content query:(NSString *)query {
-    return nil;
-}
-
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -644,42 +661,35 @@
 }
 
 - (void) compareLanguage {    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        NSString *language = [dataDictionary valueForKey:@"Language"];
-        NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
-        NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];
-        
-        NSArray *items = [self getItems:language forVolume:volume forPage:page onlyBegin:YES];
+    NSString *language = [dataDictionary valueForKey:@"Language"];
+    NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
+    NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];
+    
+    NSArray *items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:YES];
+    if (items && [items count] > 0) {
+        [self showItemOptions:items 
+                      withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
+    } else {
+        items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:NO];
         if (items && [items count] > 0) {
             [self showItemOptions:items 
                           withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
-        } else {
-            items = [self getItems:language forVolume:volume forPage:page onlyBegin:NO];
-            if (items && [items count] > 0) {
-                [self showItemOptions:items 
-                              withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
-            }
-        }     
+        }
     }
-    else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        DoubleReadViewController *controller = [[DoubleReadViewController alloc] 
-                                                initWithNibName:@"DoubleReadView_iPad" bundle:nil];
-        [self.navigationController pushViewController:controller animated:YES];
-        [controller release], controller = nil;     
-    }    
 }
 
 - (void) doCompare:(NSInteger)buttonIndex {
-	NSString *language = [dataDictionary valueForKey:@"Language"];
-	NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
-	NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];			
+	NSString *sourceLanguage = [[NSString alloc] initWithString:[dataDictionary valueForKey:@"Language"]];
+	NSNumber *volume = [[dataDictionary valueForKey:sourceLanguage] valueForKey:@"Volume"];
+	NSNumber *page = [[dataDictionary valueForKey:sourceLanguage] valueForKey:@"Page"];			
 	
-	NSArray *items = [self getItems:language forVolume:volume forPage:page onlyBegin:YES];
+	NSArray *items = [ReadViewController getItems:sourceLanguage forVolume:volume 
+                                          forPage:page onlyBegin:YES];
 	Item *selectedItem = nil;
 	if (items && [items count] > 0) {
 		selectedItem = [items objectAtIndex:buttonIndex];
 	} else {
-		items = [self getItems:language forVolume:volume forPage:page onlyBegin:NO];
+		items = [ReadViewController getItems:sourceLanguage forVolume:volume forPage:page onlyBegin:NO];
 		if (items && [items count] > 0) {
 			selectedItem = [items objectAtIndex:buttonIndex];
 		}
@@ -689,13 +699,13 @@
 		NSArray *comparedItems;
 		NSString *targetLanguage;
 		
-		if ([language isEqualToString:@"Thai"]) {
+		if ([sourceLanguage isEqualToString:@"Thai"]) {
 			targetLanguage = @"Pali";
 		} else {
 			targetLanguage = @"Thai";
 		}
 		
-		comparedItems = [self getItems:targetLanguage 
+		comparedItems = [ReadViewController getItems:targetLanguage 
 							 forVolume:volume 
 							 forNumber:selectedItem.number 
 							forSection:selectedItem.section];
@@ -703,17 +713,38 @@
 		if (comparedItems && [comparedItems count] > 0) {
 			Item *comparedItem = [comparedItems objectAtIndex:0];
 			savedItemNumber = [comparedItem.number intValue];
-			[dataDictionary setValue:targetLanguage forKey:@"Language"];
-			[[dataDictionary valueForKey:targetLanguage] setValue:volume 
-														   forKey:@"Volume"];
-			[[dataDictionary valueForKey:targetLanguage] setValue:comparedItem.content.page
-														   forKey:@"Page"];
+            
 			self.scrollToItem = YES;
             self.scrollToKeyword = NO;
-            
-			[self updateReadingPage];
+    
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                // change language
+                [dataDictionary setValue:targetLanguage forKey:@"Language"];
+                [[dataDictionary valueForKey:targetLanguage] setValue:volume 
+                                                               forKey:@"Volume"];
+                [[dataDictionary valueForKey:targetLanguage] setValue:comparedItem.content.page
+                                                               forKey:@"Page"];                
+                [self updateReadingPage];
+            } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                [[dataDictionary valueForKey:targetLanguage] setValue:volume 
+                                                               forKey:@"Volume"];
+                [[dataDictionary valueForKey:targetLanguage] setValue:comparedItem.content.page
+                                                               forKey:@"Page"];                
+                [Utils writeData:dataDictionary];
+                
+                DoubleReadViewController *controller = [[DoubleReadViewController alloc] 
+                                                        initWithNibName:@"DoubleReadView_iPad" bundle:nil];                
+                controller.sourceLanguage = sourceLanguage;
+                controller.targetLanguage = targetLanguage;
+                controller.savedItemNumber = [comparedItem.number intValue];
+                controller.scrollToItem = YES;
+
+                [self.navigationController pushViewController:controller animated:YES];
+                [controller release], controller = nil;                
+            }
 		}
-	}	
+	}
+	[sourceLanguage release];
 }
 
 - (void) saveBookmark:(NSInteger)buttonIndex {
@@ -721,9 +752,9 @@
 	NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
 	NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];			
 	
-	NSArray *items = [self getItems:language forVolume:volume forPage:page onlyBegin:YES];
+	NSArray *items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:YES];
 	if (!items || [items count] == 0) {
-		items = [self getItems:language forVolume:volume forPage:page onlyBegin:NO];
+		items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:NO];
 	}		
 	
 	if (items && [items count] > 0) {
@@ -996,13 +1027,13 @@
 	NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
 	NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];			
 	
-	NSArray *items = [self getItems:language forVolume:volume forPage:page onlyBegin:YES];
+	NSArray *items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:YES];
 	if (items && [items count] > 0) {
 		[self showItemOptions:items 
                       withTag:kBookmarkOptionsActionSheet 
                     withTitle:@"โปรดเลือกข้อที่ต้องการจดบันทึก"];
 	} else {
-		items = [self getItems:language forVolume:volume forPage:page onlyBegin:NO];
+		items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:NO];
 		if (items && [items count] > 0) {
 			[self showItemOptions:items 
                           withTag:kBookmarkOptionsActionSheet 
@@ -1148,6 +1179,7 @@
     } else {
         BookListTableViewController *booklistTableViewController = [[BookListTableViewController alloc] 
                                                                     init];
+        booklistTableViewController.readViewController = self;
         UINavigationController *navController = [[UINavigationController alloc] 
                                                  initWithRootViewController:booklistTableViewController];
         UIPopoverController *poc = [[UIPopoverController alloc]
@@ -1188,7 +1220,9 @@
     
     [dataDictionary setValue:dict forKey:language];
     
-    [self updatePageTitle:language volume:volume page:page];
+    [ReadViewController updatePageTitle:language volume:volume page:page 
+                                 slider:self.pageSlider titleLabel:self.titleLabel 
+                              pageLabel:pageNumberLabel];
 }
 
 -(IBAction) startUpdatingPage:(id)sender {
@@ -1200,7 +1234,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    
     [self reloadData];
     
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -1214,10 +1248,7 @@
         }      
         [self updateLanguageButtonTitle];        
     }
-    else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        // TODO for iPad
-    }
-      
+    [self updateReadingPage];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -1234,8 +1265,8 @@
     
     mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
     mWindow.viewToObserve = htmlView;
-    mWindow.controllerThatObserves = self;	
-	
+    mWindow.controllerThatObserves = self;	        
+    
     pageSlider.continuous = YES;
     
 	self.scrollToItem = NO;
@@ -1286,7 +1317,7 @@
     
     
     self.fontSize = [[dataDictionary valueForKey:@"FontSize"] intValue];
-    
+        
 	[self updateReadingPage];
     
     UIActionSheet *actionSheet;
@@ -1447,7 +1478,8 @@
                                                                                ofVolume:volume];
 							if([inputText intValue] > 0 && [inputText intValue] <= maxItem) {
 								NSNumber *newNumber = [NSNumber numberWithInt:[inputText intValue]];
-								NSArray *results = [self getItems:language forVolume:volume forNumber:newNumber];
+								NSArray *results = [ReadViewController getItems:language 
+                                                                      forVolume:volume forNumber:newNumber];
 																
 								self.alterItems = [[NSArray alloc] initWithArray:results];
 								
@@ -1577,7 +1609,7 @@
 #pragma mark -
 #pragma mark Tap Detecting Window Delegate Methods
 
-- (void) userDidTapWebView:(id)tapPoint {
+- (void) userDidTapView:(id)tapPoint {
     
     CGRect rect = [htmlView frame];
     

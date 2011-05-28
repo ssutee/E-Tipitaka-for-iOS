@@ -436,7 +436,7 @@
             [readController reloadData];
             readController.scrollToItem = YES;
             readController.savedItemNumber = [bookmark.item.number intValue];
-            [readController updateReadingPage:nil];		
+            [readController updateReadingPage];		
             self.tabBarController.selectedIndex = 0;		
         }
         else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

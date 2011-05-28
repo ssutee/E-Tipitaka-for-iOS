@@ -18,13 +18,16 @@
     }
     return self;
 }
+
 - (void)dealloc {
     [viewToObserve release];
     [super dealloc];
 }
+
 - (void)forwardTap:(id)touch {
-    [controllerThatObserves userDidTapWebView:touch];
+    [controllerThatObserves userDidTapView:touch];
 }
+
 - (void)sendEvent:(UIEvent *)event {
     [super sendEvent:event];
     if (viewToObserve == nil || controllerThatObserves == nil)

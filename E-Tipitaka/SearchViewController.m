@@ -568,12 +568,14 @@
         ReadViewController* readController = [firstNavController.viewControllers objectAtIndex:0];
         [readController reloadData];
         readController.scrollToKeyword = YES;
-        [readController updateReadingPage:self.keywords];
+        readController.keywords = self.keywords;
+        [readController updateReadingPage];
         self.tabBarController.selectedIndex = 0;
     }
     else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self.readViewController reloadData];
-        [self.readViewController updateReadingPage:self.keywords];
+        self.readViewController.keywords = self.keywords;
+        [self.readViewController updateReadingPage];
         self.readViewController.scrollToKeyword = YES;
         [self.readViewController dismissAllPopoverControllers];
     }
@@ -698,7 +700,7 @@
                     s = [NSString stringWithFormat:@"%@ %@", s, content.volume];                    
                 }
             }
-			label = [[NSString alloc] initWithFormat:@"พบในพระวินัยปิฎก %@ หน้า จาก %d เล่ม", 
+			label = [[NSString alloc] initWithFormat:@"พบในพระสุตตันตปิฎก %@ หน้า จาก %d เล่ม", 
                      [resultSection objectAtIndex:row], [tmp count]];
 			cell.textLabel.text = [Utils arabic2thai:label];
             if ([tmp count] > 0) {
@@ -714,7 +716,7 @@
                     s = [NSString stringWithFormat:@"%@ %@", s, content.volume];                    
                 }
             }
-			label = [[NSString alloc] initWithFormat:@"พบในพระวินัยปิฎก %@ หน้า จาก %d เล่ม", 
+			label = [[NSString alloc] initWithFormat:@"พบในพระอภิธรรมปิฎก %@ หน้า จาก %d เล่ม", 
                      [resultSection objectAtIndex:row], [tmp count]];
 			cell.textLabel.text = [Utils arabic2thai:label];
             if ([tmp count] > 0) {
