@@ -160,7 +160,7 @@
 		unz_global_info  globalInfo = {0};
 		if( unzGetGlobalInfo(_unzFile, &globalInfo )==UNZ_OK )
 		{
-            NSLog(@"%ld entries in the zip file",globalInfo.number_entry);
+//            NSLog(@"%ld entries in the zip file",globalInfo.number_entry);
 //			NSLog([NSString stringWithFormat:@"%d entries in the zip file",globalInfo.number_entry] );
 		}
 	}
@@ -185,6 +185,7 @@
 	}
 	
 	do{
+        NSAutoreleasePool *internalPool = [[NSAutoreleasePool alloc] init];
 		if( [_password length]==0 )
 			ret = unzOpenCurrentFile( _unzFile );
 		else
@@ -293,6 +294,8 @@
 		}
 		unzCloseCurrentFile( _unzFile );
 		ret = unzGoToNextFile( _unzFile );
+        
+        [internalPool drain];
 	}while( ret==UNZ_OK && UNZ_OK!=UNZ_END_OF_LIST_OF_FILE );
 	return success;
 }
