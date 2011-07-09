@@ -29,35 +29,28 @@
     //NSError *error;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
-    success = [fileManager fileExistsAtPath:writableDBPath];
-    if (success) return;
     
-    /*
-     natural_t freemem = [self get_free_memory];
-    // check available memory before unzip database
-    if (freemem/1000000 < 40) {
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Low memory" message:@"Memory on your device is lower than 50 Mb that is not enough to run the program at the first time. After the program was closed, please try again." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil, nil] autorelease];
-        [alert show];        
-    } else {    
-        // The writable database does not exist, so copy the default to the appropriate location.    
-        NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] 
-                                   stringByAppendingPathComponent:@"E_Tipitaka.sqlite.zip"];
-        
-        // unzip the database file
-        ZipArchive *za = [[ZipArchive alloc] init];
-        if ([za UnzipOpenFile:defaultDBPath]) {
-            success = [za UnzipFileTo:documentsDirectory overWrite:YES];
-            [za UnzipCloseFile];
+    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
+    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] 
+                               stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
+    
+    
+    NSNumber *sourceFileSize = [[fileManager attributesOfItemAtPath:defaultDBPath error:NULL] 
+                                objectForKey:NSFileSize];
+    NSNumber *targetFileSize = [[fileManager attributesOfItemAtPath:writableDBPath error:NULL] 
+                                objectForKey:NSFileSize];
+    
+    NSError *error;    
+    success = [fileManager fileExistsAtPath:writableDBPath];        
+    if (!success || (success && [sourceFileSize intValue] > [targetFileSize intValue])) {
+        if (success) {            
+            if (![fileManager removeItemAtPath:writableDBPath error:&error]) {
+                NSLog(@"Failed to delete existing database file, %@, %@", error, [error userInfo]);
+            }
         }
-        [za release];
+        [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];                       
+    }    
         
-        //success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
-        if (!success) {
-            NSLog(@"Failed to create writable database file");
-        }
-    }
-    */
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

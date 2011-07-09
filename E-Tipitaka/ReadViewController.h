@@ -20,6 +20,7 @@
 
 #define kGotoPageAlert 2001
 #define kGotoItemAlert 2002
+#define kDatabaseAlert 2003
 
 @interface ReadViewController : UIViewController 
 <UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate>
@@ -145,7 +146,6 @@
 
 
 -(void) showItemOptions:(NSArray *)items withTag:(NSInteger)tagNumber withTitle:(NSString *)titleName;
-
 
 
 @end

@@ -142,7 +142,7 @@
 		9E669700134B15CA00B9E0F4 /* E-Tipitaka-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "E-Tipitaka-Prefix.pch"; sourceTree = "<group>"; };
 		9E669701134B15CA00B9E0F4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = E_TipitakaAppDelegate.h; sourceTree = "<group>"; };
-		9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = E_TipitakaAppDelegate.m; sourceTree = "<group>"; };
+		9E669704134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = E_TipitakaAppDelegate.m; sourceTree = "<group>"; };
 		9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = E_Tipitaka.xcdatamodel; sourceTree = "<group>"; };
 		9E66970A134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = E_TipitakaAppDelegate_iPhone.h; path = iPhone/E_TipitakaAppDelegate_iPhone.h; sourceTree = "<group>"; };
 		9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = E_TipitakaAppDelegate_iPhone.m; path = iPhone/E_TipitakaAppDelegate_iPhone.m; sourceTree = "<group>"; };

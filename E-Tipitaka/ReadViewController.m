@@ -1265,34 +1265,16 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
-    BOOL success;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
-    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] 
-                               stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
-    
-    
-    NSNumber *sourceFileSize = [[fileManager attributesOfItemAtPath:defaultDBPath error:NULL] 
-                                objectForKey:NSFileSize];
-    
-    NSNumber *targetFileSize = [[fileManager attributesOfItemAtPath:writableDBPath error:NULL] 
-                                objectForKey:NSFileSize];
-    
-    success = [fileManager fileExistsAtPath:writableDBPath];    
-    
-    if (success && [sourceFileSize intValue] > [targetFileSize intValue]) {
-        
-    }
-    
-    
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[targetFileSize stringValue] message:@"Do you want to download the database?" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil, nil] autorelease];
-    [alert show];                
+}
 
-    
-    
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	[Utils writeData:dataDictionary];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+        
     [self reloadData];
     
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -1307,11 +1289,7 @@
         [self updateLanguageButtonTitle];        
     }
     [self updateReadingPage];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	[Utils writeData:dataDictionary];
+    
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -1511,81 +1489,84 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if (buttonIndex != [alertView cancelButtonIndex]) {
+        
 		NSString *language = [dataDictionary valueForKey:@"Language"];
 		NSMutableDictionary *dict = [dataDictionary valueForKey:language];
 		
 		NSNumber *volume = [dict valueForKey:@"Volume"];
-		
-		for(UIView *subview in [alertView subviews]) {
-			if([subview isKindOfClass:[UITextField class]]) {
-				NSString *inputText = ((UITextField *)subview).text;
-				if ([inputText length] > 0) {
-					if ([inputText intValue]) {
-						if(alertView.tag == kGotoPageAlert) {
-							NSInteger maxPage = [ReadViewController getMaximumPageValue:language 
-                                                                               ofVolume:volume];
-							if ([inputText intValue] > 0 && [inputText intValue] <= maxPage) {
-								NSNumber *newPage = [NSNumber numberWithInt:[inputText intValue]];
-								[dict setValue:newPage forKey:@"Page"];
-								[dataDictionary setValue:dict forKey:language];
-								[self updateReadingPage];
-							}
 
-						}
-						else {
-							NSInteger maxItem = [ReadViewController getMaximumItemValue:language 
-                                                                               ofVolume:volume];
-							if([inputText intValue] > 0 && [inputText intValue] <= maxItem) {
-								NSNumber *newNumber = [NSNumber numberWithInt:[inputText intValue]];
-								NSArray *results = [ReadViewController getItems:language 
-                                                                      forVolume:volume forNumber:newNumber];
-																
-								self.alterItems = [[NSArray alloc] initWithArray:results];
-								
-								savedItemNumber = [inputText intValue];
-								if ([results count] > 1) {                                    
-									UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-									actionSheet.tag = kSelectItemActionSheet;
-									actionSheet.title = [Utils arabic2thai: 
-														 [NSString stringWithFormat:@"ข้อที่ %@ พบมากกว่าหนึ่งหน้า", newNumber]];
-									actionSheet.delegate = self;
-									actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-									for (Item *item in results) {
-										[actionSheet addButtonWithTitle:
-										 [Utils arabic2thai:[NSString stringWithFormat:@"หน้าที่ %@", item.content.page]]];
-									}                                    
-                                    [actionSheet addButtonWithTitle:@"ยกเลิก"];
-                                    [actionSheet setCancelButtonIndex:[results count]];
+        if (alertView.tag == kGotoItemAlert || alertView.tag == kGotoPageAlert) {
+            for(UIView *subview in [alertView subviews]) {
+                if([subview isKindOfClass:[UITextField class]]) {
+                    NSString *inputText = ((UITextField *)subview).text;
+                    if ([inputText length] > 0) {
+                        if ([inputText intValue]) {
+                            if(alertView.tag == kGotoPageAlert) {
+                                NSInteger maxPage = [ReadViewController getMaximumPageValue:language 
+                                                                                   ofVolume:volume];
+                                if ([inputText intValue] > 0 && [inputText intValue] <= maxPage) {
+                                    NSNumber *newPage = [NSNumber numberWithInt:[inputText intValue]];
+                                    [dict setValue:newPage forKey:@"Page"];
+                                    [dataDictionary setValue:dict forKey:language];
+                                    [self updateReadingPage];
+                                }
+                                
+                            }
+                            else if(alertView.tag == kGotoItemAlert) {
+                                NSInteger maxItem = [ReadViewController getMaximumItemValue:language 
+                                                                                   ofVolume:volume];
+                                if([inputText intValue] > 0 && [inputText intValue] <= maxItem) {
+                                    NSNumber *newNumber = [NSNumber numberWithInt:[inputText intValue]];
+                                    NSArray *results = [ReadViewController getItems:language 
+                                                                          forVolume:volume forNumber:newNumber];
                                     
-                                    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-                                        [actionSheet showFromToolbar:toolbar];
-                                    }
-                                    else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                                        [actionSheet showFromRect:CGRectMake(60, 0, 10, 74) 
-                                                           inView:self.view animated:YES];                                        
-                                        self.itemOptionsActionSheet = actionSheet;
-                                    }
-
-									[actionSheet release];
-									
-								} else if ([results count] == 1) {
-									self.scrollToItem = YES;
-                                    self.scrollToKeyword = NO;
-                                    self.keywords = nil;
+                                    self.alterItems = [[NSArray alloc] initWithArray:results];
                                     
-									Item *item = [results objectAtIndex:0];
-									[dict setValue:item.content.page forKey:@"Page"];
-									[dataDictionary setValue:dict forKey:language];
-									[self updateReadingPage];
-								} 
-							}
-						}
-					}
-				} else {
-					//NSLog(@"No input");
-				}
-			} 
-		}
+                                    savedItemNumber = [inputText intValue];
+                                    if ([results count] > 1) {                                    
+                                        UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+                                        actionSheet.tag = kSelectItemActionSheet;
+                                        actionSheet.title = [Utils arabic2thai: 
+                                                             [NSString stringWithFormat:@"ข้อที่ %@ พบมากกว่าหนึ่งหน้า", newNumber]];
+                                        actionSheet.delegate = self;
+                                        actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+                                        for (Item *item in results) {
+                                            [actionSheet addButtonWithTitle:
+                                             [Utils arabic2thai:[NSString stringWithFormat:@"หน้าที่ %@", item.content.page]]];
+                                        }                                    
+                                        [actionSheet addButtonWithTitle:@"ยกเลิก"];
+                                        [actionSheet setCancelButtonIndex:[results count]];
+                                        
+                                        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                                            [actionSheet showFromToolbar:toolbar];
+                                        }
+                                        else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                                            [actionSheet showFromRect:CGRectMake(60, 0, 10, 74) 
+                                                               inView:self.view animated:YES];                                        
+                                            self.itemOptionsActionSheet = actionSheet;
+                                        }
+                                        
+                                        [actionSheet release];
+                                        
+                                    } else if ([results count] == 1) {
+                                        self.scrollToItem = YES;
+                                        self.scrollToKeyword = NO;
+                                        self.keywords = nil;
+                                        
+                                        Item *item = [results objectAtIndex:0];
+                                        [dict setValue:item.content.page forKey:@"Page"];
+                                        [dataDictionary setValue:dict forKey:language];
+                                        [self updateReadingPage];
+                                    } 
+                                }
+                            }
+                        }
+                    } else {
+                        //NSLog(@"No input");
+                    }
+                } 
+            }
+        }         
 	} else {
 		//NSLog(@"Cancel");
 	}
