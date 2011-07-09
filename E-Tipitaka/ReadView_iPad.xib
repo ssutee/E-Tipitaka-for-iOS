@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.SystemVersion">10K540</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
-		<string key="IBDocument.AppKitVersion">1038.35</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -65,14 +65,11 @@
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="21117755"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="408280319">
-								<int key="IBUITag">1</int>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">icon_arrow_left.png</string>
-								</object>
+							<object class="IBUIBarButtonItem" id="244924211">
+								<int key="IBUITag">3</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="21117755"/>
+								<int key="IBUISystemItemIdentifier">9</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="380610577">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -80,11 +77,11 @@
 								<reference key="IBUIToolbar" ref="21117755"/>
 								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="874913098">
-								<int key="IBUITag">2</int>
+							<object class="IBUIBarButtonItem" id="26879995">
+								<int key="IBUITag">4</int>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">icon_arrow_right.png</string>
+									<string key="NSResourceName">icon_refresh.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="21117755"/>
@@ -279,11 +276,14 @@
 								<reference key="IBUIToolbar" ref="245419086"/>
 								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="244924211">
-								<int key="IBUITag">3</int>
+							<object class="IBUIBarButtonItem" id="408280319">
+								<int key="IBUITag">1</int>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">icon_arrow_left.png</string>
+								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="245419086"/>
-								<int key="IBUISystemItemIdentifier">9</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="439218821">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -291,11 +291,11 @@
 								<reference key="IBUIToolbar" ref="245419086"/>
 								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="26879995">
-								<int key="IBUITag">4</int>
+							<object class="IBUIBarButtonItem" id="874913098">
+								<int key="IBUITag">2</int>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">icon_refresh.png</string>
+									<string key="NSResourceName">icon_arrow_right.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="245419086"/>
@@ -648,16 +648,16 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="583631775"/>
-							<reference ref="408280319"/>
 							<reference ref="433051412"/>
 							<reference ref="846499185"/>
 							<reference ref="696919741"/>
 							<reference ref="298491371"/>
-							<reference ref="874913098"/>
 							<reference ref="380610577"/>
 							<reference ref="142996735"/>
 							<reference ref="200289957"/>
 							<reference ref="145745581"/>
+							<reference ref="244924211"/>
+							<reference ref="26879995"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -669,16 +669,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
 						<reference key="object" ref="583631775"/>
-						<reference key="parent" ref="21117755"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">16</int>
-						<reference key="object" ref="408280319"/>
-						<reference key="parent" ref="21117755"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">17</int>
-						<reference key="object" ref="874913098"/>
 						<reference key="parent" ref="21117755"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -726,8 +716,6 @@
 						<reference key="object" ref="245419086"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="244924211"/>
-							<reference ref="26879995"/>
 							<reference ref="679372831"/>
 							<reference ref="1064085756"/>
 							<reference ref="364870022"/>
@@ -737,18 +725,10 @@
 							<reference ref="676494104"/>
 							<reference ref="587515180"/>
 							<reference ref="140953668"/>
+							<reference ref="408280319"/>
+							<reference ref="874913098"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">21</int>
-						<reference key="object" ref="244924211"/>
-						<reference key="parent" ref="245419086"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">22</int>
-						<reference key="object" ref="26879995"/>
-						<reference key="parent" ref="245419086"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">66</int>
@@ -813,6 +793,27 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">79</int>
 						<reference key="object" ref="145745581"/>
+						<reference key="parent" ref="21117755"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">16</int>
+						<reference key="object" ref="408280319"/>
+						<reference key="parent" ref="245419086"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">21</int>
+						<reference key="object" ref="244924211"/>
+						<reference key="parent" ref="21117755"/>
+						<string key="objectName">Bar Button Item - Action</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">17</int>
+						<reference key="object" ref="874913098"/>
+						<reference key="parent" ref="245419086"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">22</int>
+						<reference key="object" ref="26879995"/>
 						<reference key="parent" ref="21117755"/>
 					</object>
 				</object>
