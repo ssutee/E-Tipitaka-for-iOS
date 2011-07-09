@@ -1264,6 +1264,34 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+
+    BOOL success;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
+    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] 
+                               stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
+    
+    
+    NSNumber *sourceFileSize = [[fileManager attributesOfItemAtPath:defaultDBPath error:NULL] 
+                                objectForKey:NSFileSize];
+    
+    NSNumber *targetFileSize = [[fileManager attributesOfItemAtPath:writableDBPath error:NULL] 
+                                objectForKey:NSFileSize];
+    
+    success = [fileManager fileExistsAtPath:writableDBPath];    
+    
+    if (success && [sourceFileSize intValue] > [targetFileSize intValue]) {
+        
+    }
+    
+    
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[targetFileSize stringValue] message:@"Do you want to download the database?" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil, nil] autorelease];
+    [alert show];                
+
+    
     
     [self reloadData];
     
@@ -1290,6 +1318,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
+    
 //    self.pagesDictionary = [Utils readPages];
 //    self.itemsDictionary = [Utils readItems];
     

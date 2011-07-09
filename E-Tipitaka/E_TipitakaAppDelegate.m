@@ -22,6 +22,7 @@
 
 // Creates a writable copy of the bundled default database in the application Documents directory.
 - (void)createEditableCopyOfDatabaseIfNeeded {
+    
     // First, test for existence.
     BOOL success;
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -31,23 +32,32 @@
     NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
     success = [fileManager fileExistsAtPath:writableDBPath];
     if (success) return;
-    // The writable database does not exist, so copy the default to the appropriate location.
     
-    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] 
-                               stringByAppendingPathComponent:@"E_Tipitaka.sqlite.zip"];
-    
-    // unzip the database file
-    ZipArchive *za = [[ZipArchive alloc] init];
-    if ([za UnzipOpenFile:defaultDBPath]) {
-        success = [za UnzipFileTo:documentsDirectory overWrite:YES];
-        [za UnzipCloseFile];
+    /*
+     natural_t freemem = [self get_free_memory];
+    // check available memory before unzip database
+    if (freemem/1000000 < 40) {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Low memory" message:@"Memory on your device is lower than 50 Mb that is not enough to run the program at the first time. After the program was closed, please try again." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil, nil] autorelease];
+        [alert show];        
+    } else {    
+        // The writable database does not exist, so copy the default to the appropriate location.    
+        NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] 
+                                   stringByAppendingPathComponent:@"E_Tipitaka.sqlite.zip"];
+        
+        // unzip the database file
+        ZipArchive *za = [[ZipArchive alloc] init];
+        if ([za UnzipOpenFile:defaultDBPath]) {
+            success = [za UnzipFileTo:documentsDirectory overWrite:YES];
+            [za UnzipCloseFile];
+        }
+        [za release];
+        
+        //success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+        if (!success) {
+            NSLog(@"Failed to create writable database file");
+        }
     }
-    [za release];
-    
-    //success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
-    if (!success) {
-        NSLog(@"Failed to create writable database file");
-    }
+    */
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
