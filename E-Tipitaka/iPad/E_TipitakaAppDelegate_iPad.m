@@ -20,7 +20,7 @@
 {
     // Override point for customization after application launch.
     // Add the split view controller's view to the window and display.
-    [super createEditableCopyOfDatabaseIfNeeded];
+    //[super createEditableCopyOfDatabaseIfNeeded];
     
     [self.window addSubview:rootController.view]; 
     

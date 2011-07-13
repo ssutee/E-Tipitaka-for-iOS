@@ -1354,8 +1354,6 @@
     
     
     self.fontSize = [[dataDictionary valueForKey:@"FontSize"] intValue];
-        
-	[self updateReadingPage];
     
     UIActionSheet *actionSheet;
     
@@ -1385,6 +1383,59 @@
     self.gotoActionSheet = actionSheet;
 	[actionSheet release];    
     
+    
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
+    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] 
+                               stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
+    
+    
+    NSNumber *sourceFileSize = [[fileManager attributesOfItemAtPath:defaultDBPath error:NULL] 
+                                objectForKey:NSFileSize];
+    NSNumber *targetFileSize = [[fileManager attributesOfItemAtPath:writableDBPath error:NULL] 
+                                objectForKey:NSFileSize];
+    
+    NSError *error;    
+    BOOL dbExists = [fileManager fileExistsAtPath:writableDBPath];        
+    if (!dbExists || (dbExists && [sourceFileSize intValue] > [targetFileSize intValue])) {
+        if (dbExists) {            
+            if (![fileManager removeItemAtPath:writableDBPath error:&error]) {
+                NSLog(@"Failed to delete existing database file, %@, %@", error, [error userInfo]);
+            }
+        }
+        
+        UIAlertView *dbAlert = [[[UIAlertView alloc] 
+                                 initWithTitle:@"โปรดรอซักครู่\nโปรแกรมกำลังสร้างฐานข้อมูลเริ่มต้น" 
+                                 message:nil
+                                 delegate:self 
+                                 cancelButtonTitle:nil 
+                                 otherButtonTitles:nil, nil] autorelease];
+        
+        [dbAlert show];
+
+        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        
+        // Adjust the indicator so it is up a few pixels from the bottom of the alert
+        indicator.center = CGPointMake(dbAlert.bounds.size.width / 2, dbAlert.bounds.size.height - 50);
+        [indicator startAnimating];
+        [dbAlert addSubview:indicator];
+        [indicator release];        
+        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSError *error;
+            [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dbAlert dismissWithClickedButtonIndex:0 animated:YES];
+            });
+            [self updateReadingPage];
+        });                     
+    } else {
+        [self updateReadingPage];
+    }
 }
 
 /*

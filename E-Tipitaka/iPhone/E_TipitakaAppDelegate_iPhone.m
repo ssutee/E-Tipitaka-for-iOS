@@ -26,7 +26,7 @@
     [application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
     // create database for the first time
-    [super createEditableCopyOfDatabaseIfNeeded];
+    //[super createEditableCopyOfDatabaseIfNeeded];
     
 
     [self.window addSubview:rootController.view];    
