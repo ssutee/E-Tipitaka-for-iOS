@@ -88,6 +88,10 @@
 		9EA8F3F913782BB800BEE728 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EA8F3F413782BB800BEE728 /* Default.png */; };
 		9EA8F3FA13782BB800BEE728 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EA8F3F513782BB800BEE728 /* Default@2x.png */; };
 		9EA8F3FB13782BB800BEE728 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EA8F3F613782BB800BEE728 /* Default~ipad.png */; };
+		9EAF954C13D163D30010CABD /* PaliThai.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EAF954B13D163D30010CABD /* PaliThai.plist */; };
+		9EAF955A13D1AD540010CABD /* DictionaryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAF955813D1AD530010CABD /* DictionaryListViewController.m */; };
+		9EAF955B13D1AD540010CABD /* DictionaryListView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EAF955913D1AD540010CABD /* DictionaryListView_iPad.xib */; };
+		9EAF955E13D1C6720010CABD /* PaliThai.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAF955D13D1C6710010CABD /* PaliThai.m */; };
 		9EC2A854136267FA0082BBB7 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EC2A853136267FA0082BBB7 /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
@@ -204,6 +208,13 @@
 		9EA8F3F413782BB800BEE728 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		9EA8F3F513782BB800BEE728 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		9EA8F3F613782BB800BEE728 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = "<group>"; };
+		9EAF954913D155DF0010CABD /* E_Tipitaka 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 6.xcdatamodel"; sourceTree = "<group>"; };
+		9EAF954B13D163D30010CABD /* PaliThai.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PaliThai.plist; sourceTree = "<group>"; };
+		9EAF955713D1AD530010CABD /* DictionaryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryListViewController.h; sourceTree = "<group>"; };
+		9EAF955813D1AD530010CABD /* DictionaryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryListViewController.m; sourceTree = "<group>"; };
+		9EAF955913D1AD540010CABD /* DictionaryListView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DictionaryListView_iPad.xib; sourceTree = "<group>"; };
+		9EAF955C13D1C6700010CABD /* PaliThai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaliThai.h; sourceTree = "<group>"; };
+		9EAF955D13D1C6710010CABD /* PaliThai.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaliThai.m; sourceTree = "<group>"; };
 		9EC2A853136267FA0082BBB7 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -247,6 +258,7 @@
 				9EA21D0A134F3EBC00C17FD6 /* Pages.plist */,
 				9EA21D0D134F5C6000C17FD6 /* Items.plist */,
 				9EA859F3135011F6002195A6 /* Names.plist */,
+				9EAF954B13D163D30010CABD /* PaliThai.plist */,
 				9E326FF3138F6EBE00ED66AE /* stage_01.png */,
 				9E326FF4138F6EBE00ED66AE /* stage_02.png */,
 				9E326FF5138F6EBE00ED66AE /* stage_03.png */,
@@ -284,6 +296,8 @@
 				9E326FBF138D445600ED66AE /* History.m */,
 				9E66973C134C574A00B9E0F4 /* Item.h */,
 				9E66973D134C574A00B9E0F4 /* Item.m */,
+				9EAF955C13D1C6700010CABD /* PaliThai.h */,
+				9EAF955D13D1C6710010CABD /* PaliThai.m */,
 				9E669743134C584300B9E0F4 /* TapDetectingWindow.h */,
 				9E669744134C584300B9E0F4 /* TapDetectingWindow.m */,
 				9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */,
@@ -302,6 +316,8 @@
 				9E669763134C5D0600B9E0F4 /* BookmarkListViewController.m */,
 				9E669764134C5D0A00B9E0F4 /* SearchHistoryViewController.h */,
 				9E669765134C5D1000B9E0F4 /* SearchHistoryViewController.m */,
+				9EAF955713D1AD530010CABD /* DictionaryListViewController.h */,
+				9EAF955813D1AD530010CABD /* DictionaryListViewController.m */,
 				9E669766134C5D1800B9E0F4 /* iToast.h */,
 				9E669767134C5D1F00B9E0F4 /* iToast.m */,
 				9E669768134C5D2500B9E0F4 /* Utils.h */,
@@ -414,6 +430,7 @@
 				9E326FA6138C03B300ED66AE /* DoubleReadView_iPad.xib */,
 				9E326FE6138E3EE900ED66AE /* DoubleReadViewController.h */,
 				9E326FE7138E3EE900ED66AE /* DoubleReadViewController.m */,
+				9EAF955913D1AD540010CABD /* DictionaryListView_iPad.xib */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -517,6 +534,8 @@
 				9E326FF9138F6EBE00ED66AE /* stage_03.png in Resources */,
 				9E326FFA138F6EBE00ED66AE /* stage_04.png in Resources */,
 				9E10EA7813C88B6800DCA4B4 /* E_Tipitaka.sqlite in Resources */,
+				9EAF954C13D163D30010CABD /* PaliThai.plist in Resources */,
+				9EAF955B13D1AD540010CABD /* DictionaryListView_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +571,8 @@
 				9E326FC0138D445600ED66AE /* History.m in Sources */,
 				9E326FD9138E1B6D00ED66AE /* BookmarkEditViewController.m in Sources */,
 				9E326FE8138E3EE900ED66AE /* DoubleReadViewController.m in Sources */,
+				9EAF955A13D1AD540010CABD /* DictionaryListViewController.m in Sources */,
+				9EAF955E13D1C6720010CABD /* PaliThai.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,13 +762,14 @@
 		9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9EAF954913D155DF0010CABD /* E_Tipitaka 6.xcdatamodel */,
 				9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */,
 				9E326FEA138F69C500ED66AE /* E_Tipitaka 4.xcdatamodel */,
 				9E32700C13908F2E00ED66AE /* E_Tipitaka 5.xcdatamodel */,
 				9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */,
 				9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */,
 			);
-			currentVersion = 9E32700C13908F2E00ED66AE /* E_Tipitaka 5.xcdatamodel */;
+			currentVersion = 9EAF954913D155DF0010CABD /* E_Tipitaka 6.xcdatamodel */;
 			path = E_Tipitaka.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
