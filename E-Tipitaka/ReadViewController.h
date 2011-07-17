@@ -47,6 +47,7 @@
     UIPopoverController *searchPopoverController;
     UIPopoverController *bookmarkPopoverController;
     UIPopoverController *booklistPopoverController;
+    UIPopoverController *dictionaryPopoverController;
     UIBarButtonItem *searchButton;
     UIBarButtonItem *languageButton;
     UIBarButtonItem *booklistButton;
@@ -54,6 +55,7 @@
     UIBarButtonItem *bookmarkButton;
     UIBarButtonItem *gotoButton;
     UIBarButtonItem *titleButton;
+    UIBarButtonItem *dictionaryButton;
     UIToolbar *bottomToolBar;
     UIActionSheet *languageActionSheet;
     UIActionSheet *gotoActionSheet;
@@ -83,6 +85,7 @@
 @property (nonatomic, retain) UIPopoverController *searchPopoverController;
 @property (nonatomic, retain) UIPopoverController *bookmarkPopoverController;
 @property (nonatomic, retain) UIPopoverController *booklistPopoverController;
+@property (nonatomic, retain) UIPopoverController *dictionaryPopoverController;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *searchButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *languageButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *booklistButton;
@@ -90,6 +93,7 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *noteButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *bookmarkButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *titleButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *dictionaryButton;
 //@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *indicator;
 @property (nonatomic, retain) UIActionSheet *languageActionSheet;
 @property (nonatomic, retain) UIActionSheet *gotoActionSheet;
@@ -108,6 +112,7 @@
 -(IBAction)showSearchView:(id)sender;
 -(IBAction)showBookmarkListView:(id)sender;
 -(IBAction)showBooklistTableView:(id)sender;
+-(IBAction)showDictionary:(id)sender;
 -(IBAction)sliderValueChanged:(id)sender;
 -(IBAction)startUpdatingPage:(id)sender;
 

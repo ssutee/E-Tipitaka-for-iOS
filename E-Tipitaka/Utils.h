@@ -19,6 +19,7 @@
 + (NSDictionary *)readPages;
 + (NSDictionary *)readItems;
 + (NSDictionary *)readNames;
++ (NSDictionary *)readPlist:(NSString *)name;
 + (char *) replace:(const char *)original pattern:(const char *)pattern 
        replacement:(const char*)replacement;
 

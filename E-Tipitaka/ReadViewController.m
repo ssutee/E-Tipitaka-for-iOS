@@ -12,6 +12,7 @@
 #import "BookListTableViewController.h"
 #import "BookmarkAddViewController.h"
 #import "BookmarkListViewController.h"
+#import "DictionaryListViewController.h"
 #import "SearchViewController.h"
 #import "Item.h"
 #import "Utils.h"
@@ -42,6 +43,7 @@
 @synthesize searchPopoverController=_searchPopoverController;
 @synthesize bookmarkPopoverController=_bookmarkPopoverController;
 @synthesize booklistPopoverController;
+@synthesize dictionaryPopoverController;
 @synthesize searchButton;
 @synthesize languageButton;
 @synthesize booklistButton;
@@ -49,6 +51,7 @@
 @synthesize noteButton;
 @synthesize bookmarkButton;
 @synthesize titleButton;
+@synthesize dictionaryButton;
 @synthesize languageActionSheet;
 @synthesize gotoActionSheet;
 @synthesize itemOptionsActionSheet;
@@ -845,6 +848,10 @@
     if (booklistPopoverController != nil && [booklistPopoverController isPopoverVisible]) {
         [booklistPopoverController dismissPopoverAnimated:YES];
     }
+    if (dictionaryPopoverController != nil && [dictionaryPopoverController isPopoverVisible]) {
+        [dictionaryPopoverController dismissPopoverAnimated:YES];
+    }
+    
     if (languageActionSheet != nil && [languageActionSheet isVisible]) {
         [languageActionSheet 
          dismissWithClickedButtonIndex:[languageActionSheet cancelButtonIndex] animated:YES];
@@ -1224,6 +1231,37 @@
     }
 }
 
+-(IBAction)showDictionary:(id)sender {
+    if(dictionaryPopoverController != nil) {
+        if ([dictionaryPopoverController isPopoverVisible]) {
+            [dictionaryPopoverController dismissPopoverAnimated:YES];
+        } else {
+            [self dismissAllPopoverControllers];
+            [dictionaryPopoverController presentPopoverFromBarButtonItem:dictionaryButton
+                                              permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                              animated:YES];
+        }
+    } else {
+        DictionaryListViewController *dictViewController = [[DictionaryListViewController alloc]
+                                                            initWithNibName:@"DictionaryListView_iPad"
+                                                            bundle:nil];        
+        
+        dictViewController.title = @"พจนานุกรม บาลี-ไทย";
+        
+        UINavigationController *navController = [[UINavigationController alloc] 
+                                                 initWithRootViewController:dictViewController];
+        UIPopoverController *poc = [[UIPopoverController alloc]
+                                    initWithContentViewController:navController];
+        [self dismissAllPopoverControllers];
+        [poc presentPopoverFromBarButtonItem:dictionaryButton 
+                    permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        self.dictionaryPopoverController = poc;
+        [poc release];
+        [dictViewController release];
+        [navController release];
+    }    
+}
+
 -(IBAction)sliderValueChanged:(UISlider *)sender {
     self.scrollToItem = NO;
     self.scrollToKeyword = NO;
@@ -1480,12 +1518,14 @@
 //    self.popoverController = nil;
     self.searchPopoverController = nil;
     self.bookmarkPopoverController = nil;
+    self.dictionaryPopoverController = nil;
     self.searchButton = nil;
     self.languageButton = nil;    
     self.gotoButton = nil;
     self.noteButton = nil;
     self.bookmarkButton = nil;    
     self.titleButton = nil;
+    self.dictionaryButton = nil;
     self.languageActionSheet = nil;
     self.gotoActionSheet = nil;
     self.itemOptionsActionSheet = nil;
@@ -1511,6 +1551,7 @@
     [_searchPopoverController release];
     [_bookmarkPopoverController release];
     [booklistPopoverController release];
+    [dictionaryPopoverController release];
     [searchButton release];
     [languageButton release];
     [booklistButton release];
@@ -1518,6 +1559,7 @@
     [noteButton release];
     [bookmarkButton release];
     [titleButton release];
+    [dictionaryButton release];
     [languageActionSheet release];
     [gotoActionSheet release];
     [itemOptionsActionSheet release];

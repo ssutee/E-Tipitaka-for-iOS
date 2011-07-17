@@ -140,6 +140,7 @@
 						<string key="NSFrame">{{0, 149}, {1024, 555}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="1042911001"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="50393659">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -154,7 +155,7 @@
 						<string key="NSFrame">{{0, 44}, {1024, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="540575712"/>
+						<reference key="NSNextKeyView" ref="469684613"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">2</int>
 							<bytes key="NSRGB">MC42Nzg0MzEzNzI1IDAuNzIxNTY4NjI3NSAwLjc1Mjk0MTE3NjUAA</bytes>
@@ -186,6 +187,7 @@
 						<string key="NSFrame">{{437, 363}, {150, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="245419086"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -214,6 +216,7 @@
 						<string key="NSFrame">{{18, 119}, {988, 23}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="540575712"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">2</int>
 							<bytes key="NSRGB">MC42Nzg0MzEzNzI1IDAuNzIxNTY4NjI3NSAwLjc1Mjk0MTE3NjUAA</bytes>
@@ -231,6 +234,7 @@
 						<string key="NSFrame">{{412, 82}, {201, 29}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="662515144"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC40OTgwMzkyMTU4IDAuNDk4MDM5MjE1OCAwLjQ5ODAzOTIxNTgAA</bytes>
@@ -264,6 +268,7 @@
 						<string key="NSFrame">{{0, 704}, {1024, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -298,6 +303,17 @@
 									<string key="NSResourceName">icon_arrow_right.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<reference key="IBUIToolbar" ref="245419086"/>
+							</object>
+							<object class="IBUIBarButtonItem" id="22334753">
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<reference key="IBUIToolbar" ref="245419086"/>
+								<int key="IBUISystemItemIdentifier">5</int>
+							</object>
+							<object class="IBUIBarButtonItem" id="547074792">
+								<string key="IBUITitle">พจนานุกรม บาลี-ไทย</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="245419086"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="679372831">
@@ -606,6 +622,22 @@
 					</object>
 					<int key="connectionID">81</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">dictionaryButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="547074792"/>
+					</object>
+					<int key="connectionID">84</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showDictionary:</string>
+						<reference key="source" ref="547074792"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">85</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -727,6 +759,8 @@
 							<reference ref="140953668"/>
 							<reference ref="408280319"/>
 							<reference ref="874913098"/>
+							<reference ref="22334753"/>
+							<reference ref="547074792"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -816,6 +850,16 @@
 						<reference key="object" ref="26879995"/>
 						<reference key="parent" ref="21117755"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">82</int>
+						<reference key="object" ref="22334753"/>
+						<reference key="parent" ref="245419086"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">83</int>
+						<reference key="object" ref="547074792"/>
+						<reference key="parent" ref="245419086"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -856,6 +900,8 @@
 					<string>76.IBPluginDependency</string>
 					<string>79.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
+					<string>82.IBPluginDependency</string>
+					<string>83.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -895,6 +941,8 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -909,7 +957,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">81</int>
+			<int key="maxID">85</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -930,6 +978,7 @@
 							<string>noteButtonClicked:</string>
 							<string>showBooklistTableView:</string>
 							<string>showBookmarkListView:</string>
+							<string>showDictionary:</string>
 							<string>showSearchView:</string>
 							<string>sliderValueChanged:</string>
 							<string>startUpdatingPage:</string>
@@ -937,6 +986,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -965,6 +1015,7 @@
 							<string>noteButtonClicked:</string>
 							<string>showBooklistTableView:</string>
 							<string>showBookmarkListView:</string>
+							<string>showDictionary:</string>
 							<string>showSearchView:</string>
 							<string>sliderValueChanged:</string>
 							<string>startUpdatingPage:</string>
@@ -1009,6 +1060,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">showDictionary:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">showSearchView:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -1033,6 +1088,7 @@
 							<string>booklistButton</string>
 							<string>bookmarkButton</string>
 							<string>bottomToolbar</string>
+							<string>dictionaryButton</string>
 							<string>gotoButton</string>
 							<string>htmlView</string>
 							<string>languageButton</string>
@@ -1050,6 +1106,7 @@
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIToolbar</string>
+							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIWebView</string>
 							<string>UIBarButtonItem</string>
@@ -1070,6 +1127,7 @@
 							<string>booklistButton</string>
 							<string>bookmarkButton</string>
 							<string>bottomToolbar</string>
+							<string>dictionaryButton</string>
 							<string>gotoButton</string>
 							<string>htmlView</string>
 							<string>languageButton</string>
@@ -1095,6 +1153,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">bottomToolbar</string>
 								<string key="candidateClassName">UIToolbar</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">dictionaryButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">gotoButton</string>
