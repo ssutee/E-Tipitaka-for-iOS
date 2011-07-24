@@ -286,9 +286,9 @@
 						  bookmark.item.content.volume,
 						  bookmark.item.content.page,
 						  bookmark.item.number];
-		cell.textLabel.text = [Utils arabic2thai:text];
-		[text release];
-		cell.detailTextLabel.text = bookmark.text;
+		cell.textLabel.text = bookmark.text;
+		cell.detailTextLabel.text = [Utils arabic2thai:text];
+		[text release];        
         EditBookmarkButton *button = [[EditBookmarkButton alloc] init];
 
         UIImage *image = [UIImage imageNamed:@"ic_menu_edit.png"];
