@@ -15,20 +15,31 @@
 
 @class ReadViewController;
 
-@interface BookmarkListViewController : UITableViewController <UITabBarControllerDelegate> {
+typedef enum {
+    BY_TEXT, BY_CREATED, BY_VOLUME
+} sortingType;
+
+@interface BookmarkListViewController : UIViewController 
+<UITableViewDataSource, UITableViewDelegate,UITabBarControllerDelegate> {
 	NSMutableDictionary *bookmarkData;
 	NSString *language;
     ReadViewController *readViewController;
+    UITableView *tableView;
+    sortingType sorting;
+    UISegmentedControl *sortingControl;
 }
 
 @property(nonatomic, retain) NSMutableDictionary *bookmarkData;
 @property(nonatomic, retain) NSString *language;
 @property(nonatomic, retain) ReadViewController *readViewController;
+@property(nonatomic, retain) IBOutlet UITableView *tableView;
+@property(nonatomic, retain) IBOutlet UISegmentedControl *sortingControl;
 
 
 -(IBAction)toggleEdit:(id)sender;
 -(IBAction)toggleLanguage:(id)sender;
 -(IBAction)editBookmark:(id)sender;
+-(IBAction)sortList:(id)sender;
 
 @end
 

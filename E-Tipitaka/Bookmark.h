@@ -16,5 +16,6 @@
 }
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) Item * item;
+@property (nonatomic, retain) NSDate * created;
 
 @end

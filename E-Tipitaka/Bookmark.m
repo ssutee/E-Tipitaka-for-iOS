@@ -13,6 +13,7 @@
 @implementation Bookmark
 @dynamic text;
 @dynamic item;
+@dynamic created;
 
 
 @end

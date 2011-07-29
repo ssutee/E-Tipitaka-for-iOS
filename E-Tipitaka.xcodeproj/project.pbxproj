@@ -216,6 +216,7 @@
 		9EAF955C13D1C6700010CABD /* PaliThai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaliThai.h; sourceTree = "<group>"; };
 		9EAF955D13D1C6710010CABD /* PaliThai.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaliThai.m; sourceTree = "<group>"; };
 		9EC2A853136267FA0082BBB7 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		9EF8919A13E30AD800A7C5B4 /* E_Tipitaka 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 7.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -762,6 +763,7 @@
 		9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9EF8919A13E30AD800A7C5B4 /* E_Tipitaka 7.xcdatamodel */,
 				9EAF954913D155DF0010CABD /* E_Tipitaka 6.xcdatamodel */,
 				9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */,
 				9E326FEA138F69C500ED66AE /* E_Tipitaka 4.xcdatamodel */,
@@ -769,7 +771,7 @@
 				9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */,
 				9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */,
 			);
-			currentVersion = 9EAF954913D155DF0010CABD /* E_Tipitaka 6.xcdatamodel */;
+			currentVersion = 9EF8919A13E30AD800A7C5B4 /* E_Tipitaka 7.xcdatamodel */;
 			path = E_Tipitaka.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

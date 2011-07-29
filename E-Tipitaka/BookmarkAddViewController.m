@@ -54,6 +54,7 @@
 						  insertNewObjectForEntityForName:@"Bookmark" inManagedObjectContext:context];
 	bookmark.text = self.textView.text;
 	bookmark.item = self.selectedItem;
+    bookmark.created = [NSDate date];
 	[self.selectedItem addBookmarksObject:bookmark];
 	
 	NSError *error;

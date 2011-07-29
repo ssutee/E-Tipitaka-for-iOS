@@ -28,6 +28,8 @@
 @synthesize bookmarkData;
 @synthesize language;
 @synthesize readViewController;
+@synthesize tableView;
+@synthesize sortingControl;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:
 (UIInterfaceOrientation)toInterfaceOrientation {
@@ -80,10 +82,29 @@
 	
 	if (fetchedObjects) {
 		NSSortDescriptor *sortDescriptor;
-		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"item.content.volume" ascending:YES];
-		NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-		NSArray *sortedBookmarks = [fetchedObjects sortedArrayUsingDescriptors:sortDescriptors];
-		[sortDescriptor release];
+        switch (sorting) {
+            case BY_CREATED:
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created" ascending:NO];
+                break;
+            case BY_TEXT:
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"text" ascending:YES];
+                break;
+            case BY_VOLUME:
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"item.content.volume" ascending:YES];
+                break;                
+            default:
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"item.content.volume" ascending:YES];
+                break;
+        }
+
+        NSArray *sortedBookmarks = nil;
+        if (sortDescriptor) {
+            NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+            sortedBookmarks = [fetchedObjects sortedArrayUsingDescriptors:sortDescriptors];
+            [sortDescriptor release];
+        } else {
+            sortedBookmarks = fetchedObjects;
+        }
 		
 		for(Bookmark *bookmark in sortedBookmarks) {
 			NSNumber *volume = bookmark.item.content.volume;
@@ -94,8 +115,6 @@
 			} else {
 				[[self.bookmarkData valueForKey:kAbhidhumKey] addObject:bookmark];					
 			}
-			
-			//NSLog(@"%@",bookmark.item.content.volume);
 		}			
 	}
 	[self.tableView reloadData];
@@ -160,6 +179,24 @@
     
 }
 
+-(IBAction)sortList:(id)sender {
+    switch (sortingControl.selectedSegmentIndex) {
+        case 0:
+            sorting = BY_TEXT;
+            break;
+        case 1:
+            sorting = BY_VOLUME;
+            break;
+        case 2:
+            sorting = BY_CREATED;
+            break;
+        default:
+            sorting = BY_VOLUME;
+            break;
+    }
+    [self reloadData];
+}
+
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -167,7 +204,18 @@
 - (void)viewDidLoad {
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 500.0);
 
+    sorting = BY_VOLUME;
+    
     self.title = @"รายการบันทึก";
+    
+    UIButton *titleNavLabel = [UIButton buttonWithType:UIButtonTypeCustom];
+    titleNavLabel.showsTouchWhenHighlighted = YES;
+    [titleNavLabel setTitle:@"รายการบันทึก" forState:UIControlStateNormal];
+    titleNavLabel.frame = CGRectMake(0, 0, 230, 44);
+    
+    titleNavLabel.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    [titleNavLabel addTarget:self action:@selector(sortList:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView = titleNavLabel;	
     
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
 								   initWithTitle:@"ลบ"
@@ -198,11 +246,9 @@
             self.navigationItem.title = @"ภาษาบาลี";
         }
     }
-	
+    
     [super viewDidLoad];	
 }
-
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -258,13 +304,13 @@
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row = indexPath.row;
 	NSUInteger section = indexPath.section;
 	
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
@@ -347,7 +393,7 @@
 }
 
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row = indexPath.row;
 	NSUInteger section = indexPath.section;
 	NSMutableArray *array;
@@ -380,8 +426,8 @@
 		}		
 
         // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-		[tableView reloadData];
+        [aTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		[aTableView reloadData];
     }
 }
 
@@ -406,7 +452,7 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row = indexPath.row;
 	NSUInteger section = indexPath.section;
 	NSMutableArray *array;
@@ -466,6 +512,8 @@
     // For example: self.myOutlet = nil;
 	self.language = nil;
     self.readViewController = nil;
+    self.tableView = nil;
+    self.sortingControl = nil;
 }
 
 - (void)dealloc {
@@ -473,6 +521,8 @@
 	[bookmarkData release];
 	[language release];
     [readViewController release];
+    [tableView release];
+    [sortingControl release];
 }
 
 #pragma mark -
