@@ -13,6 +13,9 @@
 //    TapDetectingWindow *mWindow;
     NSString *sourceLanguage;
     NSString *targetLanguage;
+    
+    NSString *keyword;
+    
     NSDictionary *mappingTable;
     
     BOOL scrollToItem;
@@ -51,6 +54,7 @@
 
 @property (nonatomic, retain) NSString *sourceLanguage;
 @property (nonatomic, retain) NSString *targetLanguage;
+@property (nonatomic, retain) NSString *keyword;
 
 @property (nonatomic, retain) IBOutlet UIWebView *webview1;
 @property (nonatomic, retain) IBOutlet UIWebView *webview2;
@@ -86,6 +90,8 @@
 -(IBAction) compare:(id)sender;
 
 -(void) updatePages;
+-(void) updatePage:(NSString *)language withKeyword:(NSString *)term;
+-(void) updatePage:(NSString *)language;
 
 
 @end

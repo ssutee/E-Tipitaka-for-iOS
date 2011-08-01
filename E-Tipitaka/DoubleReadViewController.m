@@ -16,6 +16,7 @@
 
 @synthesize sourceLanguage;
 @synthesize targetLanguage;
+@synthesize keyword;
 @synthesize webview1;
 @synthesize webview2;
 @synthesize slider1;
@@ -54,6 +55,7 @@
     [mappingTable release];
     [sourceLanguage release];
     [targetLanguage release];
+    [keyword release];
     [webview1 release];
     [webview2 release];
     [slider1 release];
@@ -83,7 +85,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void) updatePage:(NSString *)language
+- (void) updatePage:(NSString *)language withKeyword:(NSString *)term
 {
     NSDictionary *dict = [Utils readData];
     
@@ -106,13 +108,25 @@
     
     [newTitle release];
     
-    [ReadViewController updateReadingPage:nil slider:slider webview:webview 
-                               titleLabel:titleLabel pageLabel:pageLabel fontSize:[fontSize intValue] language:language volume:volume page:page];
+    [ReadViewController updateReadingPage:term 
+                                   slider:slider 
+                                  webview:webview 
+                               titleLabel:titleLabel 
+                                pageLabel:pageLabel 
+                                 fontSize:[fontSize intValue] 
+                                 language:language 
+                                   volume:volume 
+                                     page:page];
+}
+
+- (void) updatePage:(NSString *)language
+{
+    [self updatePage:language withKeyword:nil];
 }
 
 - (void) updatePages
 {
-    [self updatePage:sourceLanguage];
+    [self updatePage:sourceLanguage withKeyword:keyword];
     [self updatePage:targetLanguage];
 }
 
@@ -251,7 +265,7 @@
                                                  forKey:@"Page"];
         }
         [Utils writeData:dict];
-        [self updatePage:sourceLanguage];
+        [self updatePage:sourceLanguage withKeyword:keyword];
     } else if(nextButton.tag == 2) {
         volume = [[dict valueForKey:targetLanguage] valueForKey:@"Volume"];
         page = [[dict valueForKey:targetLanguage] valueForKey:@"Page"];             
@@ -281,7 +295,7 @@
                                                  forKey:@"Page"];
         }
         [Utils writeData:dict];
-        [self updatePage:sourceLanguage];
+        [self updatePage:sourceLanguage withKeyword:keyword];
     } else if(backButton.tag == 2) {
         volume = [[dict valueForKey:targetLanguage] valueForKey:@"Volume"];
         page = [[dict valueForKey:targetLanguage] valueForKey:@"Page"];             
@@ -331,7 +345,7 @@
     UISlider *slider = (UISlider *)sender;
     
     if (slider.tag == 1) {
-        [self updatePage:sourceLanguage];
+        [self updatePage:sourceLanguage withKeyword:keyword];
     } else if (slider.tag == 2) {
         [self updatePage:targetLanguage];
     }
@@ -443,6 +457,7 @@
     self.mappingTable = nil;
     self.sourceLanguage = nil;
     self.targetLanguage = nil;
+    self.keyword = nil;
     self.webview1 = nil;
     self.webview2 = nil;
     self.slider1 = nil;
@@ -498,6 +513,8 @@
 		  ]];
 	}    
 }
+
+
 
 //#pragma mark -
 //#pragma mark Tap Detecting Window Delegate Methods
