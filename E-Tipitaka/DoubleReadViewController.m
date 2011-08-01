@@ -106,8 +106,6 @@
     
     headerButton.title = [Utils arabic2thai:newTitle];
     
-    [newTitle release];
-    
     [ReadViewController updateReadingPage:term 
                                    slider:slider 
                                   webview:webview 
