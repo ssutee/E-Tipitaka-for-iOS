@@ -552,6 +552,7 @@
 	} else {
 		newTitle = [newTitle initWithFormat:@"%@ เล่มที่ %d", @"พระอภิธรรมปิฎก", [volume intValue] - 33];		
 	}
+    [newTitle autorelease];
     return  newTitle;
 }
 
@@ -576,7 +577,6 @@
             }
         }
     }
-	[newTitle release];
         
     [ReadViewController updateReadingPage:self.keywords slider:self.pageSlider webview:self.htmlView
                                titleLabel:self.titleLabel pageLabel:self.pageNumberLabel
@@ -739,6 +739,13 @@
                                                         initWithNibName:@"DoubleReadView_iPad" bundle:nil];                
                 controller.sourceLanguage = sourceLanguage;
                 controller.targetLanguage = targetLanguage;
+                
+                if (self.keywords) {
+                    NSString *str = [[NSString alloc] initWithString:self.keywords];
+                    controller.keyword = str;
+                    [str release];
+                }
+                
                 controller.savedItemNumber = [comparedItem.number intValue];
                 controller.scrollToItem = YES;
 

@@ -288,8 +288,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                  reuseIdentifier: sectionsTableIdentifier] autorelease];
     }
-    
-    
+
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.detailTextLabel.backgroundColor = [UIColor clearColor];
     
