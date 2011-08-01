@@ -431,7 +431,7 @@
              [self.itemOptionsActionSheet cancelButtonIndex] animated:YES];
         }
         if (tagNumber == kItemOptionsActionSheet) {
-            [actionSheet showFromBarButtonItem:gotoButton animated:YES];
+            [actionSheet showFromBarButtonItem:languageButton animated:YES];
         }
         else if (tagNumber == kBookmarkOptionsActionSheet) {
             [actionSheet showFromBarButtonItem:noteButton animated:YES];
