@@ -218,6 +218,7 @@
 			else {
 				history.lang = @"pali";
 			}
+            history.created = [NSDate date];
         }
 		
         NSEntityDescription *entity = [NSEntityDescription 
