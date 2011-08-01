@@ -67,7 +67,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.contentSizeForViewInPopover = CGSizeMake(320.0, 500.0);
+    self.contentSizeForViewInPopover = CGSizeMake(350.0, 500.0);
  
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"บันทึก" 
