@@ -202,9 +202,9 @@
 
 
 - (void)viewDidLoad {
-    self.contentSizeForViewInPopover = CGSizeMake(320.0, 500.0);
+    self.contentSizeForViewInPopover = CGSizeMake(350.0, 500.0);
 
-    sorting = BY_VOLUME;
+    sorting = BY_TEXT;
     
     self.title = @"รายการบันทึก";
     
@@ -225,11 +225,19 @@
 	self.navigationItem.rightBarButtonItem = editButton;
 	[editButton release];
 
-	UIBarButtonItem *languageButton = [[UIBarButtonItem alloc]
-								   initWithTitle:@"บาลี"
-								   style:UIBarButtonItemStyleBordered
-								   target:self 
-								   action:@selector(toggleLanguage:)];
+	UIBarButtonItem *languageButton;
+    if ([self.language isEqualToString:@"Thai"]) {
+        languageButton = [[UIBarButtonItem alloc] initWithTitle:@"บาลี"
+                                                          style:UIBarButtonItemStyleBordered
+                                                         target:self 
+                                                         action:@selector(toggleLanguage:)];
+    } else {
+        languageButton = [[UIBarButtonItem alloc] initWithTitle:@"ไทย"
+                                                          style:UIBarButtonItemStyleBordered
+                                                         target:self 
+                                                         action:@selector(toggleLanguage:)];        
+    }
+    
 	self.navigationItem.leftBarButtonItem = languageButton;
 	[languageButton release];
 	
@@ -333,6 +341,7 @@
 						  bookmark.item.content.page,
 						  bookmark.item.number];
 		cell.textLabel.text = bookmark.text;
+        cell.textLabel.numberOfLines = 2;
 		cell.detailTextLabel.text = [Utils arabic2thai:text];
 		[text release];        
         EditBookmarkButton *button = [[EditBookmarkButton alloc] init];
@@ -389,7 +398,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath { 
-    return 60;
+    return 85;
 }
 
 // Override to support editing the table view.
@@ -496,6 +505,25 @@
 	
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
+    CGPoint offset = aScrollView.contentOffset;
+    CGRect bounds = aScrollView.bounds;
+    CGSize size = aScrollView.contentSize;
+    UIEdgeInsets inset = aScrollView.contentInset;
+    float y = offset.y + bounds.size.height - inset.bottom;
+    float h = size.height;    
+    float reload_distance = 40;
+    
+    willReload = (y > h + reload_distance) ? YES : NO;
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView willDecelerate:(BOOL)decelerate {
+    NSLog(@"end dragging");
+    if (willReload) {
+        NSLog(@"load more cells");
+    }
+}
 
 #pragma mark -
 #pragma mark Memory management

@@ -27,6 +27,7 @@ typedef enum {
     UITableView *tableView;
     sortingType sorting;
     UISegmentedControl *sortingControl;
+    BOOL willReload;
 }
 
 @property(nonatomic, retain) NSMutableDictionary *bookmarkData;
