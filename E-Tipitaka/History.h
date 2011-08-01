@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSNumber * star;
 @property (nonatomic, retain) NSNumber * state;
 @property (nonatomic, retain) NSSet* contents;
+@property (nonatomic, retain) NSData* created;
 
 - (void)addContentsObject:(Content *)value;
 - (void)removeContentsObject:(Content *)value;

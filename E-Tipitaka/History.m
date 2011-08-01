@@ -16,6 +16,7 @@
 @dynamic star;
 @dynamic contents;
 @dynamic state;
+@dynamic created;
 
 - (void)addContentsObject:(Content *)value {    
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
