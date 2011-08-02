@@ -12,17 +12,29 @@
 @implementation Utils
 
 + (NSString *)arabic2thai:(NSString *)text {
-	NSString *result;
-	result = [text stringByReplacingOccurrencesOfString:@"0" withString:@"๐"];
-	result = [result stringByReplacingOccurrencesOfString:@"1" withString:@"๑"];
-	result = [result stringByReplacingOccurrencesOfString:@"2" withString:@"๒"];
-	result = [result stringByReplacingOccurrencesOfString:@"3" withString:@"๓"];
-	result = [result stringByReplacingOccurrencesOfString:@"4" withString:@"๔"];
-	result = [result stringByReplacingOccurrencesOfString:@"5" withString:@"๕"];
-	result = [result stringByReplacingOccurrencesOfString:@"6" withString:@"๖"];
-	result = [result stringByReplacingOccurrencesOfString:@"7" withString:@"๗"];
-	result = [result stringByReplacingOccurrencesOfString:@"8" withString:@"๘"];
-	result = [result stringByReplacingOccurrencesOfString:@"9" withString:@"๙"];
+	NSMutableString *result = [[text mutableCopy] autorelease];
+
+    [result replaceOccurrencesOfString:@"0" withString:@"๐" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    [result replaceOccurrencesOfString:@"1" withString:@"๑" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    [result replaceOccurrencesOfString:@"2" withString:@"๒" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    [result replaceOccurrencesOfString:@"3" withString:@"๓" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    [result replaceOccurrencesOfString:@"4" withString:@"๔" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    [result replaceOccurrencesOfString:@"5" withString:@"๕" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    [result replaceOccurrencesOfString:@"6" withString:@"๖" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    [result replaceOccurrencesOfString:@"7" withString:@"๗" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    [result replaceOccurrencesOfString:@"8" withString:@"๘" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    [result replaceOccurrencesOfString:@"9" withString:@"๙" 
+                               options:NSLiteralSearch range:NSMakeRange(0, [text length])];
+    
 	return result;	  
 }
 
