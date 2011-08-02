@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.SystemVersion">10K549</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
-		<string key="IBDocument.AppKitVersion">1038.35</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -103,7 +103,6 @@
 						<string key="NSFrame">{{513, 146}, {511, 602}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="24667607"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIDataDetectorTypes">1</int>
@@ -216,11 +215,11 @@
 								<reference key="IBUIToolbar" ref="448426346"/>
 								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="1029015564">
+							<object class="IBUIBarButtonItem" id="403698087">
 								<int key="IBUITag">2</int>
-								<reference key="IBUIImage" ref="881744627"/>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="448426346"/>
+								<int key="IBUISystemItemIdentifier">8</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="211054052">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -228,9 +227,9 @@
 								<reference key="IBUIToolbar" ref="448426346"/>
 								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="888725424">
+							<object class="IBUIBarButtonItem" id="443643712">
 								<int key="IBUITag">2</int>
-								<reference key="IBUIImage" ref="1062974412"/>
+								<reference key="IBUIImage" ref="656177038"/>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="448426346"/>
 							</object>
@@ -250,9 +249,9 @@
 								<reference key="IBUIToolbar" ref="448426346"/>
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="443643712">
+							<object class="IBUIBarButtonItem" id="1029015564">
 								<int key="IBUITag">2</int>
-								<reference key="IBUIImage" ref="656177038"/>
+								<reference key="IBUIImage" ref="881744627"/>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="448426346"/>
 							</object>
@@ -262,11 +261,11 @@
 								<reference key="IBUIToolbar" ref="448426346"/>
 								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="403698087">
+							<object class="IBUIBarButtonItem" id="888725424">
 								<int key="IBUITag">2</int>
+								<reference key="IBUIImage" ref="1062974412"/>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="448426346"/>
-								<int key="IBUISystemItemIdentifier">8</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="955933393">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -756,17 +755,17 @@
 						<reference key="object" ref="448426346"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1029015564"/>
-							<reference ref="888725424"/>
 							<reference ref="635092004"/>
-							<reference ref="403698087"/>
 							<reference ref="211054052"/>
 							<reference ref="604878305"/>
 							<reference ref="955933393"/>
 							<reference ref="110271571"/>
 							<reference ref="570643612"/>
-							<reference ref="443643712"/>
 							<reference ref="7446992"/>
+							<reference ref="1029015564"/>
+							<reference ref="888725424"/>
+							<reference ref="443643712"/>
+							<reference ref="403698087"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
