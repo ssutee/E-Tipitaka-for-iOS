@@ -17,11 +17,11 @@
 
 @synthesize language;
 @synthesize historyData;
-@synthesize tableData;
+@synthesize loadedData;
+@synthesize detailTable;
 @synthesize stageImages;
 @synthesize tableView;
 @synthesize sortingControl;
-@synthesize indicator;
 
 -(IBAction)toggleEdit:(id)sender {
 	[self.tableView setEditing:!self.tableView.editing animated:YES];
@@ -66,74 +66,30 @@
     }
 }
 
--(NSMutableDictionary *) convertHistoryData:(History *)history atRow:(NSUInteger)row
-{    
-    NSString *text = [[NSString alloc] initWithFormat:@"%@", history.keywords];
-    
-    NSInteger n1 = 0, n2 = 0, n3 = 0;
-    for (Content *content in history.contents) {
-        if ([content.volume intValue] <= 8) {
-            n1++;
-        } else if([content.volume intValue] >= 9 && [content.volume intValue] <= 33) {
-            n2++;
-        } else {
-            n3++;
-        }
-    }
-    
-    NSString *detail = [[NSString alloc] 
-            initWithFormat:@"%4d หน้า: วิ.(%d) สุต.(%d) อภิ.(%d)", 
-            [history.contents count] ,n1, n2, n3];
+-(void) loadMoreData:(NSArray *)histories loadedData:(NSMutableArray *)table 
+                from:(NSUInteger)start to:(NSUInteger)end {
 
-    UIImage *buttonStar;
-    if (history.state) {
-        buttonStar = [UIImage imageNamed:[stageImages objectAtIndex:[history.state intValue]]];  
-    } else {
-        buttonStar = [UIImage imageNamed:[stageImages objectAtIndex:0]];   
-    }
-    
-    UIButton *button = [[UIButton alloc] init];
-    button.tag = row;
-    button.frame = CGRectMake(0.0, 0.0, buttonStar.size.width, buttonStar.size.height);
-    [button setImage:buttonStar forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(starTapped:) forControlEvents:UIControlEventTouchUpInside];
-    
-    NSMutableDictionary *result = [[[NSMutableDictionary alloc] initWithObjectsAndKeys:
-     [Utils arabic2thai:text], @"text",
-     [Utils arabic2thai:detail], @"detail",
-     button,@"accessory", nil] autorelease];
-    
-    [button release];
-    [text release];
-    [detail release];
-    
-    return result;
-    
-}
-
-// exclude item at end position
--(NSMutableArray *) convertAllHistoryData:(NSArray *)histories from:(NSUInteger)start to:(NSUInteger)end
-{
-    NSMutableArray *results = [[[NSMutableArray alloc] init] autorelease];
-    History *history;
     for (int row=start; row < end; row++) {
         if (row >= [histories count]) {
             break;
         }
-        history = [histories objectAtIndex:row];
-        [results insertObject:[self convertHistoryData:history atRow:row] atIndex:row];
-    }
-    return results;
-}
-
--(void) addMoreHistoryData:(NSArray *)histories tableData:(NSMutableArray *)table from:(NSUInteger)start to:(NSUInteger)end {
-    History *history;
-    for (int row=start; row < end; row++) {
-        if (row >= [histories count]) {
-            break;
+        History *history = [histories objectAtIndex:row];
+        [table insertObject:history atIndex:row];
+        
+        NSInteger n1 = 0, n2 = 0, n3 = 0;
+        for (Content *content in history.contents) {
+            if ([content.volume intValue] <= 8) {
+                n1++;
+            } else if([content.volume intValue] <= 33) {
+                n2++;
+            } else {
+                n3++;
+            }
         }
-        history = [histories objectAtIndex:row];
-        [table insertObject:[self convertHistoryData:history atRow:row] atIndex:row];
+        NSString *text = [[NSString alloc] initWithFormat:@"%4d หน้า: วิ.(%d) สุต.(%d) อภิ.(%d)",
+                          [history.contents count] ,n1, n2, n3];
+        [detailTable setValue:[Utils arabic2thai:text] forKey:history.keywords];
+        [text release];        
     }
 }
 
@@ -165,8 +121,18 @@
 	NSError *error;			
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 	[fetchRequest release];
+    self.historyData = [[fetchedObjects mutableCopy] autorelease];
+
+    // create empty array
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    self.loadedData = array;
+    [array release];
     
-    self.historyData = [[fetchedObjects mutableCopy] autorelease];    
+    // create empty dictionary
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    self.detailTable = dict;
+    [dict release];    
+    
     [self.tableView reloadData];
 }
 
@@ -178,11 +144,11 @@
 {
     [language release];
     [historyData release];
-    [tableData release];
+    [loadedData release];
     [stageImages release];
     [tableView release];
     [sortingControl release];
-    [indicator release];
+    [detailTable release];
     [super dealloc];
 }
 
@@ -210,7 +176,6 @@
     UIButton *senderButton = (UIButton *)sender;
         
     History *history = [self.historyData objectAtIndex:senderButton.tag];
-    NSMutableDictionary *data = [self.tableData objectAtIndex:senderButton.tag];
     
 	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	
@@ -222,13 +187,6 @@
         history.state = [NSNumber numberWithInteger:1];
     }
     
-    UIButton *button = [data valueForKey:@"accessory"];
-    
-    [button setImage:[UIImage imageNamed:[stageImages objectAtIndex:[history.state intValue]]]
-            forState:UIControlStateNormal];
-    
-    [data setValue:button forKey:@"accessory"];
-
 	NSError *error;    
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -264,8 +222,10 @@
     }
     
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
     self.historyData = [[[historyData sortedArrayUsingDescriptors:sortDescriptors] mutableCopy] autorelease];
-    self.tableData = [self convertAllHistoryData:historyData from:0 to:[historyData count]];
+    self.loadedData = [[[loadedData sortedArrayUsingDescriptors:sortDescriptors] mutableCopy] autorelease];
+    
     [self.tableView reloadData];
 }
 
@@ -277,6 +237,7 @@
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    
     loading = YES;
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
     
@@ -304,27 +265,18 @@
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{        
         [self reloadData];
-        self.tableData = [self convertAllHistoryData:historyData from:0 to:10];
-        loading = NO;
-        [NSThread sleepForTimeInterval:1];        
-        dispatch_async(dispatch_get_main_queue(), ^{   
-            [self.tableView reloadData];
-        });
-        
-        while ([self.historyData count] != [self.tableData count]) {
+        while ([historyData count] != [loadedData count]) {
             loading = YES;
-            [NSThread sleepForTimeInterval:1];
-            dispatch_async(dispatch_get_main_queue(), ^{               
-                [self.tableView reloadData];                
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
             });
-            [self addMoreHistoryData:self.historyData 
-                           tableData:self.tableData 
-                                from:[self.tableData count] to:[self.tableData count]+10];
+            [NSThread sleepForTimeInterval:0.5];
+            [self loadMoreData:historyData loadedData:loadedData 
+                          from:[loadedData count] to:[loadedData count]+10];
             loading = NO;
-            [NSThread sleepForTimeInterval:1];            
             dispatch_async(dispatch_get_main_queue(), ^{           
                 [self.tableView reloadData];                
-            });            
+            });
         }
         dispatch_async(dispatch_get_main_queue(), ^{           
             self.sortingControl.enabled = YES;
@@ -341,11 +293,11 @@
     // e.g. self.myOutlet = nil;
     self.language = nil;
     self.historyData = nil;
-    self.tableData = nil;
+    self.loadedData = nil;
+    self.detailTable = nil;
     self.stageImages = nil;
     self.tableView = nil;
     self.sortingControl = nil;
-    self.indicator = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -379,7 +331,7 @@
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section
 {
-    return (loading) ? [self.tableData count] + 1 : [self.tableData count];
+    return (loading) ? [loadedData count] + 1 : [loadedData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -397,8 +349,7 @@
     }
     
     if (section == 0) {
-        // set font
-        if (loading && row == [self.tableData count]) {
+        if (loading && row == [loadedData count]) {
             if (cell.tag == 0) {
                 cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
                                                reuseIdentifier:CellIdentifier] autorelease];
@@ -406,22 +357,37 @@
             }
             cell.textLabel.text = @"กำลังโหลดข้อมูล กรุณารอสักครู่";
             [cell.textLabel setTextAlignment:UITextAlignmentCenter];
-            UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] 
-                                                  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            UIActivityIndicatorView *indicator = [[[UIActivityIndicatorView alloc] 
+                                                  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
             [indicator startAnimating];
             cell.accessoryView = indicator;
-            [indicator release];
         } else {
+            History *history = [historyData objectAtIndex:row];
             if (cell.tag == 1) {
                 cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle 
                                                reuseIdentifier:CellIdentifier] autorelease];                
                 cell.tag = 0;
             }
-            NSMutableDictionary *result = [[self tableData] objectAtIndex:row];
+
             cell.textLabel.textAlignment = UITextAlignmentLeft;            
-            cell.textLabel.text = [result valueForKey:@"text"];
-            cell.detailTextLabel.text = [result valueForKey:@"detail"];
-            cell.accessoryView = [result valueForKey:@"accessory"];
+            cell.textLabel.text = history.keywords;
+            cell.detailTextLabel.text = [detailTable valueForKey:history.keywords];
+            
+            UIImage *buttonStar;
+            if (history.state) {
+                buttonStar = [UIImage imageNamed:[stageImages objectAtIndex:[history.state intValue]]];  
+            } else {
+                buttonStar = [UIImage imageNamed:[stageImages objectAtIndex:0]];   
+            }
+            
+            UIButton *button = [[UIButton alloc] init];
+            button.tag = row;
+            button.frame = CGRectMake(0.0, 0.0, buttonStar.size.width, buttonStar.size.height);
+            [button setImage:buttonStar forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(starTapped:) forControlEvents:UIControlEventTouchUpInside];            
+            cell.accessoryView = button;
+            [button release];
+            
             cell.textLabel.font = [UIFont boldSystemFontOfSize:22];    
             cell.detailTextLabel.font = [UIFont systemFontOfSize:20];                     
         }
@@ -466,8 +432,8 @@
         
         [context deleteObject:history];
         
-        [self.historyData removeObjectAtIndex:indexPath.row];
-        [self.tableData removeObjectAtIndex:indexPath.row];
+        [historyData removeObjectAtIndex:indexPath.row];
+        [loadedData removeObjectAtIndex:indexPath.row];
         
 		NSError *error;
 		if (![context save:&error]) {
