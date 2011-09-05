@@ -177,7 +177,7 @@
                          @"(head BEGINSWITH %@) || (head BEGINSWITH %@)", newTerm, searchTerm];
     
     [fetchRequest setPredicate:pred];
-    [fetchRequest setFetchLimit:50];
+    [fetchRequest setFetchLimit:25];
 
     NSError *error;			
     
@@ -189,6 +189,7 @@
     } 
     
     isFound = [fetchedResults count] > 0 ? YES : NO;
+    [tableView reloadData];
     
 }
 
@@ -205,6 +206,12 @@
     selectedIndex = -1;
     
     searchBar.placeholder = @"ป้อนคำภาษาบาลี";
+    
+    for(int i =0; i<[searchBar.subviews count]; i++) {
+        if([[searchBar.subviews objectAtIndex:i] isKindOfClass:[UITextField class]])
+            [(UITextField*)[searchBar.subviews objectAtIndex:i] setFont:[UIFont systemFontOfSize:20]];
+    }
+    
     
     if (![self checkDatabase]) {
         
@@ -394,13 +401,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
     NSString *searchTerm = [aSearchBar text];
     [self handleSearchForTerm:searchTerm];
-    [tableView reloadData];
     [searchBar resignFirstResponder];
 }
 
 - (void)searchBar:(UISearchBar *)aSearchBar textDidChange:(NSString *)searchTerm {
     [self handleSearchForTerm:searchTerm];
-    [tableView reloadData];
 }
 
 @end

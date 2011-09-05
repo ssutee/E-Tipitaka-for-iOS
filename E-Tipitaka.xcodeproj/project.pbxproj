@@ -34,6 +34,7 @@
 		9E326FFA138F6EBE00ED66AE /* stage_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FF6138F6EBE00ED66AE /* stage_04.png */; };
 		9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D7137862D00092521B /* Icon-Small@2x.png */; };
 		9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D8137862D00092521B /* Icon-Small-50.png */; };
+		9E61E401140C8354009A5FD0 /* page.html in Resources */ = {isa = PBXBuildFile; fileRef = 9E61E400140C8354009A5FD0 /* page.html */; };
 		9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
 		9E6696F5134B15CA00B9E0F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F4134B15CA00B9E0F4 /* Foundation.framework */; };
 		9E6696F7134B15CA00B9E0F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */; };
@@ -137,6 +138,7 @@
 		9E32700C13908F2E00ED66AE /* E_Tipitaka 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 5.xcdatamodel"; sourceTree = "<group>"; };
 		9E3DA8D7137862D00092521B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		9E3DA8D8137862D00092521B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		9E61E400140C8354009A5FD0 /* page.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = page.html; sourceTree = "<group>"; };
 		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6696F2134B15CA00B9E0F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E6696F4134B15CA00B9E0F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -284,6 +286,7 @@
 				9E669783134C9F6F00B9E0F4 /* 28-star.png */,
 				9E669784134C9F7300B9E0F4 /* 179-notepad.png */,
 				9E326FD4138E167200ED66AE /* ic_menu_edit.png */,
+				9E61E400140C8354009A5FD0 /* page.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				9E10EA7813C88B6800DCA4B4 /* E_Tipitaka.sqlite in Resources */,
 				9EAF954C13D163D30010CABD /* PaliThai.plist in Resources */,
 				9EAF955B13D1AD540010CABD /* DictionaryListView_iPad.xib in Resources */,
+				9E61E401140C8354009A5FD0 /* page.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

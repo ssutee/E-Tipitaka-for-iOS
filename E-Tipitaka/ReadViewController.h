@@ -10,6 +10,7 @@
 #import "TapDetectingWindow.h"
 
 @class Content;
+@class DictionaryListViewController;
 
 
 #define kGotoActionSheet 1001
@@ -22,6 +23,8 @@
 #define kGotoItemAlert 2002
 #define kDatabaseAlert 2003
 
+#define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
+
 @interface ReadViewController : UIViewController 
 <UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate>
 {
@@ -30,11 +33,11 @@
 	UIToolbar *toolbar;
 	UIWebView *htmlView;
 	NSMutableDictionary *dataDictionary;
-//    NSDictionary *pagesDictionary;
-//    NSDictionary *itemsDictionary;    
 	BOOL showToolbar;
 	TapDetectingWindow *mWindow;
-	
+
+	DictionaryListViewController *dictionaryListViewController;
+    
     BOOL scrollToItem;
     BOOL scrollToKeyword;
     
@@ -63,7 +66,9 @@
     UILabel *toastText;
     UISlider *pageSlider;
     //UIActivityIndicatorView *indicator;
+    double lastScale;
 }
+@property(nonatomic, retain) DictionaryListViewController *dictionaryListViewController;
 
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, retain) IBOutlet UILabel *pageNumberLabel;
@@ -71,8 +76,6 @@
 @property(nonatomic, retain) IBOutlet UIWebView *htmlView;
 @property(nonatomic, retain) IBOutlet UILabel *toastText;
 @property(nonatomic, retain) NSDictionary *dataDictionary;
-//@property(nonatomic, retain) NSDictionary *pagesDictionary;
-//@property(nonatomic, retain) NSDictionary *itemsDictionary;
 @property(nonatomic, retain) NSArray *alterItems;
 @property(nonatomic, retain) NSString *keywords;
 
@@ -94,7 +97,6 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *bookmarkButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *titleButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *dictionaryButton;
-//@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *indicator;
 @property (nonatomic, retain) UIActionSheet *languageActionSheet;
 @property (nonatomic, retain) UIActionSheet *gotoActionSheet;
 @property (nonatomic, retain) UIActionSheet *itemOptionsActionSheet;
@@ -124,6 +126,9 @@
 -(void) dismissAllPopoverControllers;
 -(void) showToast;
 -(void) hideToast:(NSTimer *)theTimer;
+-(void) zoom:(id)sender;
+
+-(void) lookUpDictionary:(id)sender;
 
 +(NSInteger) getMaximumItemValue:(NSString *)language ofVolume:(NSNumber *)volume;
 +(NSInteger) getMaximumPageValue:(NSString *)language ofVolume:(NSNumber *)volume;

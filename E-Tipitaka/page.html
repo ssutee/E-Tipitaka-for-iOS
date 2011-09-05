@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <style type="text/css">
+            body {font-family:arial; font-size:%d; margin: 5; padding: 5;}
+        </style>
+        <script>
+            function ScrollToElement(theElement){
+                var selectedPosX = 0;
+                var selectedPosY = 0;
+                while(theElement != null){
+                    selectedPosX += theElement.offsetLeft;
+                    selectedPosY += theElement.offsetTop;
+                    theElement = theElement.offsetParent;
+                }
+                window.scrollTo(selectedPosX,selectedPosY);
+            }
+            
+            function getLinePositionOfSelection() {
+                var selection = window.getSelection();
+                var range = selection.getRangeAt(0);
+                var node = selection.anchorNode.previousSibling;
+                alert(selection.anchorNode.parentNode);
+                var linePosition = 0;
+                while (node != null) {
+                    if (node.nodeType == Node.ELEMENT_NODE && node.nodeName == 'BR') {
+                        linePosition++;                        
+                    }
+                    node = node.previousSibling;
+                }
+                return linePosition;
+            }
+            
+            function findTextAtLinePosition(row) {
+                var body = document.getElementById("body");
+                var j = 0;
+                for (var i=0; i< body.childNodes.length; i++) {
+                    var child = body.childNodes[i];
+                    
+                    if (child.nodeType == Node.TEXT_NODE && row == j) {
+                        
+                    }
+                    
+                    if (child.nodeType == Node.ELEMENT_NODE && child.nodeName == 'BR') {
+                        j++;
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body id="body">%@</body>
+</html>

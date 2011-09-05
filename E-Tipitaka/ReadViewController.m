@@ -44,6 +44,7 @@
 @synthesize bookmarkPopoverController=_bookmarkPopoverController;
 @synthesize booklistPopoverController;
 @synthesize dictionaryPopoverController;
+@synthesize dictionaryListViewController;
 @synthesize searchButton;
 @synthesize languageButton;
 @synthesize booklistButton;
@@ -515,29 +516,11 @@
             [tmp release];
         }
     }
-    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"page" ofType:@"html"];
+    NSString *template = [NSString stringWithContentsOfFile:filePath 
+                                                  encoding:NSUTF8StringEncoding error:nil];
     NSString *html = [[NSString alloc] 
-                      initWithFormat:
-                      @"<html> \n"
-                      "<head> \n"
-                      "<style type=\"text/css\"> \n"
-                      "body {font-family:arial; font-size:%d; margin: 5; padding: 5;} \n"
-                      "</style> \n"
-                      "<script> \n"
-                      "function ScrollToElement(theElement){ \n"
-                      "   var selectedPosX = 0; \n"
-                      "	  var selectedPosY = 0; \n"  
-                      "   while(theElement != null){ \n"
-                      "      selectedPosX += theElement.offsetLeft; \n"
-                      "      selectedPosY += theElement.offsetTop; \n"
-                      "      theElement = theElement.offsetParent; \n"
-                      "   } \n"
-                      "   window.scrollTo(selectedPosX,selectedPosY); \n"
-                      "} \n"
-                      "</script>"
-                      "</head> \n"
-                      "<body>%@</body> \n"
-                      "</html>", size, text];
+                      initWithFormat:template, size, text];
     [webview loadHTMLString:html baseURL:[NSURL URLWithString:@"http://www.etipitaka.com"]];
     [html release];
 
@@ -810,18 +793,11 @@
             UIPopoverController *poc = [[UIPopoverController alloc]
                                         initWithContentViewController:navController];
             controller.popoverController = poc;
-            if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-                [poc presentPopoverFromRect:CGRectMake(309, 82, 151, 29) 
-                                     inView:self.view 
-                   permittedArrowDirections:UIPopoverArrowDirectionUp 
-                                   animated:YES];
-            } else {
-                [poc presentPopoverFromRect:CGRectMake(277, 82, 151, 29) 
-                                     inView:self.view 
-                   permittedArrowDirections:UIPopoverArrowDirectionUp 
-                                   animated:YES];                
-            }
             
+            [poc presentPopoverFromRect:self.pageNumberLabel.frame
+                                 inView:self.view 
+               permittedArrowDirections:UIPopoverArrowDirectionUp 
+                               animated:YES];
             [navController release];
         }
 
@@ -923,6 +899,25 @@
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation { 
     [self updateReadingPage];
+}
+
+
+-(void)zoom:(id)sender
+{
+	[self.view bringSubviewToFront:[(UIPinchGestureRecognizer*)sender view]];
+    
+	if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded) {
+		lastScale = 1.0;
+		return;
+	}
+    
+	CGFloat scale = 1.0 - (lastScale - [(UIPinchGestureRecognizer*)sender scale]);
+    
+    self.fontSize = ceil(self.fontSize * scale);
+    [dataDictionary setValue:[NSNumber numberWithInt:self.fontSize] forKey:@"FontSize"];
+    [self updateReadingPage];
+    
+	lastScale = [(UIPinchGestureRecognizer*)sender scale];    
 }
 
 #pragma mark -
@@ -1096,25 +1091,6 @@
     [self updateLanguageButtonTitle];
 }
 
-//-(void)presentSearchPopover {
-//    if (_searchPopoverController != nil && [_searchPopoverController isPopoverVisible]) {
-//        [self dismissAllPopoverControllers];
-//        _searchPopoverController.popoverContentSize = CGSizeMake(580, 500);
-//        
-//        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-//            [_searchPopoverController presentPopoverFromRect:CGRectMake(309, 82, 151, 29) 
-//                                                      inView:self.view 
-//                                    permittedArrowDirections:UIPopoverArrowDirectionUp 
-//                                                    animated:YES];
-//        } else {
-//            [_searchPopoverController presentPopoverFromRect:CGRectMake(277, 82, 151, 29) 
-//                                                      inView:self.view 
-//                                    permittedArrowDirections:UIPopoverArrowDirectionUp 
-//                                                    animated:YES];                
-//        }            
-//    }
-//}
-
 -(IBAction)showSearchView:(id)sender {    
     if(_searchPopoverController != nil) {
         if ([_searchPopoverController isPopoverVisible]) {
@@ -1125,19 +1101,7 @@
             _searchPopoverController.popoverContentSize = CGSizeMake(660, 600);            
             [_searchPopoverController presentPopoverFromBarButtonItem:searchButton 
                                              permittedArrowDirections:UIPopoverArrowDirectionDown 
-                                                             animated:NO];
-            
-//            if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-//                [_searchPopoverController presentPopoverFromRect:CGRectMake(309, 82, 151, 29) 
-//                                     inView:self.view 
-//                   permittedArrowDirections:UIPopoverArrowDirectionUp 
-//                                   animated:YES];
-//            } else {
-//                [_searchPopoverController presentPopoverFromRect:CGRectMake(277, 82, 151, 29) 
-//                                     inView:self.view 
-//                   permittedArrowDirections:UIPopoverArrowDirectionUp 
-//                                   animated:YES];                
-//            }            
+                                                             animated:NO];            
         }
     } 
     else {
@@ -1156,19 +1120,6 @@
                     permittedArrowDirections:UIPopoverArrowDirectionDown 
                                     animated:YES];        
 
-        
-//        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-//            [poc presentPopoverFromRect:CGRectMake(309, 82, 151, 29) 
-//                                 inView:self.view 
-//               permittedArrowDirections:UIPopoverArrowDirectionUp 
-//                               animated:YES];
-//        } else {
-//            [poc presentPopoverFromRect:CGRectMake(277, 82, 151, 29) 
-//                                 inView:self.view 
-//               permittedArrowDirections:UIPopoverArrowDirectionUp 
-//                               animated:YES];                
-//        }
-        
         self.searchPopoverController = poc;
         [poc release];
         [searchViewController release];
@@ -1239,6 +1190,11 @@
 }
 
 -(IBAction)showDictionary:(id)sender {
+    
+    NSString *selection = [self.htmlView
+                           stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];        
+//    NSLog(@"%@", [self.htmlView stringByEvaluatingJavaScriptFromString:@"findTextAtRow(4);"]);
+
     if(dictionaryPopoverController != nil) {
         if ([dictionaryPopoverController isPopoverVisible]) {
             [dictionaryPopoverController dismissPopoverAnimated:YES];
@@ -1246,25 +1202,29 @@
             [self dismissAllPopoverControllers];
             [dictionaryPopoverController presentPopoverFromBarButtonItem:dictionaryButton
                                               permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                                              animated:YES];
+                                                              animated:YES];  
+            dictionaryListViewController.searchBar.text = selection;
+            [dictionaryListViewController handleSearchForTerm:selection];                        
         }
     } else {
-        DictionaryListViewController *dictViewController = [[DictionaryListViewController alloc]
+        DictionaryListViewController *controller = [[DictionaryListViewController alloc]
                                                             initWithNibName:@"DictionaryListView_iPad"
                                                             bundle:nil];        
-        
-        dictViewController.title = @"พจนานุกรม บาลี-ไทย";
+        self.dictionaryListViewController = controller;
+        dictionaryListViewController.title = @"พจนานุกรม บาลี-ไทย";        
         
         UINavigationController *navController = [[UINavigationController alloc] 
-                                                 initWithRootViewController:dictViewController];
+                                                 initWithRootViewController:dictionaryListViewController];
         UIPopoverController *poc = [[UIPopoverController alloc]
                                     initWithContentViewController:navController];
         [self dismissAllPopoverControllers];
         [poc presentPopoverFromBarButtonItem:dictionaryButton 
-                    permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                    permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];   
+        dictionaryListViewController.searchBar.text = selection;        
+        [dictionaryListViewController handleSearchForTerm:selection];             
         self.dictionaryPopoverController = poc;
         [poc release];
-        [dictViewController release];
+        [controller release];
         [navController release];
     }    
 }
@@ -1302,6 +1262,22 @@
 
 -(IBAction) startUpdatingPage:(id)sender {
     [self updateReadingPage];
+}
+
+-(BOOL) canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (action == @selector(lookUpDictionary:)) {
+        
+        NSString *selection = [self.htmlView 
+                               stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];
+        return ([allTrim(selection) length] != 0);
+    }
+    return [super canPerformAction:action withSender:sender];
+}
+
+-(void) lookUpDictionary:(id)sender
+{
+    [self showDictionary:nil];
 }
 
 #pragma mark -
@@ -1342,8 +1318,18 @@
 	[super viewDidLoad];
 
     
-//    self.pagesDictionary = [Utils readPages];
-//    self.itemsDictionary = [Utils readItems];
+    // add pinch gesture
+    UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc]
+                                                 initWithTarget:self action:@selector(zoom:)];    
+    pinchRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;    
+    [htmlView addGestureRecognizer:pinchRecognizer];    
+    [pinchRecognizer release];
+
+    // lookup dictionary menu
+    UIMenuItem *dictionaryMenuItem = [[UIMenuItem alloc] initWithTitle:@"บาลี-ไทย" 
+                                                          action:@selector(lookUpDictionary:)];
+    [UIMenuController sharedMenuController].menuItems = [NSArray arrayWithObject:dictionaryMenuItem];
+    [dictionaryMenuItem release];    
     
     mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
     mWindow.viewToObserve = htmlView;
@@ -1539,6 +1525,7 @@
     self.toastText = nil;
     self.bottomToolbar = nil;
     //self.indicator = nil;
+    self.dictionaryListViewController = nil;
 }
 
 
@@ -1573,6 +1560,7 @@
     [toastText release];
     [bottomToolbar release];
     //[indicator release];
+    [dictionaryListViewController release];
     [super dealloc];
 }
 
@@ -1641,8 +1629,8 @@
                                             [actionSheet showFromToolbar:toolbar];
                                         }
                                         else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                                            [actionSheet showFromRect:CGRectMake(60, 0, 10, 74) 
-                                                               inView:self.view animated:YES];                                        
+                                            [actionSheet showFromBarButtonItem:self.gotoButton 
+                                                                      animated:YES];
                                             self.itemOptionsActionSheet = actionSheet;
                                         }
                                         
