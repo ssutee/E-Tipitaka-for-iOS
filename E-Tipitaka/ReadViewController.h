@@ -126,7 +126,6 @@
 -(void) dismissAllPopoverControllers;
 -(void) showToast;
 -(void) hideToast:(NSTimer *)theTimer;
--(void) zoom:(id)sender;
 
 -(void) lookUpDictionary:(id)sender;
 

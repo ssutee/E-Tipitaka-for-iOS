@@ -66,10 +66,14 @@
     } else {
         maximumSize = CGSizeMake(CELL_WIDTH_IPHONE, 10000);
     }
-    PaliThai *item = [fetchedResults objectAtIndex:index];
-    CGSize translaitonHeighSize = [item.translation 
-                                   sizeWithFont:[UIFont fontWithName:TRANSLATION_FONT 
-                                                                size:TRANSLATION_SIZE]                                   
+    NSString *text = @"ไม่พบคำนี้ในพจนานุกรม";
+    if (index < [fetchedResults count]) {
+        PaliThai *item = [fetchedResults objectAtIndex:index];
+        text = item.translation;
+    }
+
+    CGSize translaitonHeighSize = [text sizeWithFont:[UIFont fontWithName:TRANSLATION_FONT 
+                                                                     size:TRANSLATION_SIZE]                                   
                                    constrainedToSize:maximumSize
                                    lineBreakMode:UILineBreakModeWordWrap];
     
@@ -86,10 +90,13 @@
     } else {
         maximumSize = CGSizeMake(CELL_WIDTH_IPHONE, 10000);
     }
-    PaliThai *item = [fetchedResults objectAtIndex:index];
-    CGSize headHeighSize = [item.head 
-                            sizeWithFont:[UIFont fontWithName:HEAD_FONT 
-                                                         size:HEAD_SIZE]
+    NSString *text = @"ตัวอย่างคำ";
+    if (index < [fetchedResults count]) {
+        PaliThai *item = [fetchedResults objectAtIndex:index];
+        text = item.head;
+    }
+
+    CGSize headHeighSize = [text sizeWithFont:[UIFont fontWithName:HEAD_FONT size:HEAD_SIZE]
                             constrainedToSize:maximumSize
                             lineBreakMode:UILineBreakModeWordWrap];
     

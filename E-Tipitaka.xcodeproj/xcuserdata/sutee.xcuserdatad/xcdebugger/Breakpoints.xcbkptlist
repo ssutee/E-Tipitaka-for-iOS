@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "E-Tipitaka/ReadViewController.m"
-         timestampString = "336982447.431842"
+         timestampString = "337024720.150703"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "968"
-         endingLineNumber = "968"
+         startingLineNumber = "949"
+         endingLineNumber = "949"
          landmarkName = "-languageButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>

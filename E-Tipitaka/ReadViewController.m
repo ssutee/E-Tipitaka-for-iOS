@@ -901,25 +901,6 @@
     [self updateReadingPage];
 }
 
-
--(void)zoom:(id)sender
-{
-	[self.view bringSubviewToFront:[(UIPinchGestureRecognizer*)sender view]];
-    
-	if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded) {
-		lastScale = 1.0;
-		return;
-	}
-    
-	CGFloat scale = 1.0 - (lastScale - [(UIPinchGestureRecognizer*)sender scale]);
-    
-    self.fontSize = ceil(self.fontSize * scale);
-    [dataDictionary setValue:[NSNumber numberWithInt:self.fontSize] forKey:@"FontSize"];
-    [self updateReadingPage];
-    
-	lastScale = [(UIPinchGestureRecognizer*)sender scale];    
-}
-
 #pragma mark -
 #pragma mark IBAction Methods
 
@@ -1316,14 +1297,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
-
-    
-    // add pinch gesture
-    UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc]
-                                                 initWithTarget:self action:@selector(zoom:)];    
-    pinchRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;    
-    [htmlView addGestureRecognizer:pinchRecognizer];    
-    [pinchRecognizer release];
 
     // lookup dictionary menu
     UIMenuItem *dictionaryMenuItem = [[UIMenuItem alloc] initWithTitle:@"บาลี-ไทย" 
