@@ -129,30 +129,15 @@
 
 -(void) lookUpDictionary:(id)sender;
 
-+(NSInteger) getMaximumItemValue:(NSString *)language ofVolume:(NSNumber *)volume;
-+(NSInteger) getMaximumPageValue:(NSString *)language ofVolume:(NSNumber *)volume;
-+(NSArray *) getContents:(NSString *)language forVolume:(NSNumber *)volume forPage:(NSNumber *)page;
-+(NSArray *) getContents:(NSString *)language forVolume:(NSNumber *)volume;
-
 +(NSString *) createHeaderTitle:(NSNumber *)volume;
 +(void) updateWebView:(UIWebView *)webview withContent:(Content *)content 
              fontSize:(NSInteger)size andKeywords:(NSString *)query;
 +(void) updatePageTitle:(NSString *)language volume:(NSNumber *)volume 
                    page:(NSNumber *)page slider:(UISlider *)slider 
              titleLabel:(UILabel *)label1 pageLabel:(UILabel *)label2;
-
 +(void) updateReadingPage:(NSString *)query slider:(UISlider *)slider webview:(UIWebView *)webview
                titleLabel:(UILabel *)label1 pageLabel:(UILabel *)label2 fontSize:(NSInteger)size
                  language:(NSString *)language volume:(NSNumber *)volume page:(NSNumber *)page;
-
-+(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forNumber:(NSNumber *)number;
-+(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume 
-            forNumber:(NSNumber *)number forSection:(NSNumber *)section;
-+(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume 
-              forPage:(NSNumber *)page onlyBegin:(BOOL)begin;
-+(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume onlyBegin:(BOOL)begin;
-+(NSArray *) getItemsFromContent:(Content *)content;
-
 
 -(void) showItemOptions:(NSArray *)items withTag:(NSInteger)tagNumber withTitle:(NSString *)titleName;
 

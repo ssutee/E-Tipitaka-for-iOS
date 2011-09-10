@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E10C31B141A65DD005E60FC /* ContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E10C31A141A65DD005E60FC /* ContentView.xib */; };
+		9E10C570141B183D005E60FC /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C56F141B183D005E60FC /* ContentViewController.m */; };
+		9E10C571141B183D005E60FC /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C56F141B183D005E60FC /* ContentViewController.m */; };
+		9E10C572141B18AD005E60FC /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669769134C5D2D00B9E0F4 /* Utils.m */; };
+		9E10C575141B1B51005E60FC /* QueryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C574141B1B51005E60FC /* QueryHelper.m */; };
+		9E10C576141B1B51005E60FC /* QueryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C574141B1B51005E60FC /* QueryHelper.m */; };
+		9E10C57C141B1C5F005E60FC /* ContentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C57B141B1C5F005E60FC /* ContentInfo.m */; };
+		9E10C57D141B1C5F005E60FC /* ContentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C57B141B1C5F005E60FC /* ContentInfo.m */; };
+		9E10C580141B2BE6005E60FC /* ContentInfoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C57F141B2BE6005E60FC /* ContentInfoType.m */; };
+		9E10C581141B2BE6005E60FC /* ContentInfoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C57F141B2BE6005E60FC /* ContentInfoType.m */; };
 		9E10EA7813C88B6800DCA4B4 /* E_Tipitaka.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 9E10EA7713C88B6800DCA4B4 /* E_Tipitaka.sqlite */; };
 		9E1721F61366C4C00011891C /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1721F51366C4C00011891C /* libz.1.2.3.dylib */; };
 		9E1722031366C4F90011891C /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721F91366C4F90011891C /* ioapi.c */; };
@@ -105,6 +115,15 @@
 
 /* Begin PBXFileReference section */
 		9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 2.xcdatamodel"; sourceTree = "<group>"; };
+		9E10C31A141A65DD005E60FC /* ContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentView.xib; sourceTree = "<group>"; };
+		9E10C56E141B183D005E60FC /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		9E10C56F141B183D005E60FC /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		9E10C573141B1B51005E60FC /* QueryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryHelper.h; sourceTree = "<group>"; };
+		9E10C574141B1B51005E60FC /* QueryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryHelper.m; sourceTree = "<group>"; };
+		9E10C57A141B1C5F005E60FC /* ContentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentInfo.h; sourceTree = "<group>"; };
+		9E10C57B141B1C5F005E60FC /* ContentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentInfo.m; sourceTree = "<group>"; };
+		9E10C57E141B2BE6005E60FC /* ContentInfoType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentInfoType.h; sourceTree = "<group>"; };
+		9E10C57F141B2BE6005E60FC /* ContentInfoType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentInfoType.m; sourceTree = "<group>"; };
 		9E10EA7713C88B6800DCA4B4 /* E_Tipitaka.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = E_Tipitaka.sqlite; sourceTree = "<group>"; };
 		9E1721F51366C4C00011891C /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		9E1721F81366C4F90011891C /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
@@ -264,6 +283,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E10C577141B1B73005E60FC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9E669768134C5D2500B9E0F4 /* Utils.h */,
+				9E669769134C5D2D00B9E0F4 /* Utils.m */,
+				9E10C573141B1B51005E60FC /* QueryHelper.h */,
+				9E10C574141B1B51005E60FC /* QueryHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		9E10C578141B1B99005E60FC /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9EAF955C13D1C6700010CABD /* PaliThai.h */,
+				9EAF955D13D1C6710010CABD /* PaliThai.m */,
+				9E669738134C574A00B9E0F4 /* Content.h */,
+				9E669739134C574A00B9E0F4 /* Content.m */,
+				9E66973A134C574A00B9E0F4 /* Bookmark.h */,
+				9E66973B134C574A00B9E0F4 /* Bookmark.m */,
+				9E326FBE138D445600ED66AE /* History.h */,
+				9E326FBF138D445600ED66AE /* History.m */,
+				9E66973C134C574A00B9E0F4 /* Item.h */,
+				9E66973D134C574A00B9E0F4 /* Item.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		9E10C579141B1C32005E60FC /* ParameterObject */ = {
+			isa = PBXGroup;
+			children = (
+				9E10C57A141B1C5F005E60FC /* ContentInfo.h */,
+				9E10C57B141B1C5F005E60FC /* ContentInfo.m */,
+				9E10C57E141B2BE6005E60FC /* ContentInfoType.h */,
+				9E10C57F141B2BE6005E60FC /* ContentInfoType.m */,
+			);
+			name = ParameterObject;
+			sourceTree = "<group>";
+		};
 		9E1721F71366C4F90011891C /* minizip */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,16 +377,9 @@
 		9E326FDC138E1CB900ED66AE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9E669738134C574A00B9E0F4 /* Content.h */,
-				9E669739134C574A00B9E0F4 /* Content.m */,
-				9E66973A134C574A00B9E0F4 /* Bookmark.h */,
-				9E66973B134C574A00B9E0F4 /* Bookmark.m */,
-				9E326FBE138D445600ED66AE /* History.h */,
-				9E326FBF138D445600ED66AE /* History.m */,
-				9E66973C134C574A00B9E0F4 /* Item.h */,
-				9E66973D134C574A00B9E0F4 /* Item.m */,
-				9EAF955C13D1C6700010CABD /* PaliThai.h */,
-				9EAF955D13D1C6710010CABD /* PaliThai.m */,
+				9E10C579141B1C32005E60FC /* ParameterObject */,
+				9E10C578141B1B99005E60FC /* CoreData */,
+				9E10C577141B1B73005E60FC /* Helpers */,
 				9E669743134C584300B9E0F4 /* TapDetectingWindow.h */,
 				9E669744134C584300B9E0F4 /* TapDetectingWindow.m */,
 				9E669703134B15CB00B9E0F4 /* E_TipitakaAppDelegate.h */,
@@ -349,10 +400,10 @@
 				9E669765134C5D1000B9E0F4 /* SearchHistoryViewController.m */,
 				9EAF955713D1AD530010CABD /* DictionaryListViewController.h */,
 				9EAF955813D1AD530010CABD /* DictionaryListViewController.m */,
+				9E10C56E141B183D005E60FC /* ContentViewController.h */,
+				9E10C56F141B183D005E60FC /* ContentViewController.m */,
 				9E669766134C5D1800B9E0F4 /* iToast.h */,
 				9E669767134C5D1F00B9E0F4 /* iToast.m */,
-				9E669768134C5D2500B9E0F4 /* Utils.h */,
-				9E669769134C5D2D00B9E0F4 /* Utils.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -470,6 +521,7 @@
 				9E326FD8138E1B6C00ED66AE /* BookmarkEditViewController.xib */,
 				9E669752134C5C7A00B9E0F4 /* BookmarkListViewController.xib */,
 				9E669753134C5C7A00B9E0F4 /* SearchHistoryViewController.xib */,
+				9E10C31A141A65DD005E60FC /* ContentView.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -617,6 +669,7 @@
 				9EAF954C13D163D30010CABD /* PaliThai.plist in Resources */,
 				9EAF955B13D1AD540010CABD /* DictionaryListView_iPad.xib in Resources */,
 				9E61E401140C8354009A5FD0 /* page.html in Resources */,
+				9E10C31B141A65DD005E60FC /* ContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,8 +680,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E10C572141B18AD005E60FC /* Utils.m in Sources */,
 				9E4B9C951419B571000DD263 /* main.m in Sources */,
 				9E4B9CB61419BF5E000DD263 /* MyTest.m in Sources */,
+				9E10C571141B183D005E60FC /* ContentViewController.m in Sources */,
+				9E10C576141B1B51005E60FC /* QueryHelper.m in Sources */,
+				9E10C57D141B1C5F005E60FC /* ContentInfo.m in Sources */,
+				9E10C581141B2BE6005E60FC /* ContentInfoType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,6 +721,10 @@
 				9E326FE8138E3EE900ED66AE /* DoubleReadViewController.m in Sources */,
 				9EAF955A13D1AD540010CABD /* DictionaryListViewController.m in Sources */,
 				9EAF955E13D1C6720010CABD /* PaliThai.m in Sources */,
+				9E10C570141B183D005E60FC /* ContentViewController.m in Sources */,
+				9E10C575141B1B51005E60FC /* QueryHelper.m in Sources */,
+				9E10C57C141B1C5F005E60FC /* ContentInfo.m in Sources */,
+				9E10C580141B2BE6005E60FC /* ContentInfoType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,6 +1007,7 @@
 				9E4B9CAB1419B571000DD263 /* Ad Hoc Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Distribution;
 		};
 		9E6696E8134B15C900B9E0F4 /* Build configuration list for PBXProject "E-Tipitaka" */ = {
 			isa = XCConfigurationList;

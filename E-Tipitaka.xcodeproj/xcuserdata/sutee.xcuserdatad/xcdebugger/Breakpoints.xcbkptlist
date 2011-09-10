@@ -9,40 +9,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "E-Tipitaka/ReadViewController.m"
-         timestampString = "336982253.264133"
+         timestampString = "337332435.83171"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "574"
-         endingLineNumber = "574"
+         startingLineNumber = "973"
+         endingLineNumber = "973"
+         landmarkName = "-noteButtonClicked:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "E-Tipitaka/ReadViewController.m"
+         timestampString = "337270987.41052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "493"
+         endingLineNumber = "493"
          landmarkName = "+updateReadingPage:slider:webview:titleLabel:pageLabel:fontSize:language:volume:page:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "E-Tipitaka/ReadViewController.m"
-         timestampString = "337024720.150703"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "949"
-         endingLineNumber = "949"
-         landmarkName = "-languageButtonClicked:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "E-Tipitaka/ReadViewController.m"
-         timestampString = "336982718.21093"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "488"
-         endingLineNumber = "488"
-         landmarkName = "+updateWebView:withContent:fontSize:andKeywords:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

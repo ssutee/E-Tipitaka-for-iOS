@@ -17,6 +17,8 @@
 #import "Item.h"
 #import "Utils.h"
 #import "Content.h"
+#import "ContentInfo.h"
+#import "QueryHelper.h"
 
 //@interface ReadViewController ()
 //@property (nonatomic, retain) UIPopoverController *popoverController;
@@ -61,64 +63,6 @@
 @synthesize bottomToolbar;
 //@synthesize indicator;
 
-#pragma mark - Managing the detail item
-
-/*
- When setting the detail item, update the view and dismiss the popover controller if it's showing.
- */
-//- (void)setDetailItem:(id)newDetailItem
-//{
-//    if (_detailItem != newDetailItem) {
-//        [_detailItem release];
-//        _detailItem = [newDetailItem retain];
-//        
-//        // Update the view.
-//        [self configureView];
-//    }
-//    
-//    if (self.popoverController != nil) {
-//        [self.popoverController dismissPopoverAnimated:YES];
-//    }
-//    
-//    if(_searchPopoverController != nil) {
-//        [_searchPopoverController dismissPopoverAnimated:YES];
-//    }
-//}
-
-//- (void)configureView
-//{
-//    // Update the user interface for the detail item.
-//    
-//    // TODO 
-//}
-
-//#pragma mark - Split view support
-
-//- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
-//{
-//    barButtonItem.title = @"เลือก";
-//    NSMutableArray *items = [[self.toolbar items] mutableCopy];
-//    [items insertObject:barButtonItem atIndex:0];
-//    [self.toolbar setItems:items animated:YES];
-//    [items release];
-//    self.popoverController = pc;
-//}
-
-// Called when the view is shown again in the split view, invalidating the button and popover controller.
-//- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-//{
-//    NSMutableArray *items = [[self.toolbar items] mutableCopy];
-//    [items removeObjectAtIndex:0];
-//    [self.toolbar setItems:items animated:YES];
-//    [items release];
-//    self.popoverController = nil;
-//}
-//
-//- (void)splitViewController:(UISplitViewController*)svc popoverController:(UIPopoverController*)pc willPresentViewController:(UIViewController *)aViewController
-//{
-//    [self dismissAllPopoverControllers];
-//}
-
 #pragma mark - General Methods
 
 -(void) gotoItem {
@@ -141,10 +85,13 @@
 	itemLabel.shadowOffset = CGSizeMake(0,-1);
 	itemLabel.textAlignment = UITextAlignmentCenter;
 	
-	
-	itemLabel.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่ข้อที่ ๑ ถึง %d", 
-										 [ReadViewController getMaximumItemValue:language 
-                                                                        ofVolume:volume]]];
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    [info setType:LANGUAGE|VOLUME];
+	itemLabel.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่ข้อที่ ๑ ถึง %d", [QueryHelper getMaximumItemValue:info]]];
+    [info release];
+    
 	[itemAlert addSubview:itemLabel];
 	
 	UIImageView *itemImage = [[UIImageView alloc] 
@@ -199,10 +146,12 @@
 	pageLabel.shadowOffset = CGSizeMake(0,-1);
 	pageLabel.textAlignment = UITextAlignmentCenter;
 	
-	
-	pageLabel.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่หน้าที่ ๑ ถึง %d", 
-                                         [ReadViewController getMaximumPageValue:language 
-                                                                        ofVolume:volume]]];
+	ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    [info setType:LANGUAGE|VOLUME];
+	pageLabel.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่หน้าที่ ๑ ถึง %d", [QueryHelper getMaximumPageValue:info]]];
+    [info release];
 	[pageAlert addSubview:pageLabel];
 	
 	UIImageView *pageImage = [[UIImageView alloc] 
@@ -238,174 +187,6 @@
 	[pageImage release];
 	[pageLabel release];	
 }
-
-+(NSArray *) getContents:(NSString *)language forVolume:(NSNumber *)volume {
-	return [ReadViewController getContents:language forVolume:volume forPage:nil];
-}
-
-+(NSArray *) getContents:(NSString *) language forVolume:(NSNumber *)volume forPage:(NSNumber *)page {
-	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
-	
-	NSManagedObjectContext *context = [appDelegate managedObjectContext];
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	
-	NSEntityDescription *entity = [NSEntityDescription 
-								   entityForName:@"Content" 
-								   inManagedObjectContext:context];	
-	[fetchRequest setEntity:entity];
-	
-	NSPredicate *pred;
-	
-	if (page == nil) {
-		pred = [NSPredicate 
-				 predicateWithFormat:@"(lang = %@ && volume = %d)",
-				 [language lowercaseString], [volume intValue]];
-	} else {
-		pred = [NSPredicate 
-				 predicateWithFormat:@"(lang = %@ && volume = %d && page = %d)",
-				 [language lowercaseString], [volume intValue], [page intValue]];
-	}
-	
-	[fetchRequest setPredicate:pred];
-	
-	NSError *error;
-        
-	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-	
-	[fetchRequest release];
-	
-	return fetchedObjects;
-}
-
-+(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forNumber:(NSNumber *)number {
-	return [self getItems:language forVolume:volume forNumber:number forSection:nil];
-}
-
-+(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forNumber:(NSNumber *)number forSection:(NSNumber *)section {
-	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
-	
-	NSManagedObjectContext *context = [appDelegate managedObjectContext];
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	
-	NSEntityDescription *entity = [NSEntityDescription 
-								   entityForName:@"Item" 
-								   inManagedObjectContext:context];	
-	[fetchRequest setEntity:entity];
-	
-	
-	NSPredicate *pred;
-	if (section) {
-		pred = [NSPredicate 
-				predicateWithFormat:@"(number = %d && content.lang = %@ && content.volume = %d && begin = 1 && section = %d)",
-				[number intValue],
-				[language lowercaseString], 
-				[volume intValue],
-				[section intValue]];
-	} else {
-		pred = [NSPredicate 
-				predicateWithFormat:@"(number = %d && content.lang = %@ && content.volume = %d && begin = 1)",
-				[number intValue],
-				[language lowercaseString], 
-				[volume intValue]];
-	}
-	
-	[fetchRequest setPredicate:pred];
-	
-	NSError *error;			
-	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-	
-	[fetchRequest release];
-		
-	return fetchedObjects;
-}
-
-+(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume forPage:(NSNumber *)page onlyBegin:(BOOL)begin {
-	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
-	
-	NSManagedObjectContext *context = [appDelegate managedObjectContext];
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	
-	NSEntityDescription *entity = [NSEntityDescription 
-								   entityForName:@"Item" 
-								   inManagedObjectContext:context];	
-	[fetchRequest setEntity:entity];
-	
-	NSPredicate *pred;
-	if (page == nil) {
-		pred = [NSPredicate 
-				predicateWithFormat:@"(content.lang = %@ && content.volume = %d && begin = %d)",
-				[language lowercaseString], 
-				[volume intValue], begin];		
-	} else {
-		pred = [NSPredicate 
-				predicateWithFormat:@"(content.lang = %@ && content.volume = %d && content.page = %d && begin = %d)",
-				[language lowercaseString], 
-				[volume intValue],
-				[page intValue], begin];		
-	}
-
-	
-	[fetchRequest setPredicate:pred];
-	NSSortDescriptor *sortByNumber = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
-	[fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByNumber]];
-	[sortByNumber release];
-	
-	NSError *error;			
-	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-	
-	[fetchRequest release];
-	
-	return fetchedObjects;
-}
-
-+(NSArray *) getItems:(NSString *)language forVolume:(NSNumber *)volume onlyBegin:(BOOL)begin {
-	return [self getItems:language forVolume:volume forPage:nil onlyBegin:begin];
-}
-
-+(NSArray *) getItemsFromContent:(Content *)content {
-	NSMutableArray *array = [[NSMutableArray alloc] init];
-	
-	for(Item *item in content.items) {
-		if ([item.begin boolValue]) {
-			[array addObject:item];
-		}
-	}
-	if ([array count] == 0) {
-		for (Item *item in content.items) {
-			[array addObject:item];
-		}
-	}
-	
-	NSSortDescriptor *sortDescriptor;
-	sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
-	NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-	NSArray *sortedItems = [array sortedArrayUsingDescriptors:sortDescriptors];
-	
-	[sortDescriptor release];
-	[array release];
-	
-	return sortedItems;
-	
-}
-
-+(NSInteger) getMaximumItemValue:(NSString *)language ofVolume:(NSNumber *)volume {
-    NSDictionary *itemsDictionary = [Utils readItems];
-    NSInteger n=0;
-    for (NSNumber *i in [[itemsDictionary valueForKey:language] objectAtIndex:[volume intValue]-1]) {
-        if ([i intValue] > n) {
-            n = [i intValue];
-        }
-    }
-	return n;
-}
-
-+(NSInteger) getMaximumPageValue:(NSString *)language ofVolume:(NSNumber *)volume {
-    NSDictionary *pagesDictionary = [Utils readPages];
-    NSInteger n = [[[pagesDictionary valueForKey:language] objectAtIndex:[volume intValue]-1] intValue];
-    return n;
-}
-
-
 
 -(void) showItemOptions:(NSArray *)items withTag:(NSInteger)tagNumber withTitle:(NSString *)titleName {
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
@@ -447,8 +228,13 @@
 +(void) updatePageTitle:(NSString *)language volume:(NSNumber *)volume 
                    page:(NSNumber *)page slider:(UISlider *)slider 
              titleLabel:(UILabel *)label1 pageLabel:(UILabel *)label2 {
-    
-    NSInteger maxPage = [ReadViewController getMaximumPageValue:language ofVolume:volume];
+
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    [info setType:LANGUAGE|VOLUME];
+    NSInteger maxPage = [QueryHelper getMaximumPageValue:info];
+    [info release];
     
     if (slider.maximumValue != maxPage) {
         slider.maximumValue = maxPage;
@@ -576,8 +362,14 @@
                                    page:page slider:slider 
                              titleLabel:label1 
                               pageLabel:label2];
-    	
-	NSArray *fetchedObjects = [ReadViewController getContents:language forVolume:volume forPage:page];
+    
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    info.page = page;
+    [info setType:(LANGUAGE|VOLUME|PAGE)];
+    NSArray *fetchedObjects = [QueryHelper getContents:info];
+    [info release];    
 	
 	if(fetchedObjects == nil) {
 		NSLog(@"Whoops, couldn't fetch");
@@ -590,16 +382,6 @@
 	}
 }
 
-// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-/*
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization.
-    }
-    return self;
-}
-*/
 
 -(void) resetScrollPositions {
 	thaiScrollPosition = 0;
@@ -651,17 +433,25 @@
     NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
     NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];
     
-    NSArray *items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:YES];
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    info.page = page;
+    info.begin = YES;    
+    [info setType:(LANGUAGE|VOLUME|PAGE|BEGIN)];
+    NSArray *items = [QueryHelper getItems:info];
     if (items && [items count] > 0) {
         [self showItemOptions:items 
                       withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
     } else {
-        items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:NO];
+        info.begin = NO;
+        items = [QueryHelper getItems:info];
         if (items && [items count] > 0) {
             [self showItemOptions:items 
                           withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
         }
     }
+    [info release];
 }
 
 - (void) doCompare:(NSInteger)buttonIndex {
@@ -669,13 +459,19 @@
 	NSNumber *volume = [[dataDictionary valueForKey:sourceLanguage] valueForKey:@"Volume"];
 	NSNumber *page = [[dataDictionary valueForKey:sourceLanguage] valueForKey:@"Page"];			
 	
-	NSArray *items = [ReadViewController getItems:sourceLanguage forVolume:volume 
-                                          forPage:page onlyBegin:YES];
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = sourceLanguage;
+    info.volume = volume;
+    info.page = page;
+    info.begin = YES;
+    [info setType:LANGUAGE|VOLUME|PAGE|BEGIN];
+    NSArray *items = [QueryHelper getItems:info];
 	Item *selectedItem = nil;
 	if (items && [items count] > 0) {
 		selectedItem = [items objectAtIndex:buttonIndex];
 	} else {
-		items = [ReadViewController getItems:sourceLanguage forVolume:volume forPage:page onlyBegin:NO];
+        info.begin = NO;
+        items = [QueryHelper getItems:info];
 		if (items && [items count] > 0) {
 			selectedItem = [items objectAtIndex:buttonIndex];
 		}
@@ -690,11 +486,12 @@
 		} else {
 			targetLanguage = @"Thai";
 		}
-		
-		comparedItems = [ReadViewController getItems:targetLanguage 
-							 forVolume:volume 
-							 forNumber:selectedItem.number 
-							forSection:selectedItem.section];
+        info.language = targetLanguage;
+        info.volume = volume;
+        info.itemNumber = selectedItem.number;
+        info.section = selectedItem.section;
+        [info setType:LANGUAGE|VOLUME|ITEM_NUMBER|SECTION];
+        comparedItems = [QueryHelper getItems:info];
 		
 		if (comparedItems && [comparedItems count] > 0) {
 			Item *comparedItem = [comparedItems objectAtIndex:0];
@@ -763,6 +560,7 @@
             [alert show];
         }
 	}
+    [info release];
 	[sourceLanguage release];
 }
 
@@ -771,10 +569,18 @@
 	NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
 	NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];			
 	
-	NSArray *items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:YES];
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    info.page = page;
+    info.begin = YES;
+    [info setType:LANGUAGE|VOLUME|PAGE|BEGIN];
+    NSArray *items = [QueryHelper getItems:info];
+    
 	if (!items || [items count] == 0) {
-		items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:NO];
-	}		
+        info.begin = NO;
+        items = [QueryHelper getItems:info];
+	}
 	
 	if (items && [items count] > 0) {
 		BookmarkAddViewController *controller = [[BookmarkAddViewController alloc] 
@@ -803,6 +609,7 @@
 
 		[controller release], controller = nil;
 	}
+    [info release];    
 }
 
 - (void) selectItem:(NSInteger)buttonIndex {
@@ -819,9 +626,6 @@
 }
 
 - (void) dismissAllPopoverControllers {
-//    if (_myPopoverController != nil && [_myPopoverController isPopoverVisible]) {
-//        [_myPopoverController dismissPopoverAnimated:YES];
-//    }
     if (_searchPopoverController != nil && [_searchPopoverController isPopoverVisible]) {
         [_searchPopoverController dismissPopoverAnimated:YES];
     }
@@ -878,23 +682,6 @@
     }
     return NO;
 }
-
-/*
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
-{
-    if(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {               
-        [self.navigationController setNavigationBarHidden:TRUE animated:FALSE]; 
-        [[UIApplication sharedApplication] setStatusBarHidden:TRUE 
-                                                withAnimation:UIStatusBarAnimationNone];
-    }
-    else
-    {
-        [self.navigationController setNavigationBarHidden:FALSE animated:FALSE];
-        [[UIApplication sharedApplication] setStatusBarHidden:FALSE 
-                                                withAnimation:UIStatusBarAnimationNone];
-    }
-}
-*/
 
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation { 
@@ -974,7 +761,12 @@
     NSNumber *page = [dict valueForKey:@"Page"];
     NSNumber *volume = [dict valueForKey:@"Volume"];
     
-    if ([page intValue] < [ReadViewController getMaximumPageValue:language ofVolume:volume]) {
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    [info setType:LANGUAGE|VOLUME];
+    
+    if ([page intValue] < [QueryHelper getMaximumPageValue:info]) {
         // reset scroll position
         if ([language isEqualToString:@"Thai"]) {
             thaiScrollPosition = 0;
@@ -989,6 +781,8 @@
         [dataDictionary setValue:dict forKey:language];
         [self updateReadingPage];
     } 
+    
+    [info release];    
 }  
 
 -(IBAction)backButtonClicked:(id)sender {
@@ -1032,24 +826,26 @@
         }
     }
 	
-	/*
-	BookmarkAddViewController *controller = [[BookmarkAddViewController alloc] 
-											   initWithNibName:@"BookmarkAddViewController" bundle:nil];	
-	[[self navigationController] pushViewController:controller animated:YES];
-	[controller release], controller = nil;
-	 */
-
 	NSString *language = [dataDictionary valueForKey:@"Language"];
 	NSNumber *volume = [[dataDictionary valueForKey:language] valueForKey:@"Volume"];
 	NSNumber *page = [[dataDictionary valueForKey:language] valueForKey:@"Page"];			
 	
-	NSArray *items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:YES];
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    info.page = page;
+    info.begin = YES;
+    [info setType:LANGUAGE|VOLUME|PAGE|BEGIN];
+    NSArray *items = [QueryHelper getItems:info];
+    [info release];
+    
 	if (items && [items count] > 0) {
 		[self showItemOptions:items 
                       withTag:kBookmarkOptionsActionSheet 
                     withTitle:@"โปรดเลือกข้อที่ต้องการจดบันทึก"];
 	} else {
-		items = [ReadViewController getItems:language forVolume:volume forPage:page onlyBegin:NO];
+        info.begin = NO;
+        items = [QueryHelper getItems:info];
 		if (items && [items count] > 0) {
 			[self showItemOptions:items 
                           withTag:kBookmarkOptionsActionSheet 
@@ -1555,7 +1351,8 @@
 		NSMutableDictionary *dict = [dataDictionary valueForKey:language];
 		
 		NSNumber *volume = [dict valueForKey:@"Volume"];
-
+        ContentInfo *info = [[ContentInfo alloc] init];
+        
         if (alertView.tag == kGotoItemAlert || alertView.tag == kGotoPageAlert) {
             for(UIView *subview in [alertView subviews]) {
                 if([subview isKindOfClass:[UITextField class]]) {
@@ -1563,8 +1360,9 @@
                     if ([inputText length] > 0) {
                         if ([inputText intValue]) {
                             if(alertView.tag == kGotoPageAlert) {
-                                NSInteger maxPage = [ReadViewController getMaximumPageValue:language 
-                                                                                   ofVolume:volume];
+                                info.language = language;
+                                info.volume = volume;
+                                NSInteger maxPage = [QueryHelper getMaximumPageValue:info];
                                 if ([inputText intValue] > 0 && [inputText intValue] <= maxPage) {
                                     NSNumber *newPage = [NSNumber numberWithInt:[inputText intValue]];
                                     [dict setValue:newPage forKey:@"Page"];
@@ -1574,12 +1372,16 @@
                                 
                             }
                             else if(alertView.tag == kGotoItemAlert) {
-                                NSInteger maxItem = [ReadViewController getMaximumItemValue:language 
-                                                                                   ofVolume:volume];
+                                info.language = language;
+                                info.volume = volume;
+                                NSInteger maxItem = [QueryHelper getMaximumItemValue:info];
                                 if([inputText intValue] > 0 && [inputText intValue] <= maxItem) {
                                     NSNumber *newNumber = [NSNumber numberWithInt:[inputText intValue]];
-                                    NSArray *results = [ReadViewController getItems:language 
-                                                                          forVolume:volume forNumber:newNumber];
+                                    info.language = language;
+                                    info.volume = volume;
+                                    info.itemNumber = newNumber;
+                                    [info setType:LANGUAGE|VOLUME|ITEM_NUMBER];
+                                    NSArray *results = [QueryHelper getItems:info];
                                     
                                     self.alterItems = [[NSArray alloc] initWithArray:results];
                                     
@@ -1627,6 +1429,7 @@
                     }
                 } 
             }
+            [info release];
         }         
 	} else {
 		//NSLog(@"Cancel");
