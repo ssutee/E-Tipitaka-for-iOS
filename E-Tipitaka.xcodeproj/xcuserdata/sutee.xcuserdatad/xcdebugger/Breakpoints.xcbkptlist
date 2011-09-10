@@ -9,26 +9,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "E-Tipitaka/ReadViewController.m"
-         timestampString = "337332435.83171"
+         timestampString = "337340512.870629"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "973"
-         endingLineNumber = "973"
+         startingLineNumber = "868"
+         endingLineNumber = "868"
          landmarkName = "-noteButtonClicked:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "E-Tipitaka/ReadViewController.m"
-         timestampString = "337270987.41052"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "493"
-         endingLineNumber = "493"
-         landmarkName = "+updateReadingPage:slider:webview:titleLabel:pageLabel:fontSize:language:volume:page:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

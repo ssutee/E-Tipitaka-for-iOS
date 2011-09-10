@@ -17,7 +17,6 @@
 
 @implementation ContentViewController
 
-@synthesize webView;
 @synthesize content;
 @synthesize highlightText;
 @synthesize itemNumber;
@@ -37,14 +36,11 @@
 - (void)dealloc
 {
     [super dealloc];
-    [webView release];
-    [content release];
-    [highlightText release];
 }
 
 - (void)update
 {
-    [webView loadHTMLString:[self convertContentToHTML]
+    [(UIWebView *)self.view loadHTMLString:[self convertContentToHTML]
                     baseURL:[NSURL URLWithString:@"http://www.etipitaka.com"]];    
 }
 
@@ -58,9 +54,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.webView = nil;
-    self.content = nil;
-    self.highlightText = nil;
 }
 
 #pragma mark - Private Methods

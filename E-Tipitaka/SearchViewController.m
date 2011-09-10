@@ -564,8 +564,8 @@
     else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self.readViewController reloadData];
         self.readViewController.keywords = self.keywords;
+        self.readViewController.scrollToKeyword = YES;        
         [self.readViewController updateReadingPage];
-        self.readViewController.scrollToKeyword = YES;
         [self.readViewController dismissAllPopoverControllers];
     }
 }

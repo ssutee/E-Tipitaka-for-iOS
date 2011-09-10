@@ -11,6 +11,8 @@
 #import "Utils.h"
 #import "Item.h"
 #import "Content.h"
+#import "ContentInfo.h"
+#import "QueryHelper.h"
 
 @implementation DoubleReadViewController
 
@@ -162,13 +164,20 @@
 	NSNumber *volume = [[dict valueForKey:fromLanguage] valueForKey:@"Volume"];
 	NSNumber *page = [[dict valueForKey:fromLanguage] valueForKey:@"Page"];			
 	
-	NSArray *items = [ReadViewController getItems:fromLanguage forVolume:volume 
-                                          forPage:page onlyBegin:YES];
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = fromLanguage;
+    info.volume = volume;
+    info.page = page;
+    info.begin = YES;
+    [info setType:LANGUAGE|VOLUME|PAGE|BEGIN];
+    
+	NSArray *items = [QueryHelper getItems:info];
 	Item *selectedItem = nil;
 	if (items && [items count] > 0) {
 		selectedItem = [items objectAtIndex:buttonIndex];
 	} else {
-		items = [ReadViewController getItems:fromLanguage forVolume:volume forPage:page onlyBegin:NO];
+        info.begin = NO;
+		items = [QueryHelper getItems:info];
 		if (items && [items count] > 0) {
 			selectedItem = [items objectAtIndex:buttonIndex];
 		}
@@ -176,12 +185,12 @@
 	
 	if (selectedItem) {
 		NSArray *comparedItems;
-		
-		comparedItems = [ReadViewController getItems:toLanguage 
-                                           forVolume:volume 
-                                           forNumber:selectedItem.number 
-                                          forSection:selectedItem.section];
-		
+		info.language = toLanguage;
+        info.volume = volume;
+        info.itemNumber = selectedItem.number;
+        info.section = selectedItem.section;
+        [info setType:LANGUAGE|VOLUME|ITEM_NUMBER|SECTION];
+		comparedItems = [QueryHelper getItems:info];
 		if (comparedItems && [comparedItems count] > 0) {
 			Item *comparedItem = [comparedItems objectAtIndex:0];
             savedItemNumber = [comparedItem.number intValue];
@@ -220,6 +229,8 @@
             [alert show];            
         }
 	}
+    
+    [info release];
 
 }
 
@@ -253,11 +264,16 @@
     UIBarButtonItem *nextButton = (UIBarButtonItem *)sender;
     NSNumber *page, *volume;
     NSInteger maxPage = 0;
+    
+    ContentInfo *info = [[ContentInfo alloc] init];
+    [info setType:LANGUAGE|VOLUME];
     if (nextButton.tag == 1) {
         volume = [[dict valueForKey:sourceLanguage] valueForKey:@"Volume"];
-        page = [[dict valueForKey:sourceLanguage] valueForKey:@"Page"];        
-        maxPage = [ReadViewController getMaximumPageValue:sourceLanguage ofVolume:volume];
-        
+        page = [[dict valueForKey:sourceLanguage] valueForKey:@"Page"]; 
+        info.language = sourceLanguage;
+        info.volume = volume;
+        info.page = page;
+        maxPage = [QueryHelper getMaximumPageValue:info];
         if ([page intValue]+1 <= maxPage) {
             [[dict valueForKey:sourceLanguage] setValue:[NSNumber numberWithInt:[page intValue]+1] 
                                                  forKey:@"Page"];
@@ -266,9 +282,11 @@
         [self updatePage:sourceLanguage withKeyword:keyword];
     } else if(nextButton.tag == 2) {
         volume = [[dict valueForKey:targetLanguage] valueForKey:@"Volume"];
-        page = [[dict valueForKey:targetLanguage] valueForKey:@"Page"];             
-        maxPage = [ReadViewController getMaximumPageValue:targetLanguage ofVolume:volume];
-        
+        page = [[dict valueForKey:targetLanguage] valueForKey:@"Page"]; 
+        info.language = targetLanguage;
+        info.volume = volume;
+        info.page = page;
+        maxPage = [QueryHelper getMaximumPageValue:info];
         if ([page intValue]+1 <= maxPage) {
             [[dict valueForKey:targetLanguage] setValue:[NSNumber numberWithInt:[page intValue]+1] 
                                                  forKey:@"Page"];
@@ -276,6 +294,7 @@
         [Utils writeData:dict];
         [self updatePage:targetLanguage];
     }
+    [info release];
 }
 
 -(IBAction) back:(id)sender
@@ -364,19 +383,26 @@
     
     NSNumber *volume = [[dict valueForKey:fromLanguage] valueForKey:@"Volume"];
     NSNumber *page = [[dict valueForKey:fromLanguage] valueForKey:@"Page"];
-    
-    NSArray *items = [ReadViewController getItems:fromLanguage forVolume:volume 
-                                          forPage:page onlyBegin:YES];
+
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = fromLanguage;
+    info.volume = volume;
+    info.page = page;
+    info.begin = YES;
+    [info setType:LANGUAGE|VOLUME|PAGE|BEGIN];
+        
+    NSArray *items = [QueryHelper getItems:info];
     if (items && [items count] > 0) {
         [self showItemOptionsFrom:compareButton withItems:items andTag:compareButton.tag 
                          andTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
     } else {
-        items = [ReadViewController getItems:fromLanguage forVolume:volume forPage:page onlyBegin:NO];
+        items = [QueryHelper getItems:info];
         if (items && [items count] > 0) {
             [self showItemOptionsFrom:compareButton withItems:items andTag:compareButton.tag 
                              andTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
         }
     }    
+    [info release];
 }
 
 #pragma mark - View lifecycle

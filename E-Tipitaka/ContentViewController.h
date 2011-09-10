@@ -11,7 +11,6 @@
 
 @interface ContentViewController : UIViewController <UIWebViewDelegate>
 {
-    UIWebView *webView;
     Content *content;
     NSString *highlightText;
     NSUInteger itemNumber;
@@ -21,9 +20,8 @@
     BOOL scrollToHighlightText;
 }
 
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) Content *content;
-@property (nonatomic, retain) NSString *highlightText;
+@property (assign) Content *content;
+@property (assign) NSString *highlightText;
 @property (assign) NSUInteger itemNumber;
 @property (assign) NSUInteger fontSize;
 @property (assign) NSUInteger scrollPosition;
@@ -34,5 +32,7 @@
 -(NSString *) convertWhiteSpacesToHTML:(NSString *)text;
 -(NSString *) markHighlight:(NSString *)text;
 -(NSString *) anchorItemNumber:(NSString *)text;
+
+-(void) update;
 
 @end

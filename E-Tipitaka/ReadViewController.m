@@ -19,6 +19,7 @@
 #import "Content.h"
 #import "ContentInfo.h"
 #import "QueryHelper.h"
+#import "ContentViewController.h"
 
 //@interface ReadViewController ()
 //@property (nonatomic, retain) UIPopoverController *popoverController;
@@ -31,6 +32,7 @@
 @synthesize titleLabel;
 @synthesize pageNumberLabel;
 @synthesize htmlView;
+@synthesize contentView;
 @synthesize dataDictionary;
 //@synthesize pagesDictionary;
 //@synthesize itemsDictionary;
@@ -47,6 +49,7 @@
 @synthesize booklistPopoverController;
 @synthesize dictionaryPopoverController;
 @synthesize dictionaryListViewController;
+@synthesize contentViewController;
 @synthesize searchButton;
 @synthesize languageButton;
 @synthesize booklistButton;
@@ -347,6 +350,43 @@
         }
     }
         
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    info.page = page;
+    [info setType:(LANGUAGE|VOLUME|PAGE)];
+    NSArray *fetchedObjects = [QueryHelper getContents:info];
+    [info release];    
+    
+	if(fetchedObjects == nil) {
+		NSLog(@"Whoops, couldn't fetch");
+	} else {		
+		if ([fetchedObjects count] > 0) {
+            contentViewController.content = [fetchedObjects objectAtIndex:0];
+            contentViewController.fontSize = fontSize;
+            contentViewController.scrollToHighlightText = NO;
+            contentViewController.scrollToItemNumber = NO;
+            if (self.scrollToItem) {
+                self.scrollToItem = NO;
+                contentViewController.itemNumber = self.savedItemNumber;
+                contentViewController.scrollToItemNumber = YES;
+            } else if (self.scrollToKeyword) {
+                self.scrollToKeyword = NO;                
+                contentViewController.highlightText = self.keywords;
+                contentViewController.scrollToHighlightText = YES;
+            } else {
+                if ([language isEqualToString:@"Thai"]) {
+                    contentViewController.scrollPosition = thaiScrollPosition;                    
+                } else if ([language isEqualToString:@"Pali"]) {
+                    contentViewController.scrollPosition = paliScrollPosition;                    
+                } else {
+                    contentViewController.scrollPosition = 0;
+                }
+            }
+            [contentViewController update];
+		}
+	}
+    
     [ReadViewController updateReadingPage:self.keywords slider:self.pageSlider webview:self.htmlView
                                titleLabel:self.titleLabel pageLabel:self.pageNumberLabel
                                  fontSize:self.fontSize language:language volume:volume page:page];
@@ -363,23 +403,23 @@
                              titleLabel:label1 
                               pageLabel:label2];
     
-    ContentInfo *info = [[ContentInfo alloc] init];
-    info.language = language;
-    info.volume = volume;
-    info.page = page;
-    [info setType:(LANGUAGE|VOLUME|PAGE)];
-    NSArray *fetchedObjects = [QueryHelper getContents:info];
-    [info release];    
-	
-	if(fetchedObjects == nil) {
-		NSLog(@"Whoops, couldn't fetch");
-	} else {		
-		if ([fetchedObjects count] > 0) {
-			Content *content = [fetchedObjects objectAtIndex:0];	
-            [ReadViewController updateWebView:webview withContent:content 
-                                     fontSize:size andKeywords:query];
-		}
-	}
+//    ContentInfo *info = [[ContentInfo alloc] init];
+//    info.language = language;
+//    info.volume = volume;
+//    info.page = page;
+//    [info setType:(LANGUAGE|VOLUME|PAGE)];
+//    NSArray *fetchedObjects = [QueryHelper getContents:info];
+//    [info release];    
+//	
+//	if(fetchedObjects == nil) {
+//		NSLog(@"Whoops, couldn't fetch");
+//	} else {		
+//		if ([fetchedObjects count] > 0) {
+//			Content *content = [fetchedObjects objectAtIndex:0];	
+//            [ReadViewController updateWebView:webview withContent:content 
+//                                     fontSize:size andKeywords:query];
+//		}
+//	}
 }
 
 
@@ -1094,6 +1134,12 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
+    ContentViewController *controller = [[ContentViewController alloc] initWithNibName:@"ContentView" bundle:nil];
+    self.contentViewController = controller;
+    [controller release];
+    contentViewController.view.frame = CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height);
+    [contentView addSubview:contentViewController.view];
+      
     // lookup dictionary menu
     UIMenuItem *dictionaryMenuItem = [[UIMenuItem alloc] initWithTitle:@"บาลี-ไทย" 
                                                           action:@selector(lookUpDictionary:)];
@@ -1274,6 +1320,7 @@
     self.pageNumberLabel = nil;
     self.pageSlider = nil;
 	self.htmlView = nil;
+    self.contentView = nil;
 	self.dataDictionary = nil;
 //    self.pagesDictionary = nil;
 //    self.itemsDictionary = nil;
@@ -1295,6 +1342,7 @@
     self.bottomToolbar = nil;
     //self.indicator = nil;
     self.dictionaryListViewController = nil;
+    self.contentViewController = nil;
 }
 
 
@@ -1304,6 +1352,7 @@
     [pageNumberLabel release];
     [pageSlider release];
 	[htmlView release];
+    [contentView release];
 	[dataDictionary release];
 //    [pagesDictionary release];
 //    [itemsDictionary release];
@@ -1330,6 +1379,7 @@
     [bottomToolbar release];
     //[indicator release];
     [dictionaryListViewController release];
+    [contentViewController release];
     [super dealloc];
 }
 

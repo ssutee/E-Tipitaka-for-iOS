@@ -11,7 +11,7 @@
 
 @class Content;
 @class DictionaryListViewController;
-
+@class ContentViewController;
 
 #define kGotoActionSheet 1001
 #define kLanguageActionSheet 1002
@@ -32,6 +32,7 @@
     UILabel *pageNumberLabel;
 	UIToolbar *toolbar;
 	UIWebView *htmlView;
+    UIView *contentView;
 	NSMutableDictionary *dataDictionary;
 	BOOL showToolbar;
 	TapDetectingWindow *mWindow;
@@ -51,6 +52,7 @@
     UIPopoverController *bookmarkPopoverController;
     UIPopoverController *booklistPopoverController;
     UIPopoverController *dictionaryPopoverController;
+    ContentViewController *contentViewController;
     UIBarButtonItem *searchButton;
     UIBarButtonItem *languageButton;
     UIBarButtonItem *booklistButton;
@@ -65,7 +67,6 @@
     UIActionSheet *itemOptionsActionSheet;
     UILabel *toastText;
     UISlider *pageSlider;
-    //UIActivityIndicatorView *indicator;
     double lastScale;
 }
 @property(nonatomic, retain) DictionaryListViewController *dictionaryListViewController;
@@ -74,6 +75,7 @@
 @property(nonatomic, retain) IBOutlet UILabel *pageNumberLabel;
 @property(nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property(nonatomic, retain) IBOutlet UIWebView *htmlView;
+@property(nonatomic, retain) IBOutlet UIView *contentView;
 @property(nonatomic, retain) IBOutlet UILabel *toastText;
 @property(nonatomic, retain) NSDictionary *dataDictionary;
 @property(nonatomic, retain) NSArray *alterItems;
@@ -89,6 +91,8 @@
 @property (nonatomic, retain) UIPopoverController *bookmarkPopoverController;
 @property (nonatomic, retain) UIPopoverController *booklistPopoverController;
 @property (nonatomic, retain) UIPopoverController *dictionaryPopoverController;
+@property (nonatomic, retain) ContentViewController *contentViewController;
+
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *searchButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *languageButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *booklistButton;
