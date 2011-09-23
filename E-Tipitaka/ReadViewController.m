@@ -192,8 +192,6 @@
 	NSString *language = [self.dataDictionary valueForKey:@"Language"];
 	NSNumber *paliVolume = [[self.dataDictionary valueForKey:@"Pali"] valueForKey:@"Volume"];
 	NSNumber *thaiVolume = [[self.dataDictionary valueForKey:@"Thai"] valueForKey:@"Volume"];
-	
-//    NSLog(@"pali=%@ thai=%@", paliVolume, thaiVolume);
     
     int position = [[(UIWebView *) contentViewController.view 
                      stringByEvaluatingJavaScriptFromString:@"window.pageYOffset"] intValue];
