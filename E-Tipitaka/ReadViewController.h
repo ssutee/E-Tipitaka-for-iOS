@@ -96,7 +96,6 @@
 -(IBAction)showBookmarkListView:(id)sender;
 -(IBAction)showBooklistTableView:(id)sender;
 -(IBAction)showDictionary:(id)sender;
--(IBAction)startUpdatingPage:(id)sender;
 
 -(void) updateLanguageButtonTitle;
 

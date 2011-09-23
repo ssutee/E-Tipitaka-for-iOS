@@ -178,8 +178,8 @@
 }
 
 
--(void) resetScrollPositions {
-    for (NSString *key in [self.scrollPostion keyEnumerator]) {
+-(void) resetScrollPositions {    
+    for (NSString *key in [self.scrollPostion allKeys]) {
         [self.scrollPostion setValue:[NSNumber numberWithInt:0] forKey:key];
     }
 }
@@ -315,7 +315,7 @@
                 
                 if (self.keywords) {
                     NSString *str = [[NSString alloc] initWithString:self.keywords];
-                    controller.keyword = str;
+                    controller.keywords = str;
                     [str release];
                 }
                 
@@ -728,10 +728,6 @@
     }    
 }
 
--(IBAction) startUpdatingPage:(id)sender {
-    [self updateReadingPage];
-}
-
 -(BOOL) canPerformAction:(SEL)action withSender:(id)sender
 {
     if (action == @selector(lookUpDictionary:)) {
@@ -897,6 +893,7 @@
 
 
 - (void)dealloc {
+    
 	[toolbar release];    
     [_searchPopoverController release];
     [_bookmarkPopoverController release];

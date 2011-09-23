@@ -59,6 +59,8 @@
 		9E4B9C951419B571000DD263 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4B9C941419B571000DD263 /* main.m */; };
 		9E4B9CB31419BACC000DD263 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E4B9CB21419BACC000DD263 /* GHUnitIOS.framework */; };
 		9E4B9CB61419BF5E000DD263 /* MyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4B9CB51419BF5E000DD263 /* MyTest.m */; };
+		9E57771F142C817800E27FC9 /* SpecificedLanguageReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E57771E142C817800E27FC9 /* SpecificedLanguageReadViewController.m */; };
+		9E577720142C817800E27FC9 /* SpecificedLanguageReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E57771E142C817800E27FC9 /* SpecificedLanguageReadViewController.m */; };
 		9E61E401140C8354009A5FD0 /* page.html in Resources */ = {isa = PBXBuildFile; fileRef = 9E61E400140C8354009A5FD0 /* page.html */; };
 		9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
 		9E6696F5134B15CA00B9E0F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F4134B15CA00B9E0F4 /* Foundation.framework */; };
@@ -187,6 +189,8 @@
 		9E4B9C961419B571000DD263 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		9E4B9CB21419BACC000DD263 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = "external-libs/gh-unit/Project-iOS/build/Framework/GHUnitIOS.framework"; sourceTree = "<group>"; };
 		9E4B9CB51419BF5E000DD263 /* MyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTest.m; sourceTree = "<group>"; };
+		9E57771D142C817800E27FC9 /* SpecificedLanguageReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecificedLanguageReadViewController.h; sourceTree = "<group>"; };
+		9E57771E142C817800E27FC9 /* SpecificedLanguageReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecificedLanguageReadViewController.m; sourceTree = "<group>"; };
 		9E61E400140C8354009A5FD0 /* page.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = page.html; sourceTree = "<group>"; };
 		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6696F2134B15CA00B9E0F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -585,6 +589,8 @@
 				9E326FE6138E3EE900ED66AE /* DoubleReadViewController.h */,
 				9E326FE7138E3EE900ED66AE /* DoubleReadViewController.m */,
 				9EAF955913D1AD540010CABD /* DictionaryListView_iPad.xib */,
+				9E57771D142C817800E27FC9 /* SpecificedLanguageReadViewController.h */,
+				9E57771E142C817800E27FC9 /* SpecificedLanguageReadViewController.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -739,6 +745,7 @@
 				9E138976141B80EB00C350B0 /* PadReadViewController.m in Sources */,
 				9E13897F141B8E7700C350B0 /* UITextInputAlertView.m in Sources */,
 				9E138984141BA32C00C350B0 /* Command.m in Sources */,
+				9E577720142C817800E27FC9 /* SpecificedLanguageReadViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,6 +788,7 @@
 				9E138975141B80EB00C350B0 /* PadReadViewController.m in Sources */,
 				9E13897E141B8E7700C350B0 /* UITextInputAlertView.m in Sources */,
 				9E138983141BA32C00C350B0 /* Command.m in Sources */,
+				9E57771F142C817800E27FC9 /* SpecificedLanguageReadViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

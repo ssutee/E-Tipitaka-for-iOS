@@ -18,22 +18,10 @@
 
 @synthesize sourceLanguage;
 @synthesize targetLanguage;
-@synthesize keyword;
-@synthesize webview1;
-@synthesize webview2;
-@synthesize slider1;
-@synthesize slider2;
-@synthesize pageLabel1;
-@synthesize pageLabel2;
-@synthesize titleLabel1;
-@synthesize titleLabel2;
-@synthesize backButton1;
-@synthesize nextButton1;
+@synthesize keywords;
 @synthesize compareButton1;
 @synthesize returnButton1;
 @synthesize headerButton1;
-@synthesize backButton2;
-@synthesize nextButton2;
 @synthesize compareButton2;
 @synthesize returnButton2;
 @synthesize mappingTable;
@@ -41,6 +29,9 @@
 @synthesize itemOptionsActionSheet;
 @synthesize scrollToItem;
 @synthesize savedItemNumber;
+
+@synthesize sourceController=_sourceController;
+@synthesize targetController=_targetController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,30 +44,22 @@
 
 - (void)dealloc
 {
-    [super dealloc];
     [mappingTable release];
     [sourceLanguage release];
     [targetLanguage release];
-    [keyword release];
-    [webview1 release];
-    [webview2 release];
-    [slider1 release];
-    [slider2 release];
-    [pageLabel1 release];
-    [titleLabel1 release];
-    [pageLabel2 release];
-    [titleLabel2 release];
-    [backButton1 release];
-    [nextButton1 release];
+    [keywords release];
     [compareButton1 release];
     [returnButton1 release];
-    [backButton2 release];
-    [nextButton2 release];
     [compareButton2 release];
     [returnButton2 release];
     [headerButton1 release];
     [headerButton2 release];
     [itemOptionsActionSheet release];
+    
+    [_sourceController release];
+    [_targetController release];
+    
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,48 +70,48 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void) updatePage:(NSString *)language withKeyword:(NSString *)term
-{
-    NSDictionary *dict = [Utils readData];
-    
-    NSNumber *volume = [[dict valueForKey:language] valueForKey:@"Volume"];
-    NSNumber *page = [[dict valueForKey:language] valueForKey:@"Page"];
-    NSNumber *fontSize = [dict valueForKey:@"FontSize"];
-    
-    NSDictionary *map = [mappingTable valueForKey:language];
-    
-    UISlider *slider = [map valueForKey:@"slider"];
-    UIWebView *webview = [map valueForKey:@"webview"];
-    UILabel *pageLabel = [map valueForKey:@"pageLabel"];
-    UILabel *titleLabel = [map valueForKey:@"titleLabel"];
-    UIBarButtonItem *headerButton = [map valueForKey:@"headerButton"];
-    
-    
-    NSString *newTitle = [ReadViewController createHeaderTitle:volume];          
-    
-    headerButton.title = [Utils arabic2thai:newTitle];
-    
-    [ReadViewController updateReadingPage:term 
-                                   slider:slider 
-                                  webview:webview 
-                               titleLabel:titleLabel 
-                                pageLabel:pageLabel 
-                                 fontSize:[fontSize intValue] 
-                                 language:language 
-                                   volume:volume 
-                                     page:page];
-}
+//- (void) updatePage:(NSString *)language withKeyword:(NSString *)term
+//{
+//    NSDictionary *dict = [Utils readData];
+//    
+//    NSNumber *volume = [[dict valueForKey:language] valueForKey:@"Volume"];
+//    NSNumber *page = [[dict valueForKey:language] valueForKey:@"Page"];
+//    NSNumber *fontSize = [dict valueForKey:@"FontSize"];
+//    
+//    NSDictionary *map = [mappingTable valueForKey:language];
+//    
+//    UISlider *slider = [map valueForKey:@"slider"];
+//    UIWebView *webview = [map valueForKey:@"webview"];
+//    UILabel *pageLabel = [map valueForKey:@"pageLabel"];
+//    UILabel *titleLabel = [map valueForKey:@"titleLabel"];
+//    UIBarButtonItem *headerButton = [map valueForKey:@"headerButton"];
+//    
+//    
+//    NSString *newTitle = [ReadViewController createHeaderTitle:volume];          
+//    
+//    headerButton.title = [Utils arabic2thai:newTitle];
+//    
+//    [ReadViewController updateReadingPage:term 
+//                                   slider:slider 
+//                                  webview:webview 
+//                               titleLabel:titleLabel 
+//                                pageLabel:pageLabel 
+//                                 fontSize:[fontSize intValue] 
+//                                 language:language 
+//                                   volume:volume 
+//                                     page:page];
+//}
 
-- (void) updatePage:(NSString *)language
-{
-    [self updatePage:language withKeyword:nil];
-}
-
-- (void) updatePages
-{
-    [self updatePage:sourceLanguage withKeyword:keyword];
-    [self updatePage:targetLanguage];
-}
+//- (void) updatePage:(NSString *)language
+//{
+//    [self updatePage:language withKeyword:nil];
+//}
+//
+//- (void) updatePages
+//{
+//    [self updatePage:sourceLanguage withKeyword:keyword];
+//    [self updatePage:targetLanguage];
+//}
 
 -(void) showItemOptionsFrom:(UIBarButtonItem *)button withItems:(NSArray *)items 
                      andTag:(NSInteger)tagNumber andTitle:(NSString *)titleName {
@@ -157,7 +140,7 @@
 	[actionSheet release];
 }
 
--(void) doCompare:(NSInteger)buttonIndex from:(NSString *)fromLanguage to:(NSString *)toLanguage
+-(void) doCompare:(NSInteger)buttonIndex from:(NSString *)fromLanguage to:(NSString *)toLanguage inLanguage:(NSInteger)side
 {
     NSDictionary *dict = [Utils readData];
     
@@ -200,7 +183,21 @@
             [[dict valueForKey:toLanguage] setValue:comparedItem.content.page
                                                            forKey:@"Page"];
             [Utils writeData:dict];
-            [self updatePage:toLanguage];
+            
+            if (side == kSourceLanguageSide) {
+                [self.targetController reloadData];
+                self.targetController.savedItemNumber = savedItemNumber;
+                self.targetController.scrollToItem = YES;
+                [self.targetController updateReadingPage];
+            } 
+            else if (side == kTargetLanguageSide) {
+                [self.sourceController reloadData];
+                self.sourceController.savedItemNumber = savedItemNumber;                
+                self.sourceController.scrollToItem = YES;
+                [self.sourceController updateReadingPage];                
+            }
+            
+            
         } else {
             NSString *message = [[NSString alloc] initWithFormat:@"ไม่พบข้อที่ %@", selectedItem.number];                
             NSString *title = nil;
@@ -257,116 +254,6 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
--(IBAction) next:(id)sender
-{
-    scrollToItem = NO;
-    NSDictionary *dict = [Utils readData];
-    UIBarButtonItem *nextButton = (UIBarButtonItem *)sender;
-    NSNumber *page, *volume;
-    NSInteger maxPage = 0;
-    
-    ContentInfo *info = [[ContentInfo alloc] init];
-    [info setType:LANGUAGE|VOLUME];
-    if (nextButton.tag == 1) {
-        volume = [[dict valueForKey:sourceLanguage] valueForKey:@"Volume"];
-        page = [[dict valueForKey:sourceLanguage] valueForKey:@"Page"]; 
-        info.language = sourceLanguage;
-        info.volume = volume;
-        info.page = page;
-        maxPage = [QueryHelper getMaximumPageValue:info];
-        if ([page intValue]+1 <= maxPage) {
-            [[dict valueForKey:sourceLanguage] setValue:[NSNumber numberWithInt:[page intValue]+1] 
-                                                 forKey:@"Page"];
-        }
-        [Utils writeData:dict];
-        [self updatePage:sourceLanguage withKeyword:keyword];
-    } else if(nextButton.tag == 2) {
-        volume = [[dict valueForKey:targetLanguage] valueForKey:@"Volume"];
-        page = [[dict valueForKey:targetLanguage] valueForKey:@"Page"]; 
-        info.language = targetLanguage;
-        info.volume = volume;
-        info.page = page;
-        maxPage = [QueryHelper getMaximumPageValue:info];
-        if ([page intValue]+1 <= maxPage) {
-            [[dict valueForKey:targetLanguage] setValue:[NSNumber numberWithInt:[page intValue]+1] 
-                                                 forKey:@"Page"];
-        }
-        [Utils writeData:dict];
-        [self updatePage:targetLanguage];
-    }
-    [info release];
-}
-
--(IBAction) back:(id)sender
-{
-    scrollToItem = NO;
-    NSDictionary *dict = [Utils readData];
-    UIBarButtonItem *backButton = (UIBarButtonItem *)sender;
-    NSNumber *page, *volume;
-    if (backButton.tag == 1) {
-        volume = [[dict valueForKey:sourceLanguage] valueForKey:@"Volume"];
-        page = [[dict valueForKey:sourceLanguage] valueForKey:@"Page"];        
-        
-        if ([page intValue]-1 >= 1) {
-            [[dict valueForKey:sourceLanguage] setValue:[NSNumber numberWithInt:[page intValue]-1] 
-                                                 forKey:@"Page"];
-        }
-        [Utils writeData:dict];
-        [self updatePage:sourceLanguage withKeyword:keyword];
-    } else if(backButton.tag == 2) {
-        volume = [[dict valueForKey:targetLanguage] valueForKey:@"Volume"];
-        page = [[dict valueForKey:targetLanguage] valueForKey:@"Page"];             
-        
-        if ([page intValue]-1 >= 1) {
-            [[dict valueForKey:targetLanguage] setValue:[NSNumber numberWithInt:[page intValue]-1] 
-                                                 forKey:@"Page"];
-        }
-        [Utils writeData:dict];
-        [self updatePage:targetLanguage];
-    } 
-}
-
--(IBAction) sliderValueChanged:(id)sender
-{
-    scrollToItem = NO;
-    UISlider *slider = (UISlider *)sender;
-    NSDictionary *dict = [Utils readData];
-
-    NSNumber *volume;
-    NSNumber *page = [NSNumber numberWithInt: round(slider.value)];    
-    
-    UILabel *titleLabel, *pageLabel;
-    
-    if (slider.tag == 1) {
-        volume = [[dict valueForKey:sourceLanguage] valueForKey:@"Volume"];
-        [[dict valueForKey:sourceLanguage] setValue:page forKey:@"Page"];
-        [Utils writeData:dict];
-        titleLabel = [[mappingTable valueForKey:sourceLanguage] valueForKey:@"titleLabel"];
-        pageLabel = [[mappingTable valueForKey:sourceLanguage] valueForKey:@"pageLabel"];
-        [ReadViewController updatePageTitle:sourceLanguage volume:volume page:page 
-                                     slider:slider titleLabel:titleLabel pageLabel:pageLabel];         
-    } else if(slider.tag == 2) {
-        volume = [[dict valueForKey:targetLanguage] valueForKey:@"Volume"];        
-        [[dict valueForKey:targetLanguage] setValue:page forKey:@"Page"];        
-        [Utils writeData:dict];        
-        titleLabel = [[mappingTable valueForKey:targetLanguage] valueForKey:@"titleLabel"];
-        pageLabel = [[mappingTable valueForKey:targetLanguage] valueForKey:@"pageLabel"];
-        [ReadViewController updatePageTitle:targetLanguage volume:volume page:page 
-                                     slider:slider titleLabel:titleLabel pageLabel:pageLabel];         
-    }
-}
-
--(IBAction) startUpdatingPage:(id)sender
-{
-    scrollToItem = NO;
-    UISlider *slider = (UISlider *)sender;
-    
-    if (slider.tag == 1) {
-        [self updatePage:sourceLanguage withKeyword:keyword];
-    } else if (slider.tag == 2) {
-        [self updatePage:targetLanguage];
-    }
-}
 
 -(IBAction) compare:(id)sender
 {
@@ -395,7 +282,9 @@
     if (items && [items count] > 0) {
         [self showItemOptionsFrom:compareButton withItems:items andTag:compareButton.tag 
                          andTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
-    } else {
+    } 
+    else {
+        info.begin = NO;        
         items = [QueryHelper getItems:info];
         if (items && [items count] > 0) {
             [self showItemOptionsFrom:compareButton withItems:items andTag:compareButton.tag 
@@ -416,11 +305,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-//    mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
-//    mWindow.viewToObserve = self.view;
-//    mWindow.controllerThatObserves = self;    
-    
 }
 
 
@@ -429,35 +313,40 @@
 {
     [super viewDidLoad];    
     
+    
+    CGRect frame = self.view.frame;
+    
+    self.sourceController.view.frame = CGRectMake(0, 0, (frame.size.width/2)-1, frame.size.height);
+    self.targetController.view.frame = CGRectMake((frame.size.width/2)+1, 0, (frame.size.width/2)-1, frame.size.height);
+    
+    [self.view addSubview:self.sourceController.view];
+    [self.view addSubview:self.targetController.view];
+    
     if (self.sourceLanguage == nil || self.targetLanguage == nil) {
         self.sourceLanguage = @"Thai";
         self.targetLanguage = @"Pali";
     }
     
-    self.slider1.tag = 1;
-    self.webview1.tag = 1;
-    self.webview1.delegate = self;
+    [self.sourceController setCurrentLanguage:self.sourceLanguage];
+    [self.targetController setCurrentLanguage:self.targetLanguage];
+    
+    self.sourceController.scrollToItem = YES;
+    self.sourceController.savedItemNumber = self.savedItemNumber;
+    self.targetController.scrollToItem = YES;
+    self.targetController.savedItemNumber = self.savedItemNumber;
+    
+    self.sourceController.keywords = self.keywords;
+    
+    self.compareButton1.tag = kSourceLanguageSide;
+    self.compareButton2.tag = kTargetLanguageSide;
+    
+    
     NSDictionary *map1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          webview1, @"webview",
-                          slider1, @"slider", 
-                          pageLabel1, @"pageLabel",
-                          titleLabel1, @"titleLabel",
                           headerButton1, @"headerButton",                          
-                          backButton1, @"backButton",
-                          nextButton1, @"nextButton",
                           compareButton1, @"compareButton",
                           returnButton1, @"returnButton", nil];
-    self.slider2.tag = 2;
-    self.webview2.tag = 2;
-    self.webview2.delegate = self;
     NSDictionary *map2 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          webview2, @"webview",
-                          slider2, @"slider", 
-                          pageLabel2, @"pageLabel",
-                          titleLabel2, @"titleLabel",
                           headerButton2, @"headerButton",                                                    
-                          backButton2, @"backButton",
-                          nextButton2, @"nextButton",
                           compareButton2, @"compareButton",
                           returnButton2, @"returnButton", nil];
 
@@ -466,7 +355,8 @@
 
     self.mappingTable = dict;
     
-    [self updatePages];
+    [self.sourceController updateReadingPage];
+    [self.targetController updateReadingPage];
     
     [dict release];
     [map1 release];
@@ -481,26 +371,17 @@
     self.mappingTable = nil;
     self.sourceLanguage = nil;
     self.targetLanguage = nil;
-    self.keyword = nil;
-    self.webview1 = nil;
-    self.webview2 = nil;
-    self.slider1 = nil;
-    self.slider2 = nil;
-    self.pageLabel1 = nil;
-    self.pageLabel2 = nil;
-    self.titleLabel1 = nil;
-    self.titleLabel2 = nil;
-    self.backButton1 = nil;
-    self.nextButton1 = nil;
+    self.keywords = nil;
     self.compareButton1 = nil;
     self.returnButton1 = nil;    
-    self.backButton2 = nil;
-    self.nextButton2 = nil;
     self.compareButton2 = nil;
     self.returnButton2 = nil;    
     self.headerButton1 = nil;
     self.headerButton2 = nil;
     self.itemOptionsActionSheet = nil;
+    
+    self.sourceController = nil;
+    self.targetController = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -514,38 +395,13 @@
 #pragma mark Action Sheet Delegate Methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (actionSheet.tag == 1) {
-        [self doCompare:buttonIndex from:sourceLanguage to:targetLanguage];
-    } else if (actionSheet.tag == 2) {
-        [self doCompare:buttonIndex from:targetLanguage to:sourceLanguage];
+    if (actionSheet.tag == kSourceLanguageSide) {
+        [self doCompare:buttonIndex from:sourceLanguage to:targetLanguage inLanguage:kSourceLanguageSide];
+    } else if (actionSheet.tag == kTargetLanguageSide) {
+        [self doCompare:buttonIndex from:targetLanguage to:sourceLanguage inLanguage:kTargetLanguageSide];
     }    
 }
 
-
-#pragma mark - 
-#pragma mark Web View Delegate Methods 
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    if (scrollToItem) {
-		[webView stringByEvaluatingJavaScriptFromString:
-		 [NSString stringWithFormat:
-		  @"var item = document.getElementById(\"i%d\"); \n"
-		  " if(item) { \n"
-		  "    ScrollToElement(item); \n"
-		  " }", savedItemNumber
-		  ]];
-	}    
-}
-
-
-
-//#pragma mark -
-//#pragma mark Tap Detecting Window Delegate Methods
-//
-//- (void) userDidTapView:(id)tapPoint {
-//    NSLog(@"%@",tapPoint);
-//}
 
 @end
 

@@ -22,10 +22,11 @@
 @property(assign) BOOL scrollToItem;
 @property(assign) NSInteger fontSize;
 
+@property(nonatomic, retain) ContentViewController *contentViewController;   
+
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, retain) IBOutlet UILabel *pageNumberLabel;
 @property(nonatomic, retain) IBOutlet UIView *contentView;
-@property(nonatomic, retain) IBOutlet ContentViewController *contentViewController;   
 @property(nonatomic, retain) IBOutlet UISlider *pageSlider;
 @property(nonatomic, retain) IBOutlet UILabel *toastText;
 
@@ -45,6 +46,7 @@
 -(IBAction)nextButtonClicked:(id)sender;
 -(IBAction)backButtonClicked:(id)sender;
 -(IBAction)sliderValueChanged:(UISlider *)sender;
+-(IBAction) startUpdatingPage:(id)sender;
 
 
 @end

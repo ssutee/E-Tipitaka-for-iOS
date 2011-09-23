@@ -40,7 +40,6 @@
 
 - (void) dealloc
 {
-    [super dealloc];
     [_titleLabel release];
     [_pageNumberLabel release];
     [_contentView release];
@@ -50,6 +49,7 @@
     [_scrollPostion release];
     [_pageSlider release];
     [_toastText release];
+    [super dealloc];    
 }
 
 -(NSString *) getCurrentLanguage
@@ -149,13 +149,13 @@
             self.contentViewController.fontSize = self.fontSize;
             self.contentViewController.scrollToHighlightText = NO;
             self.contentViewController.scrollToItemNumber = NO;
+            self.contentViewController.highlightText = self.keywords;            
             if (self.scrollToItem) {
                 self.scrollToItem = NO;
                 self.contentViewController.itemNumber = self.savedItemNumber;
                 self.contentViewController.scrollToItemNumber = YES;
             } else if (_scrollToKeyword) {
                 self.scrollToKeyword = NO;                
-                self.contentViewController.highlightText = self.keywords;
                 self.contentViewController.scrollToHighlightText = YES;
             } else {
                 
@@ -166,7 +166,6 @@
 	}
     
     [self updatePageTitle:[self getCurrentLanguage]  volume:[self getCurrentVolume] page:[self getCurrentPage]];
-    
     [Utils writeData:self.dataDictionary];
 }
 
@@ -200,26 +199,19 @@
     self.scrollToItem = NO;
     self.scrollToKeyword = NO;
         
-    NSString *language = [self.dataDictionary valueForKey:@"Language"];
-    NSMutableDictionary *dict = [self.dataDictionary valueForKey:language];
-    
-    NSNumber *page = [dict valueForKey:@"Page"];
-    NSNumber *volume = [dict valueForKey:@"Volume"];
+    NSString *language = [self getCurrentLanguage];
+    NSNumber *page = [self getCurrentPage];
+    NSNumber *volume = [self getCurrentVolume];
     
     ContentInfo *info = [[ContentInfo alloc] init];
     info.language = language;
     info.volume = volume;
     [info setType:LANGUAGE|VOLUME];
     
-    if ([page intValue] < [QueryHelper getMaximumPageValue:info]) {
-        
-        [self.scrollPostion setValue:[NSNumber numberWithInt:0] forKey:language];
-                
-        page = [NSNumber numberWithInt:[page intValue]+1];
-        
-        [dict setValue:page forKey:@"Page"];
-        
-        [self.dataDictionary setValue:dict forKey:language];
+    if ([page intValue] < [QueryHelper getMaximumPageValue:info]) {        
+        [self.scrollPostion setValue:[NSNumber numberWithInt:0] forKey:language];                
+        page = [NSNumber numberWithInt:[page intValue]+1];                
+        [self setCurrentPage:page];
         [self updateReadingPage];
     } 
     
@@ -234,18 +226,14 @@
     self.scrollToItem = NO;
     self.scrollToKeyword = NO;    
     
-    NSString *language = [self.dataDictionary valueForKey:@"Language"];
-    NSMutableDictionary *dict = [self.dataDictionary valueForKey:language];
+    NSString *language = [self getCurrentLanguage];
+    NSNumber *page = [self getCurrentPage];
     
-    NSNumber *page = [dict valueForKey:@"Page"];
     if ([page intValue] > 1) {
         // reset scroll position
         [self.scrollPostion setValue:[NSNumber numberWithInt:0] forKey:language];        
-        page = [NSNumber numberWithInt:[page intValue]-1];
-        
-        [dict setValue:page forKey:@"Page"];
-        
-        [self.dataDictionary setValue:dict forKey:language];
+        page = [NSNumber numberWithInt:[page intValue]-1];        
+        [self setCurrentPage:page];
         [self updateReadingPage];			
     }
 }
@@ -258,22 +246,22 @@
 
     self.scrollToItem = NO;
     self.scrollToKeyword = NO;
-        
-    NSString *language = [self.dataDictionary valueForKey:@"Language"];
-    NSMutableDictionary *dict = [self.dataDictionary valueForKey:language];
+
     
-    NSNumber *volume = [dict valueForKey:@"Volume"];
+    NSString *language = [self getCurrentLanguage];    
+    NSNumber *volume = [self getCurrentVolume];
     
     // reset scroll position
     [self.scrollPostion setValue:[NSNumber numberWithInt:0] forKey:language];      
     
     NSNumber *page = [NSNumber numberWithInt: round(sender.value)];
     
-    [dict setValue:page forKey:@"Page"];
-    
-    [self.dataDictionary setValue:dict forKey:language];
-    
+    [self setCurrentPage:page];    
     [self updatePageTitle:language volume:volume page:page];
+}
+
+-(IBAction) startUpdatingPage:(id)sender {
+    [self updateReadingPage];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
