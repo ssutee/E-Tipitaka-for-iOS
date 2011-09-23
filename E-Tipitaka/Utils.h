@@ -22,5 +22,5 @@
 + (NSDictionary *)readPlist:(NSString *)name;
 + (char *) replace:(const char *)original pattern:(const char *)pattern 
        replacement:(const char*)replacement;
-
++(NSString *) createHeaderTitle:(NSNumber *)volume;
 @end

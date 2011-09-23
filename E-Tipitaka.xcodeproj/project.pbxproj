@@ -18,6 +18,14 @@
 		9E10C580141B2BE6005E60FC /* ContentInfoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C57F141B2BE6005E60FC /* ContentInfoType.m */; };
 		9E10C581141B2BE6005E60FC /* ContentInfoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C57F141B2BE6005E60FC /* ContentInfoType.m */; };
 		9E10EA7813C88B6800DCA4B4 /* E_Tipitaka.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 9E10EA7713C88B6800DCA4B4 /* E_Tipitaka.sqlite */; };
+		9E13896B141B750C00C350B0 /* BaseReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E13896A141B750C00C350B0 /* BaseReadViewController.m */; };
+		9E13896C141B750C00C350B0 /* BaseReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E13896A141B750C00C350B0 /* BaseReadViewController.m */; };
+		9E138975141B80EB00C350B0 /* PadReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E138974141B80EB00C350B0 /* PadReadViewController.m */; };
+		9E138976141B80EB00C350B0 /* PadReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E138974141B80EB00C350B0 /* PadReadViewController.m */; };
+		9E13897E141B8E7700C350B0 /* UITextInputAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E13897D141B8E7700C350B0 /* UITextInputAlertView.m */; };
+		9E13897F141B8E7700C350B0 /* UITextInputAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E13897D141B8E7700C350B0 /* UITextInputAlertView.m */; };
+		9E138983141BA32C00C350B0 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E138982141BA32C00C350B0 /* Command.m */; };
+		9E138984141BA32C00C350B0 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E138982141BA32C00C350B0 /* Command.m */; };
 		9E1721F61366C4C00011891C /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1721F51366C4C00011891C /* libz.1.2.3.dylib */; };
 		9E1722031366C4F90011891C /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721F91366C4F90011891C /* ioapi.c */; };
 		9E1722041366C4F90011891C /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721FB1366C4F90011891C /* mztools.c */; };
@@ -125,6 +133,14 @@
 		9E10C57E141B2BE6005E60FC /* ContentInfoType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentInfoType.h; sourceTree = "<group>"; };
 		9E10C57F141B2BE6005E60FC /* ContentInfoType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentInfoType.m; sourceTree = "<group>"; };
 		9E10EA7713C88B6800DCA4B4 /* E_Tipitaka.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = E_Tipitaka.sqlite; sourceTree = "<group>"; };
+		9E138969141B750C00C350B0 /* BaseReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReadViewController.h; sourceTree = "<group>"; };
+		9E13896A141B750C00C350B0 /* BaseReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReadViewController.m; sourceTree = "<group>"; };
+		9E138973141B80EB00C350B0 /* PadReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PadReadViewController.h; sourceTree = "<group>"; };
+		9E138974141B80EB00C350B0 /* PadReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PadReadViewController.m; sourceTree = "<group>"; };
+		9E13897C141B8E7700C350B0 /* UITextInputAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextInputAlertView.h; sourceTree = "<group>"; };
+		9E13897D141B8E7700C350B0 /* UITextInputAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextInputAlertView.m; sourceTree = "<group>"; };
+		9E138981141BA32C00C350B0 /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.h; sourceTree = "<group>"; };
+		9E138982141BA32C00C350B0 /* Command.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Command.m; sourceTree = "<group>"; };
 		9E1721F51366C4C00011891C /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		9E1721F81366C4F90011891C /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		9E1721F91366C4F90011891C /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
@@ -322,6 +338,33 @@
 			name = ParameterObject;
 			sourceTree = "<group>";
 		};
+		9E13896E141B7F6600C350B0 /* Decorators */ = {
+			isa = PBXGroup;
+			children = (
+				9E138973141B80EB00C350B0 /* PadReadViewController.h */,
+				9E138974141B80EB00C350B0 /* PadReadViewController.m */,
+			);
+			name = Decorators;
+			sourceTree = "<group>";
+		};
+		9E13897B141B8DBE00C350B0 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E13897C141B8E7700C350B0 /* UITextInputAlertView.h */,
+				9E13897D141B8E7700C350B0 /* UITextInputAlertView.m */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
+		9E138980141BA2FB00C350B0 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				9E138981141BA32C00C350B0 /* Command.h */,
+				9E138982141BA32C00C350B0 /* Command.m */,
+			);
+			name = Commands;
+			sourceTree = "<group>";
+		};
 		9E1721F71366C4F90011891C /* minizip */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +420,9 @@
 		9E326FDC138E1CB900ED66AE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9E138980141BA2FB00C350B0 /* Commands */,
+				9E13897B141B8DBE00C350B0 /* Custom Views */,
+				9E13896E141B7F6600C350B0 /* Decorators */,
 				9E10C579141B1C32005E60FC /* ParameterObject */,
 				9E10C578141B1B99005E60FC /* CoreData */,
 				9E10C577141B1B73005E60FC /* Helpers */,
@@ -404,6 +450,8 @@
 				9E10C56F141B183D005E60FC /* ContentViewController.m */,
 				9E669766134C5D1800B9E0F4 /* iToast.h */,
 				9E669767134C5D1F00B9E0F4 /* iToast.m */,
+				9E138969141B750C00C350B0 /* BaseReadViewController.h */,
+				9E13896A141B750C00C350B0 /* BaseReadViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -687,6 +735,10 @@
 				9E10C576141B1B51005E60FC /* QueryHelper.m in Sources */,
 				9E10C57D141B1C5F005E60FC /* ContentInfo.m in Sources */,
 				9E10C581141B2BE6005E60FC /* ContentInfoType.m in Sources */,
+				9E13896C141B750C00C350B0 /* BaseReadViewController.m in Sources */,
+				9E138976141B80EB00C350B0 /* PadReadViewController.m in Sources */,
+				9E13897F141B8E7700C350B0 /* UITextInputAlertView.m in Sources */,
+				9E138984141BA32C00C350B0 /* Command.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,6 +777,10 @@
 				9E10C575141B1B51005E60FC /* QueryHelper.m in Sources */,
 				9E10C57C141B1C5F005E60FC /* ContentInfo.m in Sources */,
 				9E10C580141B2BE6005E60FC /* ContentInfoType.m in Sources */,
+				9E13896B141B750C00C350B0 /* BaseReadViewController.m in Sources */,
+				9E138975141B80EB00C350B0 /* PadReadViewController.m in Sources */,
+				9E13897E141B8E7700C350B0 /* UITextInputAlertView.m in Sources */,
+				9E138983141BA32C00C350B0 /* Command.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

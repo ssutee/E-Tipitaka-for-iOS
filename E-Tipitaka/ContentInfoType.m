@@ -34,7 +34,7 @@
 {
     return [NSPredicate 
             predicateWithFormat:@"(lang = %@ && volume = %d)",
-            [info.language lowercaseString], [info.volume intValue]];;
+            [info.language lowercaseString], [info.volume intValue]];
 }
 
 @end

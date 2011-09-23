@@ -175,7 +175,6 @@
 	return temp;
 }
 
-
 + (char *) replace:(const char *)original pattern:(const char *)pattern 
        replacement:(const char*)replacement {
     
@@ -217,6 +216,20 @@
     }
     return returned;
 
+}
+
+
++(NSString *) createHeaderTitle:(NSNumber *)volume {
+	NSString *newTitle = [NSString alloc];
+	if([volume intValue] <= 8) {
+		newTitle = [newTitle initWithFormat:@"%@ เล่มที่ %d", @"พระวินัยปิฎก", [volume intValue]];
+	} else if([volume intValue] <= 33) {
+		newTitle = [newTitle initWithFormat:@"%@ เล่มที่ %d", @"พระสุตตันตปิฎก", [volume intValue] - 8];
+	} else {
+		newTitle = [newTitle initWithFormat:@"%@ เล่มที่ %d", @"พระอภิธรรมปิฎก", [volume intValue] - 33];		
+	}
+    [newTitle autorelease];
+    return  newTitle;
 }
 
 
