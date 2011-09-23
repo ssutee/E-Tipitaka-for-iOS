@@ -20,6 +20,8 @@
 @synthesize contentViewController=_contentViewController;
 @synthesize pageSlider=_pageSlider;
 @synthesize toastText=_toastText;
+@synthesize scrollView=_scrollView;
+@synthesize viewControllers=_viewControllers;
 
 @synthesize dataDictionary=_dataDictionary;
 @synthesize scrollPostion=_scrollPostion;
@@ -28,6 +30,7 @@
 @synthesize scrollToItem=_scrollToItem;
 @synthesize savedItemNumber=_savedItemNumber;
 @synthesize fontSize=_fontSize;
+@synthesize pageFunctionUsed=_pageFunctionUsed;
 
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +52,8 @@
     [_scrollPostion release];
     [_pageSlider release];
     [_toastText release];
+    [_viewControllers release];
+    [_scrollView release];
     [super dealloc];    
 }
 
@@ -83,6 +88,29 @@
 }
 
 - (void)reloadData {
+    if (self.dataDictionary) {
+        NSString *language = [self getCurrentLanguage];    
+        NSNumber *oldVolume = [[self.dataDictionary valueForKey:language] valueForKey:@"Volume"];
+        NSNumber *newVolume = [[[Utils readData] valueForKey:language] valueForKey:@"Volume"];
+        if (self.viewControllers == nil || [oldVolume intValue] != [newVolume intValue]) {
+            ContentInfo *info = [[ContentInfo alloc] init];
+            info.language = language;
+            info.volume = newVolume;
+            [info setType:LANGUAGE|VOLUME];
+            currentMaxPages = [QueryHelper getMaximumPageValue:info];
+            self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * currentMaxPages, self.scrollView.frame.size.height);
+
+            NSMutableArray *controllers = [[NSMutableArray alloc] init];
+            for (unsigned i = 0; i < currentMaxPages; i++)
+            {
+                [controllers addObject:[NSNull null]];
+            }
+            self.viewControllers = controllers;
+            [controllers release];            
+            [info release];
+        }
+    }
+    
     self.dataDictionary = [Utils readData];
 }
 
@@ -213,9 +241,9 @@
         page = [NSNumber numberWithInt:[page intValue]+1];                
         [self setCurrentPage:page];
         [self updateReadingPage];
-    } 
-    
+    }     
     [info release];    
+    self.pageFunctionUsed = YES;    
 }  
 
 -(IBAction)backButtonClicked:(id)sender {
@@ -236,6 +264,7 @@
         [self setCurrentPage:page];
         [self updateReadingPage];			
     }
+    self.pageFunctionUsed = YES;
 }
 
 
@@ -257,7 +286,8 @@
     NSNumber *page = [NSNumber numberWithInt: round(sender.value)];
     
     [self setCurrentPage:page];    
-    [self updatePageTitle:language volume:volume page:page];
+    [self updatePageTitle:language volume:volume page:page];    
+    self.pageFunctionUsed = YES;
 }
 
 -(IBAction) startUpdatingPage:(id)sender {
@@ -274,6 +304,36 @@
     return NO;
 }
 
+- (void)loadScrollViewWithPage:(int)page
+{
+    if (page < 0)
+        return;    
+    if (page >= currentMaxPages)
+        return;
+    
+    // replace the placeholder if necessary
+    ContentViewController *controller = [self.viewControllers objectAtIndex:page];
+    if ((NSNull *)controller == [NSNull null])
+    {
+        controller = [[ContentViewController alloc] init];
+        [self.viewControllers replaceObjectAtIndex:page withObject:controller];
+        [controller release];
+    }
+    
+    // add the controller's view to the scroll view
+    if (controller.view.superview == nil)
+    {
+        CGRect frame = self.scrollView.frame;
+        frame.origin.x = frame.size.width * page;
+        frame.origin.y = 0;
+        controller.view.frame = frame;
+        [self.scrollView addSubview:controller.view];
+        self.contentViewController = controller;
+        [self updateReadingPage];
+    }
+}
+
+
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation { 
     [self updateReadingPage];
@@ -282,12 +342,43 @@
 - (void) dismissAllPopoverControllers {
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.pageFunctionUsed) {
+        return;
+    }
+    
+    CGFloat pageWidth = scrollView.frame.size.width;
+    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+
+    [self setCurrentPage:[NSNumber numberWithInt:page+1]];    
+    
+    [self loadScrollViewWithPage:page - 1];
+    [self loadScrollViewWithPage:page];
+    [self loadScrollViewWithPage:page + 1];
+    
+    // A possible optimization would be to unload the views+controllers which are no longer visible
+}
+
+// At the begin of scroll dragging, reset the boolean used when scrolls originate from the UIPageControl
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    self.pageFunctionUsed = NO;
+}
+
+// At the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    self.pageFunctionUsed = NO;
+}
+
+
 
 #pragma mark - View lifecycle
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self reloadData];    
+    [self reloadData];
     [self updateReadingPage];
 }
 
@@ -303,18 +394,23 @@
     self.scrollPostion = dict;
     [dict release];
     
-    ContentViewController *controller = [[ContentViewController alloc] initWithNibName:@"ContentView" bundle:nil];
-    self.contentViewController = controller;
-    [controller release];
-    self.contentViewController.view.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
-    [self.contentView addSubview:self.contentViewController.view];
-    
-    
+//    ContentViewController *controller = [[ContentViewController alloc] initWithNibName:@"ContentView" bundle:nil];
+//    self.contentViewController = controller;
+//    [controller release];
+//    self.contentViewController.view.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
+//    [self.contentView addSubview:self.contentViewController.view];
+        
     self.pageSlider.continuous = YES;    
 	self.scrollToItem = NO;
     self.scrollToKeyword = NO;    
     self.pageSlider.minimumValue = 1;    
     self.toastText.hidden = YES;
+    
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.scrollsToTop = NO;
+    self.scrollView.delegate = self;
     
     [self reloadData];
     self.fontSize = [[self.dataDictionary valueForKey:@"FontSize"] intValue];    
@@ -334,6 +430,8 @@
     self.scrollPostion = nil;
     self.pageSlider = nil;
     self.toastText = nil;
+    self.scrollView = nil;
+    self.viewControllers = nil;
 }
 
 

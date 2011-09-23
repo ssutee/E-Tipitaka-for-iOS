@@ -11,18 +11,24 @@
 
 @class ContentViewController;
 
-@interface BaseReadViewController : UIViewController
+@interface BaseReadViewController : UIViewController<UIScrollViewDelegate> {
+    NSUInteger currentMaxPages;
+}
 
 @property(nonatomic, retain) NSDictionary *dataDictionary;
 @property(nonatomic, retain) NSMutableDictionary *scrollPostion;
-
 @property(nonatomic, retain) NSString *keywords;
+
 @property(assign) BOOL scrollToKeyword;
 @property(assign) NSInteger savedItemNumber;
 @property(assign) BOOL scrollToItem;
 @property(assign) NSInteger fontSize;
+@property(assign) BOOL pageFunctionUsed;
 
 @property(nonatomic, retain) ContentViewController *contentViewController;   
+
+@property(nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property(nonatomic, retain) NSMutableArray *viewControllers;
 
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, retain) IBOutlet UILabel *pageNumberLabel;
