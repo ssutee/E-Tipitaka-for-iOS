@@ -144,6 +144,8 @@
     isBlank = [allTrim(searchTerm) length] > 0 ? NO : YES;
     
     if (isBlank) {
+        self.fetchedResults = [NSArray arrayWithObjects:nil];
+        [tableView reloadData];
         return;
     }
     
@@ -350,6 +352,8 @@
 #pragma mark -
 #pragma mark Table View Delegate Methods
 - (NSIndexPath *) tableView:(UITableView *)aTableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+     [searchBar resignFirstResponder];
+    
     //We only don't want to allow selection on any cells which cannot be expanded
     if([self getCellHeightForIndex:indexPath.row] > CELL_MIN_HEIGHT)
     {
@@ -362,7 +366,6 @@
 
 -(void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     //The user is selecting the cell which is currently expanded
     //we want to minimize it back
     if(selectedIndex == indexPath.row)
