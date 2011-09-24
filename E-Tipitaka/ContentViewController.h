@@ -19,6 +19,7 @@
     NSUInteger scrollPosition;
     BOOL scrollToItemNumber;
     BOOL scrollToHighlightText;
+
 }
 
 @property (assign) Content *content;
@@ -28,6 +29,9 @@
 @property (assign) NSUInteger scrollPosition;
 @property (assign) BOOL scrollToItemNumber;
 @property (assign) BOOL scrollToHighlightText;
+
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *indictor;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
 
 -(NSString *) convertContentToHTML;
 -(NSString *) convertWhiteSpacesToHTML:(NSString *)text;

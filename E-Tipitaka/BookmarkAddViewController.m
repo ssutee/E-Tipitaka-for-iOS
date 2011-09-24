@@ -173,6 +173,7 @@
 	self.titleLabel2 = nil;
 	self.textView = nil;
     self.readViewController = nil;
+    self.popoverController = nil;
 }
 
 
@@ -184,6 +185,7 @@
 	[textView release];
 	[selectedItem release];
     [readViewController release];
+    [popoverController release];
 }
 
 

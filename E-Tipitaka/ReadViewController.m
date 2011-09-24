@@ -35,7 +35,6 @@
 @synthesize booklistPopoverController;
 @synthesize dictionaryPopoverController;
 @synthesize dictionaryListViewController;
-@synthesize contentViewController;
 @synthesize searchButton;
 @synthesize languageButton;
 @synthesize booklistButton;
@@ -101,12 +100,10 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dbAlert dismissWithClickedButtonIndex:0 animated:YES];
             });
+            [self reloadData];
             [self updateReadingPage];
         });                     
-    } else {
-        [self updateReadingPage];
-    }
-    
+    } 
 }
 
 
@@ -193,7 +190,7 @@
 	NSNumber *paliVolume = [[self.dataDictionary valueForKey:@"Pali"] valueForKey:@"Volume"];
 	NSNumber *thaiVolume = [[self.dataDictionary valueForKey:@"Thai"] valueForKey:@"Volume"];
     
-    int position = [[(UIWebView *) contentViewController.view 
+    int position = [[self.contentViewController.webView
                      stringByEvaluatingJavaScriptFromString:@"window.pageYOffset"] intValue];
     
     [self.scrollPostion setValue:[NSNumber numberWithInt:position] forKey:language];
@@ -246,6 +243,17 @@
 }
 
 - (void) doCompare:(NSInteger)buttonIndex {
+    
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];        
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && UIDeviceOrientationIsPortrait(orientation)) {
+        UIAlertView *alert = [[UIAlertView alloc] 
+                              initWithTitle:@"การเทียบเคียงไม่สามารถใช้ในแนวตั้ง" message:@"กรุณาหมุนจอเป็นแนวนอน" 
+                              delegate:nil cancelButtonTitle:@"ตกลง" otherButtonTitles:nil, nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+    
 	NSString *sourceLanguage = [[NSString alloc] initWithString:[self.dataDictionary valueForKey:@"Language"]];
 	NSNumber *volume = [[self.dataDictionary valueForKey:sourceLanguage] valueForKey:@"Volume"];
 	NSNumber *page = [[self.dataDictionary valueForKey:sourceLanguage] valueForKey:@"Page"];			
@@ -308,6 +316,7 @@
                 
                 DoubleReadViewController *controller = [[DoubleReadViewController alloc] 
                                                         initWithNibName:@"DoubleReadView_iPad" bundle:nil];                
+
                 controller.sourceLanguage = sourceLanguage;
                 controller.targetLanguage = targetLanguage;
                 
@@ -391,6 +400,7 @@
                                  inView:self.view 
                permittedArrowDirections:UIPopoverArrowDirectionUp 
                                animated:YES];
+            [poc release];
             [navController release];
         }
 		[controller release], controller = nil;
@@ -425,9 +435,9 @@
         [dictionaryPopoverController dismissPopoverAnimated:YES];
     }
     
-    if (languageActionSheet != nil && [languageActionSheet isVisible]) {
-        [languageActionSheet 
-         dismissWithClickedButtonIndex:[languageActionSheet cancelButtonIndex] animated:YES];
+    if (self.languageActionSheet != nil && [self.languageActionSheet isVisible]) {
+        [self.languageActionSheet 
+         dismissWithClickedButtonIndex:[self.languageActionSheet cancelButtonIndex] animated:YES];
     }
     if (gotoActionSheet != nil && [gotoActionSheet isVisible]) {
         [gotoActionSheet
@@ -468,11 +478,6 @@
     return NO;
 }
 
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation { 
-    [self updateReadingPage];
-}
-
 #pragma mark -
 #pragma mark IBAction Methods
 
@@ -507,15 +512,16 @@
 
 -(IBAction)languageButtonClicked:(id)sender {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [languageActionSheet showFromToolbar:toolbar];
+        [self.languageActionSheet showFromToolbar:toolbar];
     }
     else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {  
-        if ([languageActionSheet isVisible]) {
-            [languageActionSheet dismissWithClickedButtonIndex:[languageActionSheet cancelButtonIndex] 
+        
+        if ([self.languageActionSheet isVisible]) {
+            [self.languageActionSheet dismissWithClickedButtonIndex:[self.languageActionSheet cancelButtonIndex] 
                                                       animated:YES];
         } else {
             [self dismissAllPopoverControllers];            
-            [languageActionSheet showFromBarButtonItem:languageButton animated:YES];
+            [self.languageActionSheet showFromBarButtonItem:self.languageButton animated:YES];
         }
     }
 }
@@ -688,7 +694,7 @@
 
 -(IBAction)showDictionary:(id)sender {
     
-    NSString *selection = [(UIWebView *) contentViewController.view 
+    NSString *selection = [self.contentViewController.webView 
                            stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];        
 //    NSLog(@"%@", [self.htmlView stringByEvaluatingJavaScriptFromString:@"findTextAtRow(4);"]);
 
@@ -728,9 +734,11 @@
 
 -(BOOL) canPerformAction:(SEL)action withSender:(id)sender
 {
-    if (action == @selector(lookUpDictionary:)) {
-        
-        NSString *selection = [(UIWebView *) contentViewController.view  
+    if (action == @selector(lookUpDictionary:)) { 
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            return NO;
+        }
+        NSString *selection = [self.contentViewController.webView
                                stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];
         return ([allTrim(selection) length] != 0);
     }
@@ -750,15 +758,15 @@
     [super viewDidAppear:animated];
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         showToolbar = NO;
-        [self.toolbar setHidden:YES];
+        self.toolbar.hidden = YES;
         
         if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-            self.contentViewController.view.frame = CGRectMake(0, 20, 480, 219);
+            self.contentView.frame = CGRectMake(0, 20, 480, 219);            
         } else {
-            self.contentViewController.view .frame = CGRectMake(0, 20, 320, 367);
+            self.contentView.frame = CGRectMake(0, 20, 320, 367);   
         }      
         [self updateLanguageButtonTitle];        
-    }    
+    }
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -773,12 +781,14 @@
     
     // lookup dictionary popup menu
     UIMenuItem *dictionaryMenuItem = [[UIMenuItem alloc] initWithTitle:@"บาลี-ไทย" 
-                                                                action:@selector(lookUpDictionary:)];
+                                                                action:@selector(lookUpDictionary:)];    
     [UIMenuController sharedMenuController].menuItems = [NSArray arrayWithObject:dictionaryMenuItem];
-    [dictionaryMenuItem release];    
-
-    	
+    [dictionaryMenuItem release];
+        
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+
+        toolbar.hidden = YES;
+        
         UIBarButtonItem *selectButton = [[UIBarButtonItem alloc]
                                          initWithTitle:@"เลือก" 
                                          style:UIBarButtonItemStyleBordered
@@ -811,11 +821,7 @@
         } else {
             self.navigationItem.leftBarButtonItem.title = @"ไทย";		
         }        
-    }
-    else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        [self reloadData];	
-    }
-     
+    }     
     
     UIActionSheet *actionSheet;
     
@@ -844,10 +850,7 @@
 	[actionSheet setCancelButtonIndex:2];
     self.gotoActionSheet = actionSheet;
 	[actionSheet release];    
-    
-
 }
-
 
 #pragma mark -
 #pragma mark Memory management
@@ -889,6 +892,32 @@
     self.alterItems = nil;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        UIView *transView = [self.tabBarController.view.subviews objectAtIndex:0];
+        if (showToolbar) {
+            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+                transView.frame = CGRectMake(0, 0, 480, 320);
+                self.contentView.frame = CGRectMake(0, 20, 480, 224);
+            } else {        
+                transView.frame = CGRectMake(0, 0, 320, 480);
+                self.contentView.frame = CGRectMake(0, 20, 320, 372);
+            }
+        } else {
+            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+                transView.frame = CGRectMake(0, 0, 480, 271);
+                self.contentView.frame = CGRectMake(0, 20, 480, 219);
+            } else {
+                transView.frame = CGRectMake(0, 0, 320, 431);
+                self.contentView.frame = CGRectMake(0, 20, 320, 367);
+            }
+        }
+    }
+    
+}
 
 - (void)dealloc {
     
@@ -932,8 +961,8 @@
     info.language = [self getCurrentLanguage];
     info.volume = [self getCurrentVolume];
     NSInteger maxPage = [QueryHelper getMaximumPageValue:info];
-    if ([page intValue] > 0 && [page intValue] <= maxPage) {                        
-        [self setCurrentPage:page];
+    if ([page intValue] > 0 && [page intValue] <= maxPage) {                                
+        [self setCurrentPage:page];        
         [self updateReadingPage];
     }    
     [info release];
@@ -1058,7 +1087,6 @@
     }
     
 	showToolbar = !showToolbar;
-    
     UIView *transView = [self.tabBarController.view.subviews objectAtIndex:0];
     UIView *tabBar = [self.tabBarController.view.subviews objectAtIndex:1];
     if (showToolbar) {

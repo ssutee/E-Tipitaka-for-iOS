@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "E-Tipitaka/ReadViewController.m"
-         timestampString = "338458839.809091"
+         timestampString = "338563026.245749"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "326"
-         endingLineNumber = "326"
+         startingLineNumber = "337"
+         endingLineNumber = "337"
          landmarkName = "-doCompare:"
          landmarkType = "5">
       </FileBreakpoint>

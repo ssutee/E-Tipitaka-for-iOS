@@ -46,7 +46,6 @@
     [_titleLabel release];
     [_pageNumberLabel release];
     [_contentView release];
-    [_contentViewController release];
     [_dataDictionary release];
     [_keywords release];
     [_scrollPostion release];
@@ -85,33 +84,6 @@
 -(void) setCurrentPage:(NSNumber *)page
 {
     [[self.dataDictionary valueForKey:[self getCurrentLanguage]] setValue:page forKey:@"Page"];    
-}
-
-- (void)reloadData {
-    if (self.dataDictionary) {
-        NSString *language = [self getCurrentLanguage];    
-        NSNumber *oldVolume = [[self.dataDictionary valueForKey:language] valueForKey:@"Volume"];
-        NSNumber *newVolume = [[[Utils readData] valueForKey:language] valueForKey:@"Volume"];
-        if (self.viewControllers == nil || [oldVolume intValue] != [newVolume intValue]) {
-            ContentInfo *info = [[ContentInfo alloc] init];
-            info.language = language;
-            info.volume = newVolume;
-            [info setType:LANGUAGE|VOLUME];
-            currentMaxPages = [QueryHelper getMaximumPageValue:info];
-            self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * currentMaxPages, self.scrollView.frame.size.height);
-
-            NSMutableArray *controllers = [[NSMutableArray alloc] init];
-            for (unsigned i = 0; i < currentMaxPages; i++)
-            {
-                [controllers addObject:[NSNull null]];
-            }
-            self.viewControllers = controllers;
-            [controllers release];            
-            [info release];
-        }
-    }
-    
-    self.dataDictionary = [Utils readData];
 }
 
 -(void) updatePageTitle:(NSString *)language volume:(NSNumber *)volume page:(NSNumber *)page 
@@ -156,11 +128,8 @@
     [newLabel2 release];    
 }
 
-
--(void) updateReadingPage {
-	if(!self.dataDictionary)
-		return;
-    
+-(NSArray *) fetchCurrentContent
+{
     ContentInfo *info = [[ContentInfo alloc] init];
     info.language = [self getCurrentLanguage];
     info.volume = [self getCurrentVolume];
@@ -168,33 +137,81 @@
     [info setType:(LANGUAGE|VOLUME|PAGE)];
     NSArray *fetchedObjects = [QueryHelper getContents:info];
     [info release];    
+    return fetchedObjects;
+}
+
+-(NSArray *) fetchContent:(NSNumber *)page
+{
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = [self getCurrentLanguage];
+    info.volume = [self getCurrentVolume];
+    info.page = page;
+    [info setType:(LANGUAGE|VOLUME|PAGE)];
+    NSArray *fetchedObjects = [QueryHelper getContents:info];
+    [info release];    
+    return fetchedObjects;
+}
+
+
+-(void) updatePageInBackground:(NSUInteger)page
+{
+    if ([self prepareScrollViewForPage:page-1]) {
+        NSArray *fetchedObjects = [self fetchContent:[NSNumber numberWithInt:page]];
+        if (fetchedObjects == nil) {
+            NSLog(@"Whoops, couldn't fetch");
+        } else if ([fetchedObjects count] > 0) {          
+            ContentViewController *controller = [self.viewControllers objectAtIndex:page-1];
+            controller.content = [fetchedObjects objectAtIndex:0];
+            controller.fontSize = self.fontSize;
+            controller.scrollToHighlightText = NO;
+            controller.scrollToItemNumber = NO;
+            controller.highlightText = self.keywords;  
+            controller.scrollPosition = 0;
+            [controller update];      
+
+        }
+    }
+}
+
+-(void) updateReadingPage {
+	if(!self.dataDictionary)
+		return;
+    
+    [self prepareScrollViewForPage:[[self getCurrentPage] intValue]-1];    
+    NSArray *fetchedObjects = [self fetchCurrentContent];    
     
 	if(fetchedObjects == nil) {
 		NSLog(@"Whoops, couldn't fetch");
-	} else {		
-		if ([fetchedObjects count] > 0) {
-            self.contentViewController.content = [fetchedObjects objectAtIndex:0];
-            self.contentViewController.fontSize = self.fontSize;
-            self.contentViewController.scrollToHighlightText = NO;
-            self.contentViewController.scrollToItemNumber = NO;
-            self.contentViewController.highlightText = self.keywords;            
-            if (self.scrollToItem) {
-                self.scrollToItem = NO;
-                self.contentViewController.itemNumber = self.savedItemNumber;
-                self.contentViewController.scrollToItemNumber = YES;
-            } else if (_scrollToKeyword) {
-                self.scrollToKeyword = NO;                
-                self.contentViewController.scrollToHighlightText = YES;
-            } else {
-                
-                self.contentViewController.scrollPosition = [[self.scrollPostion valueForKey:[self getCurrentLanguage]] intValue];                
-            }
-            [self.contentViewController update];
-		}
-	}
-    
+	} else if ([fetchedObjects count] > 0) {            
+        self.contentViewController = [self.viewControllers objectAtIndex:[[self getCurrentPage] intValue]-1];        
+        self.contentViewController.content = [fetchedObjects objectAtIndex:0];
+        self.contentViewController.fontSize = self.fontSize;
+        self.contentViewController.scrollToHighlightText = NO;
+        self.contentViewController.scrollToItemNumber = NO;
+        self.contentViewController.highlightText = self.keywords;  
+        if (self.scrollToItem) {
+            self.contentViewController.itemNumber = self.savedItemNumber;
+            self.contentViewController.scrollToItemNumber = YES;
+            self.scrollToItem = NO;                
+        } else if (self.scrollToKeyword) {
+            self.scrollToKeyword = NO;                
+            self.contentViewController.scrollToHighlightText = YES;
+        } else {                
+            self.contentViewController.scrollPosition = [[self.scrollPostion valueForKey:[self getCurrentLanguage]] intValue];                
+        }        
+        [self.contentViewController update];
+	}    
     [self updatePageTitle:[self getCurrentLanguage]  volume:[self getCurrentVolume] page:[self getCurrentPage]];
     [Utils writeData:self.dataDictionary];
+    
+    self.pageFunctionUsed = YES;
+    CGRect frame = self.contentView.frame;
+    frame.origin.x = frame.size.width * ([[self getCurrentPage] intValue]-1);
+    frame.origin.y = 0;
+    [self.scrollView scrollRectToVisible:frame animated:NO];
+        
+    [self updatePageInBackground:[[self getCurrentPage] intValue]-1];
+    [self updatePageInBackground:[[self getCurrentPage] intValue]+1];
 }
 
 -(void)updateLanguageButtonTitle {
@@ -218,8 +235,13 @@
     [self updateReadingPage];    
 }
 
+-(IBAction) startUpdatingPage:(id)sender {
+    [self updateReadingPage];
+}
+
 
 -(IBAction)nextButtonClicked:(id)sender {
+    self.pageFunctionUsed = YES;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self dismissAllPopoverControllers];
     }
@@ -239,14 +261,15 @@
     if ([page intValue] < [QueryHelper getMaximumPageValue:info]) {        
         [self.scrollPostion setValue:[NSNumber numberWithInt:0] forKey:language];                
         page = [NSNumber numberWithInt:[page intValue]+1];                
-        [self setCurrentPage:page];
-        [self updateReadingPage];
+        [self setCurrentPage:page];        
+        [self updateReadingPage];        
     }     
     [info release];    
-    self.pageFunctionUsed = YES;    
 }  
 
+
 -(IBAction)backButtonClicked:(id)sender {
+    self.pageFunctionUsed = YES;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self dismissAllPopoverControllers];
     }
@@ -260,15 +283,15 @@
     if ([page intValue] > 1) {
         // reset scroll position
         [self.scrollPostion setValue:[NSNumber numberWithInt:0] forKey:language];        
-        page = [NSNumber numberWithInt:[page intValue]-1];        
+        page = [NSNumber numberWithInt:[page intValue]-1];                
         [self setCurrentPage:page];
-        [self updateReadingPage];			
+        [self updateReadingPage];			        
     }
-    self.pageFunctionUsed = YES;
 }
 
 
 -(IBAction)sliderValueChanged:(UISlider *)sender {
+    self.pageFunctionUsed = YES;    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self dismissAllPopoverControllers];
     }
@@ -287,11 +310,6 @@
     
     [self setCurrentPage:page];    
     [self updatePageTitle:language volume:volume page:page];    
-    self.pageFunctionUsed = YES;
-}
-
--(IBAction) startUpdatingPage:(id)sender {
-    [self updateReadingPage];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
@@ -304,18 +322,18 @@
     return NO;
 }
 
-- (void)loadScrollViewWithPage:(int)page
+- (BOOL)prepareScrollViewForPage:(int)page
 {
     if (page < 0)
-        return;    
+        return FALSE;    
     if (page >= currentMaxPages)
-        return;
-    
+        return FALSE;
+
     // replace the placeholder if necessary
     ContentViewController *controller = [self.viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null])
     {
-        controller = [[ContentViewController alloc] init];
+        controller = [[ContentViewController alloc] initWithNibName:@"ContentView" bundle:nil];
         [self.viewControllers replaceObjectAtIndex:page withObject:controller];
         [controller release];
     }
@@ -323,41 +341,67 @@
     // add the controller's view to the scroll view
     if (controller.view.superview == nil)
     {
-        CGRect frame = self.scrollView.frame;
+        CGRect frame = self.contentView.frame;
         frame.origin.x = frame.size.width * page;
         frame.origin.y = 0;
         controller.view.frame = frame;
         [self.scrollView addSubview:controller.view];
-        self.contentViewController = controller;
-        [self updateReadingPage];
+    }
+    return TRUE;
+}
+
+- (void) recomputeFrameSize
+{
+    int page = 0;
+    for (ContentViewController *controller in self.viewControllers) {
+        if ((NSNull *)controller != [NSNull null]) {
+            CGRect frame = self.contentView.frame;
+            frame.origin.x = frame.size.width * page;
+            frame.origin.y = 0;
+            controller.view.frame = frame;
+            [controller.webView scalesPageToFit];            
+        }
+        page++;
     }
 }
 
-
-
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation { 
+    self.pageFunctionUsed = YES;
+    self.scrollView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * currentMaxPages, self.contentView.frame.size.height);
+    [self recomputeFrameSize];
+    
+    int page = [[self getCurrentPage] intValue];           
+    ContentViewController *controller = [self.viewControllers objectAtIndex:page-1];
+    [controller.webView scalesPageToFit];
     [self updateReadingPage];
+
+    
 }
 
 - (void) dismissAllPopoverControllers {
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void) unloadInvisibleViews
 {
-    if (self.pageFunctionUsed) {
-        return;
+    int curPage = [[self getCurrentPage] intValue]-1;
+    int page = 0;
+
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (ContentViewController *controller in self.viewControllers) {
+        if ((NSNull *)controller != [NSNull null] && (page > curPage+2 || page < curPage-2)) {        
+            [array addObject:[NSNumber numberWithInt:page]];
+        }
+        page++;
     }
     
-    CGFloat pageWidth = scrollView.frame.size.width;
-    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-
-    [self setCurrentPage:[NSNumber numberWithInt:page+1]];    
-    
-    [self loadScrollViewWithPage:page - 1];
-    [self loadScrollViewWithPage:page];
-    [self loadScrollViewWithPage:page + 1];
-    
-    // A possible optimization would be to unload the views+controllers which are no longer visible
+    for (NSNumber *removedPage in array) {
+        ContentViewController *controller = [self.viewControllers objectAtIndex:[removedPage intValue]];
+        [controller.view removeFromSuperview];
+        [self.viewControllers replaceObjectAtIndex:[removedPage intValue] withObject:[NSNull null]];
+    }
+        
+    [array release];
 }
 
 // At the begin of scroll dragging, reset the boolean used when scrolls originate from the UIPageControl
@@ -370,16 +414,45 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     self.pageFunctionUsed = NO;
+    CGFloat pageWidth = scrollView.frame.size.width;
+    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    [self setCurrentPage:[NSNumber numberWithInt:page+1]];    
+    [self updateReadingPage];    
+    [self unloadInvisibleViews];    
 }
 
+- (void)initScrollViewWithCurrentPage
+{
+    [self reloadData];    
+    self.scrollView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
+    [self updateReadingPage];
+}
 
+- (void)reloadData {    
+    if (self.dataDictionary == nil) {
+        self.dataDictionary = [Utils readData];        
+    }
+    
+    NSString *language = [self getCurrentLanguage];    
+    NSNumber *oldVolume = [[self.dataDictionary valueForKey:language] valueForKey:@"Volume"];
+    NSNumber *newVolume = [[[Utils readData] valueForKey:language] valueForKey:@"Volume"];
+    if (currentMaxPages == 0 || [oldVolume intValue] != [newVolume intValue]) {
+        ContentInfo *info = [[ContentInfo alloc] init];
+        info.language = language;
+        info.volume = newVolume;
+        [info setType:LANGUAGE|VOLUME];
+        currentMaxPages = [QueryHelper getMaximumPageValue:info];            
+        [info release];
+    }    
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * currentMaxPages, self.contentView.frame.size.height);               
+    self.dataDictionary = [Utils readData];    
+}
 
 #pragma mark - View lifecycle
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self reloadData];
-    [self updateReadingPage];
+    [super viewDidAppear:animated];    
+    [self initScrollViewWithCurrentPage];
 }
 
 
@@ -388,33 +461,34 @@
 {
     [super viewDidLoad];
     
+    NSMutableArray *controllers = [[NSMutableArray alloc] init];
+    for (unsigned i = 0; i < 1000; i++)
+    {
+        [controllers addObject:[NSNull null]];
+    }
+    self.viewControllers = controllers;
+    [controllers release];                
+    
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                           [NSNumber numberWithInt:0], @"Thai", 
                           [NSNumber numberWithInt:0], @"Pali",nil];
     self.scrollPostion = dict;
     [dict release];
     
-//    ContentViewController *controller = [[ContentViewController alloc] initWithNibName:@"ContentView" bundle:nil];
-//    self.contentViewController = controller;
-//    [controller release];
-//    self.contentViewController.view.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
-//    [self.contentView addSubview:self.contentViewController.view];
-        
     self.pageSlider.continuous = YES;    
 	self.scrollToItem = NO;
     self.scrollToKeyword = NO;    
     self.pageSlider.minimumValue = 1;    
     self.toastText.hidden = YES;
     
+    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.scrollsToTop = NO;
     self.scrollView.delegate = self;
-    
     [self reloadData];
-    self.fontSize = [[self.dataDictionary valueForKey:@"FontSize"] intValue];    
-    
+    self.fontSize = [[self.dataDictionary valueForKey:@"FontSize"] intValue];
 }
 
 
@@ -424,7 +498,6 @@
     self.titleLabel = nil;
     self.pageNumberLabel = nil;
     self.contentView = nil;
-    self.contentViewController = nil;
     self.dataDictionary = nil;
     self.keywords = nil;
     self.scrollPostion = nil;
@@ -434,6 +507,9 @@
     self.viewControllers = nil;
 }
 
+- (BOOL) canBecomeFirstResponder {
+    return YES;
+}
 
 
 

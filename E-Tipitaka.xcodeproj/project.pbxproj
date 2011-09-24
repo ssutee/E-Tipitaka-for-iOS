@@ -108,6 +108,7 @@
 		9E6697E5134ECC2400B9E0F4 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */; };
 		9E6697E6134ECC2400B9E0F4 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */; };
 		9E6697E7134ECC2400B9E0F4 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */; };
+		9E6851FD142E2D52001D458C /* icon_document.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6851FC142E2D52001D458C /* icon_document.png */; };
 		9EA21D0B134F3EBE00C17FD6 /* Pages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA21D0A134F3EBC00C17FD6 /* Pages.plist */; };
 		9EA21D0E134F5C6400C17FD6 /* Items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA21D0D134F5C6000C17FD6 /* Items.plist */; };
 		9EA859F4135011F6002195A6 /* Names.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA859F3135011F6002195A6 /* Names.plist */; };
@@ -256,6 +257,7 @@
 		9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		9E6851FC142E2D52001D458C /* icon_document.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_document.png; sourceTree = "<group>"; };
 		9EA21D0A134F3EBC00C17FD6 /* Pages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pages.plist; sourceTree = "<group>"; };
 		9EA21D0D134F5C6000C17FD6 /* Items.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Items.plist; sourceTree = "<group>"; };
 		9EA859F3135011F6002195A6 /* Names.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Names.plist; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				9E66977C134C902500B9E0F4 /* icon_save.png */,
 				9E66977E134C903600B9E0F4 /* icon_refresh.png */,
 				9E669782134C9F6D00B9E0F4 /* 06-magnify.png */,
+				9E6851FC142E2D52001D458C /* icon_document.png */,
 				9E669783134C9F6F00B9E0F4 /* 28-star.png */,
 				9E669784134C9F7300B9E0F4 /* 179-notepad.png */,
 				9E326FD4138E167200ED66AE /* ic_menu_edit.png */,
@@ -724,6 +727,7 @@
 				9EAF955B13D1AD540010CABD /* DictionaryListView_iPad.xib in Resources */,
 				9E61E401140C8354009A5FD0 /* page.html in Resources */,
 				9E10C31B141A65DD005E60FC /* ContentView.xib in Resources */,
+				9E6851FD142E2D52001D458C /* icon_document.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

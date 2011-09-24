@@ -24,6 +24,8 @@
 @synthesize scrollPosition;
 @synthesize scrollToItemNumber;
 @synthesize scrollToHighlightText;
+@synthesize indictor=_indictor;
+@synthesize webView=_webView;
 
 - (void)didReceiveMemoryWarning
 {
@@ -35,12 +37,14 @@
 
 - (void)dealloc
 {
+    [_indictor release];
+    [_webView release];
     [super dealloc];
 }
 
 - (void)update
 {
-    [(UIWebView *)self.view loadHTMLString:[self convertContentToHTML]
+    [self.webView loadHTMLString:[self convertContentToHTML]
                     baseURL:[NSURL URLWithString:@"http://www.etipitaka.com"]];    
 }
 
@@ -48,12 +52,14 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad];        
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.indictor = nil;
+    self.webView = nil;
 }
 
 #pragma mark - Private Methods
@@ -142,6 +148,9 @@
         [aWebView stringByEvaluatingJavaScriptFromString:
          [NSString stringWithFormat:@"window.scrollTo(0,%d);", scrollPosition]];        
 	}
+    [self.indictor stopAnimating];
+    self.indictor.hidden = YES;
+    [aWebView scalesPageToFit];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

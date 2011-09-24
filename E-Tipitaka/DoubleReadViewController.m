@@ -250,7 +250,6 @@
         [itemOptionsActionSheet dismissWithClickedButtonIndex:
          [itemOptionsActionSheet cancelButtonIndex] animated:YES];
     }     
-    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -258,7 +257,7 @@
 -(IBAction) compare:(id)sender
 {
     UIBarButtonItem * compareButton = (UIBarButtonItem *)sender;
-    NSString *fromLanguage;
+    NSString *fromLanguage = nil;
 
     if (compareButton.tag == 1) {
         fromLanguage = sourceLanguage;
@@ -313,9 +312,7 @@
 {
     [super viewDidLoad];    
     
-    
-    CGRect frame = self.view.frame;
-    
+    CGRect frame = self.view.frame;    
     self.sourceController.view.frame = CGRectMake(0, 0, (frame.size.width/2)-1, frame.size.height);
     self.targetController.view.frame = CGRectMake((frame.size.width/2)+1, 0, (frame.size.width/2)-1, frame.size.height);
     
@@ -355,8 +352,11 @@
 
     self.mappingTable = dict;
     
-    [self.sourceController updateReadingPage];
-    [self.targetController updateReadingPage];
+    [self.sourceController reloadData];
+    [self.targetController reloadData];
+    
+    [self.sourceController initScrollViewWithCurrentPage];
+    [self.targetController initScrollViewWithCurrentPage];
     
     [dict release];
     [map1 release];
@@ -387,9 +387,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return YES;
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
-
 
 #pragma mark -
 #pragma mark Action Sheet Delegate Methods

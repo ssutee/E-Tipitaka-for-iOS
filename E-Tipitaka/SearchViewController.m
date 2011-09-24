@@ -556,9 +556,9 @@
         UINavigationController* firstNavController = [self.tabBarController.viewControllers objectAtIndex:0];
         ReadViewController* readController = [firstNavController.viewControllers objectAtIndex:0];
         [readController reloadData];
+        readController.keywords = self.keywords;        
         readController.scrollToKeyword = YES;
-        readController.keywords = self.keywords;
-        [readController updateReadingPage];
+        // no need to call updateReadingPage because the viewDidAppear handles it
         self.tabBarController.selectedIndex = 0;
     }
     else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

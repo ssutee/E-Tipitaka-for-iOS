@@ -324,7 +324,7 @@
     }
     
     // Configure the cell...
-	Bookmark *bookmark;
+	Bookmark *bookmark = nil;
 	
 	if (section == 0) {
 		bookmark = [[self.bookmarkData valueForKey:kVinaiKey] objectAtIndex:row];

@@ -12,7 +12,6 @@
 
 @class Content;
 @class DictionaryListViewController;
-@class ContentViewController;
 
 #define kGotoActionSheet 1001
 #define kLanguageActionSheet 1002
@@ -40,7 +39,6 @@
     UIPopoverController *bookmarkPopoverController;
     UIPopoverController *booklistPopoverController;
     UIPopoverController *dictionaryPopoverController;
-    ContentViewController *contentViewController;
     UIBarButtonItem *searchButton;
     UIBarButtonItem *languageButton;
     UIBarButtonItem *booklistButton;
@@ -70,7 +68,6 @@
 @property (nonatomic, retain) UIPopoverController *bookmarkPopoverController;
 @property (nonatomic, retain) UIPopoverController *booklistPopoverController;
 @property (nonatomic, retain) UIPopoverController *dictionaryPopoverController;
-@property (nonatomic, retain) ContentViewController *contentViewController;
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *searchButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *languageButton;

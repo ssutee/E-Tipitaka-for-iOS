@@ -25,7 +25,7 @@
 @property(assign) NSInteger fontSize;
 @property(assign) BOOL pageFunctionUsed;
 
-@property(nonatomic, retain) ContentViewController *contentViewController;   
+@property(assign) ContentViewController *contentViewController;   
 
 @property(nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property(nonatomic, retain) NSMutableArray *viewControllers;
@@ -39,6 +39,9 @@
 -(void) updateReadingPage;
 -(void) updatePageTitle:(NSString *)language volume:(NSNumber *)volume page:(NSNumber *)page;
 -(void) reloadData;
+
+- (void)initScrollViewWithCurrentPage;
+- (BOOL)prepareScrollViewForPage:(int)page;
 
 -(void) dismissAllPopoverControllers;
 

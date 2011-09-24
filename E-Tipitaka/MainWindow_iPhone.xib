@@ -73,12 +73,12 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="678932467">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="878649012">
-						<string key="IBUITitle">ค้นหา</string>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="535001584">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="634230810">
+						<string key="IBUITitle">บาลี-ไทย</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">06-magnify.png</string>
+							<string key="NSResourceName">icon_document.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -90,10 +90,11 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="797244622">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="997591303">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
+						<string key="NSReuseIdentifierKey">_NS:425</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -102,13 +103,13 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="729946846">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="721155885">
-								<string key="IBUITitle">ค้นหา</string>
+						<object class="IBUIViewController" id="542456865">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="91579976">
+								<string key="IBUITitle">พจนานุกรม บาลี-ไทย</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="678932467"/>
-							<string key="IBUINibName">SearchViewController</string>
+							<reference key="IBUIParentViewController" ref="535001584"/>
+							<string key="IBUINibName">DictionaryListView_iPad</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -165,7 +166,51 @@
 							</object>
 						</object>
 					</object>
-					<reference ref="678932467"/>
+					<object class="IBUINavigationController" id="678932467">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="878649012">
+							<string key="IBUITitle">ค้นหา</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">06-magnify.png</string>
+							</object>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						</object>
+						<reference key="IBUIParentViewController" ref="555167307"/>
+						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+							<int key="IBUIInterfaceOrientation">1</int>
+							<int key="interfaceOrientation">1</int>
+						</object>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIHorizontal">NO</bool>
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="797244622">
+							<nil key="NSNextResponder"/>
+							<int key="NSvFlags">256</int>
+							<string key="NSFrameSize">{0, 0}</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<bool key="IBUIClipsSubviews">YES</bool>
+							<bool key="IBUIMultipleTouchEnabled">YES</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<int key="IBUIBarStyle">1</int>
+						</object>
+						<object class="NSMutableArray" key="IBUIViewControllers">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBUIViewController" id="729946846">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="721155885">
+									<string key="IBUITitle">ค้นหา</string>
+									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								</object>
+								<reference key="IBUIParentViewController" ref="678932467"/>
+								<string key="IBUINibName">SearchViewController</string>
+								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+									<int key="IBUIInterfaceOrientation">1</int>
+									<int key="interfaceOrientation">1</int>
+								</object>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<bool key="IBUIHorizontal">NO</bool>
+							</object>
+						</object>
+					</object>
 					<object class="IBUINavigationController" id="675512142">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="339020944">
 							<string key="IBUITitle">รายการบันทึก</string>
@@ -211,6 +256,7 @@
 							</object>
 						</object>
 					</object>
+					<reference ref="535001584"/>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="812912661">
 					<reference key="NSNextResponder"/>
@@ -297,6 +343,7 @@
 							<reference ref="675512142"/>
 							<reference ref="678932467"/>
 							<reference ref="397995530"/>
+							<reference ref="535001584"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -410,6 +457,41 @@
 						<reference key="object" ref="319663326"/>
 						<reference key="parent" ref="397995530"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">45</int>
+						<reference key="object" ref="535001584"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="997591303"/>
+							<reference ref="542456865"/>
+							<reference ref="634230810"/>
+						</object>
+						<reference key="parent" ref="555167307"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">46</int>
+						<reference key="object" ref="997591303"/>
+						<reference key="parent" ref="535001584"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">47</int>
+						<reference key="object" ref="542456865"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="91579976"/>
+						</object>
+						<reference key="parent" ref="535001584"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">48</int>
+						<reference key="object" ref="91579976"/>
+						<reference key="parent" ref="542456865"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">49</int>
+						<reference key="object" ref="634230810"/>
+						<reference key="parent" ref="535001584"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -445,6 +527,12 @@
 					<string>4.CustomClassName</string>
 					<string>4.IBPluginDependency</string>
 					<string>40.IBPluginDependency</string>
+					<string>45.IBPluginDependency</string>
+					<string>46.IBPluginDependency</string>
+					<string>47.CustomClassName</string>
+					<string>47.IBPluginDependency</string>
+					<string>48.IBPluginDependency</string>
+					<string>49.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
@@ -483,6 +571,12 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>DictionaryListViewController</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -497,7 +591,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">40</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -519,12 +613,14 @@
 				<string>06-magnify.png</string>
 				<string>179-notepad.png</string>
 				<string>28-star.png</string>
+				<string>icon_document.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{24, 24}</string>
 				<string>{22, 28}</string>
 				<string>{26, 26}</string>
+				<string>{30, 30}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">534</string>
