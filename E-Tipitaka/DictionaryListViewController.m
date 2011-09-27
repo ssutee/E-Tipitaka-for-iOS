@@ -208,6 +208,8 @@
 {
     [super viewDidLoad];
     
+    self.searchBar.showsCancelButton = YES;
+    
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
 
     isBlank = YES;
@@ -416,6 +418,13 @@
 
 - (void)searchBar:(UISearchBar *)aSearchBar textDidChange:(NSString *)searchTerm {
     [self handleSearchForTerm:searchTerm];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [self.searchBar resignFirstResponder];
+    self.searchBar.text = @"";
+    [self handleSearchForTerm:@""];
 }
 
 @end

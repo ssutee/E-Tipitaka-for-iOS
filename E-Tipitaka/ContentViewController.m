@@ -53,6 +53,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];        
+    [self.view bringSubviewToFront:self.indictor];
 }
 
 - (void)viewDidUnload
@@ -148,9 +149,15 @@
         [aWebView stringByEvaluatingJavaScriptFromString:
          [NSString stringWithFormat:@"window.scrollTo(0,%d);", scrollPosition]];        
 	}
-    [self.indictor stopAnimating];
-    self.indictor.hidden = YES;
     [aWebView scalesPageToFit];
+    [self.indictor stopAnimating];
+    self.indictor.hidden = YES;    
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    self.indictor.hidden = NO;
+    [self.indictor startAnimating];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
