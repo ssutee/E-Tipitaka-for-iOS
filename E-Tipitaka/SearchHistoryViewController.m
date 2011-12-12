@@ -66,7 +66,7 @@
 
 -(void) loadMoreData:(NSArray *)histories loadedData:(NSMutableArray *)table 
                 from:(NSUInteger)start to:(NSUInteger)end {
-
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     for (int row=start; row < end; row++) {
         if (row >= [histories count]) {
             break;
@@ -89,9 +89,12 @@
         [detailTable setValue:[Utils arabic2thai:text] forKey:history.keywords];
         [text release];        
     }
+    [pool drain];
 }
 
 -(void) reloadData {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     NSManagedObjectContext *ctx = [[NSManagedObjectContext alloc] init];
     E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [ctx setPersistentStoreCoordinator:[appDelegate persistentStoreCoordinator]];
@@ -134,6 +137,8 @@
     [dict release];    
     
     [self.tableView reloadData];
+    
+    [pool drain];
 }
 
 -(BOOL) hidesBottomBarWhenPushed {
@@ -270,7 +275,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
-            [NSThread sleepForTimeInterval:0.5];
+            [NSThread sleepForTimeInterval:0.25];
             [self loadMoreData:historyData loadedData:loadedData 
                           from:[loadedData count] to:[loadedData count]+10];
             loading = NO;
