@@ -54,6 +54,9 @@
 {
     [super viewDidLoad];        
     [self.view bringSubviewToFront:self.indictor];
+    for (id subview in self.webView.subviews)
+        if ([[subview class] isSubclassOfClass: [UIScrollView class]])
+            ((UIScrollView *)subview).bounces = NO;    
 }
 
 - (void)viewDidUnload
