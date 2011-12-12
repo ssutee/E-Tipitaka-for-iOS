@@ -505,7 +505,6 @@
 		9E6696E3134B15C900B9E0F4 = {
 			isa = PBXGroup;
 			children = (
-				9E1721F51366C4C00011891C /* libz.1.2.3.dylib */,
 				9EC2A853136267FA0082BBB7 /* Entitlements.plist */,
 				9E6696FA134B15CA00B9E0F4 /* E-Tipitaka */,
 				9E4B9C8E1419B571000DD263 /* Tests */,
@@ -526,6 +525,7 @@
 		9E6696F1134B15CA00B9E0F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E1721F51366C4C00011891C /* libz.1.2.3.dylib */,
 				9E4B9CB21419BACC000DD263 /* GHUnitIOS.framework */,
 				9E6696F2134B15CA00B9E0F4 /* UIKit.framework */,
 				9E6696F4134B15CA00B9E0F4 /* Foundation.framework */,

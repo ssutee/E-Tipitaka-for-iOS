@@ -563,7 +563,6 @@
     info.begin = YES;
     [info setType:LANGUAGE|VOLUME|PAGE|BEGIN];
     NSArray *items = [QueryHelper getItems:info];
-    [info release];
     
 	if (items && [items count] > 0) {
 		[self showItemOptions:items 
@@ -578,6 +577,7 @@
                         withTitle:@"โปรดเลือกข้อที่ต้องการจดบันทึก"];
 		}
 	}
+    [info release];
 }
 
 -(void)updateLanguageButtonTitle {
