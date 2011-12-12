@@ -22,6 +22,7 @@
 @synthesize stageImages;
 @synthesize tableView;
 @synthesize sortingControl;
+@synthesize backgroundManagedObjectContext = _backgroundManagedObjectContext;
 
 -(IBAction)toggleEdit:(id)sender {
 	[self.tableView setEditing:!self.tableView.editing animated:YES];
@@ -36,31 +37,28 @@
 }
 
 -(void) deleteJunkRecords {
-	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
-	
-	NSManagedObjectContext *context = [appDelegate managedObjectContext];
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	
 	NSEntityDescription *entity = [NSEntityDescription 
 								   entityForName:@"History" 
-								   inManagedObjectContext:context];	
+								   inManagedObjectContext:self.backgroundManagedObjectContext];	
 	[fetchRequest setEntity:entity];
 	NSPredicate *pred = [NSPredicate
                          predicateWithFormat:@"(lang == nil)"];
 	
 	[fetchRequest setPredicate:pred];
         
-	NSError *error1;			
-	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error1];
+	NSError *fetchError;			
+	NSArray *fetchedObjects = [self.backgroundManagedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
     [fetchRequest release];
 
-	NSError *error2;    
+	NSError *saveError;    
     for (History *history in fetchedObjects) {
         if ([history.contents count] == 0) {
             NSLog(@"delete %@", history.keywords);
-            [context deleteObject:history];
-            if (![context save:&error2]) {
-                NSLog(@"Whoops, couldn't save: %@", [error2 localizedDescription]);
+            [self.backgroundManagedObjectContext deleteObject:history];
+            if (![self.backgroundManagedObjectContext save:&saveError]) {
+                NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
             }                  
         }
     }
@@ -94,17 +92,19 @@
 }
 
 -(void) reloadData {
+    NSManagedObjectContext *ctx = [[NSManagedObjectContext alloc] init];
+    E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [ctx setPersistentStoreCoordinator:[appDelegate persistentStoreCoordinator]];
+    self.backgroundManagedObjectContext = ctx;
+    [ctx release];
     
     [self deleteJunkRecords];
     
-	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
-	
-	NSManagedObjectContext *context = [appDelegate managedObjectContext];
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	
 	NSEntityDescription *entity = [NSEntityDescription 
 								   entityForName:@"History" 
-								   inManagedObjectContext:context];	
+								   inManagedObjectContext:self.backgroundManagedObjectContext];	
 	[fetchRequest setEntity:entity];
 	NSPredicate *pred = [NSPredicate 
                          predicateWithFormat:@"(lang == %@)",
@@ -119,7 +119,7 @@
     [sortDescriptor release];
     
 	NSError *error;			
-	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+	NSArray *fetchedObjects = [self.backgroundManagedObjectContext executeFetchRequest:fetchRequest error:&error];
 	[fetchRequest release];
     self.historyData = [[fetchedObjects mutableCopy] autorelease];
 

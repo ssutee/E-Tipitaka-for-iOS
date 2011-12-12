@@ -32,6 +32,7 @@ typedef enum {
 @property(nonatomic, retain) NSArray *stageImages;
 @property(nonatomic, retain) IBOutlet UITableView *tableView;
 @property(nonatomic, retain) IBOutlet UISegmentedControl *sortingControl;
+@property(nonatomic, retain) NSManagedObjectContext *backgroundManagedObjectContext;
 
 -(void) reloadData;
 -(IBAction)toggleEdit:(id)sender;
