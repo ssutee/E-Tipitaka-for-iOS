@@ -99,9 +99,9 @@
             [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dbAlert dismissWithClickedButtonIndex:0 animated:YES];
+                [self reloadData];
+                [self updateReadingPage];
             });
-            [self reloadData];
-            [self updateReadingPage];
         });                     
     } 
 }
