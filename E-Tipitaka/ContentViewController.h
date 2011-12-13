@@ -12,18 +12,15 @@
 
 @interface ContentViewController : UIViewController <UIWebViewDelegate>
 {
-    Content *content;
-    NSString *highlightText;
     NSUInteger itemNumber;
     NSUInteger fontSize;
     NSUInteger scrollPosition;
     BOOL scrollToItemNumber;
     BOOL scrollToHighlightText;
-
 }
 
-@property (assign) Content *content;
-@property (assign) NSString *highlightText;
+@property (nonatomic, retain) Content *content;
+@property (nonatomic, retain) NSString *highlightText;
 @property (assign) NSUInteger itemNumber;
 @property (assign) NSUInteger fontSize;
 @property (assign) NSUInteger scrollPosition;

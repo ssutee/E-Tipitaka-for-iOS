@@ -17,8 +17,8 @@
 
 @implementation ContentViewController
 
-@synthesize content;
-@synthesize highlightText;
+@synthesize content = _content;
+@synthesize highlightText = _highlightText;
 @synthesize itemNumber;
 @synthesize fontSize;
 @synthesize scrollPosition;
@@ -39,6 +39,8 @@
 {
     [_indictor release];
     [_webView release];
+    [_content release];
+    [_highlightText release];
     [super dealloc];
 }
 
@@ -76,11 +78,11 @@
 
 -(NSString *)markHighlight:(NSString *)text
 {
-    if (!highlightText) {
+    if (!self.highlightText) {
         return text;
     }
     
-    NSArray *tokens = [highlightText componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray *tokens = [self.highlightText componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     for(NSString *token in tokens) {
         token = [token stringByReplacingOccurrencesOfString:@"+" withString:@" "];
@@ -100,7 +102,7 @@
 
 -(NSString *)anchorItemNumber:(NSString *)text
 {
-    for (Item *item in content.items) {
+    for (Item *item in self.content.items) {
         if ([item.begin boolValue] == YES) {
             NSString *tmp = [[NSString alloc] initWithFormat:@"[%@]", [Utils arabic2thai:[item.number stringValue]]];
             
@@ -116,7 +118,7 @@
 
 -(NSString *)convertContentToHTML
 {
-    NSString *text = [self anchorItemNumber:[self markHighlight:[self convertWhiteSpacesToHTML:content.text]]];
+    NSString *text = [self anchorItemNumber:[self markHighlight:[self convertWhiteSpacesToHTML:self.content.text]]];
     NSString *template = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page" ofType:@"html"] 
                                                    encoding:NSUTF8StringEncoding error:nil];
     NSString *html = [[[NSString alloc] 
