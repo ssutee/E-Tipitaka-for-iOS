@@ -26,7 +26,7 @@
 		9E13897F141B8E7700C350B0 /* UITextInputAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E13897D141B8E7700C350B0 /* UITextInputAlertView.m */; };
 		9E138983141BA32C00C350B0 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E138982141BA32C00C350B0 /* Command.m */; };
 		9E138984141BA32C00C350B0 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E138982141BA32C00C350B0 /* Command.m */; };
-		9E1721F61366C4C00011891C /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1721F51366C4C00011891C /* libz.1.2.3.dylib */; };
+		9E1556C0149726DB00E1044B /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1556BF149726DB00E1044B /* libz.1.2.5.dylib */; };
 		9E1722031366C4F90011891C /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721F91366C4F90011891C /* ioapi.c */; };
 		9E1722041366C4F90011891C /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721FB1366C4F90011891C /* mztools.c */; };
 		9E1722051366C4F90011891C /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E1721FD1366C4F90011891C /* unzip.c */; };
@@ -144,6 +144,7 @@
 		9E13897D141B8E7700C350B0 /* UITextInputAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextInputAlertView.m; sourceTree = "<group>"; };
 		9E138981141BA32C00C350B0 /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.h; sourceTree = "<group>"; };
 		9E138982141BA32C00C350B0 /* Command.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Command.m; sourceTree = "<group>"; };
+		9E1556BF149726DB00E1044B /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		9E1721F51366C4C00011891C /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		9E1721F81366C4F90011891C /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		9E1721F91366C4F90011891C /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
@@ -294,7 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E1721F61366C4C00011891C /* libz.1.2.3.dylib in Frameworks */,
+				9E1556C0149726DB00E1044B /* libz.1.2.5.dylib in Frameworks */,
 				9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */,
 				9E6696F5134B15CA00B9E0F4 /* Foundation.framework in Frameworks */,
 				9E6696F7134B15CA00B9E0F4 /* CoreGraphics.framework in Frameworks */,
@@ -505,6 +506,7 @@
 		9E6696E3134B15C900B9E0F4 = {
 			isa = PBXGroup;
 			children = (
+				9E1556BF149726DB00E1044B /* libz.1.2.5.dylib */,
 				9EC2A853136267FA0082BBB7 /* Entitlements.plist */,
 				9E6696FA134B15CA00B9E0F4 /* E-Tipitaka */,
 				9E4B9C8E1419B571000DD263 /* Tests */,
@@ -640,6 +642,9 @@
 /* Begin PBXProject section */
 		9E6696E5134B15C900B9E0F4 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 9E6696E8134B15C900B9E0F4 /* Build configuration list for PBXProject "E-Tipitaka" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -843,6 +848,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -867,6 +873,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -892,6 +899,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -917,6 +925,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -972,6 +981,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -986,6 +996,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1019,6 +1030,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1054,6 +1066,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
