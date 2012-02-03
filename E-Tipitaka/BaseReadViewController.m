@@ -371,12 +371,12 @@
     self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * currentMaxPages, self.contentView.frame.size.height);
     [self recomputeFrameSize];
     
-    int page = [[self getCurrentPage] intValue];           
+    int page = [[self getCurrentPage] intValue];
     ContentViewController *controller = [self.viewControllers objectAtIndex:page-1];
-    [controller.webView scalesPageToFit];
-    [self updateReadingPage];
-
-    
+    if ((NSNull *)controller != [NSNull null]) {
+        [controller.webView scalesPageToFit];
+    }
+    [self updateReadingPage];    
 }
 
 - (void) dismissAllPopoverControllers {

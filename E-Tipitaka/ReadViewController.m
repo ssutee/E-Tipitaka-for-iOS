@@ -244,8 +244,8 @@
 
 - (void) doCompare:(NSInteger)buttonIndex {
     
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];        
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && UIDeviceOrientationIsPortrait(orientation)) {
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && UIInterfaceOrientationIsPortrait(orientation)) {
         UIAlertView *alert = [[UIAlertView alloc] 
                               initWithTitle:@"การเทียบเคียงไม่สามารถใช้ในแนวตั้ง" message:@"กรุณาหมุนจอเป็นแนวนอน" 
                               delegate:nil cancelButtonTitle:@"ตกลง" otherButtonTitles:nil, nil];

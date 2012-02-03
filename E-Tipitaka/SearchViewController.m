@@ -15,17 +15,37 @@
 #import "Utils.h"
 #import "SearchHistoryViewController.h"
 
+@interface SearchViewController()
+
+@property (nonatomic, strong) MBProgressHUD *HUD;
+
+@end
+
+
 @implementation SearchViewController
 
 @synthesize table;
 @synthesize search;
-@synthesize progressBar;
 @synthesize results;
 @synthesize categories;
 @synthesize clickedItems;
 @synthesize keywords;
 @synthesize scope;
 @synthesize readViewController;
+@synthesize HUD = _HUD;
+
+- (MBProgressHUD *) HUD
+{
+    if (_HUD == nil) {
+        _HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        _HUD.delegate = self;
+        _HUD.labelText = @"กำลังค้นหา";
+        _HUD.mode = MBProgressHUDModeDeterminate;
+        _HUD.dimBackground = YES;
+    }
+    return _HUD;
+}
+
 
 -(IBAction)toggleLanguage:(id)sender {
     if(self.search.selectedScopeButtonIndex == kThaiScope) {
@@ -99,7 +119,7 @@
 	[dict release];
 	
 	[table reloadData];
-	self.progressBar.hidden = YES;
+//	self.progressBar.hidden = YES;
 }
 
 -(void) loadHistory:(History *)history {
@@ -187,8 +207,8 @@
 	[self resetSearch];
 	self.search.userInteractionEnabled = NO;
 	self.search.alpha = 0.8;
-	self.progressBar.hidden = NO;
-	self.progressBar.progress = 0.0;
+//	self.progressBar.hidden = NO;
+//	self.progressBar.progress = 0.0;
 
     self.navigationItem.leftBarButtonItem.enabled = NO;
 
@@ -199,7 +219,9 @@
 	[string release];
 	
 	NSArray *tokens = [searchTerm componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-	
+	[self.view addSubview:self.HUD];
+    self.HUD.progress = 0.0f;
+    [self.HUD show:YES];
 	dispatch_async(dispatch_get_global_queue(0, 0), ^{
 		E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];			
 		NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -350,12 +372,14 @@
 			
 			
 			dispatch_async(dispatch_get_main_queue(), ^{
-				self.progressBar.progress += (1.0/45.0);
+//				self.progressBar.progress += (1.0/45.0);
+                self.HUD.progress += (1.0/45.0);
 				if (i == 45) {
 					//search.hidden = NO;
 					self.search.userInteractionEnabled = YES;
 					self.search.alpha = 1.0;
-					self.progressBar.hidden = YES;
+                    [self.HUD hide:YES];
+//					self.progressBar.hidden = YES;
 
                     self.navigationItem.leftBarButtonItem.enabled = YES;                    
 
@@ -388,11 +412,10 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 
-    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 4.0f);
-    progressBar.transform = transform;
+//    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 4.0f);
+//    progressBar.transform = transform;
     
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
-
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     self.clickedItems = array;
@@ -464,7 +487,6 @@
     // e.g. self.myOutlet = nil;
 	self.search = nil;
 	self.table = nil;
-	self.progressBar = nil;
 	self.categories = nil;
 	self.results = nil;
 	self.keywords = nil;
@@ -479,7 +501,6 @@
 //                                                  object:nil];
 	[table release];
 	[search release];
-	[progressBar release];
 	[categories release];
     [clickedItems release];
 	[results release];
@@ -795,6 +816,15 @@
     }
     [item release];
 }
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    [self.HUD removeFromSuperview];
+}
+
 
 #pragma mark - 
 #pragma mark Search Bar Delegate Methods 

@@ -182,10 +182,6 @@
         
     History *history = [self.historyData objectAtIndex:senderButton.tag];
     
-	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
-	
-	NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
     if (history.state) {
         history.state = [NSNumber numberWithInteger:([history.state intValue]+1)%4];
     } else {
@@ -193,7 +189,7 @@
     }
     
 	NSError *error;    
-    if (![context save:&error]) {
+    if (![self.backgroundManagedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
     
@@ -243,7 +239,6 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    loading = YES;
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
     
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
@@ -268,6 +263,10 @@
     self.sortingControl.enabled = NO;
     self.sortingControl.alpha = 0.2;
 
+    if ([historyData count] > 0 && [loadedData count] != [historyData count]) {
+        loading = YES;
+    }
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{        
         [self reloadData];
         while ([historyData count] != [loadedData count]) {

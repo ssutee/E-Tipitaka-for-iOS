@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
 @class History;
 
@@ -15,11 +16,11 @@
 
 @class ReadViewController;
 
+
 @interface SearchViewController : UIViewController 
-<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate> {
+<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, MBProgressHUDDelegate> {
 	UITableView *table;
 	UISearchBar *search;
-	UIProgressView *progressBar;
 	NSMutableDictionary *results;
     NSMutableArray *clickedItems;
 	NSMutableArray *categories;
@@ -34,7 +35,6 @@
 @property(nonatomic, retain) ReadViewController *readViewController;
 @property(nonatomic, retain) IBOutlet UITableView *table;
 @property(nonatomic, retain) IBOutlet UISearchBar *search;
-@property(nonatomic, retain) IBOutlet UIProgressView *progressBar;
 @property(nonatomic, retain) NSMutableDictionary *results;
 @property(nonatomic, retain) NSMutableArray *clickedItems;
 @property(nonatomic, retain) NSMutableArray *categories;

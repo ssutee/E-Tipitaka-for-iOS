@@ -306,6 +306,13 @@
     [super viewWillAppear:animated];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    CGRect frame = self.view.frame;    
+    self.sourceController.view.frame = CGRectMake(0, 0, (frame.size.width/2)-1, frame.size.height);
+    self.targetController.view.frame = CGRectMake((frame.size.width/2)+1, 0, (frame.size.width/2)-1, frame.size.height);    
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -314,7 +321,8 @@
     
     CGRect frame = self.view.frame;    
     self.sourceController.view.frame = CGRectMake(0, 0, (frame.size.width/2)-1, frame.size.height);
-    self.targetController.view.frame = CGRectMake((frame.size.width/2)+1, 0, (frame.size.width/2)-1, frame.size.height);
+    self.targetController.view.frame = CGRectMake((frame.size.width/2)+1, 0, (frame.size.width/2)-1, frame.size.height);    
+    
     
     [self.view addSubview:self.sourceController.view];
     [self.view addSubview:self.targetController.view];
@@ -388,6 +396,7 @@
 {
     // Return YES for supported orientations
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+//    return YES;
 }
 
 #pragma mark -

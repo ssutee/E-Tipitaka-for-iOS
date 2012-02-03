@@ -7,7 +7,6 @@
 //
 
 #import "E_TipitakaAppDelegate.h"
-#import "ZipArchive.h"
 
 @implementation E_TipitakaAppDelegate
 
@@ -48,7 +47,9 @@
                 NSLog(@"Failed to delete existing database file, %@, %@", error, [error userInfo]);
             }
         }
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];                       
+        [pool drain];
     }    
         
 }
