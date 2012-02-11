@@ -17,7 +17,6 @@
 		9E10C57D141B1C5F005E60FC /* ContentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C57B141B1C5F005E60FC /* ContentInfo.m */; };
 		9E10C580141B2BE6005E60FC /* ContentInfoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C57F141B2BE6005E60FC /* ContentInfoType.m */; };
 		9E10C581141B2BE6005E60FC /* ContentInfoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C57F141B2BE6005E60FC /* ContentInfoType.m */; };
-		9E10EA7813C88B6800DCA4B4 /* E_Tipitaka.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 9E10EA7713C88B6800DCA4B4 /* E_Tipitaka.sqlite */; };
 		9E13896B141B750C00C350B0 /* BaseReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E13896A141B750C00C350B0 /* BaseReadViewController.m */; };
 		9E13896C141B750C00C350B0 /* BaseReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E13896A141B750C00C350B0 /* BaseReadViewController.m */; };
 		9E138975141B80EB00C350B0 /* PadReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E138974141B80EB00C350B0 /* PadReadViewController.m */; };
@@ -46,6 +45,96 @@
 		9E326FFA138F6EBE00ED66AE /* stage_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FF6138F6EBE00ED66AE /* stage_04.png */; };
 		9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D7137862D00092521B /* Icon-Small@2x.png */; };
 		9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D8137862D00092521B /* Icon-Small-50.png */; };
+		9E45562114E646E60079F276 /* pali_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555C714E646E60079F276 /* pali_01.json */; };
+		9E45562214E646E60079F276 /* pali_02.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555C814E646E60079F276 /* pali_02.json */; };
+		9E45562314E646E60079F276 /* pali_03.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555C914E646E60079F276 /* pali_03.json */; };
+		9E45562414E646E60079F276 /* pali_04.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555CA14E646E60079F276 /* pali_04.json */; };
+		9E45562514E646E60079F276 /* pali_05.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555CB14E646E60079F276 /* pali_05.json */; };
+		9E45562614E646E60079F276 /* pali_06.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555CC14E646E60079F276 /* pali_06.json */; };
+		9E45562714E646E60079F276 /* pali_07.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555CD14E646E60079F276 /* pali_07.json */; };
+		9E45562814E646E60079F276 /* pali_08.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555CE14E646E60079F276 /* pali_08.json */; };
+		9E45562914E646E60079F276 /* pali_09.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555CF14E646E60079F276 /* pali_09.json */; };
+		9E45562A14E646E60079F276 /* pali_10.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D014E646E60079F276 /* pali_10.json */; };
+		9E45562B14E646E60079F276 /* pali_11.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D114E646E60079F276 /* pali_11.json */; };
+		9E45562C14E646E60079F276 /* pali_12.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D214E646E60079F276 /* pali_12.json */; };
+		9E45562D14E646E60079F276 /* pali_13.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D314E646E60079F276 /* pali_13.json */; };
+		9E45562E14E646E60079F276 /* pali_14.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D414E646E60079F276 /* pali_14.json */; };
+		9E45562F14E646E60079F276 /* pali_15.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D514E646E60079F276 /* pali_15.json */; };
+		9E45563014E646E60079F276 /* pali_16.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D614E646E60079F276 /* pali_16.json */; };
+		9E45563114E646E60079F276 /* pali_17.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D714E646E60079F276 /* pali_17.json */; };
+		9E45563214E646E60079F276 /* pali_18.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D814E646E60079F276 /* pali_18.json */; };
+		9E45563314E646E60079F276 /* pali_19.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555D914E646E60079F276 /* pali_19.json */; };
+		9E45563414E646E60079F276 /* pali_20.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555DA14E646E60079F276 /* pali_20.json */; };
+		9E45563514E646E60079F276 /* pali_21.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555DB14E646E60079F276 /* pali_21.json */; };
+		9E45563614E646E60079F276 /* pali_22.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555DC14E646E60079F276 /* pali_22.json */; };
+		9E45563714E646E60079F276 /* pali_23.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555DD14E646E60079F276 /* pali_23.json */; };
+		9E45563814E646E60079F276 /* pali_24.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555DE14E646E60079F276 /* pali_24.json */; };
+		9E45563914E646E60079F276 /* pali_25.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555DF14E646E60079F276 /* pali_25.json */; };
+		9E45563A14E646E60079F276 /* pali_26.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E014E646E60079F276 /* pali_26.json */; };
+		9E45563B14E646E60079F276 /* pali_27.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E114E646E60079F276 /* pali_27.json */; };
+		9E45563C14E646E60079F276 /* pali_28.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E214E646E60079F276 /* pali_28.json */; };
+		9E45563D14E646E60079F276 /* pali_29.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E314E646E60079F276 /* pali_29.json */; };
+		9E45563E14E646E60079F276 /* pali_30.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E414E646E60079F276 /* pali_30.json */; };
+		9E45563F14E646E60079F276 /* pali_31.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E514E646E60079F276 /* pali_31.json */; };
+		9E45564014E646E60079F276 /* pali_32.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E614E646E60079F276 /* pali_32.json */; };
+		9E45564114E646E60079F276 /* pali_33.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E714E646E60079F276 /* pali_33.json */; };
+		9E45564214E646E60079F276 /* pali_34.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E814E646E60079F276 /* pali_34.json */; };
+		9E45564314E646E60079F276 /* pali_35.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555E914E646E60079F276 /* pali_35.json */; };
+		9E45564414E646E60079F276 /* pali_36.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555EA14E646E60079F276 /* pali_36.json */; };
+		9E45564514E646E60079F276 /* pali_37.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555EB14E646E60079F276 /* pali_37.json */; };
+		9E45564614E646E60079F276 /* pali_38.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555EC14E646E60079F276 /* pali_38.json */; };
+		9E45564714E646E60079F276 /* pali_39.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555ED14E646E60079F276 /* pali_39.json */; };
+		9E45564814E646E60079F276 /* pali_40.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555EE14E646E60079F276 /* pali_40.json */; };
+		9E45564914E646E60079F276 /* pali_41.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555EF14E646E60079F276 /* pali_41.json */; };
+		9E45564A14E646E60079F276 /* pali_42.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F014E646E60079F276 /* pali_42.json */; };
+		9E45564B14E646E60079F276 /* pali_43.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F114E646E60079F276 /* pali_43.json */; };
+		9E45564C14E646E60079F276 /* pali_44.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F214E646E60079F276 /* pali_44.json */; };
+		9E45564D14E646E60079F276 /* pali_45.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F314E646E60079F276 /* pali_45.json */; };
+		9E45564E14E646E60079F276 /* thai_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F414E646E60079F276 /* thai_01.json */; };
+		9E45564F14E646E60079F276 /* thai_02.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F514E646E60079F276 /* thai_02.json */; };
+		9E45565014E646E60079F276 /* thai_03.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F614E646E60079F276 /* thai_03.json */; };
+		9E45565114E646E60079F276 /* thai_04.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F714E646E60079F276 /* thai_04.json */; };
+		9E45565214E646E60079F276 /* thai_05.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F814E646E60079F276 /* thai_05.json */; };
+		9E45565314E646E60079F276 /* thai_06.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555F914E646E60079F276 /* thai_06.json */; };
+		9E45565414E646E60079F276 /* thai_07.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555FA14E646E60079F276 /* thai_07.json */; };
+		9E45565514E646E60079F276 /* thai_08.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555FB14E646E60079F276 /* thai_08.json */; };
+		9E45565614E646E60079F276 /* thai_09.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555FC14E646E60079F276 /* thai_09.json */; };
+		9E45565714E646E60079F276 /* thai_10.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555FD14E646E60079F276 /* thai_10.json */; };
+		9E45565814E646E60079F276 /* thai_11.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555FE14E646E60079F276 /* thai_11.json */; };
+		9E45565914E646E60079F276 /* thai_12.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E4555FF14E646E60079F276 /* thai_12.json */; };
+		9E45565A14E646E60079F276 /* thai_13.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560014E646E60079F276 /* thai_13.json */; };
+		9E45565B14E646E60079F276 /* thai_14.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560114E646E60079F276 /* thai_14.json */; };
+		9E45565C14E646E60079F276 /* thai_15.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560214E646E60079F276 /* thai_15.json */; };
+		9E45565D14E646E60079F276 /* thai_16.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560314E646E60079F276 /* thai_16.json */; };
+		9E45565E14E646E60079F276 /* thai_17.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560414E646E60079F276 /* thai_17.json */; };
+		9E45565F14E646E60079F276 /* thai_18.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560514E646E60079F276 /* thai_18.json */; };
+		9E45566014E646E60079F276 /* thai_19.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560614E646E60079F276 /* thai_19.json */; };
+		9E45566114E646E60079F276 /* thai_20.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560714E646E60079F276 /* thai_20.json */; };
+		9E45566214E646E60079F276 /* thai_21.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560814E646E60079F276 /* thai_21.json */; };
+		9E45566314E646E60079F276 /* thai_22.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560914E646E60079F276 /* thai_22.json */; };
+		9E45566414E646E60079F276 /* thai_23.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560A14E646E60079F276 /* thai_23.json */; };
+		9E45566514E646E60079F276 /* thai_24.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560B14E646E60079F276 /* thai_24.json */; };
+		9E45566614E646E60079F276 /* thai_25.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560C14E646E60079F276 /* thai_25.json */; };
+		9E45566714E646E60079F276 /* thai_26.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560D14E646E60079F276 /* thai_26.json */; };
+		9E45566814E646E60079F276 /* thai_27.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560E14E646E60079F276 /* thai_27.json */; };
+		9E45566914E646E60079F276 /* thai_28.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45560F14E646E60079F276 /* thai_28.json */; };
+		9E45566A14E646E60079F276 /* thai_29.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561014E646E60079F276 /* thai_29.json */; };
+		9E45566B14E646E60079F276 /* thai_30.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561114E646E60079F276 /* thai_30.json */; };
+		9E45566C14E646E60079F276 /* thai_31.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561214E646E60079F276 /* thai_31.json */; };
+		9E45566D14E646E60079F276 /* thai_32.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561314E646E60079F276 /* thai_32.json */; };
+		9E45566E14E646E60079F276 /* thai_33.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561414E646E60079F276 /* thai_33.json */; };
+		9E45566F14E646E60079F276 /* thai_34.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561514E646E60079F276 /* thai_34.json */; };
+		9E45567014E646E60079F276 /* thai_35.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561614E646E60079F276 /* thai_35.json */; };
+		9E45567114E646E60079F276 /* thai_36.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561714E646E60079F276 /* thai_36.json */; };
+		9E45567214E646E60079F276 /* thai_37.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561814E646E60079F276 /* thai_37.json */; };
+		9E45567314E646E60079F276 /* thai_38.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561914E646E60079F276 /* thai_38.json */; };
+		9E45567414E646E60079F276 /* thai_39.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561A14E646E60079F276 /* thai_39.json */; };
+		9E45567514E646E60079F276 /* thai_40.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561B14E646E60079F276 /* thai_40.json */; };
+		9E45567614E646E60079F276 /* thai_41.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561C14E646E60079F276 /* thai_41.json */; };
+		9E45567714E646E60079F276 /* thai_42.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561D14E646E60079F276 /* thai_42.json */; };
+		9E45567814E646E60079F276 /* thai_43.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561E14E646E60079F276 /* thai_43.json */; };
+		9E45567914E646E60079F276 /* thai_44.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45561F14E646E60079F276 /* thai_44.json */; };
+		9E45567A14E646E60079F276 /* thai_45.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E45562014E646E60079F276 /* thai_45.json */; };
 		9E4B9C8B1419B571000DD263 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
 		9E4B9C8C1419B571000DD263 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F4134B15CA00B9E0F4 /* Foundation.framework */; };
 		9E4B9C8D1419B571000DD263 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */; };
@@ -131,7 +220,6 @@
 		9E10C57B141B1C5F005E60FC /* ContentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentInfo.m; sourceTree = "<group>"; };
 		9E10C57E141B2BE6005E60FC /* ContentInfoType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentInfoType.h; sourceTree = "<group>"; };
 		9E10C57F141B2BE6005E60FC /* ContentInfoType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentInfoType.m; sourceTree = "<group>"; };
-		9E10EA7713C88B6800DCA4B4 /* E_Tipitaka.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = E_Tipitaka.sqlite; sourceTree = "<group>"; };
 		9E138969141B750C00C350B0 /* BaseReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReadViewController.h; sourceTree = "<group>"; };
 		9E13896A141B750C00C350B0 /* BaseReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReadViewController.m; sourceTree = "<group>"; };
 		9E138973141B80EB00C350B0 /* PadReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PadReadViewController.h; sourceTree = "<group>"; };
@@ -167,6 +255,96 @@
 		9E32700C13908F2E00ED66AE /* E_Tipitaka 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 5.xcdatamodel"; sourceTree = "<group>"; };
 		9E3DA8D7137862D00092521B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		9E3DA8D8137862D00092521B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		9E4555C714E646E60079F276 /* pali_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_01.json; sourceTree = "<group>"; };
+		9E4555C814E646E60079F276 /* pali_02.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_02.json; sourceTree = "<group>"; };
+		9E4555C914E646E60079F276 /* pali_03.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_03.json; sourceTree = "<group>"; };
+		9E4555CA14E646E60079F276 /* pali_04.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_04.json; sourceTree = "<group>"; };
+		9E4555CB14E646E60079F276 /* pali_05.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_05.json; sourceTree = "<group>"; };
+		9E4555CC14E646E60079F276 /* pali_06.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_06.json; sourceTree = "<group>"; };
+		9E4555CD14E646E60079F276 /* pali_07.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_07.json; sourceTree = "<group>"; };
+		9E4555CE14E646E60079F276 /* pali_08.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_08.json; sourceTree = "<group>"; };
+		9E4555CF14E646E60079F276 /* pali_09.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_09.json; sourceTree = "<group>"; };
+		9E4555D014E646E60079F276 /* pali_10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_10.json; sourceTree = "<group>"; };
+		9E4555D114E646E60079F276 /* pali_11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_11.json; sourceTree = "<group>"; };
+		9E4555D214E646E60079F276 /* pali_12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_12.json; sourceTree = "<group>"; };
+		9E4555D314E646E60079F276 /* pali_13.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_13.json; sourceTree = "<group>"; };
+		9E4555D414E646E60079F276 /* pali_14.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_14.json; sourceTree = "<group>"; };
+		9E4555D514E646E60079F276 /* pali_15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_15.json; sourceTree = "<group>"; };
+		9E4555D614E646E60079F276 /* pali_16.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_16.json; sourceTree = "<group>"; };
+		9E4555D714E646E60079F276 /* pali_17.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_17.json; sourceTree = "<group>"; };
+		9E4555D814E646E60079F276 /* pali_18.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_18.json; sourceTree = "<group>"; };
+		9E4555D914E646E60079F276 /* pali_19.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_19.json; sourceTree = "<group>"; };
+		9E4555DA14E646E60079F276 /* pali_20.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_20.json; sourceTree = "<group>"; };
+		9E4555DB14E646E60079F276 /* pali_21.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_21.json; sourceTree = "<group>"; };
+		9E4555DC14E646E60079F276 /* pali_22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_22.json; sourceTree = "<group>"; };
+		9E4555DD14E646E60079F276 /* pali_23.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_23.json; sourceTree = "<group>"; };
+		9E4555DE14E646E60079F276 /* pali_24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_24.json; sourceTree = "<group>"; };
+		9E4555DF14E646E60079F276 /* pali_25.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_25.json; sourceTree = "<group>"; };
+		9E4555E014E646E60079F276 /* pali_26.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_26.json; sourceTree = "<group>"; };
+		9E4555E114E646E60079F276 /* pali_27.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_27.json; sourceTree = "<group>"; };
+		9E4555E214E646E60079F276 /* pali_28.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_28.json; sourceTree = "<group>"; };
+		9E4555E314E646E60079F276 /* pali_29.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_29.json; sourceTree = "<group>"; };
+		9E4555E414E646E60079F276 /* pali_30.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_30.json; sourceTree = "<group>"; };
+		9E4555E514E646E60079F276 /* pali_31.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_31.json; sourceTree = "<group>"; };
+		9E4555E614E646E60079F276 /* pali_32.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_32.json; sourceTree = "<group>"; };
+		9E4555E714E646E60079F276 /* pali_33.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_33.json; sourceTree = "<group>"; };
+		9E4555E814E646E60079F276 /* pali_34.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_34.json; sourceTree = "<group>"; };
+		9E4555E914E646E60079F276 /* pali_35.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_35.json; sourceTree = "<group>"; };
+		9E4555EA14E646E60079F276 /* pali_36.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_36.json; sourceTree = "<group>"; };
+		9E4555EB14E646E60079F276 /* pali_37.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_37.json; sourceTree = "<group>"; };
+		9E4555EC14E646E60079F276 /* pali_38.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_38.json; sourceTree = "<group>"; };
+		9E4555ED14E646E60079F276 /* pali_39.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_39.json; sourceTree = "<group>"; };
+		9E4555EE14E646E60079F276 /* pali_40.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_40.json; sourceTree = "<group>"; };
+		9E4555EF14E646E60079F276 /* pali_41.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_41.json; sourceTree = "<group>"; };
+		9E4555F014E646E60079F276 /* pali_42.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_42.json; sourceTree = "<group>"; };
+		9E4555F114E646E60079F276 /* pali_43.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_43.json; sourceTree = "<group>"; };
+		9E4555F214E646E60079F276 /* pali_44.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_44.json; sourceTree = "<group>"; };
+		9E4555F314E646E60079F276 /* pali_45.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pali_45.json; sourceTree = "<group>"; };
+		9E4555F414E646E60079F276 /* thai_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_01.json; sourceTree = "<group>"; };
+		9E4555F514E646E60079F276 /* thai_02.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_02.json; sourceTree = "<group>"; };
+		9E4555F614E646E60079F276 /* thai_03.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_03.json; sourceTree = "<group>"; };
+		9E4555F714E646E60079F276 /* thai_04.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_04.json; sourceTree = "<group>"; };
+		9E4555F814E646E60079F276 /* thai_05.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_05.json; sourceTree = "<group>"; };
+		9E4555F914E646E60079F276 /* thai_06.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_06.json; sourceTree = "<group>"; };
+		9E4555FA14E646E60079F276 /* thai_07.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_07.json; sourceTree = "<group>"; };
+		9E4555FB14E646E60079F276 /* thai_08.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_08.json; sourceTree = "<group>"; };
+		9E4555FC14E646E60079F276 /* thai_09.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_09.json; sourceTree = "<group>"; };
+		9E4555FD14E646E60079F276 /* thai_10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_10.json; sourceTree = "<group>"; };
+		9E4555FE14E646E60079F276 /* thai_11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_11.json; sourceTree = "<group>"; };
+		9E4555FF14E646E60079F276 /* thai_12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_12.json; sourceTree = "<group>"; };
+		9E45560014E646E60079F276 /* thai_13.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_13.json; sourceTree = "<group>"; };
+		9E45560114E646E60079F276 /* thai_14.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_14.json; sourceTree = "<group>"; };
+		9E45560214E646E60079F276 /* thai_15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_15.json; sourceTree = "<group>"; };
+		9E45560314E646E60079F276 /* thai_16.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_16.json; sourceTree = "<group>"; };
+		9E45560414E646E60079F276 /* thai_17.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_17.json; sourceTree = "<group>"; };
+		9E45560514E646E60079F276 /* thai_18.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_18.json; sourceTree = "<group>"; };
+		9E45560614E646E60079F276 /* thai_19.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_19.json; sourceTree = "<group>"; };
+		9E45560714E646E60079F276 /* thai_20.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_20.json; sourceTree = "<group>"; };
+		9E45560814E646E60079F276 /* thai_21.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_21.json; sourceTree = "<group>"; };
+		9E45560914E646E60079F276 /* thai_22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_22.json; sourceTree = "<group>"; };
+		9E45560A14E646E60079F276 /* thai_23.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_23.json; sourceTree = "<group>"; };
+		9E45560B14E646E60079F276 /* thai_24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_24.json; sourceTree = "<group>"; };
+		9E45560C14E646E60079F276 /* thai_25.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_25.json; sourceTree = "<group>"; };
+		9E45560D14E646E60079F276 /* thai_26.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_26.json; sourceTree = "<group>"; };
+		9E45560E14E646E60079F276 /* thai_27.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_27.json; sourceTree = "<group>"; };
+		9E45560F14E646E60079F276 /* thai_28.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_28.json; sourceTree = "<group>"; };
+		9E45561014E646E60079F276 /* thai_29.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_29.json; sourceTree = "<group>"; };
+		9E45561114E646E60079F276 /* thai_30.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_30.json; sourceTree = "<group>"; };
+		9E45561214E646E60079F276 /* thai_31.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_31.json; sourceTree = "<group>"; };
+		9E45561314E646E60079F276 /* thai_32.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_32.json; sourceTree = "<group>"; };
+		9E45561414E646E60079F276 /* thai_33.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_33.json; sourceTree = "<group>"; };
+		9E45561514E646E60079F276 /* thai_34.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_34.json; sourceTree = "<group>"; };
+		9E45561614E646E60079F276 /* thai_35.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_35.json; sourceTree = "<group>"; };
+		9E45561714E646E60079F276 /* thai_36.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_36.json; sourceTree = "<group>"; };
+		9E45561814E646E60079F276 /* thai_37.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_37.json; sourceTree = "<group>"; };
+		9E45561914E646E60079F276 /* thai_38.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_38.json; sourceTree = "<group>"; };
+		9E45561A14E646E60079F276 /* thai_39.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_39.json; sourceTree = "<group>"; };
+		9E45561B14E646E60079F276 /* thai_40.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_40.json; sourceTree = "<group>"; };
+		9E45561C14E646E60079F276 /* thai_41.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_41.json; sourceTree = "<group>"; };
+		9E45561D14E646E60079F276 /* thai_42.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_42.json; sourceTree = "<group>"; };
+		9E45561E14E646E60079F276 /* thai_43.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_43.json; sourceTree = "<group>"; };
+		9E45561F14E646E60079F276 /* thai_44.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_44.json; sourceTree = "<group>"; };
+		9E45562014E646E60079F276 /* thai_45.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thai_45.json; sourceTree = "<group>"; };
 		9E4B9C891419B571000DD263 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E4B9C901419B571000DD263 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		9E4B9C921419B571000DD263 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -360,7 +538,7 @@
 		9E326FDB138E1BAE00ED66AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9E10EA7713C88B6800DCA4B4 /* E_Tipitaka.sqlite */,
+				9E4555C614E646BD0079F276 /* json */,
 				9E669772134C5DA200B9E0F4 /* Data.plist */,
 				9EA21D0A134F3EBC00C17FD6 /* Pages.plist */,
 				9EA21D0D134F5C6000C17FD6 /* Items.plist */,
@@ -450,6 +628,103 @@
 				9E6697DC134ECC2400B9E0F4 /* Icon.png */,
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		9E4555C614E646BD0079F276 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				9E4555C714E646E60079F276 /* pali_01.json */,
+				9E4555C814E646E60079F276 /* pali_02.json */,
+				9E4555C914E646E60079F276 /* pali_03.json */,
+				9E4555CA14E646E60079F276 /* pali_04.json */,
+				9E4555CB14E646E60079F276 /* pali_05.json */,
+				9E4555CC14E646E60079F276 /* pali_06.json */,
+				9E4555CD14E646E60079F276 /* pali_07.json */,
+				9E4555CE14E646E60079F276 /* pali_08.json */,
+				9E4555CF14E646E60079F276 /* pali_09.json */,
+				9E4555D014E646E60079F276 /* pali_10.json */,
+				9E4555D114E646E60079F276 /* pali_11.json */,
+				9E4555D214E646E60079F276 /* pali_12.json */,
+				9E4555D314E646E60079F276 /* pali_13.json */,
+				9E4555D414E646E60079F276 /* pali_14.json */,
+				9E4555D514E646E60079F276 /* pali_15.json */,
+				9E4555D614E646E60079F276 /* pali_16.json */,
+				9E4555D714E646E60079F276 /* pali_17.json */,
+				9E4555D814E646E60079F276 /* pali_18.json */,
+				9E4555D914E646E60079F276 /* pali_19.json */,
+				9E4555DA14E646E60079F276 /* pali_20.json */,
+				9E4555DB14E646E60079F276 /* pali_21.json */,
+				9E4555DC14E646E60079F276 /* pali_22.json */,
+				9E4555DD14E646E60079F276 /* pali_23.json */,
+				9E4555DE14E646E60079F276 /* pali_24.json */,
+				9E4555DF14E646E60079F276 /* pali_25.json */,
+				9E4555E014E646E60079F276 /* pali_26.json */,
+				9E4555E114E646E60079F276 /* pali_27.json */,
+				9E4555E214E646E60079F276 /* pali_28.json */,
+				9E4555E314E646E60079F276 /* pali_29.json */,
+				9E4555E414E646E60079F276 /* pali_30.json */,
+				9E4555E514E646E60079F276 /* pali_31.json */,
+				9E4555E614E646E60079F276 /* pali_32.json */,
+				9E4555E714E646E60079F276 /* pali_33.json */,
+				9E4555E814E646E60079F276 /* pali_34.json */,
+				9E4555E914E646E60079F276 /* pali_35.json */,
+				9E4555EA14E646E60079F276 /* pali_36.json */,
+				9E4555EB14E646E60079F276 /* pali_37.json */,
+				9E4555EC14E646E60079F276 /* pali_38.json */,
+				9E4555ED14E646E60079F276 /* pali_39.json */,
+				9E4555EE14E646E60079F276 /* pali_40.json */,
+				9E4555EF14E646E60079F276 /* pali_41.json */,
+				9E4555F014E646E60079F276 /* pali_42.json */,
+				9E4555F114E646E60079F276 /* pali_43.json */,
+				9E4555F214E646E60079F276 /* pali_44.json */,
+				9E4555F314E646E60079F276 /* pali_45.json */,
+				9E4555F414E646E60079F276 /* thai_01.json */,
+				9E4555F514E646E60079F276 /* thai_02.json */,
+				9E4555F614E646E60079F276 /* thai_03.json */,
+				9E4555F714E646E60079F276 /* thai_04.json */,
+				9E4555F814E646E60079F276 /* thai_05.json */,
+				9E4555F914E646E60079F276 /* thai_06.json */,
+				9E4555FA14E646E60079F276 /* thai_07.json */,
+				9E4555FB14E646E60079F276 /* thai_08.json */,
+				9E4555FC14E646E60079F276 /* thai_09.json */,
+				9E4555FD14E646E60079F276 /* thai_10.json */,
+				9E4555FE14E646E60079F276 /* thai_11.json */,
+				9E4555FF14E646E60079F276 /* thai_12.json */,
+				9E45560014E646E60079F276 /* thai_13.json */,
+				9E45560114E646E60079F276 /* thai_14.json */,
+				9E45560214E646E60079F276 /* thai_15.json */,
+				9E45560314E646E60079F276 /* thai_16.json */,
+				9E45560414E646E60079F276 /* thai_17.json */,
+				9E45560514E646E60079F276 /* thai_18.json */,
+				9E45560614E646E60079F276 /* thai_19.json */,
+				9E45560714E646E60079F276 /* thai_20.json */,
+				9E45560814E646E60079F276 /* thai_21.json */,
+				9E45560914E646E60079F276 /* thai_22.json */,
+				9E45560A14E646E60079F276 /* thai_23.json */,
+				9E45560B14E646E60079F276 /* thai_24.json */,
+				9E45560C14E646E60079F276 /* thai_25.json */,
+				9E45560D14E646E60079F276 /* thai_26.json */,
+				9E45560E14E646E60079F276 /* thai_27.json */,
+				9E45560F14E646E60079F276 /* thai_28.json */,
+				9E45561014E646E60079F276 /* thai_29.json */,
+				9E45561114E646E60079F276 /* thai_30.json */,
+				9E45561214E646E60079F276 /* thai_31.json */,
+				9E45561314E646E60079F276 /* thai_32.json */,
+				9E45561414E646E60079F276 /* thai_33.json */,
+				9E45561514E646E60079F276 /* thai_34.json */,
+				9E45561614E646E60079F276 /* thai_35.json */,
+				9E45561714E646E60079F276 /* thai_36.json */,
+				9E45561814E646E60079F276 /* thai_37.json */,
+				9E45561914E646E60079F276 /* thai_38.json */,
+				9E45561A14E646E60079F276 /* thai_39.json */,
+				9E45561B14E646E60079F276 /* thai_40.json */,
+				9E45561C14E646E60079F276 /* thai_41.json */,
+				9E45561D14E646E60079F276 /* thai_42.json */,
+				9E45561E14E646E60079F276 /* thai_43.json */,
+				9E45561F14E646E60079F276 /* thai_44.json */,
+				9E45562014E646E60079F276 /* thai_45.json */,
+			);
+			name = json;
 			sourceTree = "<group>";
 		};
 		9E4B9C8E1419B571000DD263 /* Tests */ = {
@@ -702,13 +977,102 @@
 				9E326FF8138F6EBE00ED66AE /* stage_02.png in Resources */,
 				9E326FF9138F6EBE00ED66AE /* stage_03.png in Resources */,
 				9E326FFA138F6EBE00ED66AE /* stage_04.png in Resources */,
-				9E10EA7813C88B6800DCA4B4 /* E_Tipitaka.sqlite in Resources */,
 				9EAF954C13D163D30010CABD /* PaliThai.plist in Resources */,
 				9EAF955B13D1AD540010CABD /* DictionaryListView_iPad.xib in Resources */,
 				9E61E401140C8354009A5FD0 /* page.html in Resources */,
 				9E10C31B141A65DD005E60FC /* ContentView.xib in Resources */,
 				9E6851FD142E2D52001D458C /* icon_document.png in Resources */,
 				9E803C3814DB788600EBCEAA /* Settings.bundle in Resources */,
+				9E45562114E646E60079F276 /* pali_01.json in Resources */,
+				9E45562214E646E60079F276 /* pali_02.json in Resources */,
+				9E45562314E646E60079F276 /* pali_03.json in Resources */,
+				9E45562414E646E60079F276 /* pali_04.json in Resources */,
+				9E45562514E646E60079F276 /* pali_05.json in Resources */,
+				9E45562614E646E60079F276 /* pali_06.json in Resources */,
+				9E45562714E646E60079F276 /* pali_07.json in Resources */,
+				9E45562814E646E60079F276 /* pali_08.json in Resources */,
+				9E45562914E646E60079F276 /* pali_09.json in Resources */,
+				9E45562A14E646E60079F276 /* pali_10.json in Resources */,
+				9E45562B14E646E60079F276 /* pali_11.json in Resources */,
+				9E45562C14E646E60079F276 /* pali_12.json in Resources */,
+				9E45562D14E646E60079F276 /* pali_13.json in Resources */,
+				9E45562E14E646E60079F276 /* pali_14.json in Resources */,
+				9E45562F14E646E60079F276 /* pali_15.json in Resources */,
+				9E45563014E646E60079F276 /* pali_16.json in Resources */,
+				9E45563114E646E60079F276 /* pali_17.json in Resources */,
+				9E45563214E646E60079F276 /* pali_18.json in Resources */,
+				9E45563314E646E60079F276 /* pali_19.json in Resources */,
+				9E45563414E646E60079F276 /* pali_20.json in Resources */,
+				9E45563514E646E60079F276 /* pali_21.json in Resources */,
+				9E45563614E646E60079F276 /* pali_22.json in Resources */,
+				9E45563714E646E60079F276 /* pali_23.json in Resources */,
+				9E45563814E646E60079F276 /* pali_24.json in Resources */,
+				9E45563914E646E60079F276 /* pali_25.json in Resources */,
+				9E45563A14E646E60079F276 /* pali_26.json in Resources */,
+				9E45563B14E646E60079F276 /* pali_27.json in Resources */,
+				9E45563C14E646E60079F276 /* pali_28.json in Resources */,
+				9E45563D14E646E60079F276 /* pali_29.json in Resources */,
+				9E45563E14E646E60079F276 /* pali_30.json in Resources */,
+				9E45563F14E646E60079F276 /* pali_31.json in Resources */,
+				9E45564014E646E60079F276 /* pali_32.json in Resources */,
+				9E45564114E646E60079F276 /* pali_33.json in Resources */,
+				9E45564214E646E60079F276 /* pali_34.json in Resources */,
+				9E45564314E646E60079F276 /* pali_35.json in Resources */,
+				9E45564414E646E60079F276 /* pali_36.json in Resources */,
+				9E45564514E646E60079F276 /* pali_37.json in Resources */,
+				9E45564614E646E60079F276 /* pali_38.json in Resources */,
+				9E45564714E646E60079F276 /* pali_39.json in Resources */,
+				9E45564814E646E60079F276 /* pali_40.json in Resources */,
+				9E45564914E646E60079F276 /* pali_41.json in Resources */,
+				9E45564A14E646E60079F276 /* pali_42.json in Resources */,
+				9E45564B14E646E60079F276 /* pali_43.json in Resources */,
+				9E45564C14E646E60079F276 /* pali_44.json in Resources */,
+				9E45564D14E646E60079F276 /* pali_45.json in Resources */,
+				9E45564E14E646E60079F276 /* thai_01.json in Resources */,
+				9E45564F14E646E60079F276 /* thai_02.json in Resources */,
+				9E45565014E646E60079F276 /* thai_03.json in Resources */,
+				9E45565114E646E60079F276 /* thai_04.json in Resources */,
+				9E45565214E646E60079F276 /* thai_05.json in Resources */,
+				9E45565314E646E60079F276 /* thai_06.json in Resources */,
+				9E45565414E646E60079F276 /* thai_07.json in Resources */,
+				9E45565514E646E60079F276 /* thai_08.json in Resources */,
+				9E45565614E646E60079F276 /* thai_09.json in Resources */,
+				9E45565714E646E60079F276 /* thai_10.json in Resources */,
+				9E45565814E646E60079F276 /* thai_11.json in Resources */,
+				9E45565914E646E60079F276 /* thai_12.json in Resources */,
+				9E45565A14E646E60079F276 /* thai_13.json in Resources */,
+				9E45565B14E646E60079F276 /* thai_14.json in Resources */,
+				9E45565C14E646E60079F276 /* thai_15.json in Resources */,
+				9E45565D14E646E60079F276 /* thai_16.json in Resources */,
+				9E45565E14E646E60079F276 /* thai_17.json in Resources */,
+				9E45565F14E646E60079F276 /* thai_18.json in Resources */,
+				9E45566014E646E60079F276 /* thai_19.json in Resources */,
+				9E45566114E646E60079F276 /* thai_20.json in Resources */,
+				9E45566214E646E60079F276 /* thai_21.json in Resources */,
+				9E45566314E646E60079F276 /* thai_22.json in Resources */,
+				9E45566414E646E60079F276 /* thai_23.json in Resources */,
+				9E45566514E646E60079F276 /* thai_24.json in Resources */,
+				9E45566614E646E60079F276 /* thai_25.json in Resources */,
+				9E45566714E646E60079F276 /* thai_26.json in Resources */,
+				9E45566814E646E60079F276 /* thai_27.json in Resources */,
+				9E45566914E646E60079F276 /* thai_28.json in Resources */,
+				9E45566A14E646E60079F276 /* thai_29.json in Resources */,
+				9E45566B14E646E60079F276 /* thai_30.json in Resources */,
+				9E45566C14E646E60079F276 /* thai_31.json in Resources */,
+				9E45566D14E646E60079F276 /* thai_32.json in Resources */,
+				9E45566E14E646E60079F276 /* thai_33.json in Resources */,
+				9E45566F14E646E60079F276 /* thai_34.json in Resources */,
+				9E45567014E646E60079F276 /* thai_35.json in Resources */,
+				9E45567114E646E60079F276 /* thai_36.json in Resources */,
+				9E45567214E646E60079F276 /* thai_37.json in Resources */,
+				9E45567314E646E60079F276 /* thai_38.json in Resources */,
+				9E45567414E646E60079F276 /* thai_39.json in Resources */,
+				9E45567514E646E60079F276 /* thai_40.json in Resources */,
+				9E45567614E646E60079F276 /* thai_41.json in Resources */,
+				9E45567714E646E60079F276 /* thai_42.json in Resources */,
+				9E45567814E646E60079F276 /* thai_43.json in Resources */,
+				9E45567914E646E60079F276 /* thai_44.json in Resources */,
+				9E45567A14E646E60079F276 /* thai_45.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
