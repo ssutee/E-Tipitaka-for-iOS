@@ -823,6 +823,7 @@
 - (void)hudWasHidden:(MBProgressHUD *)hud {
     // Remove HUD from screen when the HUD was hidded
     [self.HUD removeFromSuperview];
+    self.HUD = nil;
 }
 
 
