@@ -160,7 +160,7 @@
                 }
                 [za release];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.HUD hide:YES];                    
+                    [self.HUD hide:YES afterDelay:2];   
                     UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Completed" message:@"To complete the process, please restart the program again." delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:nil];    
                     alerView.tag = kQuitAlert;
                     [alerView show];            
@@ -173,7 +173,7 @@
             self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_dialog_alert.png"]];
             self.HUD.mode = MBProgressHUDModeCustomView;        
             self.HUD.labelText = @"Connection Failed";            
-            [self.HUD hide:YES];   
+            [self.HUD hide:YES afterDelay:2];   
             NSLog(@"%@", [request.error localizedDescription]);
             UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Conection Failed" message:[request.error localizedDescription] delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:nil];    
             alerView.tag = kQuitAlert;
