@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "TapDetectingWindow.h"
 #import "BaseReadViewController.h"
+#import "MBProgressHUD.h"
+#import "ASIHTTPRequest.h"
 
 @class Content;
 @class DictionaryListViewController;
@@ -22,11 +24,12 @@
 #define kGotoPageAlert 2001
 #define kGotoItemAlert 2002
 #define kDatabaseAlert 2003
+#define kQuitAlert 2004
 
 #define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
 
 @interface ReadViewController : BaseReadViewController 
-<UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate>
+<UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate, MBProgressHUDDelegate, ASIProgressDelegate>
 {
     TapDetectingWindow *mWindow;
     

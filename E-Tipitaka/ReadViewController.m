@@ -22,6 +22,16 @@
 #import "ContentViewController.h"
 #import "UITextInputAlertView.h"
 #import "Command.h"
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
+#import "ASIHTTPRequest.h"
+#import "ZipArchive.h"
+
+@interface ReadViewController()
+
+@property (nonatomic, retain) MBProgressHUD *HUD;
+
+@end
 
 @implementation ReadViewController
 
@@ -49,10 +59,223 @@
 @synthesize toastText;
 @synthesize pageSlider=_pageSlider;
 @synthesize bottomToolbar;
+@synthesize HUD = _HUD;
+
+#pragma mark - Getter/Setter Methods
+
+-(MBProgressHUD *)HUD
+{
+    if (_HUD == nil) {
+        if (self.tabBarController) {
+            _HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+            [self.tabBarController.view addSubview:_HUD];
+        } else if (self.navigationController) {
+            _HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:_HUD];
+        } else {
+            _HUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.view addSubview:_HUD];
+        }
+        _HUD.dimBackground = YES;
+        _HUD.delegate = self;
+    }
+    return _HUD;
+}
+
+#pragma mark - MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    [self.HUD removeFromSuperview];
+	self.HUD = nil;
+}
 
 #pragma mark - General Methods
 
--(void) prepareDatabase {
+
+-(void) request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes
+{
+    float progress = 1.0f * ([request partialDownloadSize]+[request totalBytesRead])/([request contentLength]+[request partialDownloadSize]);    
+    self.HUD.progress = progress;
+    NSLog(@"%f", progress);
+}
+
+-(void) prepareDatabaseByDownloadingFromInternet
+{
+    ContentInfo *thaiInfo = [[ContentInfo alloc] init];
+    ContentInfo *paliInfo = [[ContentInfo alloc] init];    
+    thaiInfo.language = @"Thai";
+    thaiInfo.volume = [NSNumber numberWithInt:1];
+    thaiInfo.page = [NSNumber numberWithInt:1];
+    [thaiInfo setType:(LANGUAGE|VOLUME|PAGE)];
+    
+    paliInfo.language = @"Pali";
+    paliInfo.volume = [NSNumber numberWithInt:1];
+    paliInfo.page = [NSNumber numberWithInt:1];    
+    [paliInfo setType:(LANGUAGE|VOLUME|PAGE)];
+    
+    NSArray *thaiContents = [QueryHelper getContents:thaiInfo];
+    NSArray *paliContents = [QueryHelper getContents:paliInfo];
+    
+    if(!thaiContents.count || !paliContents.count) {      
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
+        
+        NSString *cacheDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *compressedDBPath = [cacheDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite.zip"];
+        NSError *error = nil;
+        
+        if (![fileManager removeItemAtPath:writableDBPath error:&error]) {
+            NSLog(@"Failed to delete existing database file, %@, %@", [error localizedDescription], [error userInfo]);
+        }
+        
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://download.watnapahpong.org/data/etipitaka/ios/E_Tipitaka.sqlite.zip"]];
+        request.allowResumeForFileDownloads = YES;
+        request.allowCompressedResponse = YES;
+        request.downloadDestinationPath = compressedDBPath;
+        request.temporaryFileDownloadPath = [compressedDBPath stringByAppendingPathExtension:@"download"];
+        request.showAccurateProgress = YES;
+        request.downloadProgressDelegate = self;
+        
+        self.HUD.mode = MBProgressHUDModeDeterminate;
+        self.HUD.labelText = @"กำลังดาว์นโหลดฐานข้อมูล";
+        self.HUD.progress = 0.0f;
+        [self.HUD show:YES];
+        [request startAsynchronous];
+        [request setCompletionBlock:^{
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                ZipArchive *za = [[ZipArchive alloc] init];            
+                if ([za UnzipOpenFile:compressedDBPath]) {
+                    self.HUD.mode = MBProgressHUDModeIndeterminate;
+                    self.HUD.labelText = @"กำลังขยายฐานข้อมูล";
+                    if ([za UnzipFileTo:documentsDirectory overWrite:YES]) {
+                        NSError *error = nil;
+                        if(![fileManager removeItemAtPath:compressedDBPath error:&error]) {
+                            NSLog(@"Failed to delete compressed database file, %@, %@", [error localizedDescription], [error userInfo]);
+                        }
+                        self.HUD.labelText = @"Completed";
+                        self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                        self.HUD.mode = MBProgressHUDModeCustomView;
+                    }
+                }
+                [za release];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.HUD hide:YES afterDelay:2];   
+                    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Completed" message:@"To complete the process, please restart the program again." delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:nil];    
+                    alerView.tag = kQuitAlert;
+                    [alerView show];            
+                    [alerView release];
+                });                
+            });
+        }];
+
+        [request setFailedBlock:^{
+            self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_dialog_alert.png"]];
+            self.HUD.mode = MBProgressHUDModeCustomView;        
+            self.HUD.labelText = @"Connection Failed";            
+            [self.HUD hide:YES afterDelay:2];   
+            NSLog(@"%@", [request.error localizedDescription]);
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Conection Failed" message:[request.error localizedDescription] delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:nil];    
+            alerView.tag = kQuitAlert;
+            [alerView show];            
+            [alerView release];
+        }];
+    }
+    
+    [thaiInfo release];
+    [paliInfo release];    
+}
+
+
+- (void)mergeChanges:(NSNotification *)notification
+{
+    E_TipitakaAppDelegate *application = [[UIApplication sharedApplication] delegate];
+    [application.managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:notification waitUntilDone:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:notification.object];    
+}
+
+// this method is too slow
+-(void) prepareDatabaseByPopulatingFromJSONFiles {
+    ContentInfo *thaiInfo = [[ContentInfo alloc] init];
+    ContentInfo *paliInfo = [[ContentInfo alloc] init];    
+    thaiInfo.language = @"Thai";
+    thaiInfo.volume = [NSNumber numberWithInt:1];
+    thaiInfo.page = [NSNumber numberWithInt:1];
+    [thaiInfo setType:(LANGUAGE|VOLUME|PAGE)];
+
+    paliInfo.language = @"Pali";
+    paliInfo.volume = [NSNumber numberWithInt:1];
+    paliInfo.page = [NSNumber numberWithInt:1];    
+    [paliInfo setType:(LANGUAGE|VOLUME|PAGE)];
+    
+    NSArray *thaiContents = [QueryHelper getContents:thaiInfo];
+    NSArray *paliContents = [QueryHelper getContents:paliInfo];
+
+    if(![thaiContents count] || ![paliContents count]) {      
+        [self.HUD show:YES];
+        self.HUD.mode = MBProgressHUDModeDeterminate;
+        self.HUD.labelText = @"โปรแกรมกำลังสร้างฐานข้อมูลเริ่มต้น";
+        self.HUD.progress = 0.0f;
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            E_TipitakaAppDelegate *application = [[UIApplication sharedApplication] delegate];        
+            NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+            NSDirectoryEnumerator *dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:resourcePath];            
+            NSArray *files = [dirEnum allObjects];
+            int jsonFileCount = 0;
+            for (NSString *file in files) {
+                if ([[file pathExtension] isEqualToString:@"json"]) {
+                    jsonFileCount += 1;
+                }
+            }
+            for (NSString *file in files) {
+                if (![[file pathExtension] isEqualToString:@"json"]) { continue; }
+                self.HUD.progress += 1.0f/ jsonFileCount;                
+                NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+                NSManagedObjectContext *ctx = [[NSManagedObjectContext alloc] init];
+                [ctx setUndoManager:nil];
+                [ctx setPersistentStoreCoordinator:[application persistentStoreCoordinator]];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:ctx];
+                
+                NSError *error = nil;
+                NSString *jsonString = [NSString stringWithContentsOfFile:[resourcePath stringByAppendingPathComponent:file] encoding:NSUTF8StringEncoding error:&error];
+                id jsonObject = [jsonString objectFromJSONString];
+                for (NSString *key in jsonObject) {
+                    NSArray *pageValues = [[jsonObject objectForKey:key] objectForKey:@"value"];
+                    Content *content = [NSEntityDescription insertNewObjectForEntityForName:@"Content" inManagedObjectContext:ctx];
+                    content.page = [NSNumber numberWithInt:[key intValue]];
+                    content.text = [pageValues objectAtIndex:1];
+                    content.volume = [pageValues objectAtIndex:0];;
+                    content.lang = [pageValues objectAtIndex:2];
+                    for (NSArray *itemValues in [[jsonObject objectForKey:key] objectForKey:@"items"]) {
+                        Item *item = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:ctx];
+                        item.section = [itemValues objectAtIndex:0];
+                        item.sut = [itemValues objectAtIndex:1];
+                        item.number = [itemValues objectAtIndex:2];
+                        item.begin = [itemValues objectAtIndex:3];
+                        item.content = content;
+                    }
+                }
+                error = nil;
+                if (![ctx save:&error]) {
+                    NSLog(@"%@", [error localizedDescription]);
+                }
+                [ctx release];                    
+                [pool drain];                            
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.HUD hide:YES];                
+                [self reloadData];
+                [self updateReadingPage];
+            });
+        });        
+    }
+    
+    [thaiInfo release];
+    [paliInfo release];
+}
+
+// this method was rejected by AppStore
+-(void) prepareDatabaseByCopyingFromBundle {
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -773,7 +996,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-    [self prepareDatabase];
+    [self prepareDatabaseByDownloadingFromInternet];
     
     mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
     mWindow.viewToObserve = self.contentView;
@@ -941,6 +1164,7 @@
     [dictionaryListViewController release];
 
     [alterItems release];
+    [_HUD release];
     
     [super dealloc];
 }
@@ -969,6 +1193,11 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (alertView.tag == kQuitAlert) {
+        exit(0);
+    }
+    
 	if (buttonIndex != [alertView cancelButtonIndex]) {        
         if (alertView.tag == kGotoItemAlert || alertView.tag == kGotoPageAlert) {
             NSString *inputText = ((UITextInputAlertView *)alertView).field.text;

@@ -428,6 +428,24 @@
     [self updateReadingPage];
 }
 
+- (void)forceReloadData
+{
+    if (self.dataDictionary == nil) {
+        self.dataDictionary = [Utils readData];        
+    }
+    
+    NSString *language = [self getCurrentLanguage];    
+    NSNumber *volume = [[[Utils readData] valueForKey:language] valueForKey:@"Volume"];
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = language;
+    info.volume = volume;
+    [info setType:LANGUAGE|VOLUME];
+    currentMaxPages = [QueryHelper getMaximumPageValue:info];            
+    [info release];
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * currentMaxPages, self.contentView.frame.size.height);               
+    self.dataDictionary = [Utils readData];        
+}
+
 - (void)reloadData {    
     if (self.dataDictionary == nil) {
         self.dataDictionary = [Utils readData];        
