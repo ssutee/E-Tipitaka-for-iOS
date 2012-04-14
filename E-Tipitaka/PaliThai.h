@@ -2,17 +2,16 @@
 //  PaliThai.h
 //  E-Tipitaka
 //
-//  Created by Sutee Sudprasert on 7/16/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Sutee Sudprasert on 3/27/55 BE.
+//  Copyright (c) 2555 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
 
-@interface PaliThai : NSManagedObject {
-@private
-}
+@interface PaliThai : NSManagedObject
+
 @property (nonatomic, retain) NSString * head;
 @property (nonatomic, retain) NSString * translation;
 

@@ -12,7 +12,6 @@
 #import "BookListTableViewController.h"
 #import "BookmarkAddViewController.h"
 #import "BookmarkListViewController.h"
-#import "DictionaryListViewController.h"
 #import "SearchViewController.h"
 #import "Item.h"
 #import "Utils.h"
@@ -43,8 +42,6 @@
 @synthesize searchPopoverController=_searchPopoverController;
 @synthesize bookmarkPopoverController=_bookmarkPopoverController;
 @synthesize booklistPopoverController;
-@synthesize dictionaryPopoverController;
-@synthesize dictionaryListViewController;
 @synthesize searchButton;
 @synthesize languageButton;
 @synthesize booklistButton;
@@ -915,64 +912,6 @@
     }
 }
 
--(IBAction)showDictionary:(id)sender {
-    
-    NSString *selection = [self.contentViewController.webView 
-                           stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];        
-//    NSLog(@"%@", [self.htmlView stringByEvaluatingJavaScriptFromString:@"findTextAtRow(4);"]);
-
-    if(dictionaryPopoverController != nil) {
-        if ([dictionaryPopoverController isPopoverVisible]) {
-            [dictionaryPopoverController dismissPopoverAnimated:YES];
-        } else {
-            [self dismissAllPopoverControllers];
-            [dictionaryPopoverController presentPopoverFromBarButtonItem:dictionaryButton
-                                              permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                                              animated:YES];  
-            dictionaryListViewController.searchBar.text = selection;
-            [dictionaryListViewController handleSearchForTerm:selection];                        
-        }
-    } else {
-        DictionaryListViewController *controller = [[DictionaryListViewController alloc]
-                                                            initWithNibName:@"DictionaryListView_iPad"
-                                                            bundle:nil];        
-        self.dictionaryListViewController = controller;
-        dictionaryListViewController.title = @"พจนานุกรม บาลี-ไทย";        
-        
-        UINavigationController *navController = [[UINavigationController alloc] 
-                                                 initWithRootViewController:dictionaryListViewController];
-        UIPopoverController *poc = [[UIPopoverController alloc]
-                                    initWithContentViewController:navController];
-        [self dismissAllPopoverControllers];
-        [poc presentPopoverFromBarButtonItem:dictionaryButton 
-                    permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];   
-        dictionaryListViewController.searchBar.text = selection;        
-        [dictionaryListViewController handleSearchForTerm:selection];             
-        self.dictionaryPopoverController = poc;
-        [poc release];
-        [controller release];
-        [navController release];
-    }    
-}
-
--(BOOL) canPerformAction:(SEL)action withSender:(id)sender
-{
-    if (action == @selector(lookUpDictionary:)) { 
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-            return NO;
-        }
-        NSString *selection = [self.contentViewController.webView
-                               stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];
-        return ([allTrim(selection) length] != 0);
-    }
-    return [super canPerformAction:action withSender:sender];
-}
-
--(void) lookUpDictionary:(id)sender
-{
-    [self showDictionary:nil];
-}
-
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -1002,12 +941,6 @@
     mWindow.viewToObserve = self.contentView;
     mWindow.controllerThatObserves = self;	            
     
-    // lookup dictionary popup menu
-    UIMenuItem *dictionaryMenuItem = [[UIMenuItem alloc] initWithTitle:@"บาลี-ไทย" 
-                                                                action:@selector(lookUpDictionary:)];    
-    [UIMenuController sharedMenuController].menuItems = [NSArray arrayWithObject:dictionaryMenuItem];
-    [dictionaryMenuItem release];
-        
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 
         toolbar.hidden = YES;
@@ -1098,7 +1031,6 @@
     self.searchPopoverController = nil;
     self.bookmarkPopoverController = nil;
     self.booklistPopoverController = nil;
-    self.dictionaryPopoverController = nil;
     self.searchButton = nil;
     self.languageButton = nil;    
     self.gotoButton = nil;
@@ -1110,8 +1042,6 @@
     self.gotoActionSheet = nil;
     self.itemOptionsActionSheet = nil;    
     self.bottomToolbar = nil;
-    self.dictionaryListViewController = nil;
-    
     self.alterItems = nil;
 }
 
@@ -1148,7 +1078,6 @@
     [_searchPopoverController release];
     [_bookmarkPopoverController release];
     [booklistPopoverController release];
-    [dictionaryPopoverController release];
     [searchButton release];
     [languageButton release];
     [booklistButton release];
@@ -1161,7 +1090,6 @@
     [gotoActionSheet release];
     [itemOptionsActionSheet release];
     [bottomToolbar release];
-    [dictionaryListViewController release];
 
     [alterItems release];
     [_HUD release];

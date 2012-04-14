@@ -1,9 +1,9 @@
 //
 //  Bookmark.h
-//  ETipitaka
+//  E-Tipitaka
 //
-//  Created by Sutee Sudprasert on 3/27/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Sutee Sudprasert on 3/27/55 BE.
+//  Copyright (c) 2555 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,11 +11,10 @@
 
 @class Item;
 
-@interface Bookmark : NSManagedObject {
-@private
-}
-@property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) Item * item;
+@interface Bookmark : NSManagedObject
+
 @property (nonatomic, retain) NSDate * created;
+@property (nonatomic, retain) NSString * text;
+@property (nonatomic, retain) Item *item;
 
 @end

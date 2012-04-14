@@ -26,8 +26,6 @@
 #define kDatabaseAlert 2003
 #define kQuitAlert 2004
 
-#define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
-
 @interface ReadViewController : BaseReadViewController 
 <UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate, MBProgressHUDDelegate, ASIProgressDelegate>
 {
@@ -57,7 +55,6 @@
     UIActionSheet *itemOptionsActionSheet;
     double lastScale;
 }
-@property(nonatomic, retain) DictionaryListViewController *dictionaryListViewController;
 
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, retain) IBOutlet UILabel *pageNumberLabel;
@@ -70,7 +67,6 @@
 @property (nonatomic, retain) UIPopoverController *searchPopoverController;
 @property (nonatomic, retain) UIPopoverController *bookmarkPopoverController;
 @property (nonatomic, retain) UIPopoverController *booklistPopoverController;
-@property (nonatomic, retain) UIPopoverController *dictionaryPopoverController;
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *searchButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *languageButton;
@@ -95,7 +91,7 @@
 -(IBAction)showSearchView:(id)sender;
 -(IBAction)showBookmarkListView:(id)sender;
 -(IBAction)showBooklistTableView:(id)sender;
--(IBAction)showDictionary:(id)sender;
+//-(IBAction)showDictionary:(id)sender;
 
 -(void) updateLanguageButtonTitle;
 
@@ -104,7 +100,7 @@
 -(void) showToast;
 -(void) hideToast:(NSTimer *)theTimer;
 
--(void) lookUpDictionary:(id)sender;
+//-(void) lookUpDictionary:(id)sender;
 
 -(void) showItemOptions:(NSArray *)items withTag:(NSInteger)tagNumber withTitle:(NSString *)titleName;
 

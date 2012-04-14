@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "TapDetectingWindow.h"
+#import "DictionaryListViewController.h"
+
+#define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
 
 @class ContentViewController;
 
@@ -29,6 +32,8 @@
 
 @property(nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property(nonatomic, retain) NSMutableArray *viewControllers;
+@property (nonatomic, retain) UIPopoverController *dictionaryPopoverController;
+@property(nonatomic, retain) DictionaryListViewController *dictionaryListViewController;
 
 @property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, retain) IBOutlet UILabel *pageNumberLabel;

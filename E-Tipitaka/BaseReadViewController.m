@@ -31,7 +31,8 @@
 @synthesize savedItemNumber=_savedItemNumber;
 @synthesize fontSize=_fontSize;
 @synthesize pageFunctionUsed=_pageFunctionUsed;
-
+@synthesize dictionaryPopoverController=_dictionaryPopoverController;
+@synthesize dictionaryListViewController = _dictionaryListViewController;
 
 - (void)didReceiveMemoryWarning
 {
@@ -53,6 +54,8 @@
     [_toastText release];
     [_viewControllers release];
     [_scrollView release];
+    [_dictionaryPopoverController release];
+    [_dictionaryListViewController release];
     [super dealloc];    
 }
 
@@ -85,6 +88,25 @@
 {
     [[self.dataDictionary valueForKey:[self getCurrentLanguage]] setValue:page forKey:@"Page"];    
 }
+
+-(BOOL) canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (action == @selector(lookUpDictionary:)) { 
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            return NO;
+        }
+        NSString *selection = [self.contentViewController.webView
+                               stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];
+        return ([allTrim(selection) length] != 0);
+    }
+    return [super canPerformAction:action withSender:sender];
+}
+
+-(void) lookUpDictionary:(id)sender
+{
+    [self showDictionary:nil];
+}
+
 
 -(void) updatePageTitle:(NSString *)language volume:(NSNumber *)volume page:(NSNumber *)page 
 {
@@ -466,6 +488,51 @@
     self.dataDictionary = [Utils readData];    
 }
 
+
+-(IBAction)showDictionary:(id)sender {
+    
+    NSString *selection = [self.contentViewController.webView 
+                           stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];        
+    //    NSLog(@"%@", [self.htmlView stringByEvaluatingJavaScriptFromString:@"findTextAtRow(4);"]);
+
+    CGRect rect = CGRectMake(self.contentViewController.webView.bounds.size.width/2, self.contentViewController.webView.bounds.size.height, 0, 0);
+    
+    if(self.dictionaryPopoverController != nil) {
+        if ([self.dictionaryPopoverController isPopoverVisible]) {
+            [self.dictionaryPopoverController dismissPopoverAnimated:YES];
+        } else {
+            [self dismissAllPopoverControllers];
+            
+            [self.dictionaryPopoverController presentPopoverFromRect:rect inView:self.contentViewController.webView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            
+            self.dictionaryListViewController.searchBar.text = selection;
+            [self.dictionaryListViewController handleSearchForTerm:selection];                        
+        }
+    } else {
+        DictionaryListViewController *controller = [[DictionaryListViewController alloc]
+                                                    initWithNibName:@"DictionaryListView_iPad"
+                                                    bundle:nil];        
+        self.dictionaryListViewController = controller;
+        self.dictionaryListViewController.title = @"พจนานุกรม บาลี-ไทย";        
+        
+        UINavigationController *navController = [[UINavigationController alloc] 
+                                                 initWithRootViewController:self.dictionaryListViewController];
+        UIPopoverController *poc = [[UIPopoverController alloc]
+                                    initWithContentViewController:navController];
+        [self dismissAllPopoverControllers];
+        
+        [poc presentPopoverFromRect:rect inView:self.contentViewController.webView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        
+        self.dictionaryListViewController.searchBar.text = selection;        
+        [self.dictionaryListViewController handleSearchForTerm:selection];             
+        self.dictionaryPopoverController = poc;
+        [poc release];
+        [controller release];
+        [navController release];
+    }    
+}
+
+
 #pragma mark - View lifecycle
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -507,6 +574,12 @@
     self.scrollView.delegate = self;
     [self reloadData];
     self.fontSize = [[self.dataDictionary valueForKey:@"FontSize"] intValue];
+    
+    UIMenuItem *dictionaryMenuItem = [[UIMenuItem alloc] initWithTitle:@"บาลี-ไทย" 
+                                                                action:@selector(lookUpDictionary:)];    
+    [UIMenuController sharedMenuController].menuItems = [NSArray arrayWithObject:dictionaryMenuItem];
+    [dictionaryMenuItem release];
+    
 }
 
 
@@ -523,6 +596,8 @@
     self.toastText = nil;
     self.scrollView = nil;
     self.viewControllers = nil;
+    self.dictionaryPopoverController = nil;
+    self.dictionaryListViewController = nil;
 }
 
 - (BOOL) canBecomeFirstResponder {

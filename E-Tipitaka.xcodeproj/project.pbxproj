@@ -33,12 +33,16 @@
 		9E19431414E7883400D2940B /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E19431314E7883400D2940B /* libz.1.2.5.dylib */; };
 		9E19431614E7932700D2940B /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E19431514E7932700D2940B /* 37x-Checkmark.png */; };
 		9E19431814E793E300D2940B /* ic_dialog_alert.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E19431714E793E300D2940B /* ic_dialog_alert.png */; };
+		9E2C938B15219E150043C0E5 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C938A15219E150043C0E5 /* History.m */; };
+		9E2C938E15219E150043C0E5 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C938D15219E150043C0E5 /* Content.m */; };
+		9E2C939115219E150043C0E5 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C939015219E150043C0E5 /* Bookmark.m */; };
+		9E2C939415219E150043C0E5 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C939315219E150043C0E5 /* Item.m */; };
+		9E2C939715219E150043C0E5 /* PaliThai.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C939615219E150043C0E5 /* PaliThai.m */; };
 		9E326FA7138C03B300ED66AE /* DoubleReadView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FA6138C03B300ED66AE /* DoubleReadView_iPad.xib */; };
 		9E326FB3138D30F700ED66AE /* star_big_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB1138D30F700ED66AE /* star_big_off.png */; };
 		9E326FB4138D30F700ED66AE /* star_big_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB2138D30F700ED66AE /* star_big_on.png */; };
 		9E326FB8138D36D900ED66AE /* star_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB6138D36D900ED66AE /* star_off.png */; };
 		9E326FB9138D36D900ED66AE /* star_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FB7138D36D900ED66AE /* star_on.png */; };
-		9E326FC0138D445600ED66AE /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E326FBF138D445600ED66AE /* History.m */; };
 		9E326FCB138E0ECD00ED66AE /* rate_star_big_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FC9138E0ECD00ED66AE /* rate_star_big_off.png */; };
 		9E326FCC138E0ECD00ED66AE /* rate_star_big_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FCA138E0ECD00ED66AE /* rate_star_big_on.png */; };
 		9E326FD0138E0EE700ED66AE /* rate_star_small_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FCE138E0EE700ED66AE /* rate_star_small_off.png */; };
@@ -53,6 +57,7 @@
 		9E326FFA138F6EBE00ED66AE /* stage_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E326FF6138F6EBE00ED66AE /* stage_04.png */; };
 		9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D7137862D00092521B /* Icon-Small@2x.png */; };
 		9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D8137862D00092521B /* Icon-Small-50.png */; };
+		9E42DCF1150AFB6D0081D04E /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E42DCEF150AFB380081D04E /* CoreDataTableViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		9E4976F514E6BE6C00437B09 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4976F414E6BE6C00437B09 /* JSONKit.m */; };
 		9E4B9C8B1419B571000DD263 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
 		9E4B9C8C1419B571000DD263 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F4134B15CA00B9E0F4 /* Foundation.framework */; };
@@ -75,9 +80,6 @@
 		9E66970C134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */; };
 		9E669713134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */; };
 		9E669716134B15CB00B9E0F4 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */; };
-		9E66973F134C574A00B9E0F4 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669739134C574A00B9E0F4 /* Content.m */; };
-		9E669740134C574A00B9E0F4 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66973B134C574A00B9E0F4 /* Bookmark.m */; };
-		9E669741134C574A00B9E0F4 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E66973D134C574A00B9E0F4 /* Item.m */; };
 		9E669745134C584300B9E0F4 /* TapDetectingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669744134C584300B9E0F4 /* TapDetectingWindow.m */; };
 		9E66974D134C5AFD00B9E0F4 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66974C134C5AFD00B9E0F4 /* MainWindow_iPhone.xib */; };
 		9E669754134C5C7B00B9E0F4 /* ReadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66974E134C5C7800B9E0F4 /* ReadViewController.xib */; };
@@ -123,7 +125,6 @@
 		9EAF954C13D163D30010CABD /* PaliThai.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EAF954B13D163D30010CABD /* PaliThai.plist */; };
 		9EAF955A13D1AD540010CABD /* DictionaryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAF955813D1AD530010CABD /* DictionaryListViewController.m */; };
 		9EAF955B13D1AD540010CABD /* DictionaryListView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EAF955913D1AD540010CABD /* DictionaryListView_iPad.xib */; };
-		9EAF955E13D1C6720010CABD /* PaliThai.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAF955D13D1C6710010CABD /* PaliThai.m */; };
 		9EC2A854136267FA0082BBB7 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EC2A853136267FA0082BBB7 /* Entitlements.plist */; };
 		9ED7DDB914DADFF90013A5E2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED7DDB814DADFF90013A5E2 /* MBProgressHUD.m */; };
 		9EDEDF4A14E7709200C099E9 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEDF3714E7709200C099E9 /* ASIAuthenticationDialog.m */; };
@@ -174,6 +175,17 @@
 		9E19431314E7883400D2940B /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		9E19431514E7932700D2940B /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		9E19431714E793E300D2940B /* ic_dialog_alert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_dialog_alert.png; sourceTree = "<group>"; };
+		9E2C937515219CAD0043C0E5 /* E_Tipitaka 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 10.xcdatamodel"; sourceTree = "<group>"; };
+		9E2C938915219E150043C0E5 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
+		9E2C938A15219E150043C0E5 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
+		9E2C938C15219E150043C0E5 /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Content.h; sourceTree = "<group>"; };
+		9E2C938D15219E150043C0E5 /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Content.m; sourceTree = "<group>"; };
+		9E2C938F15219E150043C0E5 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
+		9E2C939015219E150043C0E5 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
+		9E2C939215219E150043C0E5 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		9E2C939315219E150043C0E5 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		9E2C939515219E150043C0E5 /* PaliThai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaliThai.h; sourceTree = "<group>"; };
+		9E2C939615219E150043C0E5 /* PaliThai.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaliThai.m; sourceTree = "<group>"; };
 		9E3029D913E85BBE00F923F7 /* E_Tipitaka 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 9.xcdatamodel"; sourceTree = "<group>"; };
 		9E326FA6138C03B300ED66AE /* DoubleReadView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoubleReadView_iPad.xib; sourceTree = "<group>"; };
 		9E326FB1138D30F700ED66AE /* star_big_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_big_off.png; sourceTree = "<group>"; };
@@ -181,8 +193,6 @@
 		9E326FB6138D36D900ED66AE /* star_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_off.png; sourceTree = "<group>"; };
 		9E326FB7138D36D900ED66AE /* star_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_on.png; sourceTree = "<group>"; };
 		9E326FBA138D393000ED66AE /* E_Tipitaka 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 3.xcdatamodel"; sourceTree = "<group>"; };
-		9E326FBE138D445600ED66AE /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
-		9E326FBF138D445600ED66AE /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		9E326FC9138E0ECD00ED66AE /* rate_star_big_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate_star_big_off.png; sourceTree = "<group>"; };
 		9E326FCA138E0ECD00ED66AE /* rate_star_big_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate_star_big_on.png; sourceTree = "<group>"; };
 		9E326FCE138E0EE700ED66AE /* rate_star_small_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate_star_small_off.png; sourceTree = "<group>"; };
@@ -201,6 +211,8 @@
 		9E32700C13908F2E00ED66AE /* E_Tipitaka 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 5.xcdatamodel"; sourceTree = "<group>"; };
 		9E3DA8D7137862D00092521B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		9E3DA8D8137862D00092521B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		9E42DCEE150AFB380081D04E /* CoreDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
+		9E42DCEF150AFB380081D04E /* CoreDataTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		9E4976F314E6BE6C00437B09 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		9E4976F414E6BE6C00437B09 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		9E4B9C891419B571000DD263 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,12 +242,6 @@
 		9E669711134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = E_TipitakaAppDelegate_iPad.h; path = iPad/E_TipitakaAppDelegate_iPad.h; sourceTree = "<group>"; };
 		9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = E_TipitakaAppDelegate_iPad.m; path = iPad/E_TipitakaAppDelegate_iPad.m; sourceTree = "<group>"; };
 		9E669715134B15CB00B9E0F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		9E669738134C574A00B9E0F4 /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Content.h; sourceTree = "<group>"; };
-		9E669739134C574A00B9E0F4 /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Content.m; sourceTree = "<group>"; };
-		9E66973A134C574A00B9E0F4 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
-		9E66973B134C574A00B9E0F4 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
-		9E66973C134C574A00B9E0F4 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
-		9E66973D134C574A00B9E0F4 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		9E669743134C584300B9E0F4 /* TapDetectingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectingWindow.h; sourceTree = "<group>"; };
 		9E669744134C584300B9E0F4 /* TapDetectingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectingWindow.m; sourceTree = "<group>"; };
 		9E66974C134C5AFD00B9E0F4 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
@@ -292,8 +298,6 @@
 		9EAF955713D1AD530010CABD /* DictionaryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryListViewController.h; sourceTree = "<group>"; };
 		9EAF955813D1AD530010CABD /* DictionaryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryListViewController.m; sourceTree = "<group>"; };
 		9EAF955913D1AD540010CABD /* DictionaryListView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DictionaryListView_iPad.xib; sourceTree = "<group>"; };
-		9EAF955C13D1C6700010CABD /* PaliThai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaliThai.h; sourceTree = "<group>"; };
-		9EAF955D13D1C6710010CABD /* PaliThai.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaliThai.m; sourceTree = "<group>"; };
 		9EC2A853136267FA0082BBB7 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9ED7DDB714DADFF90013A5E2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		9ED7DDB814DADFF90013A5E2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -372,16 +376,16 @@
 		9E10C578141B1B99005E60FC /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				9EAF955C13D1C6700010CABD /* PaliThai.h */,
-				9EAF955D13D1C6710010CABD /* PaliThai.m */,
-				9E669738134C574A00B9E0F4 /* Content.h */,
-				9E669739134C574A00B9E0F4 /* Content.m */,
-				9E66973A134C574A00B9E0F4 /* Bookmark.h */,
-				9E66973B134C574A00B9E0F4 /* Bookmark.m */,
-				9E326FBE138D445600ED66AE /* History.h */,
-				9E326FBF138D445600ED66AE /* History.m */,
-				9E66973C134C574A00B9E0F4 /* Item.h */,
-				9E66973D134C574A00B9E0F4 /* Item.m */,
+				9E2C939515219E150043C0E5 /* PaliThai.h */,
+				9E2C939615219E150043C0E5 /* PaliThai.m */,
+				9E2C939215219E150043C0E5 /* Item.h */,
+				9E2C939315219E150043C0E5 /* Item.m */,
+				9E2C938F15219E150043C0E5 /* Bookmark.h */,
+				9E2C939015219E150043C0E5 /* Bookmark.m */,
+				9E2C938C15219E150043C0E5 /* Content.h */,
+				9E2C938D15219E150043C0E5 /* Content.m */,
+				9E2C938915219E150043C0E5 /* History.h */,
+				9E2C938A15219E150043C0E5 /* History.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -509,6 +513,8 @@
 				9EAF955813D1AD530010CABD /* DictionaryListViewController.m */,
 				9E10C56E141B183D005E60FC /* ContentViewController.h */,
 				9E10C56F141B183D005E60FC /* ContentViewController.m */,
+				9E42DCEE150AFB380081D04E /* CoreDataTableViewController.h */,
+				9E42DCEF150AFB380081D04E /* CoreDataTableViewController.m */,
 				9E669766134C5D1800B9E0F4 /* iToast.h */,
 				9E669767134C5D1F00B9E0F4 /* iToast.m */,
 				9E138969141B750C00C350B0 /* BaseReadViewController.h */,
@@ -879,14 +885,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E42DCF1150AFB6D0081D04E /* CoreDataTableViewController.m in Sources */,
 				9E669702134B15CA00B9E0F4 /* main.m in Sources */,
 				9E669705134B15CB00B9E0F4 /* E_TipitakaAppDelegate.m in Sources */,
 				9E669708134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld in Sources */,
 				9E66970C134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m in Sources */,
 				9E669713134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m in Sources */,
-				9E66973F134C574A00B9E0F4 /* Content.m in Sources */,
-				9E669740134C574A00B9E0F4 /* Bookmark.m in Sources */,
-				9E669741134C574A00B9E0F4 /* Item.m in Sources */,
 				9E669745134C584300B9E0F4 /* TapDetectingWindow.m in Sources */,
 				9E66976A134C5D3600B9E0F4 /* ReadViewController.m in Sources */,
 				9E66976B134C5D3600B9E0F4 /* SearchViewController.m in Sources */,
@@ -896,11 +900,9 @@
 				9E66976F134C5D3600B9E0F4 /* SearchHistoryViewController.m in Sources */,
 				9E669770134C5D3600B9E0F4 /* iToast.m in Sources */,
 				9E669771134C5D3600B9E0F4 /* Utils.m in Sources */,
-				9E326FC0138D445600ED66AE /* History.m in Sources */,
 				9E326FD9138E1B6D00ED66AE /* BookmarkEditViewController.m in Sources */,
 				9E326FE8138E3EE900ED66AE /* DoubleReadViewController.m in Sources */,
 				9EAF955A13D1AD540010CABD /* DictionaryListViewController.m in Sources */,
-				9EAF955E13D1C6720010CABD /* PaliThai.m in Sources */,
 				9E10C570141B183D005E60FC /* ContentViewController.m in Sources */,
 				9E10C575141B1B51005E60FC /* QueryHelper.m in Sources */,
 				9E10C57C141B1C5F005E60FC /* ContentInfo.m in Sources */,
@@ -926,6 +928,11 @@
 				9E19430D14E787F800D2940B /* unzip.c in Sources */,
 				9E19430E14E787F800D2940B /* zip.c in Sources */,
 				9E19431214E7880A00D2940B /* ZipArchive.mm in Sources */,
+				9E2C938B15219E150043C0E5 /* History.m in Sources */,
+				9E2C938E15219E150043C0E5 /* Content.m in Sources */,
+				9E2C939115219E150043C0E5 /* Bookmark.m in Sources */,
+				9E2C939415219E150043C0E5 /* Item.m in Sources */,
+				9E2C939715219E150043C0E5 /* PaliThai.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,6 +1180,7 @@
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56BE7FED-BAF3-4420-893E-A0D1CB178FA0";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1201,7 +1209,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sutee Sudprasert";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
@@ -1209,7 +1217,6 @@
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1258,6 +1265,7 @@
 			isa = XCVersionGroup;
 			children = (
 				9E3029D913E85BBE00F923F7 /* E_Tipitaka 9.xcdatamodel */,
+				9E2C937515219CAD0043C0E5 /* E_Tipitaka 10.xcdatamodel */,
 				9EF891A413E6D3A900A7C5B4 /* E_Tipitaka 8.xcdatamodel */,
 				9EF8919A13E30AD800A7C5B4 /* E_Tipitaka 7.xcdatamodel */,
 				9EAF954913D155DF0010CABD /* E_Tipitaka 6.xcdatamodel */,
@@ -1267,7 +1275,7 @@
 				9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */,
 				9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */,
 			);
-			currentVersion = 9EF891A413E6D3A900A7C5B4 /* E_Tipitaka 8.xcdatamodel */;
+			currentVersion = 9E2C937515219CAD0043C0E5 /* E_Tipitaka 10.xcdatamodel */;
 			path = E_Tipitaka.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

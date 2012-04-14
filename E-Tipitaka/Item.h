@@ -1,29 +1,30 @@
 //
 //  Item.h
-//  ETipitaka
+//  E-Tipitaka
 //
-//  Created by Sutee Sudprasert on 3/27/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Sutee Sudprasert on 3/27/55 BE.
+//  Copyright (c) 2555 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Content;
+@class Bookmark, Content;
 
-@interface Item : NSManagedObject {
-@private
-}
+@interface Item : NSManagedObject
+
 @property (nonatomic, retain) NSNumber * begin;
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSNumber * section;
 @property (nonatomic, retain) NSNumber * sut;
-@property (nonatomic, retain) Content * content;
-@property (nonatomic, retain) NSSet* bookmarks;
+@property (nonatomic, retain) Content *content;
+@property (nonatomic, retain) NSSet *bookmarks;
+@end
 
-- (void)addBookmarksObject:(NSManagedObject *)value;
-- (void)removeBookmarksObject:(NSManagedObject *)value;
-- (void)addBookmarks:(NSSet *)value;
-- (void)removeBookmarks:(NSSet *)value;
+@interface Item (CoreDataGeneratedAccessors)
 
+- (void)addBookmarksObject:(Bookmark *)value;
+- (void)removeBookmarksObject:(Bookmark *)value;
+- (void)addBookmarks:(NSSet *)values;
+- (void)removeBookmarks:(NSSet *)values;
 @end

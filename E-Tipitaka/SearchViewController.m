@@ -18,6 +18,7 @@
 @interface SearchViewController()
 
 @property (nonatomic, strong) MBProgressHUD *HUD;
+@property (nonatomic, retain) History *selectedHistory;
 
 @end
 
@@ -33,11 +34,12 @@
 @synthesize scope;
 @synthesize readViewController;
 @synthesize HUD = _HUD;
+@synthesize selectedHistory = _selectedHistory;
 
 - (MBProgressHUD *) HUD
 {
     if (_HUD == nil) {
-        _HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        _HUD = [[MBProgressHUD alloc] initWithWindow:self.view.window];
         _HUD.delegate = self;
         _HUD.labelText = @"กำลังค้นหา";
         _HUD.mode = MBProgressHUDModeDeterminate;
@@ -124,6 +126,12 @@
 
 -(void) loadHistory:(History *)history {
     [self resetSearch];
+    
+    self.selectedHistory = history;
+    if (self.selectedHistory.selected && [NSKeyedUnarchiver unarchiveObjectWithData:self.selectedHistory.selected]) {
+        self.clickedItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.selectedHistory.selected];
+        NSLog(@"%@", self.clickedItems);
+    }
 
 	NSString *string = [[NSString alloc] initWithString:history.keywords];
 	self.keywords = string;
@@ -203,6 +211,28 @@
     [newKeys release];
 }
 
+- (void)unclickedItem:(UIGestureRecognizer *)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        CGPoint touchPoint = [recognizer locationInView:self.table];
+        NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:touchPoint];
+        NSUInteger section = [indexPath section];
+        NSUInteger row = [indexPath row];
+        NSString *item = [[NSString alloc] initWithFormat:@"%d:%d",section,row];
+        [self.clickedItems removeObject:item];        
+        [item release];
+        
+        [self.table reloadData];
+        
+        self.selectedHistory.selected = [NSKeyedArchiver archivedDataWithRootObject:self.clickedItems];
+        NSError *error = nil;
+        if (![self.selectedHistory.managedObjectContext save:&error]) {
+            NSLog(@"%@", error.localizedDescription);
+        } 
+        
+    }
+}
+
 -(void) handleSearchForTerm:(NSString *)searchTerm {
 	[self resetSearch];
 	self.search.userInteractionEnabled = NO;
@@ -219,7 +249,7 @@
 	[string release];
 	
 	NSArray *tokens = [searchTerm componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-	[self.view addSubview:self.HUD];
+	[self.view.window addSubview:self.HUD];
     self.HUD.progress = 0.0f;
     [self.HUD show:YES];
 	dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -241,6 +271,7 @@
 				history.lang = @"pali";
 			}
             history.created = [NSDate date];
+            self.selectedHistory = history;
         }
 		
         NSEntityDescription *entity = [NSEntityDescription 
@@ -372,21 +403,15 @@
 			
 			
 			dispatch_async(dispatch_get_main_queue(), ^{
-//				self.progressBar.progress += (1.0/45.0);
                 self.HUD.progress += (1.0/45.0);
 				if (i == 45) {
-					//search.hidden = NO;
 					self.search.userInteractionEnabled = YES;
 					self.search.alpha = 1.0;
                     [self.HUD hide:YES];
-//					self.progressBar.hidden = YES;
-
                     self.navigationItem.leftBarButtonItem.enabled = YES;                    
-
-                    self.navigationItem.rightBarButtonItem.enabled = YES;
+                    self.navigationItem.rightBarButtonItem.enabled = YES;                    
 					[table reloadData];
 				} 
-
 			});
 		}	
 		[fetchRequest release];
@@ -461,7 +486,10 @@
 	[self resetSearch];
 	
 	[table reloadData];
-	
+    
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(unclickedItem:)];    
+    [self.table addGestureRecognizer:longPressGestureRecognizer];    
+    [longPressGestureRecognizer release];	
     [super viewDidLoad];
 }
 
@@ -492,6 +520,7 @@
 	self.keywords = nil;
     self.readViewController = nil;
     self.clickedItems = nil;
+    self.selectedHistory = nil;
 }
 
 
@@ -506,6 +535,7 @@
 	[results release];
 	[keywords release];
     [readViewController release];
+    [_selectedHistory release];
     [super dealloc];
 }
 
@@ -546,6 +576,11 @@
     
     if (![self.clickedItems containsObject:item]) {
         [self.clickedItems addObject:item];
+        self.selectedHistory.selected = [NSKeyedArchiver archivedDataWithRootObject:self.clickedItems];
+        NSError *error = nil;
+        if (![self.selectedHistory.managedObjectContext save:&error]) {
+            NSLog(@"%@", error.localizedDescription);
+        }
     }
 	
     [item release];
@@ -864,8 +899,7 @@
             isNewKeywords = YES;
         } else {
             isNewKeywords = NO;
-            // TODO: restore results from history
-            //NSLog(@"this keywords was already used to search.");
+            self.selectedHistory = fetchedObjects.lastObject;
         }
         [self handleSearchForTerm:searchTerm];
         [searchBar resignFirstResponder]; 

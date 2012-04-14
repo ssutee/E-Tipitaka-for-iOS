@@ -12,6 +12,16 @@
 #import "History.h"
 #import "Utils.h"
 #import "Content.h"
+#import "MBProgressHUD.h"
+
+@interface SearchHistoryViewController()<MBProgressHUDDelegate>
+
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsSortedByKeywordsController;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsSortedByStateController;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsSortedByCreatedController;
+@property (nonatomic, retain) MBProgressHUD *progressHUD;
+
+@end
 
 @implementation SearchHistoryViewController
 
@@ -20,9 +30,111 @@
 @synthesize loadedData;
 @synthesize detailTable;
 @synthesize stageImages;
-@synthesize tableView;
 @synthesize sortingControl;
 @synthesize backgroundManagedObjectContext = _backgroundManagedObjectContext;
+@synthesize fetchedResultsSortedByCreatedController = _fetchedResultsSortedByCreatedController;
+@synthesize fetchedResultsSortedByKeywordsController = _fetchedResultsSortedByKeywordsController;
+@synthesize fetchedResultsSortedByStateController = _fetchedResultsSortedByStateController;
+@synthesize progressHUD = _progressHUD;
+
+- (NSFetchedResultsController *)fetchedResultsSortedByKeywordsController
+{
+    if (_fetchedResultsSortedByKeywordsController == nil) {        
+        E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription 
+                                       entityForName:@"History" 
+                                       inManagedObjectContext:appDelegate.managedObjectContext];	
+        [fetchRequest setEntity:entity];
+        NSPredicate *pred = [NSPredicate 
+                             predicateWithFormat:@"(lang == %@)",
+                             [self.language lowercaseString], [self.language lowercaseString]];
+        
+        [fetchRequest setPredicate:pred];
+        
+        NSSortDescriptor *sortDescriptor;
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"keywords" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        [sortDescriptor release];
+        
+        _fetchedResultsSortedByKeywordsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
+                                                                                        managedObjectContext:appDelegate.managedObjectContext
+                                                                                          sectionNameKeyPath:nil cacheName:@"Search History Keywords Cache"];;
+        [fetchRequest release];        
+    }
+    return _fetchedResultsSortedByKeywordsController;
+}
+
+- (NSFetchedResultsController *)fetchedResultsSortedByStateController
+{
+    if (_fetchedResultsSortedByStateController == nil) {
+        E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription 
+                                       entityForName:@"History" 
+                                       inManagedObjectContext:appDelegate.managedObjectContext];	
+        [fetchRequest setEntity:entity];
+        NSPredicate *pred = [NSPredicate 
+                             predicateWithFormat:@"(lang == %@)",
+                             [self.language lowercaseString], [self.language lowercaseString]];
+        
+        [fetchRequest setPredicate:pred];
+        
+        NSSortDescriptor *sortDescriptor;
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"state" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        [sortDescriptor release];
+        
+        _fetchedResultsSortedByStateController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
+                                                                                     managedObjectContext:appDelegate.managedObjectContext
+                                                                                       sectionNameKeyPath:nil cacheName:@"Search History State Cache"];
+        [fetchRequest release]; 
+    }
+    return _fetchedResultsSortedByStateController;
+}
+
+- (NSFetchedResultsController *)fetchedResultsSortedByCreatedController
+{
+    if (_fetchedResultsSortedByCreatedController == nil) {
+        E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription 
+                                       entityForName:@"History" 
+                                       inManagedObjectContext:appDelegate.managedObjectContext];	
+        [fetchRequest setEntity:entity];
+        NSPredicate *pred = [NSPredicate 
+                             predicateWithFormat:@"(lang == %@)",
+                             [self.language lowercaseString], [self.language lowercaseString]];
+        
+        [fetchRequest setPredicate:pred];
+        
+        NSSortDescriptor *sortDescriptor;
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        [sortDescriptor release];
+        
+        _fetchedResultsSortedByCreatedController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
+                                                                                       managedObjectContext:appDelegate.managedObjectContext
+                                                                                         sectionNameKeyPath:nil cacheName:@"Search History Created Cache"];
+        [fetchRequest release];         
+    }
+    return _fetchedResultsSortedByCreatedController;
+}
+
+- (MBProgressHUD *)progressHUD
+{
+    if (_progressHUD == nil) {
+        _progressHUD = [[MBProgressHUD alloc] initWithWindow:self.view.window];
+        _progressHUD.mode = MBProgressHUDModeDeterminate;
+        _progressHUD.labelText = @"ประมวลผลข้อมูล";
+        _progressHUD.dimBackground = YES;
+        _progressHUD.progress = 0.0;
+    }
+    return _progressHUD;
+}
 
 -(IBAction)toggleEdit:(id)sender {
 	[self.tableView setEditing:!self.tableView.editing animated:YES];
@@ -34,111 +146,6 @@
 		[self.navigationItem.rightBarButtonItem setStyle:UIBarButtonItemStyleBordered];
 	}    
     
-}
-
--(void) deleteJunkRecords {
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	
-	NSEntityDescription *entity = [NSEntityDescription 
-								   entityForName:@"History" 
-								   inManagedObjectContext:self.backgroundManagedObjectContext];	
-	[fetchRequest setEntity:entity];
-	NSPredicate *pred = [NSPredicate
-                         predicateWithFormat:@"(lang == nil)"];
-	
-	[fetchRequest setPredicate:pred];
-        
-	NSError *fetchError;			
-	NSArray *fetchedObjects = [self.backgroundManagedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
-    [fetchRequest release];
-
-	NSError *saveError;    
-    for (History *history in fetchedObjects) {
-        if ([history.contents count] == 0) {
-            NSLog(@"delete %@", history.keywords);
-            [self.backgroundManagedObjectContext deleteObject:history];
-            if (![self.backgroundManagedObjectContext save:&saveError]) {
-                NSLog(@"Whoops, couldn't save: %@", [saveError localizedDescription]);
-            }                  
-        }
-    }
-}
-
--(void) loadMoreData:(NSArray *)histories loadedData:(NSMutableArray *)table 
-                from:(NSUInteger)start to:(NSUInteger)end {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    for (int row=start; row < end; row++) {
-        if (row >= [histories count]) {
-            break;
-        }
-        History *history = [histories objectAtIndex:row];
-        [table insertObject:history atIndex:row];
-        
-        NSInteger n1 = 0, n2 = 0, n3 = 0;
-        for (Content *content in history.contents) {
-            if ([content.volume intValue] <= 8) {
-                n1++;
-            } else if([content.volume intValue] <= 33) {
-                n2++;
-            } else {
-                n3++;
-            }
-        }
-        NSString *text = [[NSString alloc] initWithFormat:@"%4d หน้า: วิ.(%d) สุต.(%d) อภิ.(%d)",
-                          [history.contents count] ,n1, n2, n3];
-        [detailTable setValue:[Utils arabic2thai:text] forKey:history.keywords];
-        [text release];        
-    }
-    [pool drain];
-}
-
--(void) reloadData {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    NSManagedObjectContext *ctx = [[NSManagedObjectContext alloc] init];
-    E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [ctx setPersistentStoreCoordinator:[appDelegate persistentStoreCoordinator]];
-    self.backgroundManagedObjectContext = ctx;
-    [ctx release];
-    
-    [self deleteJunkRecords];
-    
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	
-	NSEntityDescription *entity = [NSEntityDescription 
-								   entityForName:@"History" 
-								   inManagedObjectContext:self.backgroundManagedObjectContext];	
-	[fetchRequest setEntity:entity];
-	NSPredicate *pred = [NSPredicate 
-                         predicateWithFormat:@"(lang == %@)",
-                         [self.language lowercaseString], [self.language lowercaseString]];
-	
-	[fetchRequest setPredicate:pred];
-
-    NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"keywords" ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    [sortDescriptor release];
-    
-	NSError *error;			
-	NSArray *fetchedObjects = [self.backgroundManagedObjectContext executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
-    self.historyData = [[fetchedObjects mutableCopy] autorelease];
-
-    // create empty array
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    self.loadedData = array;
-    [array release];
-    
-    // create empty dictionary
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    self.detailTable = dict;
-    [dict release];    
-    
-    [self.tableView reloadData];
-    
-    [pool drain];
 }
 
 -(BOOL) hidesBottomBarWhenPushed {
@@ -154,15 +161,11 @@
     [tableView release];
     [sortingControl release];
     [detailTable release];
+    [_fetchedResultsSortedByKeywordsController release];
+    [_fetchedResultsSortedByCreatedController release];
+    [_fetchedResultsSortedByStateController release];
+    [_progressHUD release];
     [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:
@@ -180,54 +183,34 @@
 {
     UIButton *senderButton = (UIButton *)sender;
         
-    History *history = [self.historyData objectAtIndex:senderButton.tag];
+    History *history = [self.fetchedResultsController.fetchedObjects objectAtIndex:senderButton.tag];    
     
     if (history.state) {
         history.state = [NSNumber numberWithInteger:([history.state intValue]+1)%4];
     } else {
         history.state = [NSNumber numberWithInteger:1];
-    }
-    
-	NSError *error;    
-    if (![self.backgroundManagedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-    
-    [self.tableView reloadData];
-    
+    }    
 }
 
 -(IBAction)sortList:(id)sender {
-    NSSortDescriptor *sortDescriptor;
     switch (sortingControl.selectedSegmentIndex) {
         case 0:
             sorting = BY_TEXT;
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"keywords"
-                                                          ascending:YES] autorelease];            
+            self.fetchedResultsController = self.fetchedResultsSortedByKeywordsController;
             break;
         case 1:
             sorting = BY_PRIORITY;
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"state"
-                                                          ascending:NO] autorelease];                        
+            self.fetchedResultsController = self.fetchedResultsSortedByStateController;
             break;
         case 2:
             sorting = BY_CREATED;
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"created"
-                                                          ascending:YES] autorelease];                                    
+            self.fetchedResultsController = self.fetchedResultsSortedByCreatedController;
             break;
         default:
             sorting = BY_TEXT;
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"keywords"
-                                                          ascending:YES] autorelease];                        
+            self.fetchedResultsController = self.fetchedResultsSortedByKeywordsController;
             break;
-    }
-    
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    
-    self.historyData = [[[historyData sortedArrayUsingDescriptors:sortDescriptors] mutableCopy] autorelease];
-    self.loadedData = [[[loadedData sortedArrayUsingDescriptors:sortDescriptors] mutableCopy] autorelease];
-    
-    [self.tableView reloadData];
+    }    
 }
 
 #pragma mark - View lifecycle
@@ -236,10 +219,7 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
+    self.tableView = (UITableView *)self.view;
     
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
 								   initWithTitle:@"แก้ไข"
@@ -260,41 +240,12 @@
     self.stageImages = array;
     [array release];
     
-    self.sortingControl.enabled = NO;
-    self.sortingControl.alpha = 0.2;
-
-    if ([historyData count] > 0 && [loadedData count] != [historyData count]) {
-        loading = YES;
-    }
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{        
-        [self reloadData];
-        while ([historyData count] != [loadedData count]) {
-            loading = YES;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-            [NSThread sleepForTimeInterval:0.25];
-            [self loadMoreData:historyData loadedData:loadedData 
-                          from:[loadedData count] to:[loadedData count]+10];
-            loading = NO;
-            dispatch_async(dispatch_get_main_queue(), ^{           
-                [self.tableView reloadData];                
-            });
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{           
-            self.sortingControl.enabled = YES;
-            self.sortingControl.alpha = 1.0;
-            [self.tableView reloadData];                            
-        });                    
-    });
+    self.fetchedResultsController = self.fetchedResultsSortedByKeywordsController;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
     self.language = nil;
     self.historyData = nil;
     self.loadedData = nil;
@@ -305,13 +256,62 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
     [super viewWillAppear:animated];
+    
+    self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);   
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    if (self.progressHUD.superview == nil) {
+        self.suspendAutomaticTrackingOfChangesInManagedObjectContext = YES;
+        [self.view.window addSubview:self.progressHUD];
+        [self.progressHUD show:YES];
+        
+        dispatch_queue_t historyDetailQueue = dispatch_queue_create("history detail queue", NULL);
+        
+        dispatch_async(historyDetailQueue, ^{
+            int count = 1;
+            for (History *history in self.fetchedResultsController.fetchedObjects) {
+                if (history.detail == nil) {
+                    NSInteger n1 = 0, n2 = 0, n3 = 0;
+                    for (Content *content in history.contents) {
+                        if ([content.volume intValue] <= 8) {
+                            n1++;
+                        } else if([content.volume intValue] <= 33) {
+                            n2++;
+                        } else {
+                            n3++;
+                        }
+                    }              
+                    
+                    NSString *text = [[NSString alloc] initWithFormat:@"%4d หน้า: วิ.(%d) สุต.(%d) อภิ.(%d)",
+                                      [history.contents count] ,n1, n2, n3];
+                    history.detail = [Utils arabic2thai:text];                
+                    [text release];                                        
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.progressHUD.progress = 1.0 * count / self.fetchedResultsController.fetchedObjects.count;
+                });                
+                count += 1;                
+                NSLog(@"%d %f", count, self.progressHUD.progress);
+            }        
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.progressHUD hide:YES];
+                self.suspendAutomaticTrackingOfChangesInManagedObjectContext = NO;
+                NSError *error = nil;
+                if (![self.fetchedResultsController.managedObjectContext save:&error]) {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+                [self.tableView reloadData];                
+            });
+        });
+        
+        dispatch_release(historyDetailQueue);
+    }
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -322,25 +322,17 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    NSError *error = nil;
+    if (![self.fetchedResultsController.managedObjectContext save:&error]) {
+        NSLog(@"%@", error.localizedDescription);
+    }
 }
 
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section
-{
-    return (loading) ? [loadedData count] + 1 : [loadedData count];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     
     static NSString *CellIdentifier = @"Cell";
@@ -349,53 +341,31 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle 
                                        reuseIdentifier:CellIdentifier] autorelease];
-        cell.tag = 0;
     }
     
-    if (section == 0) {
-        if (loading && row == [loadedData count]) {
-            if (cell.tag == 0) {
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                               reuseIdentifier:CellIdentifier] autorelease];
-                cell.tag = 1;
-            }
-            cell.textLabel.text = @"กำลังโหลดข้อมูล กรุณารอสักครู่";
-            [cell.textLabel setTextAlignment:UITextAlignmentCenter];
-            UIActivityIndicatorView *indicator = [[[UIActivityIndicatorView alloc] 
-                                                  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
-            [indicator startAnimating];
-            cell.accessoryView = indicator;
-        } else {
-            History *history = [historyData objectAtIndex:row];
-            if (cell.tag == 1) {
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle 
-                                               reuseIdentifier:CellIdentifier] autorelease];                
-                cell.tag = 0;
-            }
-
-            cell.textLabel.textAlignment = UITextAlignmentLeft;            
-            cell.textLabel.text = history.keywords;
-            cell.detailTextLabel.text = [detailTable valueForKey:history.keywords];
-            
-            UIImage *buttonStar;
-            if (history.state) {
-                buttonStar = [UIImage imageNamed:[stageImages objectAtIndex:[history.state intValue]]];  
-            } else {
-                buttonStar = [UIImage imageNamed:[stageImages objectAtIndex:0]];   
-            }
-            
-            UIButton *button = [[UIButton alloc] init];
-            button.tag = row;
-            button.frame = CGRectMake(0.0, 0.0, buttonStar.size.width, buttonStar.size.height);
-            [button setImage:buttonStar forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(starTapped:) forControlEvents:UIControlEventTouchUpInside];            
-            cell.accessoryView = button;
-            [button release];
-            
-            cell.textLabel.font = [UIFont boldSystemFontOfSize:22];    
-            cell.detailTextLabel.font = [UIFont systemFontOfSize:20];                     
-        }
+    History *history = [self.fetchedResultsController.fetchedObjects objectAtIndex:row];
+    
+    cell.textLabel.textAlignment = UITextAlignmentLeft;            
+    cell.textLabel.text = history.keywords;
+    cell.detailTextLabel.text = history.detail;            
+    
+    UIImage *buttonStar;
+    if (history.state) {
+        buttonStar = [UIImage imageNamed:[stageImages objectAtIndex:[history.state intValue]]];  
+    } else {
+        buttonStar = [UIImage imageNamed:[stageImages objectAtIndex:0]];   
     }
+    
+    UIButton *button = [[UIButton alloc] init];
+    button.tag = row;
+    button.frame = CGRectMake(0.0, 0.0, buttonStar.size.width, buttonStar.size.height);
+    [button setImage:buttonStar forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(starTapped:) forControlEvents:UIControlEventTouchUpInside];            
+    cell.accessoryView = button;
+    [button release];
+    
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:22];    
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:20];  
     
     return cell;
 }
@@ -412,61 +382,24 @@
     }
 }
 
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     return !loading;
 }
 
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Update database
-		E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];		
-		NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-        History *history = [self.historyData objectAtIndex:indexPath.row];
-        
-        //for(Content *content in history.contents) {
-            //[history removeContentsObject:content];
-            //[content removeHistoriesObject:history];
-        //}
-        
-        [context deleteObject:history];
-        
-        [historyData removeObjectAtIndex:indexPath.row];
-        [loadedData removeObjectAtIndex:indexPath.row];
-        
-		NSError *error;
-		if (![context save:&error]) {
-			NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-		}        
-        
-        // Delete the row from the data source
-        [aTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
-                         withRowAnimation:UITableViewRowAnimationFade];
-        [aTableView reloadData];
+        History *history = [self.fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row];
+        [self.fetchedResultsController.managedObjectContext deleteObject:history];
+        NSError *error = nil;
+        if (![self.fetchedResultsController.managedObjectContext save:&error]) {
+            NSLog(@"%@", error.localizedDescription);
+        }        
+        [self.tableView reloadData];
     }   
 }
 
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -475,8 +408,7 @@
     NSInteger row = indexPath.row;
     
     SearchViewController *searchController = [self.navigationController.viewControllers objectAtIndex:0];
-    
-    [searchController loadHistory:[self.historyData objectAtIndex:row]];
+    [searchController loadHistory:[self.fetchedResultsController.fetchedObjects objectAtIndex:row]];
 
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -489,33 +421,26 @@
     return indexPath;
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
-//    CGPoint offset = aScrollView.contentOffset;
-//    CGRect bounds = aScrollView.bounds;
-//    CGSize size = aScrollView.contentSize;
-//    UIEdgeInsets inset = aScrollView.contentInset;
-//    float y = offset.y + bounds.size.height - inset.bottom;
-//    float h = size.height;    
-//    float reload_distance = 40;
-//    
-//    willReload = (y > h + reload_distance) ? YES : NO;
-//    
-//}
-//
-//- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView willDecelerate:(BOOL)decelerate {
-//    if (willReload && [self.historyData count] > [self.tableData count] && loading == NO) {
-//        loading = YES;
-//        [self.tableView reloadData];
-//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//            [NSThread sleepForTimeInterval:1];            
-//            [self addMoreHistoryData:self.historyData 
-//                           tableData:self.tableData 
-//                                from:[self.tableData count] to:[self.tableData count]+10];            
-//            loading = NO;            
-//            [self.tableView reloadData];
-//            [NSThread sleepForTimeInterval:.5];                        
-//        });
-//    }
-//}
+#pragma mark - NSFetchedResultsControllerDelegate
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [super controllerWillChangeContent:controller];
+    self.sortingControl.enabled = NO;
+    self.sortingControl.alpha = 0.2;
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [super controllerDidChangeContent:controller];
+    self.sortingControl.enabled = YES;
+    self.sortingControl.alpha = 1.0;    
+}
+
+#pragma mark - MBProgressHUD delegate
+
+- (void)hudWasHidden:(MBProgressHUD *)hud
+{
+    [self.progressHUD removeFromSuperview];
+}
 
 @end
