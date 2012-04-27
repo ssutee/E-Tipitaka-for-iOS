@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Socialize/Socialize.h>
 
 @class Content;
 
@@ -26,10 +27,12 @@
 @property (assign) NSUInteger scrollPosition;
 @property (assign) BOOL scrollToItemNumber;
 @property (assign) BOOL scrollToHighlightText;
+@property (nonatomic, retain) id<SocializeEntity> entity;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *indictor;
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 
+- (id)initWithEntity:(id<SocializeEntity>)entity;
 -(NSString *) convertContentToHTML;
 -(NSString *) convertWhiteSpacesToHTML:(NSString *)text;
 -(NSString *) markHighlight:(NSString *)text;

@@ -25,6 +25,7 @@
 #define kGotoItemAlert 2002
 #define kDatabaseAlert 2003
 #define kQuitAlert 2004
+#define kFacebookAlert 2005
 
 @interface ReadViewController : BaseReadViewController 
 <UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate, MBProgressHUDDelegate, ASIProgressDelegate>

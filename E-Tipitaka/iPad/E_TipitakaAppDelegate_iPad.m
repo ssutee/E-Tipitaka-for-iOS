@@ -7,34 +7,23 @@
 //
 
 #import "E_TipitakaAppDelegate_iPad.h"
+#import <Socialize/Socialize.h>
 
 @implementation E_TipitakaAppDelegate_iPad
 
-//@synthesize splitViewController=_splitViewController;
-//@synthesize readViewController=_readViewController;
-//@synthesize rootViewController=_rootViewController;
-
 @synthesize rootController;
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // Override point for customization after application launch.
-    // Add the split view controller's view to the window and display.
-    //[super createEditableCopyOfDatabaseIfNeeded];
-    
-    [self.window addSubview:rootController.view]; 
-    
-    [self.window makeKeyAndVisible];
-    return YES;
-}
 
 - (void)dealloc
 {
 	[super dealloc];
     [rootController release];
-//    [_splitViewController release];
-//    [_rootViewController release];
-//    [_readViewController release];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Override point for customization after application launch.
+    [self.window addSubview:rootController.view]; 
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 @end

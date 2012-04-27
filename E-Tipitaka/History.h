@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSDate * created;
 @property (nonatomic, retain) NSNumber * state;
 @property (nonatomic, retain) NSData * selected;
+@property (nonatomic, retain) NSData * read;
 @property (nonatomic, retain) NSSet *contents;
 @end
 

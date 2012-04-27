@@ -34,6 +34,8 @@
 @synthesize dictionaryPopoverController=_dictionaryPopoverController;
 @synthesize dictionaryListViewController = _dictionaryListViewController;
 
+@synthesize delegate = _delegate;
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -232,6 +234,8 @@
     frame.origin.y = 0;
     [self.scrollView scrollRectToVisible:frame animated:NO];
         
+    [self.delegate baseReadViewController:self didLoadVolume:[self getCurrentVolume].intValue andPage:[self getCurrentPage].intValue];
+    
     [self updatePageInBackground:[[self getCurrentPage] intValue]-1];
     [self updatePageInBackground:[[self getCurrentPage] intValue]+1];
 }
@@ -495,7 +499,7 @@
                            stringByEvaluatingJavaScriptFromString:@"window.getSelection().toString()"];        
     //    NSLog(@"%@", [self.htmlView stringByEvaluatingJavaScriptFromString:@"findTextAtRow(4);"]);
 
-    CGRect rect = CGRectMake(self.contentViewController.webView.bounds.size.width/2, self.contentViewController.webView.bounds.size.height, 0, 0);
+    CGRect rect = CGRectMake(self.contentViewController.webView.bounds.size.width/2, self.contentViewController.webView.bounds.size.height, 1, 1);
     
     if(self.dictionaryPopoverController != nil) {
         if ([self.dictionaryPopoverController isPopoverVisible]) {

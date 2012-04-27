@@ -25,10 +25,15 @@
 #import "MBProgressHUD.h"
 #import "ASIHTTPRequest.h"
 #import "ZipArchive.h"
+#import <Socialize/Socialize.h>
+#import "Reachability.h"
 
 @interface ReadViewController()
-
+{
+    BOOL _isDownloadingDatabase;
+}
 @property (nonatomic, retain) MBProgressHUD *HUD;
+@property (nonatomic, retain) SocializeActionBar *actionBar;
 
 @end
 
@@ -57,6 +62,7 @@
 @synthesize pageSlider=_pageSlider;
 @synthesize bottomToolbar;
 @synthesize HUD = _HUD;
+@synthesize actionBar = _actionBar;
 
 #pragma mark - Getter/Setter Methods
 
@@ -98,6 +104,7 @@
 
 -(void) prepareDatabaseByDownloadingFromInternet
 {
+    _isDownloadingDatabase = NO;
     ContentInfo *thaiInfo = [[ContentInfo alloc] init];
     ContentInfo *paliInfo = [[ContentInfo alloc] init];    
     thaiInfo.language = @"Thai";
@@ -114,6 +121,7 @@
     NSArray *paliContents = [QueryHelper getContents:paliInfo];
     
     if(!thaiContents.count || !paliContents.count) {      
+        _isDownloadingDatabase = YES;
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"E_Tipitaka.sqlite"];
@@ -330,8 +338,43 @@
 -(void) updateReadingPage
 {
     [super updateReadingPage];
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus netStatus = [reachability currentReachabilityStatus];
+    
 
-	NSString *newTitle = [Utils createHeaderTitle:[self getCurrentVolume]];    
+    
+    NSString *entityName;
+    
+    if ([[self getCurrentLanguage] isEqualToString:@"Thai"]) {
+        entityName = [[NSString alloc] initWithFormat:@"พระไตรปิฎก (ภาษาไทย) เล่มที่ %@ หน้าที่ %@", 
+                     [self getCurrentVolume], [self getCurrentPage]];
+    } else {
+        entityName = [[NSString alloc] initWithFormat:@"พระไตรปิฎก (ภาษาบาลี) เล่มที่ %@ หน้าที่ %@", 
+                     [self getCurrentVolume], [self getCurrentPage]];        
+    }
+    
+    if (self.actionBar == nil || netStatus != NotReachable) {
+        [self.actionBar.view removeFromSuperview];
+        SocializeActionBar *actionBar = [SocializeActionBar actionBarWithKey:[NSString stringWithFormat:@"http://www.etipitaka.com/%@/%@/%@", [self getCurrentLanguage], [self getCurrentVolume], [self getCurrentPage]] name:[Utils arabic2thai:entityName] presentModalInController:self];
+        self.actionBar = actionBar;
+        self.actionBar.noAutoLayout = YES;
+    }
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {        
+        self.actionBar.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+        self.actionBar.view.frame = CGRectMake(0, self.view.bounds.size.height-bottomToolbar.bounds.size.height-SOCIALIZE_ACTION_PANE_HEIGHT, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
+    } else {
+        self.actionBar.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;        
+        self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
+    }
+
+    if (bottomToolbar && bottomToolbar.hidden) {
+        self.actionBar.view.hidden = YES;
+    }
+    
+    [self.view addSubview:self.actionBar.view];
+    
+    NSString *newTitle = [Utils createHeaderTitle:[self getCurrentVolume]];    
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [(UIButton *)self.navigationItem.titleView setTitle:[Utils arabic2thai:newTitle] forState:UIControlStateNormal];
     }
@@ -342,7 +385,6 @@
             }
         }
     }
-    
 }
 
 -(void) gotoItem {
@@ -829,6 +871,7 @@
     } 
     else {
         SearchViewController *searchViewController = [[SearchViewController alloc] init];
+        self.delegate = searchViewController;
         searchViewController.title = @"ค้นหา";
         searchViewController.readViewController = self;
         UINavigationController *navController = [[UINavigationController alloc] 
@@ -917,15 +960,15 @@
 
 -(void) viewDidDisappear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewDidDisappear:animated];
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         showToolbar = NO;
         self.toolbar.hidden = YES;
         
         if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-            self.contentView.frame = CGRectMake(0, 20, 480, 219);            
+            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 219-SOCIALIZE_ACTION_PANE_HEIGHT);            
         } else {
-            self.contentView.frame = CGRectMake(0, 20, 320, 367);   
+            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 367-SOCIALIZE_ACTION_PANE_HEIGHT);   
         }      
         [self updateLanguageButtonTitle];        
     }
@@ -1043,29 +1086,42 @@
     self.itemOptionsActionSheet = nil;    
     self.bottomToolbar = nil;
     self.alterItems = nil;
+    self.actionBar = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
+    if (![self.actionBar.socialize isAuthenticatedWithFacebook] && !_isDownloadingDatabase) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Facebook Login Request" message:@"คุณต้องใช้การแบ่งปันข้อมูลแบบออนไลน์ผ่าน Facebook หรือไม่?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        alertView.tag = kFacebookAlert;
+        [alertView show];
+        [alertView release];
+    }
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         UIView *transView = [self.tabBarController.view.subviews objectAtIndex:0];
         if (showToolbar) {
             if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
                 transView.frame = CGRectMake(0, 0, 480, 320);
-                self.contentView.frame = CGRectMake(0, 20, 480, 224);
+                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 224-SOCIALIZE_ACTION_PANE_HEIGHT);
             } else {        
                 transView.frame = CGRectMake(0, 0, 320, 480);
-                self.contentView.frame = CGRectMake(0, 20, 320, 372);
+                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 372-SOCIALIZE_ACTION_PANE_HEIGHT);
             }
         } else {
             if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
                 transView.frame = CGRectMake(0, 0, 480, 271);
-                self.contentView.frame = CGRectMake(0, 20, 480, 219);
+                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 219-SOCIALIZE_ACTION_PANE_HEIGHT);
             } else {
                 transView.frame = CGRectMake(0, 0, 320, 431);
-                self.contentView.frame = CGRectMake(0, 20, 320, 367);
+                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 367-SOCIALIZE_ACTION_PANE_HEIGHT);
             }
         }
     }
@@ -1093,6 +1149,7 @@
 
     [alterItems release];
     [_HUD release];
+    [_actionBar release];
     
     [super dealloc];
 }
@@ -1125,7 +1182,7 @@
     if (alertView.tag == kQuitAlert) {
         exit(0);
     }
-    
+        
 	if (buttonIndex != [alertView cancelButtonIndex]) {        
         if (alertView.tag == kGotoItemAlert || alertView.tag == kGotoPageAlert) {
             NSString *inputText = ((UITextInputAlertView *)alertView).field.text;
@@ -1165,7 +1222,10 @@
                     [info release];                                
                 }
             } 
+        } else if(alertView.tag == kFacebookAlert) {
+            [self.actionBar.socialize authenticateWithApiKey:@"da599d2b-0d97-4ae0-992e-f413e589a53e" apiSecret:@"df7e464e-466e-47bb-b8f8-b06026f1543a" thirdPartyAppId:@"173041622753730" thirdPartyName:SocializeThirdPartyAuthTypeFacebook];
         }
+
     }
 }
 
@@ -1219,25 +1279,32 @@
         [self nextButtonClicked:nil];
         return;
     } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        // toggle bottom bar and slider
-        bottomToolbar.hidden = !bottomToolbar.hidden;
-        _pageSlider.hidden = !_pageSlider.hidden;
-        
-        CGRect oldRect = self.contentView.frame;
-        CGRect newRect;
+        // toggle bottom bar and slider                
         if (bottomToolbar.hidden) {
-            newRect = CGRectMake(oldRect.origin.x, 
-                                 oldRect.origin.y-30, 
-                                 oldRect.size.width, 
-                                 oldRect.size.height+44+30);
+            self.actionBar.view.hidden = NO;
+            self.actionBar.view.frame = CGRectMake(0, self.view.bounds.size.height-88, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
         } else {
-            newRect = CGRectMake(oldRect.origin.x, 
-                                 oldRect.origin.y+30, 
-                                 oldRect.size.width, 
-                                 oldRect.size.height-44-30);            
+            self.actionBar.view.hidden = YES;
         }
-        self.contentView.frame = newRect;
+        bottomToolbar.hidden = !bottomToolbar.hidden;        
+        _pageSlider.hidden = !_pageSlider.hidden;        
     }
+    
+    CGRect oldRect = self.contentView.frame;
+    CGRect newRect;
+    if (bottomToolbar.hidden) {
+        newRect = CGRectMake(oldRect.origin.x, 
+                             oldRect.origin.y-30, 
+                             oldRect.size.width, 
+                             oldRect.size.height+44+30+44);
+    } else {
+        newRect = CGRectMake(oldRect.origin.x, 
+                             oldRect.origin.y+30, 
+                             oldRect.size.width, 
+                             oldRect.size.height-44-30-44);            
+    }
+    self.contentView.frame = newRect;
+
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         return;
@@ -1250,22 +1317,23 @@
         tabBar.hidden = TRUE;
         if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
             transView.frame = CGRectMake(0, 0, 480, 320);
-            self.contentView.frame = CGRectMake(0, 20, 480, 224);
+            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 224-SOCIALIZE_ACTION_PANE_HEIGHT);
         } else {        
             transView.frame = CGRectMake(0, 0, 320, 480);
-            self.contentView.frame = CGRectMake(0, 20, 320, 372);
+            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 372-SOCIALIZE_ACTION_PANE_HEIGHT);
         }
     } else {
         tabBar.hidden = FALSE;
         if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
             transView.frame = CGRectMake(0, 0, 480, 271);
-            self.contentView.frame = CGRectMake(0, 20, 480, 219);
+            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 219-SOCIALIZE_ACTION_PANE_HEIGHT);
         } else {
             transView.frame = CGRectMake(0, 0, 320, 431);
-            self.contentView.frame = CGRectMake(0, 20, 320, 367);
+            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 367-SOCIALIZE_ACTION_PANE_HEIGHT);
         }
     }
 	toolbar.hidden = !showToolbar;
+    self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
 }
 
 

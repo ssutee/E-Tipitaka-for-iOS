@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) MBProgressHUD *HUD;
 @property (nonatomic, retain) History *selectedHistory;
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 
 @end
 
@@ -30,11 +31,13 @@
 @synthesize results;
 @synthesize categories;
 @synthesize clickedItems;
+@synthesize readItems = _readItems;
 @synthesize keywords;
 @synthesize scope;
 @synthesize readViewController;
 @synthesize HUD = _HUD;
 @synthesize selectedHistory = _selectedHistory;
+@synthesize selectedIndexPath = _selectedIndexPath;
 
 - (MBProgressHUD *) HUD
 {
@@ -47,7 +50,6 @@
     }
     return _HUD;
 }
-
 
 -(IBAction)toggleLanguage:(id)sender {
     if(self.search.selectedScopeButtonIndex == kThaiScope) {
@@ -100,6 +102,7 @@
 	[array release];
 
     [self.clickedItems removeAllObjects];
+    [self.readItems removeAllObjects];
     
 	NSMutableArray *value0 = [[NSMutableArray alloc] init];
 	NSMutableArray *value1 = [[NSMutableArray alloc] init];
@@ -130,7 +133,10 @@
     self.selectedHistory = history;
     if (self.selectedHistory.selected && [NSKeyedUnarchiver unarchiveObjectWithData:self.selectedHistory.selected]) {
         self.clickedItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.selectedHistory.selected];
-        NSLog(@"%@", self.clickedItems);
+    }
+    
+    if (self.selectedHistory.read && [NSKeyedUnarchiver unarchiveObjectWithData:self.selectedHistory.read]) {
+        self.readItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.selectedHistory.read];
     }
 
 	NSString *string = [[NSString alloc] initWithString:history.keywords];
@@ -220,11 +226,14 @@
         NSUInteger row = [indexPath row];
         NSString *item = [[NSString alloc] initWithFormat:@"%d:%d",section,row];
         [self.clickedItems removeObject:item];        
+        [self.readItems removeObject:item];
         [item release];
         
         [self.table reloadData];
         
         self.selectedHistory.selected = [NSKeyedArchiver archivedDataWithRootObject:self.clickedItems];
+        self.selectedHistory.read = [NSKeyedArchiver archivedDataWithRootObject:self.readItems];
+        
         NSError *error = nil;
         if (![self.selectedHistory.managedObjectContext save:&error]) {
             NSLog(@"%@", error.localizedDescription);
@@ -431,6 +440,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
+    [self.table reloadData];
+    
+    if (self.selectedIndexPath) {
+        [self.table selectRowAtIndexPath:self.selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+    }
+    
     [super viewWillAppear:animated];
 }
 
@@ -442,9 +457,13 @@
     
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
     
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    self.clickedItems = array;
-    [array release];
+    NSMutableArray *array1 = [[NSMutableArray alloc] init];
+    self.clickedItems = array1;
+    [array1 release];
+    
+    NSMutableArray *array2 = [[NSMutableArray alloc] init];
+    self.readItems = array2;
+    [array2 release];
 
     UIBarButtonItem *languageButton = [[UIBarButtonItem alloc]
                                        initWithTitle:@""
@@ -520,6 +539,7 @@
 	self.keywords = nil;
     self.readViewController = nil;
     self.clickedItems = nil;
+    self.readItems = nil;
     self.selectedHistory = nil;
 }
 
@@ -536,6 +556,7 @@
 	[keywords release];
     [readViewController release];
     [_selectedHistory release];
+    [_readItems release];
     [super dealloc];
 }
 
@@ -570,6 +591,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
+    self.selectedIndexPath = indexPath;
+    
 	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
     NSString *item = [[NSString alloc] initWithFormat:@"%d:%d",section,row];
@@ -844,9 +867,14 @@
 	NSUInteger row = [indexPath row];
     NSString *item = [[NSString alloc] initWithFormat:@"%d:%d",section,row];
     
+    
     if ([self.clickedItems containsObject:item]) {
         [cell setBackgroundColor:[UIColor colorWithRed:.8 green:.8 blue:.8 alpha:1]];
-    } else {
+    } 
+    else if ([self.readItems containsObject:item]){
+        [cell setBackgroundColor:[UIColor colorWithRed:.90 green:.90 blue:.90 alpha:1]]; 
+    }
+    else {
         [cell setBackgroundColor:[UIColor clearColor]];
     }
     [item release];
@@ -970,6 +998,41 @@
 	//[self resetSearch];
 	//[table reloadData];
 	[searchBar resignFirstResponder];
+}
+
+#pragma mark - BaseReadViewController delegate
+
+- (void)baseReadViewController:(BaseReadViewController *)controller didLoadVolume:(NSInteger)volume andPage:(NSInteger)page
+{
+    BOOL isFound = NO;
+    int foundSection, foundRow;
+    for (int section=1; section < self.categories.count; ++section) {
+        NSString *category = [categories objectAtIndex:section];
+        NSArray *resultSection = [results objectForKey:category];
+        for (int row=0; row < resultSection.count; ++row) {
+            Content *content = [resultSection objectAtIndex:row];
+            if (content.volume.intValue == volume && content.page.intValue == page) {
+                isFound = YES;
+                foundSection = section;
+                foundRow = row;
+                break;
+            }
+        }        
+    }
+    
+    if (isFound) {
+        NSString *item = [[NSString alloc] initWithFormat:@"%d:%d",foundSection,foundRow];                
+        if (![self.readItems containsObject:item]) {
+            [self.readItems addObject:item];
+            self.selectedHistory.read = [NSKeyedArchiver archivedDataWithRootObject:self.readItems];
+            NSError *error = nil;
+            if (![self.selectedHistory.managedObjectContext save:&error]) {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }                
+        [item release];
+    }
+    
 }
 
 @end

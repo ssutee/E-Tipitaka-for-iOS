@@ -19,6 +19,7 @@
 @dynamic created;
 @dynamic state;
 @dynamic selected;
+@dynamic read;
 @dynamic contents;
 
 @end

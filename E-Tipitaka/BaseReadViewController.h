@@ -10,6 +10,15 @@
 #import "TapDetectingWindow.h"
 #import "DictionaryListViewController.h"
 
+@class BaseReadViewController;
+
+@protocol BaseReadViewControllerDelegate <NSObject>
+
+- (void)baseReadViewController:(BaseReadViewController *)controller didLoadVolume:(NSInteger)volume andPage:(NSInteger)page;
+
+@end
+
+
 #define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
 
 @class ContentViewController;
@@ -40,6 +49,8 @@
 @property(nonatomic, retain) IBOutlet UIView *contentView;
 @property(nonatomic, retain) IBOutlet UISlider *pageSlider;
 @property(nonatomic, retain) IBOutlet UILabel *toastText;
+
+@property(nonatomic, unsafe_unretained) id<BaseReadViewControllerDelegate> delegate;
 
 -(void) updateReadingPage;
 -(void) updatePageTitle:(NSString *)language volume:(NSNumber *)volume page:(NSNumber *)page;

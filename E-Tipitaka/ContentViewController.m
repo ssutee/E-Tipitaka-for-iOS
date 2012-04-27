@@ -10,6 +10,8 @@
 #import "ContentViewController.h"
 #import "Content.h"
 #import "Item.h"
+#import "ContentInfo.h"
+#import "QueryHelper.h"
 
 @interface ContentViewController()
 // private methods
@@ -26,6 +28,17 @@
 @synthesize scrollToHighlightText;
 @synthesize indictor=_indictor;
 @synthesize webView=_webView;
+@synthesize entity = _entity;
+
+- (id)initWithEntity:(id<SocializeEntity>)entity
+{
+    self = [super init];
+    if (self) {
+        self.entity = entity;
+        self.fontSize = 24;
+    }
+    return self;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -41,6 +54,7 @@
     [_webView release];
     [_content release];
     [_highlightText release];
+    [_entity release];
     [super dealloc];
 }
 
@@ -55,11 +69,55 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];        
+        
     [self.view bringSubviewToFront:self.indictor];
     for (id subview in self.webView.subviews)
         if ([[subview class] isSubclassOfClass: [UIScrollView class]])
             ((UIScrollView *)subview).bounces = NO;    
+    
+    if (self.entity) {
+        self.title = self.entity.name;
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        } else {
+            titleLabel.font = [UIFont boldSystemFontOfSize:20.0];    
+        }
+        
+        titleLabel.textColor = [UIColor whiteColor];
+        self.navigationItem.titleView = titleLabel;
+        titleLabel.text = self.title;
+        [titleLabel sizeToFit];    
+        
+        NSString *key = self.entity.key;
+        NSArray *tokens = key.pathComponents;
+        NSString *langauge = [tokens objectAtIndex:2];
+        NSNumber *volume = [NSNumber numberWithInt:[[tokens objectAtIndex:3] intValue]];
+        NSNumber *page = [NSNumber numberWithInt:[[tokens objectAtIndex:4] intValue]];
+                
+        ContentInfo *info = [[ContentInfo alloc] init];
+        info.language = langauge;
+        info.volume = volume;
+        info.page = page;
+        [info setType:(LANGUAGE|VOLUME|PAGE)];
+        NSArray *fetchedObjects = [QueryHelper getContents:info];
+        [info release];    
+        if (fetchedObjects && fetchedObjects.count == 1) {
+            self.content = [fetchedObjects objectAtIndex:0];
+        }
+    }
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.content) {
+        [self update];
+    }
+}
+
 
 - (void)viewDidUnload
 {
@@ -130,7 +188,7 @@
 #pragma mark Web View Delegate Methods 
 
 - (void)webViewDidFinishLoad:(UIWebView *)aWebView
-{   
+{       
     if (scrollToItemNumber) {
 		[aWebView stringByEvaluatingJavaScriptFromString:
 		 [NSString stringWithFormat:
