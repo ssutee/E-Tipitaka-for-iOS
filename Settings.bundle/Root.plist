@@ -8,7 +8,7 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>DefaultValue</key>
-			<string>1.2.4</string>
+			<string>1.3.0</string>
 			<key>Title</key>
 			<string>Version</string>
 			<key>Key</key>

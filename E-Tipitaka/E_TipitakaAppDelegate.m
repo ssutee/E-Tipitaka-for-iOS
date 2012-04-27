@@ -7,6 +7,9 @@
 //
 
 #import "E_TipitakaAppDelegate.h"
+#import "SampleEntityLoader.h"
+#import "ContentViewController.h"
+#import <Socialize/Socialize.h>
 
 @implementation E_TipitakaAppDelegate
 
@@ -57,10 +60,45 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [Socialize storeConsumerKey:@"da599d2b-0d97-4ae0-992e-f413e589a53e"];
+    [Socialize storeConsumerSecret:@"df7e464e-466e-47bb-b8f8-b06026f1543a"];    
+    [Socialize storeFacebookAppId:@"173041622753730"];
+    
+    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    
+    [Socialize setEntityLoaderBlock:^(UINavigationController *navigationController, id<SocializeEntity>entity) {
+        ContentViewController *contentViewController = [[ContentViewController alloc] initWithEntity:entity];
+        [navigationController pushViewController:contentViewController animated:YES];
+        [contentViewController release];
+    }];
     
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [Socialize handleOpenURL:url];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [Socialize registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    if ([Socialize handleNotification:userInfo]) {
+        return;
+    }
+    
+    // Nonsocialize notification handling goes here
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Error Register Notifications: %@", [error localizedDescription]);
+} 
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

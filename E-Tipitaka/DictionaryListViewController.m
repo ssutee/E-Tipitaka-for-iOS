@@ -348,6 +348,9 @@
         cell.detailTextLabel.font = [UIFont fontWithName:TRANSLATION_FONT size:TRANSLATION_SIZE];;        
     } 
     
+    cell.textLabel.font = [UIFont fontWithName:@"THSarabunNew-Bold" size:24]; 
+    cell.detailTextLabel.font = [UIFont fontWithName:@"THSarabunNew" size:24]; 
+    
     return cell;
 }
 
