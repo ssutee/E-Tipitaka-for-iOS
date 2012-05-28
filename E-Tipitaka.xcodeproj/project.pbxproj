@@ -224,6 +224,10 @@
 		9E1F6BB1154A3A5400F1CCD7 /* SampleEntityLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6BAF154A3A5400F1CCD7 /* SampleEntityLoader.m */; };
 		9E1F6BB3154A3B2F00F1CCD7 /* SampleEntityLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E1F6BB2154A3B2F00F1CCD7 /* SampleEntityLoader.xib */; };
 		9E1F6BB4154A3B2F00F1CCD7 /* SampleEntityLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E1F6BB2154A3B2F00F1CCD7 /* SampleEntityLoader.xib */; };
+		9E1F6BD1154AF93000F1CCD7 /* comment_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1F6BD0154AF93000F1CCD7 /* comment_48.png */; };
+		9E1F6BD4154AF95000F1CCD7 /* comment_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1F6BD3154AF95000F1CCD7 /* comment_24.png */; };
+		9E1F6BDD154BB73100F1CCD7 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E1F6BDA154BB73000F1CCD7 /* CommentViewController.xib */; };
+		9E1F6BDE154BB73100F1CCD7 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F6BDB154BB73000F1CCD7 /* CommentViewController.m */; };
 		9E2A9E2E1539642F00E991E2 /* THSarabunNew Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E2A9E2A1539642F00E991E2 /* THSarabunNew Bold.ttf */; };
 		9E2A9E2F1539642F00E991E2 /* THSarabunNew BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E2A9E2B1539642F00E991E2 /* THSarabunNew BoldItalic.ttf */; };
 		9E2A9E301539642F00E991E2 /* THSarabunNew Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E2A9E2C1539642F00E991E2 /* THSarabunNew Italic.ttf */; };
@@ -560,6 +564,11 @@
 		9E1F6BAE154A3A5400F1CCD7 /* SampleEntityLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleEntityLoader.h; sourceTree = "<group>"; };
 		9E1F6BAF154A3A5400F1CCD7 /* SampleEntityLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleEntityLoader.m; sourceTree = "<group>"; };
 		9E1F6BB2154A3B2F00F1CCD7 /* SampleEntityLoader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleEntityLoader.xib; sourceTree = "<group>"; };
+		9E1F6BD0154AF93000F1CCD7 /* comment_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_48.png; sourceTree = "<group>"; };
+		9E1F6BD3154AF95000F1CCD7 /* comment_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_24.png; sourceTree = "<group>"; };
+		9E1F6BDA154BB73000F1CCD7 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
+		9E1F6BDB154BB73000F1CCD7 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		9E1F6BDC154BB73000F1CCD7 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		9E2A9E2A1539642F00E991E2 /* THSarabunNew Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "THSarabunNew Bold.ttf"; sourceTree = "<group>"; };
 		9E2A9E2B1539642F00E991E2 /* THSarabunNew BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "THSarabunNew BoldItalic.ttf"; sourceTree = "<group>"; };
 		9E2A9E2C1539642F00E991E2 /* THSarabunNew Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "THSarabunNew Italic.ttf"; sourceTree = "<group>"; };
@@ -1060,6 +1069,8 @@
 				9E19431714E793E300D2940B /* ic_dialog_alert.png */,
 				9E19431514E7932700D2940B /* 37x-Checkmark.png */,
 				9E326FF3138F6EBE00ED66AE /* stage_01.png */,
+				9E1F6BD0154AF93000F1CCD7 /* comment_48.png */,
+				9E1F6BD3154AF95000F1CCD7 /* comment_24.png */,
 				9E326FF4138F6EBE00ED66AE /* stage_02.png */,
 				9E326FF5138F6EBE00ED66AE /* stage_03.png */,
 				9E326FF6138F6EBE00ED66AE /* stage_04.png */,
@@ -1126,6 +1137,9 @@
 				9E1F6BAF154A3A5400F1CCD7 /* SampleEntityLoader.m */,
 				9E138969141B750C00C350B0 /* BaseReadViewController.h */,
 				9E13896A141B750C00C350B0 /* BaseReadViewController.m */,
+				9E1F6BDA154BB73000F1CCD7 /* CommentViewController.xib */,
+				9E1F6BDB154BB73000F1CCD7 /* CommentViewController.m */,
+				9E1F6BDC154BB73000F1CCD7 /* CommentViewController.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1657,6 +1671,9 @@
 				9E1F6BA215498D2800F1CCD7 /* SocializeTableViewController.xib in Resources */,
 				9E1F6BA315498D2800F1CCD7 /* SocializeTwitterAuthViewController.xib in Resources */,
 				9E1F6BB3154A3B2F00F1CCD7 /* SampleEntityLoader.xib in Resources */,
+				9E1F6BD1154AF93000F1CCD7 /* comment_48.png in Resources */,
+				9E1F6BD4154AF95000F1CCD7 /* comment_24.png in Resources */,
+				9E1F6BDD154BB73100F1CCD7 /* CommentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1736,6 +1753,7 @@
 				9E2C939415219E150043C0E5 /* Item.m in Sources */,
 				9E2C939715219E150043C0E5 /* PaliThai.m in Sources */,
 				9E1F6BB0154A3A5400F1CCD7 /* SampleEntityLoader.m in Sources */,
+				9E1F6BDE154BB73100F1CCD7 /* CommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

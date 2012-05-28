@@ -77,6 +77,7 @@
     
     if (self.entity) {
         self.title = self.entity.name;
+        
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         titleLabel.backgroundColor = [UIColor clearColor];
         
@@ -92,21 +93,33 @@
         [titleLabel sizeToFit];    
         
         NSString *key = self.entity.key;
-        NSArray *tokens = key.pathComponents;
-        NSString *langauge = [tokens objectAtIndex:2];
-        NSNumber *volume = [NSNumber numberWithInt:[[tokens objectAtIndex:3] intValue]];
-        NSNumber *page = [NSNumber numberWithInt:[[tokens objectAtIndex:4] intValue]];
-                
-        ContentInfo *info = [[ContentInfo alloc] init];
-        info.language = langauge;
-        info.volume = volume;
-        info.page = page;
-        [info setType:(LANGUAGE|VOLUME|PAGE)];
-        NSArray *fetchedObjects = [QueryHelper getContents:info];
-        [info release];    
-        if (fetchedObjects && fetchedObjects.count == 1) {
-            self.content = [fetchedObjects objectAtIndex:0];
-        }
+        
+        if ([key componentsSeparatedByString:@"?"].count == 2) {
+            NSArray *tokens = [[key componentsSeparatedByString:@"?"].lastObject componentsSeparatedByString:@"&"];        
+            NSString *langauge;
+            NSNumber *volume, *page;
+            
+            for (NSString *token in tokens) {
+                if ([token hasPrefix:@"language"]) {
+                    langauge = [[token componentsSeparatedByString:@"="].lastObject capitalizedString];
+                } else if ([token hasPrefix:@"number"]) {
+                    page = [NSNumber numberWithInt:[[token componentsSeparatedByString:@"="].lastObject intValue]];
+                } else if ([token hasPrefix:@"volume"]) {
+                    volume = [NSNumber numberWithInt:[[token componentsSeparatedByString:@"="].lastObject intValue]];
+                }
+            }        
+            
+            ContentInfo *info = [[ContentInfo alloc] init];
+            info.language = langauge;
+            info.volume = volume;
+            info.page = page;
+            [info setType:(LANGUAGE|VOLUME|PAGE)];
+            NSArray *fetchedObjects = [QueryHelper getContents:info];
+            [info release];    
+            if (fetchedObjects && fetchedObjects.count == 1) {
+                self.content = [fetchedObjects objectAtIndex:0];
+            }
+        }        
     }
 }
 

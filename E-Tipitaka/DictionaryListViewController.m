@@ -202,6 +202,14 @@
     
 }
 
+- (void)mergeChanges:(NSNotification *)notification
+{
+    E_TipitakaAppDelegate *application = [[UIApplication sharedApplication] delegate];
+    [application.managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:notification waitUntilDone:YES];
+    NSLog(@"mergeChanges called");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:notification.object];    
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -245,7 +253,11 @@
                 
         dispatch_async(dispatch_get_global_queue(0, 0), ^{           
             E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];			
-            NSManagedObjectContext *context = [appDelegate managedObjectContext];
+            NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+            [context setUndoManager:nil];
+            [context setPersistentStoreCoordinator:[appDelegate persistentStoreCoordinator]];
+            
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:context];
             
             [[Utils readPlist:@"PaliThai"] 
              enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {

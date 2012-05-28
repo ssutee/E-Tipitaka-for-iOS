@@ -27,8 +27,9 @@
 #import "ZipArchive.h"
 #import <Socialize/Socialize.h>
 #import "Reachability.h"
+#import "CommentViewController.h"
 
-@interface ReadViewController()
+@interface ReadViewController()<SocializeServiceDelegate>
 {
     BOOL _isDownloadingDatabase;
 }
@@ -353,9 +354,12 @@
                      [self getCurrentVolume], [self getCurrentPage]];        
     }
     
+    // http://www.etipitaka.com/read?language=thai&number=1&volume=1
+        
     if (self.actionBar == nil || netStatus != NotReachable) {
         [self.actionBar.view removeFromSuperview];
-        SocializeActionBar *actionBar = [SocializeActionBar actionBarWithKey:[NSString stringWithFormat:@"http://www.etipitaka.com/%@/%@/%@", [self getCurrentLanguage], [self getCurrentVolume], [self getCurrentPage]] name:[Utils arabic2thai:entityName] presentModalInController:self];
+        SocializeActionBar *actionBar = [SocializeActionBar actionBarWithKey:[NSString stringWithFormat:@"http://www.etipitaka.com/read?language=%@&number=%@&volume=%@", [[self getCurrentLanguage] lowercaseString], [self getCurrentPage], [self getCurrentVolume]] name:[Utils arabic2thai:entityName] presentModalInController:self];
+        NSLog(@"%@", actionBar.socialize.delegate);
         self.actionBar = actionBar;
         self.actionBar.noAutoLayout = YES;
     }
@@ -757,6 +761,13 @@
 	[controller release], controller = nil;	
 }
 
+- (IBAction)showComments:(id)sender
+{
+    CommentViewController *controller = [[CommentViewController alloc] initWithNibName:@"CommentViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];    
+    [controller release], controller = nil;
+}
+
 -(IBAction)gotoButtonClicked:(id)sender {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [gotoActionSheet showFromToolbar:toolbar];
@@ -958,26 +969,11 @@
 #pragma mark -
 #pragma mark View lifecycle
 
--(void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        showToolbar = NO;
-        self.toolbar.hidden = YES;
-        
-        if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 219-SOCIALIZE_ACTION_PANE_HEIGHT);            
-        } else {
-            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 367-SOCIALIZE_ACTION_PANE_HEIGHT);   
-        }      
-        [self updateLanguageButtonTitle];        
-    }
-}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
-
+    
     [self prepareDatabaseByDownloadingFromInternet];
     
     mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
@@ -1094,6 +1090,36 @@
     [super viewWillAppear:animated];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        
+        UIView *transView = [self.tabBarController.view.subviews objectAtIndex:0];
+        UIView *tabBar = [self.tabBarController.view.subviews objectAtIndex:1];
+        if (tabBar.hidden) {
+            tabBar.hidden = FALSE;
+            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+                transView.frame = CGRectMake(0, 0, 480, 271);
+                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 219-SOCIALIZE_ACTION_PANE_HEIGHT);
+            } else {
+                transView.frame = CGRectMake(0, 0, 320, 431);
+                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 367-SOCIALIZE_ACTION_PANE_HEIGHT);
+            }    
+            toolbar.hidden = YES;
+            self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
+            showToolbar = NO;
+        }                
+        [self updateLanguageButtonTitle];        
+    }
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -1124,6 +1150,7 @@
                 self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 367-SOCIALIZE_ACTION_PANE_HEIGHT);
             }
         }
+        self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
     }
     
 }

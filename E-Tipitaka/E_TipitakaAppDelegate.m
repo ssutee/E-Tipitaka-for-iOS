@@ -66,12 +66,16 @@
     
     [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     
+    [Socialize setCanLoadEntityBlock:^BOOL(id<SocializeEntity> entity) {
+        return ([entity.key componentsSeparatedByString:@"?"].count != 2);
+    }];
+        
     [Socialize setEntityLoaderBlock:^(UINavigationController *navigationController, id<SocializeEntity>entity) {
         ContentViewController *contentViewController = [[ContentViewController alloc] initWithEntity:entity];
         [navigationController pushViewController:contentViewController animated:YES];
         [contentViewController release];
     }];
-    
+        
     [self.window makeKeyAndVisible];
     return YES;
 }
