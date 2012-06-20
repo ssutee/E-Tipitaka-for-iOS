@@ -57,6 +57,11 @@
         
 }
 
+- (void)errorNotification:(NSNotification*)notification {
+    NSError *error = [[notification userInfo] objectForKey:SocializeUIControllerErrorUserInfoKey];
+    NSLog(@"Error: %@", [error localizedDescription]);
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -75,7 +80,10 @@
         [navigationController pushViewController:contentViewController animated:YES];
         [contentViewController release];
     }];
-        
+    
+    [Socialize storeUIErrorAlertsDisabled:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(errorNotification:) name:SocializeUIControllerDidFailWithErrorNotification object:nil];
+
     [self.window makeKeyAndVisible];
     return YES;
 }

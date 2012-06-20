@@ -339,10 +339,8 @@
 -(void) updateReadingPage
 {
     [super updateReadingPage];
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus netStatus = [reachability currentReachabilityStatus];
-    
-
+//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+//    NetworkStatus netStatus = [reachability currentReachabilityStatus];
     
     NSString *entityName;
     
@@ -356,14 +354,14 @@
     
     // http://www.etipitaka.com/read?language=thai&number=1&volume=1
         
-    if (self.actionBar == nil || netStatus != NotReachable) {
+    if (!self.actionBar) {
         [self.actionBar.view removeFromSuperview];
         SocializeActionBar *actionBar = [SocializeActionBar actionBarWithKey:[NSString stringWithFormat:@"http://www.etipitaka.com/read?language=%@&number=%@&volume=%@", [[self getCurrentLanguage] lowercaseString], [self getCurrentPage], [self getCurrentVolume]] name:[Utils arabic2thai:entityName] presentModalInController:self];
         NSLog(@"%@", actionBar.socialize.delegate);
         self.actionBar = actionBar;
         self.actionBar.noAutoLayout = YES;
-    }
-    
+    } 
+        
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {        
         self.actionBar.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
         self.actionBar.view.frame = CGRectMake(0, self.view.bounds.size.height-bottomToolbar.bounds.size.height-SOCIALIZE_ACTION_PANE_HEIGHT, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
