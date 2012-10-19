@@ -27,6 +27,8 @@
 #define kQuitAlert 2004
 #define kFacebookAlert 2005
 
+#define kFacebookSharingKey @"kFacebookSharingKey"
+
 @interface ReadViewController : BaseReadViewController 
 <UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate, MBProgressHUDDelegate, ASIProgressDelegate>
 {

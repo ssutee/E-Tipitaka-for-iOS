@@ -866,6 +866,9 @@
 }
 
 -(IBAction)showSearchView:(id)sender {    
+    
+    NSString *langugae = [self.dataDictionary valueForKey:@"Language"];
+    
     if(_searchPopoverController != nil) {
         if ([_searchPopoverController isPopoverVisible]) {
             [_searchPopoverController dismissPopoverAnimated:YES];
@@ -1122,7 +1125,7 @@
 {
     [super viewDidAppear:animated];
     
-    if (![self.actionBar.socialize isAuthenticatedWithFacebook] && !_isDownloadingDatabase) {
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kFacebookSharingKey] isEqualToString:@"No"] && ![self.actionBar.socialize isAuthenticatedWithFacebook] && !_isDownloadingDatabase) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Facebook Login Request" message:@"คุณต้องใช้การแบ่งปันข้อมูลแบบออนไลน์ผ่าน Facebook หรือไม่?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         alertView.tag = kFacebookAlert;
         [alertView show];
@@ -1251,6 +1254,9 @@
             [self.actionBar.socialize authenticateWithApiKey:@"da599d2b-0d97-4ae0-992e-f413e589a53e" apiSecret:@"df7e464e-466e-47bb-b8f8-b06026f1543a" thirdPartyAppId:@"173041622753730" thirdPartyName:SocializeThirdPartyAuthTypeFacebook];
         }
 
+    } else if (alertView.tag == kFacebookAlert) {
+        [[NSUserDefaults standardUserDefaults] setValue:@"No" forKey:kFacebookSharingKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

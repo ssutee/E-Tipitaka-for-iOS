@@ -218,7 +218,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    [NSFetchedResultsController deleteCacheWithName:nil];
+    
     self.tableView = (UITableView *)self.view;
     
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
