@@ -112,4 +112,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (BOOL)shouldAutorotate {
+    UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+    return (orientation == UIInterfaceOrientationPortrait);    
+}
+
 @end

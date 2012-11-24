@@ -399,6 +399,11 @@
 //    return YES;
 }
 
+- (BOOL)shouldAutorotate {
+    UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+    return UIInterfaceOrientationIsLandscape(orientation);
+}
+
 #pragma mark -
 #pragma mark Action Sheet Delegate Methods
 

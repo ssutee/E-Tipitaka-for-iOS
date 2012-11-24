@@ -25,6 +25,10 @@
     return YES;
 }
 
+- (BOOL)shouldAutorotate {
+    return YES;
+ }
+
 #pragma mark - Fetching
 
 - (void)performFetch

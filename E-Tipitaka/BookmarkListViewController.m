@@ -42,6 +42,15 @@
     return NO;
 }
 
+- (BOOL)shouldAutorotate {
+    UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return YES;
+    } else {
+        return orientation != UIInterfaceOrientationPortraitUpsideDown;
+    }
+}
+
 - (void)reloadData {
 	NSMutableArray *array1 = [[NSMutableArray alloc] init];
 	NSMutableArray *array2 = [[NSMutableArray alloc] init];

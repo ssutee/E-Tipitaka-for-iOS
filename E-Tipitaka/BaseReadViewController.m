@@ -348,6 +348,15 @@
     return NO;
 }
 
+- (BOOL)shouldAutorotate {
+    UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return YES;
+    } else {
+        return orientation != UIInterfaceOrientationPortraitUpsideDown;
+    }
+}
+
 - (BOOL)prepareScrollViewForPage:(int)page
 {
     if (page < 0)

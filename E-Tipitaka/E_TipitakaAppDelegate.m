@@ -7,7 +7,6 @@
 //
 
 #import "E_TipitakaAppDelegate.h"
-#import "SampleEntityLoader.h"
 #import "ContentViewController.h"
 #import <Socialize/Socialize.h>
 #import <CoreData/CoreData.h>

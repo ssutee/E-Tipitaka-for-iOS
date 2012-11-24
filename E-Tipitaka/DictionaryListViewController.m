@@ -294,6 +294,10 @@
 	return YES;
 }
 
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
 #pragma mark -
 #pragma mark Table View Data Source Methods
 

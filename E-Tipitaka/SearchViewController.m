@@ -571,6 +571,15 @@
     return NO;
 }
 
+- (BOOL)shouldAutorotate {
+    UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return YES;
+    } else {
+        return orientation != UIInterfaceOrientationPortraitUpsideDown;
+    }
+}
+
 #pragma mark - 
 #pragma mark Table View Delegate Methods 
 - (NSIndexPath *)tableView:(UITableView *)tableView
