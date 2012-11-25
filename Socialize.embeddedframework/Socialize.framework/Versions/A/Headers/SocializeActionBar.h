@@ -29,9 +29,9 @@
 #import "SocializeBaseViewController.h"
 #import "SocializeActionView.h"
 #import "SocializeActionBarDelegate.h"
-#import "SocializeUIDisplayProxyDelegate.h"
+#import "_SZCommentsListViewController.h"
 
-@class SocializeCommentsTableViewController;
+@class _SZCommentsListViewController;
 @protocol SocializeView;
 @protocol SocializeEntity;
 @protocol SocializeLike;
@@ -42,12 +42,10 @@
  The Socialize Action Bar
 
  */
-@interface SocializeActionBar : SocializeBaseViewController<SocializeActionViewDelegate, SocializeUIDisplayProxyDelegate>
+ __attribute__((deprecated("Please use SZActionBar or the utility functions in SZActionBarUtils"))) @interface SocializeActionBar : SocializeBaseViewController <SocializeActionViewDelegate> 
 
 @property (nonatomic, assign) id<SocializeActionBarDelegate> delegate;
-@property (nonatomic, retain) id displayProxy;
 @property (nonatomic, retain) id<SocializeEntity> entity;
-@property (nonatomic, retain) UIViewController *commentsNavController;
 
 @property (nonatomic, assign) BOOL ignoreNextView;
 @property (nonatomic, retain) UIActionSheet *shareActionSheet;
@@ -56,6 +54,7 @@
 @property (nonatomic, assign) BOOL noAutoLayout;
 @property (nonatomic, assign, readonly) BOOL initialized;
 @property (nonatomic, retain) UIAlertView *unconfiguredEmailAlert;
+@property (nonatomic, retain) UIViewController *viewController;
 
 /** @name Initialization */
 
@@ -115,21 +114,6 @@
  @param presentModalInController Modal dialogs and UIActionSheet popups will be presented in this controller and its view
  */
 -(id)initWithEntity:(id<SocializeEntity>)entity presentModalInController:(UIViewController*)controller;
-
-/**
- 
- @param entity The Socialize entity. It will be created if it does not exist
- @param display Target for display actions. Either a UIViewController or a SocializeUIDisplay implementation
- */
-//+(SocializeActionBar*)actionBarWithEntity:(id<SocializeEntity>)entity display:(id)display;
-
-/**
- Action Bar Init
- 
- @param url The URL for the Entity Key
- @param display Target for display actions. Either a UIViewController or a SocializeUIDisplay implementation
- */
--(id)initWithEntity:(id<SocializeEntity>)entity display:(id)display;
 
 @end
 

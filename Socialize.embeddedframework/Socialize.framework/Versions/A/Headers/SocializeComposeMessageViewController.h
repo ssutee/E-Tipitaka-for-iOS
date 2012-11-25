@@ -1,5 +1,5 @@
 //
-//  PostCommentViewController.h
+//  ComposeCommentViewController.h
 //  appbuildr
 //
 //  Created by William M. Johnson on 4/5/11.
@@ -11,12 +11,12 @@
 
 #import "SocializeBaseViewController.h"
 #import "_Socialize.h"
-#import "SocializeProfileViewController.h"
+#import "_SZUserProfileViewController.h"
 #import "SocializeBaseViewControllerDelegate.h"
-#import "SocializeLocationManager.h"
 
+@class SocializeLocationManager;
 @class CommentMapView;
-@class SocializeHorizontalContainerView;
+@class SZHorizontalContainerView;
 
 @interface SocializeComposeMessageViewController : SocializeBaseViewController <UITextViewDelegate, MKMapViewDelegate, SocializeServiceDelegate>
 {
@@ -29,7 +29,7 @@
     NSArray *messageActionButtons_;
 }
 
-@property (nonatomic, copy) NSString *entityURL;
+@property (nonatomic, retain) id<SZEntity> entity;
 @property(nonatomic, retain) IBOutlet UITextView    *commentTextView;
 @property(nonatomic, retain) IBOutlet UILabel       *locationText;
 @property(nonatomic, retain) IBOutlet UIButton      *doNotShareLocationButton;
@@ -39,15 +39,21 @@
 @property(nonatomic, retain) IBOutlet UIView *upperContainer;
 @property(nonatomic, retain) IBOutlet UIView *mapContainer;
 @property(nonatomic, retain) UIBarButtonItem *sendButton;
-@property(nonatomic, retain) IBOutlet SocializeHorizontalContainerView *messageActionButtonContainer;
+@property(nonatomic, retain) IBOutlet SZHorizontalContainerView *messageActionButtonContainer;
 @property(nonatomic, retain) NSArray *messageActionButtons;
 @property(nonatomic, copy) NSString *currentLocationDescription;
 @property (nonatomic, retain) SocializeLocationManager *locationManager;
+@property (retain, nonatomic) IBOutlet UIView *bottomContainerDisabledView;
+@property (nonatomic, retain) CLLocation *currentLocation;
+
+- (void)disableLowerContainer;
+- (void)enableLowerContainer;
 
 -(IBAction)activateLocationButtonPressed:(id)sender;
 -(IBAction)doNotShareLocationButtonPressed:(id)sender;
 
 - (id)initWithEntityUrlString:(NSString*)entityUrlString;
+- (id)initWithEntity:(id<SZEntity>)entity;
 
 - (void)addSocializeRoundedGrayButtonImagesToButton:(UIButton*)button;
 - (void)setSubviewForLowerContainer:(UIView*)newSubview;

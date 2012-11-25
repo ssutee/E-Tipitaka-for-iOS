@@ -20,6 +20,7 @@
 #define kSelectItemActionSheet 1003
 #define kItemOptionsActionSheet 1004
 #define kBookmarkOptionsActionSheet 1005
+#define kDataToolsActionSheet 1006
 
 #define kGotoPageAlert 2001
 #define kGotoItemAlert 2002
@@ -70,6 +71,7 @@
 @property (nonatomic, retain) UIPopoverController *searchPopoverController;
 @property (nonatomic, retain) UIPopoverController *bookmarkPopoverController;
 @property (nonatomic, retain) UIPopoverController *booklistPopoverController;
+@property (nonatomic, retain) UIPopoverController *importFilePopoverController;
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *searchButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *languageButton;
@@ -82,8 +84,10 @@
 @property (nonatomic, retain) UIActionSheet *languageActionSheet;
 @property (nonatomic, retain) UIActionSheet *gotoActionSheet;
 @property (nonatomic, retain) UIActionSheet *itemOptionsActionSheet;
+@property (nonatomic, retain) UIActionSheet *dataToolsActionSheet;
 @property (nonatomic, retain) IBOutlet UISlider *pageSlider;
 @property (nonatomic, retain) IBOutlet UIToolbar *bottomToolbar;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *dataToolsButton;
 
 -(IBAction)gotoButtonClicked:(id)sender;
 -(IBAction)nextButtonClicked:(id)sender;

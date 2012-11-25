@@ -570,6 +570,15 @@
 		9E6697E7134ECC2400B9E0F4 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */; };
 		9E6851FD142E2D52001D458C /* icon_document.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6851FC142E2D52001D458C /* icon_document.png */; };
 		9E803C3814DB788600EBCEAA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E803C3714DB788600EBCEAA /* Settings.bundle */; };
+		9E9810891661154500F74E2E /* ImportListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9810871661154500F74E2E /* ImportListViewController.m */; };
+		9E98108A1661154500F74E2E /* ImportListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9810881661154500F74E2E /* ImportListViewController.xib */; };
+		9E9810BD16612D6A00F74E2E /* Bookmark+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9810BC16612D6A00F74E2E /* Bookmark+Helper.m */; };
+		9E9810C0166131AE00F74E2E /* Item+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9810BF166131AE00F74E2E /* Item+Helper.m */; };
+		9E9810C3166196FC00F74E2E /* History+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9810C2166196FC00F74E2E /* History+Helper.m */; };
+		9E9810C616619D0100F74E2E /* Content+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9810C516619D0100F74E2E /* Content+Helper.m */; };
+		9E9810CA1661B14F00F74E2E /* ToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9810C81661B14D00F74E2E /* ToolsViewController.m */; };
+		9E9810CB1661B14F00F74E2E /* ToolsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9810C91661B14E00F74E2E /* ToolsViewController.xib */; };
+		9E9810CE1661B79900F74E2E /* ExportTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9810CD1661B79900F74E2E /* ExportTool.m */; };
 		9EA21D0B134F3EBE00C17FD6 /* Pages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA21D0A134F3EBC00C17FD6 /* Pages.plist */; };
 		9EA21D0E134F5C6400C17FD6 /* Items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA21D0D134F5C6000C17FD6 /* Items.plist */; };
 		9EA859F4135011F6002195A6 /* Names.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EA859F3135011F6002195A6 /* Names.plist */; };
@@ -977,6 +986,22 @@
 		9E6697E0134ECC2400B9E0F4 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		9E6851FC142E2D52001D458C /* icon_document.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_document.png; sourceTree = "<group>"; };
 		9E803C3714DB788600EBCEAA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
+		9E9810861661154500F74E2E /* ImportListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportListViewController.h; sourceTree = "<group>"; };
+		9E9810871661154500F74E2E /* ImportListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportListViewController.m; sourceTree = "<group>"; };
+		9E9810881661154500F74E2E /* ImportListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportListViewController.xib; sourceTree = "<group>"; };
+		9E9810BB16612D6900F74E2E /* Bookmark+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bookmark+Helper.h"; sourceTree = "<group>"; };
+		9E9810BC16612D6A00F74E2E /* Bookmark+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Bookmark+Helper.m"; sourceTree = "<group>"; };
+		9E9810BE166131AE00F74E2E /* Item+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+Helper.h"; sourceTree = "<group>"; };
+		9E9810BF166131AE00F74E2E /* Item+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+Helper.m"; sourceTree = "<group>"; };
+		9E9810C1166196FC00F74E2E /* History+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "History+Helper.h"; sourceTree = "<group>"; };
+		9E9810C2166196FC00F74E2E /* History+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "History+Helper.m"; sourceTree = "<group>"; };
+		9E9810C416619D0000F74E2E /* Content+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Content+Helper.h"; sourceTree = "<group>"; };
+		9E9810C516619D0100F74E2E /* Content+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Content+Helper.m"; sourceTree = "<group>"; };
+		9E9810C71661B14C00F74E2E /* ToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolsViewController.h; sourceTree = "<group>"; };
+		9E9810C81661B14D00F74E2E /* ToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolsViewController.m; sourceTree = "<group>"; };
+		9E9810C91661B14E00F74E2E /* ToolsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolsViewController.xib; sourceTree = "<group>"; };
+		9E9810CC1661B79900F74E2E /* ExportTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportTool.h; sourceTree = "<group>"; };
+		9E9810CD1661B79900F74E2E /* ExportTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTool.m; sourceTree = "<group>"; };
 		9EA21D0A134F3EBC00C17FD6 /* Pages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pages.plist; sourceTree = "<group>"; };
 		9EA21D0D134F5C6000C17FD6 /* Items.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Items.plist; sourceTree = "<group>"; };
 		9EA859F3135011F6002195A6 /* Names.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Names.plist; sourceTree = "<group>"; };
@@ -1067,6 +1092,8 @@
 				9E669769134C5D2D00B9E0F4 /* Utils.m */,
 				9E10C573141B1B51005E60FC /* QueryHelper.h */,
 				9E10C574141B1B51005E60FC /* QueryHelper.m */,
+				9E9810CC1661B79900F74E2E /* ExportTool.h */,
+				9E9810CD1661B79900F74E2E /* ExportTool.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1084,6 +1111,14 @@
 				9E2C938D15219E150043C0E5 /* Content.m */,
 				9E2C938915219E150043C0E5 /* History.h */,
 				9E2C938A15219E150043C0E5 /* History.m */,
+				9E9810BB16612D6900F74E2E /* Bookmark+Helper.h */,
+				9E9810BC16612D6A00F74E2E /* Bookmark+Helper.m */,
+				9E9810BE166131AE00F74E2E /* Item+Helper.h */,
+				9E9810BF166131AE00F74E2E /* Item+Helper.m */,
+				9E9810C1166196FC00F74E2E /* History+Helper.h */,
+				9E9810C2166196FC00F74E2E /* History+Helper.m */,
+				9E9810C416619D0000F74E2E /* Content+Helper.h */,
+				9E9810C516619D0100F74E2E /* Content+Helper.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -1234,6 +1269,10 @@
 				9E1F6BDA154BB73000F1CCD7 /* CommentViewController.xib */,
 				9E1F6BDB154BB73000F1CCD7 /* CommentViewController.m */,
 				9E1F6BDC154BB73000F1CCD7 /* CommentViewController.h */,
+				9E9810861661154500F74E2E /* ImportListViewController.h */,
+				9E9810871661154500F74E2E /* ImportListViewController.m */,
+				9E9810C71661B14C00F74E2E /* ToolsViewController.h */,
+				9E9810C81661B14D00F74E2E /* ToolsViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1608,6 +1647,8 @@
 				9E326FD8138E1B6C00ED66AE /* BookmarkEditViewController.xib */,
 				9E669752134C5C7A00B9E0F4 /* BookmarkListViewController.xib */,
 				9E669753134C5C7A00B9E0F4 /* SearchHistoryViewController.xib */,
+				9E9810881661154500F74E2E /* ImportListViewController.xib */,
+				9E9810C91661B14E00F74E2E /* ToolsViewController.xib */,
 				9E10C31A141A65DD005E60FC /* ContentView.xib */,
 			);
 			name = iPhone;
@@ -2262,6 +2303,8 @@
 				9E5426431660DE3F006E6C4C /* SocializeTableViewController.xib in Resources */,
 				9E5426451660DE3F006E6C4C /* SZBaseShareViewController.xib in Resources */,
 				9E5426471660DE3F006E6C4C /* SZStatusImageLabelView.xib in Resources */,
+				9E98108A1661154500F74E2E /* ImportListViewController.xib in Resources */,
+				9E9810CB1661B14F00F74E2E /* ToolsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2340,6 +2383,13 @@
 				9E2C939415219E150043C0E5 /* Item.m in Sources */,
 				9E2C939715219E150043C0E5 /* PaliThai.m in Sources */,
 				9E1F6BDE154BB73100F1CCD7 /* CommentViewController.m in Sources */,
+				9E9810891661154500F74E2E /* ImportListViewController.m in Sources */,
+				9E9810BD16612D6A00F74E2E /* Bookmark+Helper.m in Sources */,
+				9E9810C0166131AE00F74E2E /* Item+Helper.m in Sources */,
+				9E9810C3166196FC00F74E2E /* History+Helper.m in Sources */,
+				9E9810C616619D0100F74E2E /* Content+Helper.m in Sources */,
+				9E9810CA1661B14F00F74E2E /* ToolsViewController.m in Sources */,
+				9E9810CE1661B79900F74E2E /* ExportTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2525,6 +2575,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sutee Sudprasert (36A75C247D)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2541,6 +2592,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7A8905B2-269E-4EEA-ADC2-17B8D86ADD9B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

@@ -12,6 +12,10 @@
 #import "BookListTableViewController.h"
 #import "BookmarkAddViewController.h"
 #import "BookmarkListViewController.h"
+#import "ImportListViewController.h"
+#import "Bookmark.h"
+#import "History.h"
+#import "Content.h"
 #import "SearchViewController.h"
 #import "Item.h"
 #import "Utils.h"
@@ -28,8 +32,10 @@
 #import <Socialize/Socialize.h>
 #import "Reachability.h"
 #import "CommentViewController.h"
+#import "JSONKit.h"
+#import "ExportTool.h"
 
-@interface ReadViewController()<SocializeServiceDelegate>
+@interface ReadViewController()<SocializeServiceDelegate, ImportListViewControllerDelegate>
 {
     BOOL _isDownloadingDatabase;
 }
@@ -48,6 +54,7 @@
 @synthesize searchPopoverController=_searchPopoverController;
 @synthesize bookmarkPopoverController=_bookmarkPopoverController;
 @synthesize booklistPopoverController;
+@synthesize importFilePopoverController=_importFilePopoverController;
 @synthesize searchButton;
 @synthesize languageButton;
 @synthesize booklistButton;
@@ -59,6 +66,7 @@
 @synthesize languageActionSheet;
 @synthesize gotoActionSheet;
 @synthesize itemOptionsActionSheet;
+@synthesize dataToolsActionSheet = _dataToolsActionSheet;
 @synthesize toastText;
 @synthesize pageSlider=_pageSlider;
 @synthesize bottomToolbar;
@@ -695,10 +703,12 @@
     if (booklistPopoverController != nil && [booklistPopoverController isPopoverVisible]) {
         [booklistPopoverController dismissPopoverAnimated:YES];
     }
+    if (self.importFilePopoverController != nil && [self.importFilePopoverController isPopoverVisible]) {
+        [self.importFilePopoverController dismissPopoverAnimated:YES];
+    }
     if (dictionaryPopoverController != nil && [dictionaryPopoverController isPopoverVisible]) {
         [dictionaryPopoverController dismissPopoverAnimated:YES];
     }
-    
     if (self.languageActionSheet != nil && [self.languageActionSheet isVisible]) {
         [self.languageActionSheet 
          dismissWithClickedButtonIndex:[self.languageActionSheet cancelButtonIndex] animated:YES];
@@ -710,6 +720,9 @@
     if (itemOptionsActionSheet != nil && [itemOptionsActionSheet isVisible]) {
         [itemOptionsActionSheet
          dismissWithClickedButtonIndex:[itemOptionsActionSheet cancelButtonIndex] animated:YES];
+    }
+    if (self.dataToolsActionSheet != nil && [self.dataToolsActionSheet isVisible]) {
+        [self.dataToolsActionSheet dismissWithClickedButtonIndex:[self.dataToolsActionSheet cancelButtonIndex] animated:YES];
     }
 }
 
@@ -748,6 +761,38 @@
         return YES;
     } else {
         return orientation != UIInterfaceOrientationPortraitUpsideDown;
+    }
+}
+
+- (void)exportData {
+    [ExportTool exportData];
+}
+
+- (void)importData {
+    if(self.importFilePopoverController != nil) {
+        if ([self.importFilePopoverController isPopoverVisible]) {
+            [self.importFilePopoverController dismissPopoverAnimated:YES];
+        } else {
+            [self dismissAllPopoverControllers];
+            [self.importFilePopoverController presentPopoverFromBarButtonItem:self.dataToolsButton
+                                              permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                              animated:YES];
+        }
+    } else {
+        ImportListViewController *importListViewController = [[ImportListViewController alloc] init];
+        importListViewController.title = @"เลือกไฟล์ที่ต้องการนำเข้า";
+        importListViewController.delegate = self;
+        UINavigationController *navController = [[UINavigationController alloc]
+                                                 initWithRootViewController:importListViewController];
+        UIPopoverController *poc = [[UIPopoverController alloc]
+                                    initWithContentViewController:navController];
+        [self dismissAllPopoverControllers];
+        [poc presentPopoverFromBarButtonItem:self.dataToolsButton
+                    permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        self.booklistPopoverController = poc;
+        [poc release];
+        [importListViewController release];
+        [navController release];
     }
 }
 
@@ -976,6 +1021,20 @@
     }
 }
 
+-(IBAction)dataTools:(id)sender {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self.dataToolsActionSheet showFromToolbar:toolbar];
+    }
+    else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if ([self.dataToolsActionSheet isVisible]) {
+            [self.dataToolsActionSheet dismissWithClickedButtonIndex:[self.dataToolsActionSheet cancelButtonIndex] animated:YES];
+        } else {
+            [self dismissAllPopoverControllers];
+            [self.dataToolsActionSheet showFromBarButtonItem:self.dataToolsButton animated:YES];
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -1054,7 +1113,18 @@
 	[actionSheet addButtonWithTitle:@"ยกเลิก"];
 	[actionSheet setCancelButtonIndex:2];
     self.gotoActionSheet = actionSheet;
-	[actionSheet release];    
+	[actionSheet release];
+    
+    // create action sheet for data tools
+    actionSheet = [[UIActionSheet alloc] init];
+    actionSheet.title = @"โปรดเลือกคำสั่งที่ต้องการ";
+    actionSheet.delegate = self;
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    actionSheet.tag = kDataToolsActionSheet;
+    [actionSheet addButtonWithTitle:@"นำข้อมูลเข้า"];
+    [actionSheet addButtonWithTitle:@"นำข้อมูลออก"];
+    self.dataToolsActionSheet = actionSheet;
+    [actionSheet release];
 }
 
 #pragma mark -
@@ -1075,10 +1145,12 @@
 }
 
 - (void)viewDidUnload {
+    [self setDataToolsButton:nil];
     [super viewDidUnload];
 	self.toolbar = nil;
     self.searchPopoverController = nil;
     self.bookmarkPopoverController = nil;
+    self.importFilePopoverController = nil;
     self.booklistPopoverController = nil;
     self.searchButton = nil;
     self.languageButton = nil;    
@@ -1089,7 +1161,8 @@
     self.dictionaryButton = nil;
     self.languageActionSheet = nil;
     self.gotoActionSheet = nil;
-    self.itemOptionsActionSheet = nil;    
+    self.itemOptionsActionSheet = nil;
+    self.dataToolsActionSheet = nil;
     self.bottomToolbar = nil;
     self.alterItems = nil;
     self.actionBar = nil;
@@ -1170,6 +1243,7 @@
 	[toolbar release];    
     [_searchPopoverController release];
     [_bookmarkPopoverController release];
+    [_importFilePopoverController release];
     [booklistPopoverController release];
     [searchButton release];
     [languageButton release];
@@ -1180,6 +1254,7 @@
     [titleButton release];
     [dictionaryButton release];
     [languageActionSheet release];
+    [_dataToolsActionSheet release];
     [gotoActionSheet release];
     [itemOptionsActionSheet release];
     [bottomToolbar release];
@@ -1188,6 +1263,7 @@
     [_HUD release];
     [_actionBar release];
     
+    [_dataToolsButton release];
     [super dealloc];
 }
 
@@ -1297,8 +1373,13 @@
         if (buttonIndex != [actionSheet cancelButtonIndex]) {
             [self saveBookmark:buttonIndex];
         }
-	}
-	//NSLog(@"%d %d", actionSheet.tag, buttonIndex);
+	} else if (actionSheet.tag == kDataToolsActionSheet) {
+        if (buttonIndex == 0) {
+            [self importData];
+        } else if (buttonIndex == 1) {
+            [self exportData];
+        }
+    }
 }
 
 #pragma mark -
@@ -1376,6 +1457,11 @@
     self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
 }
 
+#pragma mark - ImportListViewControllerDelegate
+
+- (void)impotListViewControllerDidFinish:(ImportListViewController *)controller {
+    [self dismissAllPopoverControllers];
+}
 
 @end
 

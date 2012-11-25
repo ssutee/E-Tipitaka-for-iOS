@@ -10,6 +10,12 @@
 #import "SocializeErrorDefinitions.h"
 #import "SocializeVersion.h"
 
+typedef enum {
+    SZResultSortingDefault,
+    SZResultSortingMostRecent = SZResultSortingDefault,
+    SZResultSortingPopularity,
+} SZResultSorting;
+
 /** 
  Third party authentication type 
 */
@@ -17,6 +23,12 @@ typedef enum SocializeThirdPartyAuthType {
     SocializeThirdPartyAuthTypeFacebook = 1,
     SocializeThirdPartyAuthTypeTwitter = 2
 } SocializeThirdPartyAuthType;
+
+typedef enum SZSocialNetwork {
+    SZSocialNetworkNone = 0,
+    SZSocialNetworkFacebook = 1 << 0,
+    SZSocialNetworkTwitter = 1 << 1,
+} SZSocialNetwork;
 
 typedef enum {
     SocializeShareMediumTwitter = 1,
@@ -36,14 +48,27 @@ typedef enum {
 
 extern NSString *const kSocializeConsumerKey;
 extern NSString *const kSocializeConsumerSecret;
+extern NSString *const kSocializeAccessToken;
+extern NSString *const kSocializeAccessTokenSecret;
 
 // Notifications
 extern NSString *const SocializeAuthenticatedUserDidChangeNotification;
+
+extern NSString *const SZEntityDidChangeNotification;
+
+extern NSString *const SZUserSettingsDidChangeNotification;
+extern NSString *const kSZUpdatedUserSettingsKey;
+extern NSString *const kSZUpdatedUserKey;
+
 extern NSString *const SocializeCLAuthorizationStatusDidChangeNotification;
 extern NSString *const kSocializeCLAuthorizationStatusKey;
 extern NSString *const kSocializeShouldShareLocationKey;
 extern NSString *const SocializeDidRegisterDeviceTokenNotification;
-extern NSString *const SocializeLikeButtonDidChangeStateNotification;
+extern NSString *const SZLikeButtonDidChangeStateNotification;
+extern NSString *const SZLocationDidChangeNotification;
+extern NSString *const kSZNewLocationKey;
+
+extern NSString *const SocializeShouldDismissAllNotificationControllersNotification;
 
 // Twitter
 extern NSString *const kSocializeTwitterAuthConsumerKey;
@@ -62,7 +87,14 @@ extern NSString *const kSocializeFacebookAuthExpirationDate;
 extern NSString *const kSocializeFacebookStringForAPI;
 
 extern NSString *const kSocializeAuthenticationNotRequired;
+extern NSString *const kSocializeLocationSharingDisabled;
+
 extern NSString *const kSocializeAnonymousAllowed;
+
+extern NSString *const kSocializeDontPostToFacebookKey;
+extern NSString *const kSocializeDontPostToTwitterKey;
+extern NSString *const kSocializeAutoPostToSocialNetworksKey;
+
 
 #define SOCIALIZE_API_KEY @"socialize_api_key"
 #define SOCIALIZE_API_SECRET @"socialize_api_secret"
@@ -73,3 +105,45 @@ extern NSString *const SocializeUIControllerDidFailWithErrorNotification;
 extern NSString *const SocializeUIControllerErrorUserInfoKey;
 
 extern NSString *const kSocializeUIErrorAlertsDisabled;
+
+@class _SZUserSettingsViewController;
+@class _SZUserProfileViewController;
+@class _SZCommentsListViewController;
+@class _SZComposeCommentViewController;
+@class SocializeActionBar;
+@class SZLikeButton;
+@protocol _SZUserSettingsViewControllerDelegate;
+@protocol SocializeActionBarDelegate;
+
+typedef _SZUserSettingsViewController SocializeProfileEditViewController __attribute__((deprecated("Please use SZUserSettingsViewController or the utility functions in SZUserUtils")));
+#define SocializeProfileEditViewControllerDelegate _SZUserSettingsViewControllerDelegate
+
+typedef _SZUserProfileViewController SocializeProfileViewController __attribute__((deprecated("Please use SZUserProfileViewController or the utility functions in SZUserUtils")));
+typedef _SZCommentsListViewController SocializeCommentsTableViewController __attribute__((deprecated("Please use SZCommentsListViewController or the utility functions in SZCommentUtils")));
+typedef _SZComposeCommentViewController SocializeComposeCommentViewController __attribute__((deprecated("Please use SZComposeCommentViewController or the utility functions in SZCommentUtils")));
+//typedef SocializeActionBar SocializeActionBar __attribute__((deprecated("Please use SocializeActionBar or the utility functions in SocializeActionBarUtils")));
+//#define SocializeActionBarDelegate SocializeActionBarDelegate
+typedef SZLikeButton SocializeLikeButton __attribute__((deprecated("Please use SZLikeButton")));
+
+@protocol SocializeEntity;
+typedef void(^SocializeEntityLoaderBlock)(UINavigationController *navigationController, id<SocializeEntity>entity);
+typedef BOOL(^SocializeCanLoadEntityBlock)(id<SocializeEntity>entity);
+
+#define SZActivity SocializeActivity
+#define SZApplication SocializeApplication
+#define SZComment SocializeComment
+#define SZDeviceToken SocializeDeviceToken
+#define SZEntity SocializeEntity
+#define SZObject SocializeObject
+#define SZUser SocializeUser
+#define SZFullUser SocializeFullUser
+#define SZLike SocializeLike
+#define SZView SocializeView
+#define SZShare SocializeShare
+#define SZSubscription SocializeSubscription
+#define SZError SocializeError
+
+#define BLOCK_CALL(blk) do { if (blk != nil) blk(); } while (0)
+#define BLOCK_CALL_1(blk, arg1) do { if (blk != nil) blk(arg1); } while (0)
+#define BLOCK_CALL_2(blk, arg1, arg2) do { if (blk != nil) blk(arg1, arg2); } while (0)
+#define BLOCK_CALL_3(blk, arg1, arg2, arg3) do { if (blk != nil) blk(arg1, arg2, arg3); } while (0)

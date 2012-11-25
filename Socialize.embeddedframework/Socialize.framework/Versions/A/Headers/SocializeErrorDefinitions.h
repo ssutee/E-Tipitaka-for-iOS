@@ -32,6 +32,18 @@ typedef enum {
     SocializeErrorShareCancelledByUser,
     SocializeErrorThirdPartyNotLinked,
     SocializeErrorThirdPartyNotAvailable,
+    SocializeErrorThirdPartyLinkCancelledByUser,
+    SocializeErrorProcessCancelledByUser,
+    SocializeErrorCommentCancelledByUser,
+    SocializeErrorLocationUpdateRejectedByUser,
+    SocializeErrorLocationUpdateTimedOut,
+    SocializeErrorLinkCancelledByUser,
+    SocializeErrorLinkNotPossible,
+    SocializeErrorNetworkSelectionCancelledByUser,
+    SocializeErrorSMSSendFailure,
+    SocializeErrorLikeCancelledByUser,
+    SocializeErrorRequestCancelled,
+    SocializeErrorEntityLoadRejected,
     SocializeNumErrors,
 } SocializeErrorCode;
 

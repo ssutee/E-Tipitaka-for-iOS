@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 #import "ShareProviderProtocol.h"
+#import <FBConnect/FBConnect.h>
 
-@class SocializeFacebook;
-
-@interface SocializeFacebookInterface : NSObject <ShareProviderProtocol>
-@property (nonatomic, retain) SocializeFacebook *facebook;
+@interface SocializeFacebookInterface : NSObject <ShareProviderProtocol, FBSessionDelegate>
+@property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) NSMutableDictionary *handlers;
 
++ (SocializeFacebookInterface*)sharedFacebookInterface;
 - (void)requestWithGraphPath:(NSString*)graphPath params:(NSDictionary*)params httpMethod:(NSString*)httpMethod completion:(void (^)(id result, NSError *error))completion;
 
 @end
