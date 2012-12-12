@@ -765,7 +765,15 @@
 }
 
 - (void)exportData {
-    [ExportTool exportData];
+    self.HUD.mode = MBProgressHUDModeIndeterminate;
+    self.HUD.labelText = @"กำลังนำข้อมูลออก";
+    [self.HUD show:YES];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [ExportTool exportData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.HUD hide:YES];
+        });
+    });
 }
 
 - (void)importData {

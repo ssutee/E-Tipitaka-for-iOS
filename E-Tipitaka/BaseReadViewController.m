@@ -206,8 +206,10 @@
     
 	if(fetchedObjects == nil) {
 		NSLog(@"Whoops, couldn't fetch");
-	} else if ([fetchedObjects count] > 0) {            
-        self.contentViewController = [self.viewControllers objectAtIndex:[[self getCurrentPage] intValue]-1];        
+	} else if ([fetchedObjects count] > 0) {
+        int page = [[self getCurrentPage] intValue]-1;
+        [self prepareScrollViewForPage:page];
+        self.contentViewController = [self.viewControllers objectAtIndex:page];
         self.contentViewController.content = [fetchedObjects objectAtIndex:0];
         self.contentViewController.fontSize = self.fontSize;
         self.contentViewController.scrollToHighlightText = NO;

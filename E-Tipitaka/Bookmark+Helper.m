@@ -11,15 +11,18 @@
 
 @implementation Bookmark (Helper)
 
-+ (Bookmark *)bookmarkWithItem:(Item *)item inManagedObjectContext:(NSManagedObjectContext *)context {
++ (Bookmark *)bookmarkWithItem:(Item *)item text:(NSString *)text inManagedObjectContext:(NSManagedObjectContext *)context {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Bookmark"];
-    request.predicate = [NSPredicate predicateWithFormat:@"item = %@", item];
+    request.predicate = [NSPredicate predicateWithFormat:@"item = %@ AND text = %@", item, text];
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:request error:&error];
     
     Bookmark *bookmark = nil;
-    if (error || results.count > 1) {
+    if (error) {
         NSLog(@"%@", error.localizedDescription);
+    } else if (results.count > 1) {
+        NSLog(@"Duplicated Bookmark");
+        bookmark = results.lastObject;
     } else if (results.count == 0) {
         bookmark = [NSEntityDescription insertNewObjectForEntityForName:@"Bookmark" inManagedObjectContext:context];
         bookmark.item = item;

@@ -18,8 +18,11 @@
     NSArray *results = [context executeFetchRequest:request error:&error];
     
     History *history = nil;
-    if (error || results.count > 1) {
+    if (error) {
         NSLog(@"%@", error.localizedDescription);
+    } else if (results.count > 1)  {
+        NSLog(@"Duplicated History");
+        history = results.lastObject;
     } else if (results.count == 0) {
         history = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:context];
         history.keywords = keywords;

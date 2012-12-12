@@ -10,6 +10,6 @@
 
 @interface Bookmark (Helper)
 
-+ (Bookmark *)bookmarkWithItem:(Item *)item inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Bookmark *)bookmarkWithItem:(Item *)item text:(NSString *)text inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

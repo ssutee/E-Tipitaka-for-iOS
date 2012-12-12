@@ -9,12 +9,29 @@
 #import "ToolsViewController.h"
 #import "ImportListViewController.h"
 #import "ExportTool.h"
+#import "MBProgressHUD.h"
 
-@interface ToolsViewController ()
+@interface ToolsViewController ()<MBProgressHUDDelegate>
+
+@property (nonatomic, retain) MBProgressHUD *HUD;
 
 @end
 
 @implementation ToolsViewController
+
+@synthesize HUD = _HUD;
+
+- (MBProgressHUD *)HUD
+{
+    if (_HUD == nil) {
+        _HUD = [[MBProgressHUD alloc] initWithWindow:self.view.window];
+        _HUD.delegate = self;
+        _HUD.mode = MBProgressHUDModeIndeterminate;
+        _HUD.dimBackground = YES;
+    }
+    return _HUD;
+}
+
 
 - (void)viewDidLoad
 {
@@ -71,6 +88,19 @@
     return cell;
 }
 
+- (void)exportData
+{
+    self.HUD.labelText = @"กำลังนำข้อมูลออก";
+    [self.view.window addSubview:self.HUD];
+    [self.HUD show:YES];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [ExportTool exportData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.HUD hide:YES];            
+        });
+    });
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,8 +110,16 @@
         [self.navigationController pushViewController:controller animated:YES];
         [controller release];
     } else if (indexPath.section == 0 && indexPath.row == 1) {
-        [ExportTool exportData];
+        [self exportData];
     }
+}
+
+#pragma mark - MBProgressHUDDelegate
+
+- (void)hudWasHidden:(MBProgressHUD *)hud
+{
+    [self.HUD removeFromSuperview];
+    self.HUD = nil;
 }
 
 @end
