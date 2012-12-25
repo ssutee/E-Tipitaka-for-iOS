@@ -39,7 +39,7 @@
 
 - (NSFetchedResultsController *)fetchedResultsSortedByKeywordsController
 {
-    if (_fetchedResultsSortedByKeywordsController == nil) {        
+    if (_fetchedResultsSortedByKeywordsController == nil) {
         E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription 
@@ -205,19 +205,23 @@
     switch (sortingControl.selectedSegmentIndex) {
         case 0:
             sorting = BY_TEXT;
-            self.fetchedResultsController = self.fetchedResultsSortedByKeywordsController;
+            self.fetchedResultsController = nil;
+            self.fetchedResultsController = [self fetchedResultsSortedByKeywordsController];
             break;
         case 1:
             sorting = BY_PRIORITY;
-            self.fetchedResultsController = self.fetchedResultsSortedByStateController;
+            self.fetchedResultsController = nil;
+            self.fetchedResultsController = [self fetchedResultsSortedByStateController];
             break;
         case 2:
             sorting = BY_CREATED;
-            self.fetchedResultsController = self.fetchedResultsSortedByCreatedController;
+            self.fetchedResultsController = nil;
+            self.fetchedResultsController = [self fetchedResultsSortedByCreatedController];
             break;
         default:
             sorting = BY_TEXT;
-            self.fetchedResultsController = self.fetchedResultsSortedByKeywordsController;
+            self.fetchedResultsController = nil;
+            self.fetchedResultsController = [self fetchedResultsSortedByKeywordsController];
             break;
     }    
 }
@@ -401,14 +405,17 @@
 - (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
+        self.suspendAutomaticTrackingOfChangesInManagedObjectContext = YES;
         History *history = [self.fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row];
         [self.fetchedResultsController.managedObjectContext deleteObject:history];
-        NSError *error = nil;
-        if (![self.fetchedResultsController.managedObjectContext save:&error]) {
-            NSLog(@"%@", error.localizedDescription);
-        }        
-        [self.tableView reloadData];
-    }   
+        [self.fetchedResultsController.managedObjectContext save:NULL];
+        self.suspendAutomaticTrackingOfChangesInManagedObjectContext = NO;
+        [self sortList:nil];
+        if (self.fetchedResultsController.fetchedObjects.count > 0) {
+            [self.tableView scrollToRowAtIndexPath:firstVisibleIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        }
+    }
 }
 
 

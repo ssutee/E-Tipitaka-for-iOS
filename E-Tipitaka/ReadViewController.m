@@ -577,7 +577,7 @@
                 [[self.dataDictionary valueForKey:targetLanguage] setValue:volume 
                                                                forKey:@"Volume"];
                 [[self.dataDictionary valueForKey:targetLanguage] setValue:comparedItem.content.page
-                                                               forKey:@"Page"];                
+                                                               forKey:@"Page"];
                 [self updateReadingPage];
             } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
                 [[self.dataDictionary valueForKey:targetLanguage] setValue:volume 

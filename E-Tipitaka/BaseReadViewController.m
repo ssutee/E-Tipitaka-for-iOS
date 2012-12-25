@@ -363,8 +363,6 @@
 {
     if (page < 0)
         return FALSE;    
-    if (page >= currentMaxPages)
-        return FALSE;
 
     // replace the placeholder if necessary
     ContentViewController *controller = [self.viewControllers objectAtIndex:page];
@@ -405,7 +403,7 @@
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation { 
     self.pageFunctionUsed = YES;
     self.scrollView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
-    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * currentMaxPages, self.contentView.frame.size.height);
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * MAXIMUM_PAGES, self.contentView.frame.size.height);
     [self recomputeFrameSize];
     
     int page = [[self getCurrentPage] intValue];
@@ -453,9 +451,24 @@
     self.pageFunctionUsed = NO;
     CGFloat pageWidth = scrollView.frame.size.width;
     int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-    [self setCurrentPage:[NSNumber numberWithInt:page+1]];    
-    [self updateReadingPage];    
-    [self unloadInvisibleViews];    
+    
+    ContentInfo *info = [[ContentInfo alloc] init];
+    info.language = [self getCurrentLanguage];
+    info.volume = [self getCurrentVolume];
+    [info setType:LANGUAGE|VOLUME];
+    NSInteger maxPage = [QueryHelper getMaximumPageValue:info];
+    [info release];
+    
+    if (page == maxPage) {
+        CGRect frame = self.contentView.frame;
+        frame.origin.x = frame.size.width * (page-1);
+        frame.origin.y = 0;
+        [self.scrollView scrollRectToVisible:frame animated:NO];
+    } else {
+        [self setCurrentPage:[NSNumber numberWithInt:page+1]];
+        [self updateReadingPage];
+        [self unloadInvisibleViews];
+    }
 }
 
 - (void)initScrollViewWithCurrentPage
@@ -477,9 +490,8 @@
     info.language = language;
     info.volume = volume;
     [info setType:LANGUAGE|VOLUME];
-    currentMaxPages = [QueryHelper getMaximumPageValue:info];            
     [info release];
-    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * currentMaxPages, self.contentView.frame.size.height);               
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * MAXIMUM_PAGES, self.contentView.frame.size.height);
     self.dataDictionary = [Utils readData];        
 }
 
@@ -491,15 +503,14 @@
     NSString *language = [self getCurrentLanguage];    
     NSNumber *oldVolume = [[self.dataDictionary valueForKey:language] valueForKey:@"Volume"];
     NSNumber *newVolume = [[[Utils readData] valueForKey:language] valueForKey:@"Volume"];
-    if (currentMaxPages == 0 || [oldVolume intValue] != [newVolume intValue]) {
+    if ([oldVolume intValue] != [newVolume intValue]) {
         ContentInfo *info = [[ContentInfo alloc] init];
         info.language = language;
         info.volume = newVolume;
         [info setType:LANGUAGE|VOLUME];
-        currentMaxPages = [QueryHelper getMaximumPageValue:info];            
         [info release];
     }    
-    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * currentMaxPages, self.contentView.frame.size.height);               
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * MAXIMUM_PAGES, self.contentView.frame.size.height);
     self.dataDictionary = [Utils readData];    
 }
 
@@ -562,7 +573,7 @@
     [super viewDidLoad];
     
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
-    for (unsigned i = 0; i < 1000; i++)
+    for (unsigned i = 0; i < 850; i++)
     {
         [controllers addObject:[NSNull null]];
     }

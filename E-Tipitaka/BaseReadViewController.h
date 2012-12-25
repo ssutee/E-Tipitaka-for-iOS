@@ -10,6 +10,8 @@
 #import "TapDetectingWindow.h"
 #import "DictionaryListViewController.h"
 
+#define MAXIMUM_PAGES 10000
+
 @class BaseReadViewController;
 
 @protocol BaseReadViewControllerDelegate <NSObject>
@@ -55,6 +57,7 @@
 -(void) updateReadingPage;
 -(void) updatePageTitle:(NSString *)language volume:(NSNumber *)volume page:(NSNumber *)page;
 -(void) reloadData;
+-(void) forceReloadData;
 
 - (void)initScrollViewWithCurrentPage;
 - (BOOL)prepareScrollViewForPage:(int)page;
