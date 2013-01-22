@@ -91,7 +91,7 @@
 							<object class="IBUIScrollView" id="544041635">
 								<reference key="NSNextResponder" ref="340385343"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{320, 303}</string>
+								<string key="NSFrameSize">{320, 299}</string>
 								<reference key="NSSuperview" ref="340385343"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="781420953"/>
@@ -101,7 +101,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{0, 64}, {320, 303}}</string>
+						<string key="NSFrame">{{0, 68}, {320, 299}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="544041635"/>

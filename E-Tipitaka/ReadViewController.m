@@ -929,8 +929,6 @@
 
 -(IBAction)showSearchView:(id)sender {    
     
-    NSString *langugae = [self.dataDictionary valueForKey:@"Language"];
-    
     if(_searchPopoverController != nil) {
         if ([_searchPopoverController isPopoverVisible]) {
             [_searchPopoverController dismissPopoverAnimated:YES];
@@ -1135,6 +1133,21 @@
     [actionSheet release];
 }
 
+- (void)updatePhoneScreenSize {
+    UIView *transView = [self.tabBarController.view.subviews objectAtIndex:0];
+    UIView *tabBar = [self.tabBarController.view.subviews objectAtIndex:1];
+    if (showToolbar) {
+        tabBar.hidden = TRUE;
+        transView.frame = CGRectMake(0, 0, transView.frame.size.width, transView.frame.size.height + tabBar.frame.size.height);
+        self.contentView.frame = CGRectMake(0, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height - toolbar.frame.size.height);
+    } else {
+        tabBar.hidden = FALSE;
+        transView.frame = CGRectMake(0, 0, transView.frame.size.width, transView.frame.size.height - tabBar.frame.size.height);
+        self.contentView.frame = CGRectMake(0, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height + toolbar.frame.size.height);
+    }
+    self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
+}
+
 #pragma mark -
 #pragma mark Memory management
 
@@ -1191,13 +1204,8 @@
         UIView *tabBar = [self.tabBarController.view.subviews objectAtIndex:1];
         if (tabBar.hidden) {
             tabBar.hidden = FALSE;
-            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-                transView.frame = CGRectMake(0, 0, 480, 271);
-                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 219-SOCIALIZE_ACTION_PANE_HEIGHT);
-            } else {
-                transView.frame = CGRectMake(0, 0, 320, 431);
-                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 367-SOCIALIZE_ACTION_PANE_HEIGHT);
-            }    
+            transView.frame = CGRectMake(0, 0, transView.frame.size.width, transView.frame.size.height - tabBar.frame.size.height);
+            self.contentView.frame = CGRectMake(0, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height + toolbar.frame.size.height);
             toolbar.hidden = YES;
             self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
             showToolbar = NO;
@@ -1221,29 +1229,7 @@
         [alertView show];
         [alertView release];
     }
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        UIView *transView = [self.tabBarController.view.subviews objectAtIndex:0];
-        if (showToolbar) {
-            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-                transView.frame = CGRectMake(0, 0, 480, 320);
-                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 224-SOCIALIZE_ACTION_PANE_HEIGHT);
-            } else {        
-                transView.frame = CGRectMake(0, 0, 320, 480);
-                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 372-SOCIALIZE_ACTION_PANE_HEIGHT);
-            }
-        } else {
-            if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-                transView.frame = CGRectMake(0, 0, 480, 271);
-                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 219-SOCIALIZE_ACTION_PANE_HEIGHT);
-            } else {
-                transView.frame = CGRectMake(0, 0, 320, 431);
-                self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 367-SOCIALIZE_ACTION_PANE_HEIGHT);
-            }
-        }
-        self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
-    }
-    
+        
 }
 
 - (void)dealloc {
@@ -1419,50 +1405,26 @@
         _pageSlider.hidden = !_pageSlider.hidden;        
     }
     
-    CGRect oldRect = self.contentView.frame;
-    CGRect newRect;
-    if (bottomToolbar.hidden) {
-        newRect = CGRectMake(oldRect.origin.x, 
-                             oldRect.origin.y-30, 
-                             oldRect.size.width, 
-                             oldRect.size.height+44+30+44);
-    } else {
-        newRect = CGRectMake(oldRect.origin.x, 
-                             oldRect.origin.y+30, 
-                             oldRect.size.width, 
-                             oldRect.size.height-44-30-44);            
-    }
-    self.contentView.frame = newRect;
-
-    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        return;
-    }
-    
-	showToolbar = !showToolbar;
-    UIView *transView = [self.tabBarController.view.subviews objectAtIndex:0];
-    UIView *tabBar = [self.tabBarController.view.subviews objectAtIndex:1];
-    if (showToolbar) {
-        tabBar.hidden = TRUE;
-        if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-            transView.frame = CGRectMake(0, 0, 480, 320);
-            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 224-SOCIALIZE_ACTION_PANE_HEIGHT);
-        } else {        
-            transView.frame = CGRectMake(0, 0, 320, 480);
-            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 372-SOCIALIZE_ACTION_PANE_HEIGHT);
-        }
-    } else {
-        tabBar.hidden = FALSE;
-        if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-            transView.frame = CGRectMake(0, 0, 480, 271);
-            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 480, 219-SOCIALIZE_ACTION_PANE_HEIGHT);
+        CGRect oldRect = self.contentView.frame;
+        CGRect newRect;
+        if (bottomToolbar.hidden) {
+            newRect = CGRectMake(oldRect.origin.x,
+                                 oldRect.origin.y-30,
+                                 oldRect.size.width,
+                                 oldRect.size.height+44+30+44);
         } else {
-            transView.frame = CGRectMake(0, 0, 320, 431);
-            self.contentView.frame = CGRectMake(0, 20+SOCIALIZE_ACTION_PANE_HEIGHT, 320, 367-SOCIALIZE_ACTION_PANE_HEIGHT);
+            newRect = CGRectMake(oldRect.origin.x,
+                                 oldRect.origin.y+30,
+                                 oldRect.size.width,
+                                 oldRect.size.height-44-30-44);
         }
+        self.contentView.frame = newRect;
+    } else {
+        showToolbar = !showToolbar;
+        [self updatePhoneScreenSize];
+        toolbar.hidden = !showToolbar;
     }
-	toolbar.hidden = !showToolbar;
-    self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
 }
 
 #pragma mark - ImportListViewControllerDelegate

@@ -525,6 +525,7 @@
 		9E57771F142C817800E27FC9 /* SpecificedLanguageReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E57771E142C817800E27FC9 /* SpecificedLanguageReadViewController.m */; };
 		9E577720142C817800E27FC9 /* SpecificedLanguageReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E57771E142C817800E27FC9 /* SpecificedLanguageReadViewController.m */; };
 		9E61E401140C8354009A5FD0 /* page.html in Resources */ = {isa = PBXBuildFile; fileRef = 9E61E400140C8354009A5FD0 /* page.html */; };
+		9E632C3616AD480800BC019A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E632C3516AD480800BC019A /* Default-568h@2x.png */; };
 		9E6696F3134B15CA00B9E0F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
 		9E6696F5134B15CA00B9E0F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F4134B15CA00B9E0F4 /* Foundation.framework */; };
 		9E6696F7134B15CA00B9E0F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */; };
@@ -926,6 +927,7 @@
 		9E57771D142C817800E27FC9 /* SpecificedLanguageReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecificedLanguageReadViewController.h; sourceTree = "<group>"; };
 		9E57771E142C817800E27FC9 /* SpecificedLanguageReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecificedLanguageReadViewController.m; sourceTree = "<group>"; };
 		9E61E400140C8354009A5FD0 /* page.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = page.html; sourceTree = "<group>"; };
+		9E632C3516AD480800BC019A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9E6696EE134B15CA00B9E0F4 /* E-Tipitaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Tipitaka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6696F2134B15CA00B9E0F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E6696F4134B15CA00B9E0F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1280,6 +1282,7 @@
 		9E326FDD138E1D2900ED66AE /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				9E632C3516AD480800BC019A /* Default-568h@2x.png */,
 				9E6697DD134ECC2400B9E0F4 /* Icon-72.png */,
 				9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */,
 				9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */,
@@ -2016,6 +2019,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E632C3616AD480800BC019A /* Default-568h@2x.png in Resources */,
 				9E6696FF134B15CA00B9E0F4 /* InfoPlist.strings in Resources */,
 				9E669716134B15CB00B9E0F4 /* MainWindow_iPad.xib in Resources */,
 				9E66974D134C5AFD00B9E0F4 /* MainWindow_iPhone.xib in Resources */,
