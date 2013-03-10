@@ -64,6 +64,7 @@
 	bookmark.text = self.textView.text;
 	bookmark.item = self.selectedItem;
     bookmark.created = [NSDate date];
+    bookmark.important = [NSNumber numberWithBool:NO];
 	[self.selectedItem addBookmarksObject:bookmark];
 	
 	NSError *error;

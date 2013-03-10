@@ -16,11 +16,11 @@
 @class ReadViewController;
 
 typedef enum {
-    BY_TEXT, BY_CREATED, BY_VOLUME
+    BY_TEXT, BY_CREATED, BY_VOLUME, ONLY_IMPORTANCE
 } sortingType;
 
 @interface BookmarkListViewController : UIViewController 
-<UITableViewDataSource, UITableViewDelegate,UITabBarControllerDelegate> {
+<UITableViewDataSource, UITableViewDelegate,UITabBarControllerDelegate, UIGestureRecognizerDelegate> {
 	NSMutableDictionary *bookmarkData;
 	NSString *language;
     ReadViewController *readViewController;

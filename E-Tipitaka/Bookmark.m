@@ -2,8 +2,8 @@
 //  Bookmark.m
 //  E-Tipitaka
 //
-//  Created by Sutee Sudprasert on 3/27/55 BE.
-//  Copyright (c) 2555 __MyCompanyName__. All rights reserved.
+//  Created by Sutee Sudprasert on 10/3/2013.
+//
 //
 
 #import "Bookmark.h"
@@ -13,6 +13,7 @@
 @implementation Bookmark
 
 @dynamic created;
+@dynamic important;
 @dynamic text;
 @dynamic item;
 

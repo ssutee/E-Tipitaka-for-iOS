@@ -78,9 +78,8 @@
 								   entityForName:@"Bookmark" 
 								   inManagedObjectContext:context];	
 	[fetchRequest setEntity:entity];
-	NSPredicate *pred = [NSPredicate 
-					   predicateWithFormat:@"(item.content.lang = %@)",
-					   [self.language lowercaseString]];
+    
+	NSPredicate *pred = sorting == ONLY_IMPORTANCE ? [NSPredicate predicateWithFormat:@"item.content.lang = %@ AND important = 1", self.language.lowercaseString] : [NSPredicate predicateWithFormat:@"item.content.lang = %@", self.language.lowercaseString];
 	
 	[fetchRequest setPredicate:pred];
 	
@@ -100,7 +99,10 @@
                 break;
             case BY_VOLUME:
                 sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"item.content.volume" ascending:YES];
-                break;                
+                break;
+            case ONLY_IMPORTANCE:
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created" ascending:NO];
+                break;
             default:
                 sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"item.content.volume" ascending:YES];
                 break;
@@ -199,6 +201,9 @@
         case 2:
             sorting = BY_CREATED;
             break;
+        case 3:
+            sorting = ONLY_IMPORTANCE;
+            break;
         default:
             sorting = BY_VOLUME;
             break;
@@ -206,11 +211,52 @@
     [self reloadData];
 }
 
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [gestureRecognizer locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
+        if (indexPath) {
+            Bookmark *bookmark = nil;
+            
+            if (indexPath.section == 0) {
+                bookmark = [[self.bookmarkData valueForKey:kVinaiKey] objectAtIndex:indexPath.row];
+            } else if (indexPath.section == 1) {
+                bookmark = [[self.bookmarkData valueForKey:kSuttanKey] objectAtIndex:indexPath.row];
+            } else if (indexPath.section == 2) {
+                bookmark = [[self.bookmarkData valueForKey:kAbhidhumKey] objectAtIndex:indexPath.row];
+            }
+            
+            if (bookmark && bookmark.important.boolValue) {
+                bookmark.important = [NSNumber numberWithBool:NO];
+            } else if (bookmark && !bookmark.important.boolValue) {
+                bookmark.important = [NSNumber numberWithBool:YES];
+            }
+            
+            E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+            NSError *error = nil;
+            [appDelegate.managedObjectContext save:&error];
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+            } else {
+                [self reloadData];
+            }
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark View lifecycle
 
 
 - (void)viewDidLoad {
+    
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPressGestureRecognizer.minimumPressDuration = 1.5; //seconds
+    longPressGestureRecognizer.delegate = self;
+    [self.tableView addGestureRecognizer:longPressGestureRecognizer];
+    [longPressGestureRecognizer release];
+    
     self.contentSizeForViewInPopover = CGSizeMake(350.0, 500.0);
 
     sorting = BY_TEXT;
@@ -349,6 +395,7 @@
 						  bookmark.item.content.volume,
 						  bookmark.item.content.page,
 						  bookmark.item.number];
+        cell.textLabel.textColor = bookmark.important.boolValue ? [UIColor redColor] : [UIColor blackColor];
 		cell.textLabel.text = bookmark.text;
         cell.textLabel.numberOfLines = 2;
 		cell.detailTextLabel.text = [Utils arabic2thai:text];
