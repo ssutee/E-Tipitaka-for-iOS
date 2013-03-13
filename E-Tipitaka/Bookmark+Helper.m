@@ -32,4 +32,13 @@
     return bookmark;
 }
 
++ (NSArray *)bookmarksWithoutOrderInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Bookmark"];
+    request.predicate = [NSPredicate predicateWithFormat:@"order = nil OR order = 0"];
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:request error:&error];    
+    return results;
+}
+
 @end

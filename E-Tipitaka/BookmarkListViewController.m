@@ -10,7 +10,7 @@
 #import "BookmarkEditViewController.h"
 #import "E_TipitakaAppDelegate.h"
 #import "ReadViewController.h"
-#import "Bookmark.h"
+#import "Bookmark+Helper.h"
 #import "Item.h"
 #import "Content.h"
 #import "Utils.h"
@@ -28,7 +28,7 @@
 @synthesize bookmarkData;
 @synthesize language;
 @synthesize readViewController;
-@synthesize tableView;
+@synthesize tableView = _tableView;
 @synthesize sortingControl;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:
@@ -101,7 +101,7 @@
                 sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"item.content.volume" ascending:YES];
                 break;
             case ONLY_IMPORTANCE:
-                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created" ascending:NO];
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
                 break;
             default:
                 sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"item.content.volume" ascending:YES];
@@ -140,7 +140,7 @@
 		[self.navigationItem.rightBarButtonItem setTitle:@"สำเร็จ"];
 		[self.navigationItem.rightBarButtonItem setStyle:UIBarButtonItemStyleDone];
 	} else {
-		[self.navigationItem.rightBarButtonItem setTitle:@"ลบ"];
+		[self.navigationItem.rightBarButtonItem setTitle:@"แก้ไข"];
 		[self.navigationItem.rightBarButtonItem setStyle:UIBarButtonItemStyleBordered];
 	}
 }
@@ -249,7 +249,18 @@
 #pragma mark View lifecycle
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{    
+    E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    for (Bookmark *bookmark in [Bookmark bookmarksWithoutOrderInManagedObjectContext:appDelegate.managedObjectContext]) {
+        bookmark.order = [NSNumber numberWithDouble:[bookmark.created timeIntervalSince1970]];
+    }
+    
+    NSError *error = nil;
+    [appDelegate.managedObjectContext save:&error];
+    if (error) {
+        NSLog(@"%@", error.localizedDescription);
+    }
     
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     longPressGestureRecognizer.minimumPressDuration = 1.5; //seconds
@@ -273,7 +284,7 @@
     self.navigationItem.titleView = titleNavLabel;	
     
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
-								   initWithTitle:@"ลบ"
+								   initWithTitle:@"แก้ไข"
 								   style:UIBarButtonItemStyleBordered
 								   target:self 
 								   action:@selector(toggleEdit:)];
@@ -444,14 +455,11 @@
 	return @"Unknown section";
 }
 
-
-
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath { 
     return 85;
@@ -496,23 +504,57 @@
     }
 }
 
-
-
-/*
 // Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+    NSMutableArray *array = nil;
+    if (fromIndexPath.section == 0) {
+        array = [self.bookmarkData valueForKey:kVinaiKey];
+    } else if (fromIndexPath.section == 1) {
+        array = [self.bookmarkData valueForKey:kSuttanKey];
+    } else if (fromIndexPath.section == 2) {
+        array = [self.bookmarkData valueForKey:kAbhidhumKey];
+    }
+    
+    if (array) {
+        Bookmark *sourceBookmark = [array objectAtIndex:fromIndexPath.row];
+        Bookmark *targetBookmark = [array objectAtIndex:toIndexPath.row];
+        double sourceOrder = sourceBookmark.order.doubleValue;
+        sourceBookmark.order = [NSNumber numberWithDouble:targetBookmark.order.doubleValue];
+        targetBookmark.order = [NSNumber numberWithDouble:sourceOrder];
+        E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSError *error = nil;
+        [appDelegate.managedObjectContext save:&error];
+
+        if (!error) {
+            [self reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+
+    }
 }
-*/
 
-
-/*
 // Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return sorting == ONLY_IMPORTANCE;
 }
-*/
 
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    // limit UITableView row reordering to a section
+    // source: http://stackoverflow.com/questions/849926/how-to-limit-uitableview-row-reordering-to-a-section
+    
+    if (sourceIndexPath.section != proposedDestinationIndexPath.section) {
+        NSInteger row = 0;
+        if (sourceIndexPath.section < proposedDestinationIndexPath.section) {
+            row = [self.tableView numberOfRowsInSection:sourceIndexPath.section] - 1;
+        }
+        return [NSIndexPath indexPathForRow:row inSection:sourceIndexPath.section];
+    }
+    return proposedDestinationIndexPath;
+}
 
 #pragma mark -
 #pragma mark Table view delegate

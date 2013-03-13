@@ -2,7 +2,7 @@
 //  Bookmark.m
 //  E-Tipitaka
 //
-//  Created by Sutee Sudprasert on 10/3/2013.
+//  Created by Sutee Sudprasert on 12/3/2013.
 //
 //
 
@@ -15,6 +15,7 @@
 @dynamic created;
 @dynamic important;
 @dynamic text;
+@dynamic order;
 @dynamic item;
 
 @end

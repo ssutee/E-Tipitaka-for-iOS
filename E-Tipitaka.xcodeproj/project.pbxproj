@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E004ADF16EC3623004A5225 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E004ADE16EC3623004A5225 /* Bookmark.m */; };
+		9E004AE716EF7114004A5225 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E004AE616EF7114004A5225 /* Bookmark.m */; };
 		9E10C31B141A65DD005E60FC /* ContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E10C31A141A65DD005E60FC /* ContentView.xib */; };
 		9E10C570141B183D005E60FC /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C56F141B183D005E60FC /* ContentViewController.m */; };
 		9E10C571141B183D005E60FC /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C56F141B183D005E60FC /* ContentViewController.m */; };
@@ -610,8 +610,9 @@
 
 /* Begin PBXFileReference section */
 		9E004ADC16EC3482004A5225 /* E_Tipitaka 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 12.xcdatamodel"; sourceTree = "<group>"; };
-		9E004ADD16EC3623004A5225 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
-		9E004ADE16EC3623004A5225 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
+		9E004AE116EF6D48004A5225 /* E_Tipitaka 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 13.xcdatamodel"; sourceTree = "<group>"; };
+		9E004AE516EF7114004A5225 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
+		9E004AE616EF7114004A5225 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
 		9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 2.xcdatamodel"; sourceTree = "<group>"; };
 		9E10C31A141A65DD005E60FC /* ContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentView.xib; sourceTree = "<group>"; };
 		9E10C56E141B183D005E60FC /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -1104,8 +1105,8 @@
 		9E10C578141B1B99005E60FC /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				9E004ADD16EC3623004A5225 /* Bookmark.h */,
-				9E004ADE16EC3623004A5225 /* Bookmark.m */,
+				9E004AE516EF7114004A5225 /* Bookmark.h */,
+				9E004AE616EF7114004A5225 /* Bookmark.m */,
 				9E2C939515219E150043C0E5 /* PaliThai.h */,
 				9E2C939615219E150043C0E5 /* PaliThai.m */,
 				9E2C939215219E150043C0E5 /* Item.h */,
@@ -2394,7 +2395,7 @@
 				9E9810C616619D0100F74E2E /* Content+Helper.m in Sources */,
 				9E9810CA1661B14F00F74E2E /* ToolsViewController.m in Sources */,
 				9E9810CE1661B79900F74E2E /* ExportTool.m in Sources */,
-				9E004ADF16EC3623004A5225 /* Bookmark.m in Sources */,
+				9E004AE716EF7114004A5225 /* Bookmark.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2764,6 +2765,7 @@
 		9E669706134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9E004AE116EF6D48004A5225 /* E_Tipitaka 13.xcdatamodel */,
 				9E004ADC16EC3482004A5225 /* E_Tipitaka 12.xcdatamodel */,
 				9E2A9E36153999E500E991E2 /* E_Tipitaka 11.xcdatamodel */,
 				9E3029D913E85BBE00F923F7 /* E_Tipitaka 9.xcdatamodel */,
@@ -2777,7 +2779,7 @@
 				9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */,
 				9E669707134B15CB00B9E0F4 /* E_Tipitaka.xcdatamodel */,
 			);
-			currentVersion = 9E004ADC16EC3482004A5225 /* E_Tipitaka 12.xcdatamodel */;
+			currentVersion = 9E004AE116EF6D48004A5225 /* E_Tipitaka 13.xcdatamodel */;
 			path = E_Tipitaka.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

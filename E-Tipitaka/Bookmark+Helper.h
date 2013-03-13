@@ -11,5 +11,6 @@
 @interface Bookmark (Helper)
 
 + (Bookmark *)bookmarkWithItem:(Item *)item text:(NSString *)text inManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)bookmarksWithoutOrderInManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end
