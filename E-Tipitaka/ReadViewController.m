@@ -175,7 +175,7 @@
                 [za release];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.HUD hide:YES afterDelay:2];   
-                    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Completed" message:@"To complete the process, please restart the program again." delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:nil];    
+                    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"คำเตือน" message:@"ก่อนเปิดโปรแกรมอีกครั้ง\nให้กดปุ่ม Home สองครั้งติดต่อกัน\nแล้วเลือกปิดโปรแกรมที่รันค้างอยู่ทั้งหมดก่อน\nไม่เช่นนั้นโปรแกรมอาจเปิดไม่ขึ้น" delegate:self cancelButtonTitle:@"เริ่มต้นใหม่" otherButtonTitles:nil];
                     alerView.tag = kQuitAlert;
                     [alerView show];            
                     [alerView release];
