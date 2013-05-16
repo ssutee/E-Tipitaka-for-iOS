@@ -60,6 +60,15 @@ extern NSString *const SZUserSettingsDidChangeNotification;
 extern NSString *const kSZUpdatedUserSettingsKey;
 extern NSString *const kSZUpdatedUserKey;
 
+extern NSString *const SZDidCreateObjectsNotification;
+extern NSString *const kSZCreatedObjectsKey;
+
+extern NSString *const SZDidDeleteObjectsNotification;
+extern NSString *const kSZDeletedObjectsKey;
+
+extern NSString *const SZDidFetchObjectsNotification;
+extern NSString *const kSZFetchedObjectsKey;
+
 extern NSString *const SocializeCLAuthorizationStatusDidChangeNotification;
 extern NSString *const kSocializeCLAuthorizationStatusKey;
 extern NSString *const kSocializeShouldShareLocationKey;
@@ -126,7 +135,9 @@ typedef _SZComposeCommentViewController SocializeComposeCommentViewController __
 typedef SZLikeButton SocializeLikeButton __attribute__((deprecated("Please use SZLikeButton")));
 
 @protocol SocializeEntity;
+@protocol SocializeComment;
 typedef void(^SocializeEntityLoaderBlock)(UINavigationController *navigationController, id<SocializeEntity>entity);
+typedef void(^SocializeNewCommentsNotificationBlock)(id<SocializeComment>comment);
 typedef BOOL(^SocializeCanLoadEntityBlock)(id<SocializeEntity>entity);
 
 #define SZActivity SocializeActivity

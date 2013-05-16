@@ -45,6 +45,10 @@
 @property (nonatomic, retain) SocializeLocationManager *locationManager;
 @property (retain, nonatomic) IBOutlet UIView *bottomContainerDisabledView;
 @property (nonatomic, retain) CLLocation *currentLocation;
+@property (nonatomic, assign) BOOL shouldShareLocation;
+@property (nonatomic, retain) NSString *initialText;
+@property (nonatomic, assign) BOOL allowEmpty;
+@property (retain, nonatomic) IBOutlet UIView *mapViewContainer;
 
 - (void)disableLowerContainer;
 - (void)enableLowerContainer;
@@ -57,6 +61,8 @@
 
 - (void)addSocializeRoundedGrayButtonImagesToButton:(UIButton*)button;
 - (void)setSubviewForLowerContainer:(UIView*)newSubview;
+
+- (void)stopReverseGeocodeTimer;
 
 @end
 

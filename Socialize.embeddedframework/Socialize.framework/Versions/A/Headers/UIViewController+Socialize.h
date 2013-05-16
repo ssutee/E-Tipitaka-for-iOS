@@ -13,5 +13,8 @@
 - (UINavigationController*)wrappingSocializeNavigationController;
 - (void)SZDismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion;
 - (void)SZPresentViewController:(UIViewController*)viewController animated:(BOOL)flag completion:(void (^)(void))completion;
+- (UIViewController*)SZPresentingViewController;
+
+- (UIViewController*)SZPresentationTarget;
 
 @end

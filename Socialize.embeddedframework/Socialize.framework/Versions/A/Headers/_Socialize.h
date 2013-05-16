@@ -125,6 +125,8 @@ otherwise you will get a failure.
 
 + (BOOL)openNotification:(NSDictionary*)userInfo;
 
++ (NSString *)socializeVersion;
+
 /**
  Provide access to the entity loader block
  
@@ -140,6 +142,13 @@ otherwise you will get a failure.
  @param entityLoaderBlock This block will be called when Socialize wishes to load an entity
  */
 +(void)setEntityLoaderBlock:(SocializeEntityLoaderBlock)entityLoaderBlock;
+
+/**
+ Set new comments notification block
+ 
+ @param newCommentsBlock This block will be called when Socialize wishes to load a new comments notification
+ */
++(void)setNewCommentsNotificationBlock:(SocializeNewCommentsNotificationBlock)newCommentsBlock;
 
 /**
  Provide access to the "don't load entity" block
@@ -779,7 +788,6 @@ otherwise you will get a failure.
 - (void)getSharesForUser:(id<SocializeUser>)user entity:(id<SocializeEntity>)entity first:(NSNumber*)first last:(NSNumber*)last success:(void(^)(NSArray *activity))success failure:(void(^)(NSError *error))failure;
 - (void)getCommentsForUser:(id<SocializeUser>)user entity:(id<SocializeEntity>)entity first:(NSNumber*)first last:(NSNumber*)last success:(void(^)(NSArray *activity))success failure:(void(^)(NSError *error))failure;
 - (void)getActivityForUser:(id<SocializeUser>)user entity:(id<SocializeEntity>)entity first:(NSNumber*)first last:(NSNumber*)last success:(void(^)(NSArray *activity))success failure:(void(^)(NSError *error))failure;
-- (void)getViewsForUser:(id<SocializeUser>)user entity:(id<SocializeEntity>)entity first:(NSNumber*)first last:(NSNumber*)last success:(void(^)(NSArray *activity))success failure:(void(^)(NSError *error))failure;
 
 - (void)getActivityOfEntity:(id<SZEntity>)entity first:(NSNumber*)first last:(NSNumber*)last success:(void(^)(NSArray *comments))success failure:(void(^)(NSError *error))failure;
 - (void)getActivityOfApplicationWithFirst:(NSNumber*)first last:(NSNumber*)last success:(void(^)(NSArray *comments))success failure:(void(^)(NSError *error))failure;
