@@ -52,7 +52,6 @@
     
 	NSArray *array = [[NSArray alloc] initWithObjects:@"พระวินัยปิฎก",@"พระสุตตันตปิฎก",@"พระอภิธรรมปิฎก",nil];
 	self.categories = array;
-	[array release];
 		
     self.namesDictionary = [Utils readNames];
     
@@ -128,7 +127,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
 	NSInteger volume;
@@ -153,7 +152,6 @@
     //NSLog(@"%@ %f", cell.textLabel.font.fontName, cell.textLabel.font.pointSize);
     //NSLog(@"%@ %f", cell.detailTextLabel.font.fontName, cell.detailTextLabel.font.pointSize);
     
-	[label release];
 	
     return cell;
 }
@@ -206,9 +204,6 @@
 	
 	[Utils writeData:plistDict];
 	
-	[dict1 release];
-	[dict2 release];
-	[plistDict release];
 	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         ReadViewController* readController = [[self.navigationController viewControllers] objectAtIndex:0];
@@ -246,12 +241,6 @@
 }
 
 
-- (void)dealloc {
-	[categories release];
-    [readViewController release];
-    [namesDictionary release];
-    [super dealloc];
-}
 
 
 @end

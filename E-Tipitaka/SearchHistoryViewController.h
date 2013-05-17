@@ -26,13 +26,13 @@ typedef enum {
     UISegmentedControl *sortingControl;
     sortingType sorting;
 }
-@property(nonatomic, retain) NSString *language;
-@property(nonatomic, retain) NSMutableArray *historyData;
-@property(nonatomic, retain) NSMutableArray *loadedData;
-@property(nonatomic, retain) NSMutableDictionary *detailTable;
-@property(nonatomic, retain) NSArray *stageImages;
-@property(nonatomic, retain) IBOutlet UISegmentedControl *sortingControl;
-@property(nonatomic, retain) NSManagedObjectContext *backgroundManagedObjectContext;
+@property(nonatomic, strong) NSString *language;
+@property(nonatomic, strong) NSMutableArray *historyData;
+@property(nonatomic, strong) NSMutableArray *loadedData;
+@property(nonatomic, strong) NSMutableDictionary *detailTable;
+@property(nonatomic, strong) NSArray *stageImages;
+@property(nonatomic, strong) IBOutlet UISegmentedControl *sortingControl;
+@property(nonatomic, strong) NSManagedObjectContext *backgroundManagedObjectContext;
 
 -(IBAction)toggleEdit:(id)sender;
 -(IBAction)starTapped:(id)sender;

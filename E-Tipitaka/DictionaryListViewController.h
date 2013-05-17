@@ -19,9 +19,9 @@
     NSInteger selectedIndex;
 }
 
-@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) NSArray *fetchedResults;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *fetchedResults;
 
 - (BOOL) checkDatabase;
 - (void)handleSearchForTerm:(NSString *)searchTerm;

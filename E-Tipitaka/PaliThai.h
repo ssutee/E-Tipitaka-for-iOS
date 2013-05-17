@@ -12,7 +12,7 @@
 
 @interface PaliThai : NSManagedObject
 
-@property (nonatomic, retain) NSString * head;
-@property (nonatomic, retain) NSString * translation;
+@property (nonatomic, strong) NSString * head;
+@property (nonatomic, strong) NSString * translation;
 
 @end

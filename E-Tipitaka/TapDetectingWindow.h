@@ -12,8 +12,8 @@
 @end
 @interface TapDetectingWindow : UIWindow {
     UIView *viewToObserve;
-    id <TapDetectingWindowDelegate> controllerThatObserves;
+    id <TapDetectingWindowDelegate> __weak controllerThatObserves;
 }
-@property (nonatomic, retain) UIView *viewToObserve;
-@property (nonatomic, assign) id <TapDetectingWindowDelegate> controllerThatObserves;
+@property (nonatomic, strong) UIView *viewToObserve;
+@property (nonatomic, weak) id <TapDetectingWindowDelegate> controllerThatObserves;
 @end

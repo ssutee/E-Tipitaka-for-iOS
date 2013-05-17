@@ -29,14 +29,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [bookmark release];
-    [label1 release];
-    [label2 release];
-    [textView release];
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -75,7 +67,6 @@
                                    target:self 
                                    action:@selector(saveButtonClicked:)];
 	self.navigationItem.rightBarButtonItem = saveButton;
-	[saveButton release];    
     
     NSString *text = [[NSString alloc] 
                       initWithFormat:@"เล่มที่ %@ หน้าที่ %@ ข้อที่ %@", 
@@ -83,7 +74,6 @@
                       self.bookmark.item.content.page,
                       self.bookmark.item.number];
     self.label2.text = [Utils arabic2thai:text];
-    [text release];
 
     if ([self.bookmark.item.content.lang isEqualToString:@"thai"]) {
         self.label1.text = @"พระไตรปิฎก บาลีสยามรัฐ (ภาษาไทย)";

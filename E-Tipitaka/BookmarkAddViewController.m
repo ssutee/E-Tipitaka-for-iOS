@@ -120,7 +120,6 @@
 	}
 	
 	self.titleLabel2.text = [Utils arabic2thai:newLabel];
-	[newLabel release];	
 	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         NSString *newTitle = [NSString alloc];
@@ -133,7 +132,6 @@
         }
         
         self.title = [Utils arabic2thai:newTitle];
-        [newTitle release];	        
     }
     else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         self.title = @"จดบันทึก";
@@ -145,7 +143,6 @@
 									 target:self 
 									 action:@selector(saveButtonClicked:)];
 	self.navigationItem.rightBarButtonItem = saveButton;
-	[saveButton release];	
 	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]
@@ -154,7 +151,6 @@
                                        target:self 
                                        action:@selector(cancelButtonClicked:)];
         self.navigationItem.leftBarButtonItem = cancelButton;
-        [cancelButton release];	
     }
     
 	[textView becomeFirstResponder];
@@ -188,16 +184,6 @@
 }
 
 
-- (void)dealloc {
-    [super dealloc];
-
-	[titleLabel1 release];
-	[titleLabel2 release];
-	[textView release];
-	[selectedItem release];
-    [readViewController release];
-    [popoverController release];
-}
 
 
 @end

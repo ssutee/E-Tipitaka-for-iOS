@@ -11,7 +11,7 @@
 
 @interface CommentViewController ()<SocializeServiceDelegate>
 
-@property (nonatomic, retain) Socialize *socialize;
+@property (nonatomic, strong) Socialize *socialize;
 
 @end
 
@@ -48,16 +48,10 @@
     if (netStatus == NotReachable) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Internet Connection Problem" message:@"ฟังก์ชั่นการทำงานนี้จำเป็นต้องใช้การเชื่อมต่ออินเตอร์เน็ต" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
         [alertView show];
-        [alertView release];
         [self.navigationController popViewControllerAnimated:YES];
     } 
 }
 
-- (void)dealloc
-{
-    [_socialize release];
-    [super dealloc];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -101,7 +95,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     return cell;

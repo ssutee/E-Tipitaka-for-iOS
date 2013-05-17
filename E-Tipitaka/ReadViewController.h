@@ -10,7 +10,6 @@
 #import "TapDetectingWindow.h"
 #import "BaseReadViewController.h"
 #import "MBProgressHUD.h"
-#import "ASIHTTPRequest.h"
 
 @class Content;
 @class DictionaryListViewController;
@@ -31,7 +30,7 @@
 #define kFacebookSharingKey @"kFacebookSharingKey"
 
 @interface ReadViewController : BaseReadViewController 
-<UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate, MBProgressHUDDelegate, ASIProgressDelegate>
+<UIWebViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, TapDetectingWindowDelegate, MBProgressHUDDelegate>
 {
     TapDetectingWindow *mWindow;
     
@@ -60,34 +59,34 @@
     double lastScale;
 }
 
-@property(nonatomic, retain) IBOutlet UILabel *titleLabel;
-@property(nonatomic, retain) IBOutlet UILabel *pageNumberLabel;
-@property(nonatomic, retain) IBOutlet UIToolbar *toolbar;
-@property(nonatomic, retain) IBOutlet UIView *contentView;
-@property(nonatomic, retain) IBOutlet UILabel *toastText;
+@property(nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property(nonatomic, strong) IBOutlet UILabel *pageNumberLabel;
+@property(nonatomic, strong) IBOutlet UIToolbar *toolbar;
+@property(nonatomic, strong) IBOutlet UIView *contentView;
+@property(nonatomic, strong) IBOutlet UILabel *toastText;
 
-@property(nonatomic, retain) NSArray *alterItems;
+@property(nonatomic, strong) NSArray *alterItems;
 
-@property (nonatomic, retain) UIPopoverController *searchPopoverController;
-@property (nonatomic, retain) UIPopoverController *bookmarkPopoverController;
-@property (nonatomic, retain) UIPopoverController *booklistPopoverController;
-@property (nonatomic, retain) UIPopoverController *importFilePopoverController;
+@property (nonatomic, strong) UIPopoverController *searchPopoverController;
+@property (nonatomic, strong) UIPopoverController *bookmarkPopoverController;
+@property (nonatomic, strong) UIPopoverController *booklistPopoverController;
+@property (nonatomic, strong) UIPopoverController *importFilePopoverController;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *searchButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *languageButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *booklistButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *gotoButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *noteButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *bookmarkButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *titleButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *dictionaryButton;
-@property (nonatomic, retain) UIActionSheet *languageActionSheet;
-@property (nonatomic, retain) UIActionSheet *gotoActionSheet;
-@property (nonatomic, retain) UIActionSheet *itemOptionsActionSheet;
-@property (nonatomic, retain) UIActionSheet *dataToolsActionSheet;
-@property (nonatomic, retain) IBOutlet UISlider *pageSlider;
-@property (nonatomic, retain) IBOutlet UIToolbar *bottomToolbar;
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *dataToolsButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *searchButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *languageButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *booklistButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *gotoButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *noteButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *bookmarkButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *titleButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *dictionaryButton;
+@property (nonatomic, strong) UIActionSheet *languageActionSheet;
+@property (nonatomic, strong) UIActionSheet *gotoActionSheet;
+@property (nonatomic, strong) UIActionSheet *itemOptionsActionSheet;
+@property (nonatomic, strong) UIActionSheet *dataToolsActionSheet;
+@property (nonatomic, strong) IBOutlet UISlider *pageSlider;
+@property (nonatomic, strong) IBOutlet UIToolbar *bottomToolbar;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *dataToolsButton;
 
 -(IBAction)gotoButtonClicked:(id)sender;
 -(IBAction)nextButtonClicked:(id)sender;

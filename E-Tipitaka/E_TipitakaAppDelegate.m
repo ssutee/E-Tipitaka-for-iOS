@@ -50,9 +50,9 @@
                 NSLog(@"Failed to delete existing database file, %@, %@", error, [error userInfo]);
             }
         }
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];                       
-        [pool drain];
+        @autoreleasepool {
+            [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];                       
+        }
     }    
         
 }
@@ -78,7 +78,6 @@
     [Socialize setEntityLoaderBlock:^(UINavigationController *navigationController, id<SocializeEntity>entity) {
         ContentViewController *contentViewController = [[ContentViewController alloc] initWithEntity:entity];
         [navigationController pushViewController:contentViewController animated:YES];
-        [contentViewController release];
     }];
     
     [Socialize storeUIErrorAlertsDisabled:YES];
@@ -149,14 +148,6 @@
     [self saveContext];
 }
 
-- (void)dealloc
-{
-    [_window release];
-    [__managedObjectContext release];
-    [__managedObjectModel release];
-    [__persistentStoreCoordinator release];
-    [super dealloc];
-}
 
 - (void)awakeFromNib
 {

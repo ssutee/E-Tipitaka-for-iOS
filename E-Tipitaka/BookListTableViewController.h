@@ -16,8 +16,8 @@
     ReadViewController *readViwController;
 }
 
-@property(nonatomic, retain) NSDictionary *namesDictionary;
-@property(nonatomic, retain) NSArray *categories;
-@property (nonatomic, retain) IBOutlet ReadViewController *readViewController;
+@property(nonatomic, strong) NSDictionary *namesDictionary;
+@property(nonatomic, strong) NSArray *categories;
+@property (nonatomic, strong) IBOutlet ReadViewController *readViewController;
 
 @end

@@ -13,12 +13,12 @@
 
 @interface Item : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * begin;
-@property (nonatomic, retain) NSNumber * number;
-@property (nonatomic, retain) NSNumber * section;
-@property (nonatomic, retain) NSNumber * sut;
-@property (nonatomic, retain) Content *content;
-@property (nonatomic, retain) NSSet *bookmarks;
+@property (nonatomic, strong) NSNumber * begin;
+@property (nonatomic, strong) NSNumber * number;
+@property (nonatomic, strong) NSNumber * section;
+@property (nonatomic, strong) NSNumber * sut;
+@property (nonatomic, strong) Content *content;
+@property (nonatomic, strong) NSSet *bookmarks;
 @end
 
 @interface Item (CoreDataGeneratedAccessors)

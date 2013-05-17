@@ -40,14 +40,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-    
-    [searchBar release];
-    [tableView release];
-    [fetchedResults release];    
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -125,7 +117,6 @@
     NSError *error;			
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];        
     
-    [fetchRequest release];    
     
     if (!fetchedObjects) {
         NSLog(@"Error: %@", [error localizedDescription]);
@@ -191,7 +182,6 @@
     NSError *error;			
     
     self.fetchedResults = [context executeFetchRequest:fetchRequest error:&error];        
-    [fetchRequest release];    
     
     if (!fetchedResults) {
         NSLog(@"Error: %@", [error localizedDescription]);
@@ -234,12 +224,12 @@
     
     if (![self checkDatabase]) {
         
-        UIAlertView *dbAlert = [[[UIAlertView alloc] 
+        UIAlertView *dbAlert = [[UIAlertView alloc] 
                                  initWithTitle:@"โปรดรอซักครู่\nโปรแกรมกำลังสร้างฐานข้อมูลพจนานุกรม" 
                                  message:nil
                                  delegate:self 
                                  cancelButtonTitle:nil 
-                                 otherButtonTitles:nil, nil] autorelease];
+                                 otherButtonTitles:nil, nil];
         
         [dbAlert show];
         
@@ -249,7 +239,6 @@
         indicator.center = CGPointMake(dbAlert.bounds.size.width / 2, dbAlert.bounds.size.height - 50);
         [indicator startAnimating];
         [dbAlert addSubview:indicator];
-        [indicator release];        
                 
         dispatch_async(dispatch_get_global_queue(0, 0), ^{           
             E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];			
@@ -319,8 +308,8 @@
     UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier: sectionsTableIdentifier];
     
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                 reuseIdentifier: sectionsTableIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                 reuseIdentifier: sectionsTableIdentifier];
     }
 
     cell.textLabel.backgroundColor = [UIColor clearColor];

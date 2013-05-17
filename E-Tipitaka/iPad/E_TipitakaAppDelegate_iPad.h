@@ -15,7 +15,7 @@
     UINavigationController *rootController;
 }
 
-@property (nonatomic, retain) IBOutlet UINavigationController *rootController;
+@property (nonatomic, strong) IBOutlet UINavigationController *rootController;
 
 @end
 

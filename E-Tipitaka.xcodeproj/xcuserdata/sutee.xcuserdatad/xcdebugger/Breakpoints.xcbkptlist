@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "E-Tipitaka/BaseReadViewController.m"
-         timestampString = "377057792.591097"
+         timestampString = "390459167.348121"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "215"
-         endingLineNumber = "215"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
          landmarkName = "-updateReadingPage"
          landmarkType = "5">
       </FileBreakpoint>

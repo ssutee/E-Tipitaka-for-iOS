@@ -13,11 +13,6 @@
 
 @synthesize rootController;
 
-- (void)dealloc
-{
-	[super dealloc];
-    [rootController release];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

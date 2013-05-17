@@ -30,11 +30,11 @@ typedef enum {
     BOOL willReload;
 }
 
-@property(nonatomic, retain) NSMutableDictionary *bookmarkData;
-@property(nonatomic, retain) NSString *language;
-@property(nonatomic, retain) ReadViewController *readViewController;
-@property(nonatomic, retain) IBOutlet UITableView *tableView;
-@property(nonatomic, retain) IBOutlet UISegmentedControl *sortingControl;
+@property(nonatomic, strong) NSMutableDictionary *bookmarkData;
+@property(nonatomic, strong) NSString *language;
+@property(nonatomic, strong) ReadViewController *readViewController;
+@property(nonatomic, strong) IBOutlet UITableView *tableView;
+@property(nonatomic, strong) IBOutlet UISegmentedControl *sortingControl;
 
 
 -(IBAction)toggleEdit:(id)sender;

@@ -13,12 +13,12 @@
 
 @interface Content : NSManagedObject
 
-@property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSNumber * volume;
-@property (nonatomic, retain) NSString * lang;
-@property (nonatomic, retain) NSNumber * page;
-@property (nonatomic, retain) NSSet *items;
-@property (nonatomic, retain) NSSet *histories;
+@property (nonatomic, strong) NSString * text;
+@property (nonatomic, strong) NSNumber * volume;
+@property (nonatomic, strong) NSString * lang;
+@property (nonatomic, strong) NSNumber * page;
+@property (nonatomic, strong) NSSet *items;
+@property (nonatomic, strong) NSSet *histories;
 @end
 
 @interface Content (CoreDataGeneratedAccessors)
