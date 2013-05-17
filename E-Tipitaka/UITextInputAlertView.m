@@ -33,7 +33,6 @@
                                                                           pathForResource:@"passwordfield" ofType:@"png"]]];
         image.frame = CGRectMake(11,79,262,31);
         [self addSubview:image];
-        [image release];
         
         field = [UITextField alloc];
         UIViewController *controller = (UIViewController *)self.delegate;
@@ -61,12 +60,6 @@
     return self;
 }
 
--(void) dealloc
-{
-    [label release];
-    [field release];    
-    [super dealloc];    
-}
 
 
 

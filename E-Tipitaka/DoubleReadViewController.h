@@ -33,24 +33,24 @@
     IBOutlet UIBarButtonItem *headerButton2;    
 }
 
-@property (nonatomic, retain) IBOutlet SpecificedLanguageReadViewController *sourceController;
-@property (nonatomic, retain) IBOutlet SpecificedLanguageReadViewController *targetController;
+@property (nonatomic, strong) IBOutlet SpecificedLanguageReadViewController *sourceController;
+@property (nonatomic, strong) IBOutlet SpecificedLanguageReadViewController *targetController;
 
-@property (nonatomic, retain) NSDictionary *mappingTable;
+@property (nonatomic, strong) NSDictionary *mappingTable;
 
-@property (nonatomic, retain) UIActionSheet *itemOptionsActionSheet;
+@property (nonatomic, strong) UIActionSheet *itemOptionsActionSheet;
 
-@property (nonatomic, retain) NSString *sourceLanguage;
-@property (nonatomic, retain) NSString *targetLanguage;
-@property (nonatomic, retain) NSString *keywords;
+@property (nonatomic, strong) NSString *sourceLanguage;
+@property (nonatomic, strong) NSString *targetLanguage;
+@property (nonatomic, strong) NSString *keywords;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *compareButton1;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *returnButton1;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *headerButton1;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *compareButton1;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *returnButton1;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *headerButton1;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *compareButton2;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *returnButton2;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *headerButton2;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *compareButton2;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *returnButton2;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *headerButton2;
 
 @property (assign) BOOL scrollToItem;
 @property (assign) NSInteger savedItemNumber;

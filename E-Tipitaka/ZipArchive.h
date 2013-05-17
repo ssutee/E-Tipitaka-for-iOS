@@ -34,7 +34,7 @@
 	id			_delegate;
 }
 
-@property (nonatomic, retain) id delegate;
+@property (nonatomic, strong) id delegate;
 
 -(BOOL) CreateZipFile2:(NSString*) zipFile;
 -(BOOL) CreateZipFile2:(NSString*) zipFile Password:(NSString*) password;

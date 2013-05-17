@@ -44,22 +44,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void) dealloc
-{
-    [_titleLabel release];
-    [_pageNumberLabel release];
-    [_contentView release];
-    [_dataDictionary release];
-    [_keywords release];
-    [_scrollPostion release];
-    [_pageSlider release];
-    [_toastText release];
-    [_viewControllers release];
-    [_scrollView release];
-    [_dictionaryPopoverController release];
-    [_dictionaryListViewController release];
-    [super dealloc];    
-}
 
 -(NSString *) getCurrentLanguage
 {
@@ -118,7 +102,6 @@
     info.volume = volume;
     [info setType:LANGUAGE|VOLUME];
     NSInteger maxPage = [QueryHelper getMaximumPageValue:info];
-    [info release];
     
     if (self.pageSlider.maximumValue != maxPage) {
         self.pageSlider.maximumValue = maxPage;
@@ -148,8 +131,6 @@
     self.titleLabel.text = [Utils arabic2thai:newLabel1];
     self.pageNumberLabel.text = [Utils arabic2thai:newLabel2];
     
-	[newLabel1 release];
-    [newLabel2 release];    
 }
 
 -(NSArray *) fetchCurrentContent
@@ -160,7 +141,6 @@
     info.page = [self getCurrentPage];
     [info setType:(LANGUAGE|VOLUME|PAGE)];
     NSArray *fetchedObjects = [QueryHelper getContents:info];
-    [info release];    
     return fetchedObjects;
 }
 
@@ -172,7 +152,6 @@
     info.page = page;
     [info setType:(LANGUAGE|VOLUME|PAGE)];
     NSArray *fetchedObjects = [QueryHelper getContents:info];
-    [info release];    
     return fetchedObjects;
 }
 
@@ -292,7 +271,6 @@
         [self setCurrentPage:page];        
         [self updateReadingPage];        
     }     
-    [info release];    
 }  
 
 
@@ -370,7 +348,6 @@
     {
         controller = [[ContentViewController alloc] initWithNibName:@"ContentView" bundle:nil];
         [self.viewControllers replaceObjectAtIndex:page withObject:controller];
-        [controller release];
     }
     
     // add the controller's view to the scroll view
@@ -436,7 +413,6 @@
         [self.viewControllers replaceObjectAtIndex:[removedPage intValue] withObject:[NSNull null]];
     }
         
-    [array release];
 }
 
 // At the begin of scroll dragging, reset the boolean used when scrolls originate from the UIPageControl
@@ -457,7 +433,6 @@
     info.volume = [self getCurrentVolume];
     [info setType:LANGUAGE|VOLUME];
     NSInteger maxPage = [QueryHelper getMaximumPageValue:info];
-    [info release];
     
     if (page == maxPage) {
         CGRect frame = self.contentView.frame;
@@ -490,7 +465,6 @@
     info.language = language;
     info.volume = volume;
     [info setType:LANGUAGE|VOLUME];
-    [info release];
     self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * MAXIMUM_PAGES, self.contentView.frame.size.height);
     self.dataDictionary = [Utils readData];        
 }
@@ -508,7 +482,6 @@
         info.language = language;
         info.volume = newVolume;
         [info setType:LANGUAGE|VOLUME];
-        [info release];
     }    
     self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width * MAXIMUM_PAGES, self.contentView.frame.size.height);
     self.dataDictionary = [Utils readData];    
@@ -552,9 +525,6 @@
         self.dictionaryListViewController.searchBar.text = selection;        
         [self.dictionaryListViewController handleSearchForTerm:selection];             
         self.dictionaryPopoverController = poc;
-        [poc release];
-        [controller release];
-        [navController release];
     }    
 }
 
@@ -578,13 +548,11 @@
         [controllers addObject:[NSNull null]];
     }
     self.viewControllers = controllers;
-    [controllers release];                
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                           [NSNumber numberWithInt:0], @"Thai", 
                           [NSNumber numberWithInt:0], @"Pali",nil];
     self.scrollPostion = dict;
-    [dict release];
     
     self.pageSlider.continuous = YES;    
 	self.scrollToItem = NO;
@@ -604,7 +572,6 @@
     UIMenuItem *dictionaryMenuItem = [[UIMenuItem alloc] initWithTitle:@"บาลี-ไทย" 
                                                                 action:@selector(lookUpDictionary:)];    
     [UIMenuController sharedMenuController].menuItems = [NSArray arrayWithObject:dictionaryMenuItem];
-    [dictionaryMenuItem release];
     
 }
 

@@ -29,9 +29,9 @@
     NSUInteger currentMaxPages;
 }
 
-@property(nonatomic, retain) NSDictionary *dataDictionary;
-@property(nonatomic, retain) NSMutableDictionary *scrollPostion;
-@property(nonatomic, retain) NSString *keywords;
+@property(nonatomic, strong) NSDictionary *dataDictionary;
+@property(nonatomic, strong) NSMutableDictionary *scrollPostion;
+@property(nonatomic, strong) NSString *keywords;
 
 @property(assign) BOOL scrollToKeyword;
 @property(assign) NSInteger savedItemNumber;
@@ -39,18 +39,18 @@
 @property(assign) NSInteger fontSize;
 @property(assign) BOOL pageFunctionUsed;
 
-@property(assign) ContentViewController *contentViewController;   
+@property(weak) ContentViewController *contentViewController;   
 
-@property(nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property(nonatomic, retain) NSMutableArray *viewControllers;
-@property (nonatomic, retain) UIPopoverController *dictionaryPopoverController;
-@property(nonatomic, retain) DictionaryListViewController *dictionaryListViewController;
+@property(nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property(nonatomic, strong) NSMutableArray *viewControllers;
+@property (nonatomic, strong) UIPopoverController *dictionaryPopoverController;
+@property(nonatomic, strong) DictionaryListViewController *dictionaryListViewController;
 
-@property(nonatomic, retain) IBOutlet UILabel *titleLabel;
-@property(nonatomic, retain) IBOutlet UILabel *pageNumberLabel;
-@property(nonatomic, retain) IBOutlet UIView *contentView;
-@property(nonatomic, retain) IBOutlet UISlider *pageSlider;
-@property(nonatomic, retain) IBOutlet UILabel *toastText;
+@property(nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property(nonatomic, strong) IBOutlet UILabel *pageNumberLabel;
+@property(nonatomic, strong) IBOutlet UIView *contentView;
+@property(nonatomic, strong) IBOutlet UISlider *pageSlider;
+@property(nonatomic, strong) IBOutlet UILabel *toastText;
 
 @property(nonatomic, unsafe_unretained) id<BaseReadViewControllerDelegate> delegate;
 

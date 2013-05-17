@@ -17,8 +17,8 @@
 
 @interface ImportListViewController ()<MBProgressHUDDelegate>
 
-@property (nonatomic, retain) NSMutableArray *jsonFiles;
-@property (nonatomic, retain) MBProgressHUD *HUD;
+@property (nonatomic, strong) NSMutableArray *jsonFiles;
+@property (nonatomic, strong) MBProgressHUD *HUD;
 
 @end
 
@@ -115,7 +115,7 @@
     static NSString *CellIdentifier = @"JSON File Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     NSString *path = [self.jsonFiles objectAtIndex:indexPath.row];
@@ -150,14 +150,13 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
         [context setUndoManager:nil];
         [context setPersistentStoreCoordinator:[appDelegate persistentStoreCoordinator]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:context];
         
-        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-        [dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"th_TH"] autorelease]];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"th_TH"]];
         [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
         
         NSString *path = [self.jsonFiles objectAtIndex:indexPath.row];
@@ -213,8 +212,6 @@
         }
         
         [context save:nil];
-        [context release];
-        [pool drain];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.HUD hide:YES];
@@ -223,7 +220,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"นำข้อมูลเข้าสำเร็จ" message:[NSString stringWithFormat:@"การจดจำ %d อัน\nประวัติการค้นหา %d อัน", bookmarksCount, historiesCount] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
             [alertView show];
-            [alertView release];
             
             if ([self.delegate respondsToSelector:@selector(impotListViewControllerDidFinish:)]) {
                 [self.delegate impotListViewControllerDidFinish:self];
@@ -240,12 +236,6 @@
     [super viewDidUnload];
 }
 
-- (void)dealloc
-{
-    [_jsonFiles release];
-    [_refreshButtonItem release];
-    [super dealloc];
-}
 
 #pragma mark - MBProgressHUDDelegate methods
 

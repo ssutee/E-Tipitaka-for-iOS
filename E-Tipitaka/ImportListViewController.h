@@ -19,7 +19,7 @@
 
 @interface ImportListViewController : UITableViewController
 
-@property (nonatomic, assign) id<ImportListViewControllerDelegate> delegate;
-@property (nonatomic, retain) UIBarButtonItem* refreshButtonItem;
+@property (nonatomic, weak) id<ImportListViewControllerDelegate> delegate;
+@property (nonatomic, strong) UIBarButtonItem* refreshButtonItem;
 
 @end

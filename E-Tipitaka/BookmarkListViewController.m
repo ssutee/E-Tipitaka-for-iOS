@@ -61,13 +61,9 @@
 								 array1, kVinaiKey, 
 								 array2, kSuttanKey, 
 								 array3, kAbhidhumKey, nil];
-	[array1 release];
-	[array2 release];
-	[array3 release];
 	
 	self.bookmarkData = dict;
 	
-	[dict release];
 	
 	E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	
@@ -86,7 +82,6 @@
 	NSError *error;			
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 	
-	[fetchRequest release];
 	
 	if (fetchedObjects) {
 		NSSortDescriptor *sortDescriptor;
@@ -112,7 +107,6 @@
         if (sortDescriptor) {
             NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
             sortedBookmarks = [fetchedObjects sortedArrayUsingDescriptors:sortDescriptors];
-            [sortDescriptor release];
         } else {
             sortedBookmarks = fetchedObjects;
         }
@@ -150,7 +144,6 @@
 	if([self.language isEqualToString:@"Thai"]) {
 		newLanguage = [[NSString alloc] initWithString:@"Pali"];
 		self.language = newLanguage;
-		[newLanguage release];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
             self.navigationItem.title = @"ภาษาบาลี";		
         }
@@ -158,7 +151,6 @@
 	} else {
 		newLanguage = [[NSString alloc] initWithString:@"Thai"];		
 		self.language = newLanguage;
-		[newLanguage release];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
             self.navigationItem.title = @"ภาษาไทย";		
         }
@@ -186,7 +178,7 @@
     }     
         
 	[[self navigationController] pushViewController:controller animated:YES];
-	[controller release], controller = nil;    
+	controller = nil;    
     
 }
 
@@ -266,7 +258,6 @@
     longPressGestureRecognizer.minimumPressDuration = 1.5; //seconds
     longPressGestureRecognizer.delegate = self;
     [self.tableView addGestureRecognizer:longPressGestureRecognizer];
-    [longPressGestureRecognizer release];
     
     self.contentSizeForViewInPopover = CGSizeMake(350.0, 500.0);
 
@@ -289,7 +280,6 @@
 								   target:self 
 								   action:@selector(toggleEdit:)];
 	self.navigationItem.rightBarButtonItem = editButton;
-	[editButton release];
 
 	UIBarButtonItem *languageButton;
     if ([self.language isEqualToString:@"Thai"]) {
@@ -305,13 +295,11 @@
     }
     
 	self.navigationItem.leftBarButtonItem = languageButton;
-	[languageButton release];
 	
 	NSDictionary *plistDict = [Utils readData];
 	
 	NSString *text = [[NSString alloc] initWithString:[plistDict valueForKey:@"Language"]];
 	self.language = text;
-	[text release];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         if ([self.language isEqualToString:@"Thai"]) {
@@ -386,7 +374,7 @@
     
     UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -410,7 +398,6 @@
 		cell.textLabel.text = bookmark.text;
         cell.textLabel.numberOfLines = 2;
 		cell.detailTextLabel.text = [Utils arabic2thai:text];
-		[text release];        
         EditBookmarkButton *button = [[EditBookmarkButton alloc] init];
 
         UIImage *image = [UIImage imageNamed:@"ic_menu_edit.png"];
@@ -427,7 +414,6 @@
         [button addTarget:self action:@selector(editBookmark:) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = button;
         
-        [button release];
         
 	}
     cell.textLabel.font = [UIFont boldSystemFontOfSize:22];    
@@ -642,14 +628,6 @@
     self.sortingControl = nil;
 }
 
-- (void)dealloc {
-    [super dealloc];
-	[bookmarkData release];
-	[language release];
-    [readViewController release];
-    [tableView release];
-    [sortingControl release];
-}
 
 #pragma mark -
 #pragma mark Tab Bar Controller Delegate

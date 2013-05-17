@@ -19,12 +19,12 @@
     ReadViewController *readViewController;
 }
 
-@property(nonatomic, retain) IBOutlet UILabel *titleLabel1;
-@property(nonatomic, retain) IBOutlet UILabel *titleLabel2;
-@property(nonatomic, retain) IBOutlet UITextView *textView;
-@property(nonatomic, retain) Item *selectedItem;
-@property(nonatomic, retain) UIPopoverController *popoverController;
-@property(nonatomic, retain) ReadViewController *readViewController;
+@property(nonatomic, strong) IBOutlet UILabel *titleLabel1;
+@property(nonatomic, strong) IBOutlet UILabel *titleLabel2;
+@property(nonatomic, strong) IBOutlet UITextView *textView;
+@property(nonatomic, strong) Item *selectedItem;
+@property(nonatomic, strong) UIPopoverController *popoverController;
+@property(nonatomic, strong) ReadViewController *readViewController;
 
 -(IBAction) backgroundClicked;
 -(IBAction) saveButtonClicked:(id) sender;

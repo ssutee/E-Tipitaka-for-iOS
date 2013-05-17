@@ -33,14 +33,14 @@
     BOOL notFound;
 }
 
-@property(nonatomic, retain) ReadViewController *readViewController;
-@property(nonatomic, retain) IBOutlet UITableView *table;
-@property(nonatomic, retain) IBOutlet UISearchBar *search;
-@property(nonatomic, retain) NSMutableDictionary *results;
-@property(nonatomic, retain) NSMutableArray *clickedItems;
-@property(nonatomic, retain) NSMutableArray *readItems;
-@property(nonatomic, retain) NSMutableArray *categories;
-@property(nonatomic, retain) NSString *keywords;
+@property(nonatomic, strong) ReadViewController *readViewController;
+@property(nonatomic, strong) IBOutlet UITableView *table;
+@property(nonatomic, strong) IBOutlet UISearchBar *search;
+@property(nonatomic, strong) NSMutableDictionary *results;
+@property(nonatomic, strong) NSMutableArray *clickedItems;
+@property(nonatomic, strong) NSMutableArray *readItems;
+@property(nonatomic, strong) NSMutableArray *categories;
+@property(nonatomic, strong) NSString *keywords;
 @property(assign) NSInteger scope;
 
 - (void)resetSearch;

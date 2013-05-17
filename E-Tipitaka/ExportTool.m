@@ -32,10 +32,9 @@
 	NSError *error;
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 	
-	[fetchRequest release];
     
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"th_TH"] autorelease]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"th_TH"]];
     [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
     
     NSMutableArray *bookmarkData = [[NSMutableArray alloc] initWithCapacity:fetchedObjects.count];
@@ -43,11 +42,10 @@
     for(Bookmark *bookmark in fetchedObjects) {
         NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:[dateFormatter stringFromDate:bookmark.created ? bookmark.created : [NSDate date]], @"created", bookmark.text, @"text", bookmark.item.number, @"item_number", bookmark.item.section, @"item_section", bookmark.item.content.lang, @"lang", bookmark.item.content.volume, @"volume", nil];
         [bookmarkData addObject:data];
-        [data release];
         position += 1;
         NSLog(@"%d", position);
     }
-    [bookmarkData autorelease];
+
     return bookmarkData;
 }
 
@@ -64,10 +62,9 @@
 	NSError *error;
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 	
-	[fetchRequest release];
     
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"th_TH"] autorelease]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"th_TH"]];
     [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
     
     NSMutableArray *historyData = [[NSMutableArray alloc] initWithCapacity:fetchedObjects.count];
@@ -106,11 +103,9 @@
         [data setObject:contentIds forKey:@"contents"];
 
         [historyData addObject:data];
-        [data release];
         position += 1;
         NSLog(@"%d", position);
     }
-    [historyData autorelease];
     
     return historyData;
 }
@@ -125,8 +120,8 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"th_TH"] autorelease]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"th_TH"]];
     [dateFormatter setDateFormat:@"yyyy-MM-dd_HH.mm.ss"];
     
     NSString *filePath = [NSString stringWithFormat:@"%@/%@.json", documentsDirectory, [dateFormatter stringFromDate:[NSDate date]]];
@@ -135,7 +130,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[filePath lastPathComponent] message:@"นำข้อมูลออกสำเร็จ\nข้อมูลอยู่ที่ File Sharing ใน iTunes" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
         [alertView show];
-        [alertView release];
     });
 }
 

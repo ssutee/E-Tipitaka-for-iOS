@@ -27,20 +27,17 @@
 #import "Command.h"
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
-#import "ASIHTTPRequest.h"
 #import "ZipArchive.h"
 #import <Socialize/Socialize.h>
-#import "Reachability.h"
 #import "CommentViewController.h"
-#import "JSONKit.h"
 #import "ExportTool.h"
 
 @interface ReadViewController()<SocializeServiceDelegate, ImportListViewControllerDelegate>
 {
     BOOL _isDownloadingDatabase;
 }
-@property (nonatomic, retain) MBProgressHUD *HUD;
-@property (nonatomic, retain) SocializeActionBar *actionBar;
+@property (nonatomic, strong) MBProgressHUD *HUD;
+@property (nonatomic, strong) SocializeActionBar *actionBar;
 
 @end
 
@@ -104,13 +101,6 @@
 #pragma mark - General Methods
 
 
--(void) request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes
-{
-    float progress = 1.0f * ([request partialDownloadSize]+[request totalBytesRead])/([request contentLength]+[request partialDownloadSize]);    
-    self.HUD.progress = progress;
-    NSLog(@"%f", progress);
-}
-
 -(void) prepareDatabaseByDownloadingFromInternet
 {
     _isDownloadingDatabase = NO;
@@ -143,22 +133,11 @@
             NSLog(@"Failed to delete existing database file, %@, %@", [error localizedDescription], [error userInfo]);
         }
         
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://download.watnapahpong.org/data/etipitaka/ios/E_Tipitaka.sqlite.zip"]];
-        request.allowResumeForFileDownloads = YES;
-        request.allowCompressedResponse = YES;
-        request.downloadDestinationPath = compressedDBPath;
-        request.temporaryFileDownloadPath = [compressedDBPath stringByAppendingPathExtension:@"download"];
-        request.showAccurateProgress = YES;
-        request.downloadProgressDelegate = self;
-        
-        self.HUD.mode = MBProgressHUDModeDeterminate;
-        self.HUD.labelText = @"กำลังดาว์นโหลดฐานข้อมูล";
-        self.HUD.progress = 0.0f;
-        [self.HUD show:YES];
-        [request startAsynchronous];
-        [request setCompletionBlock:^{
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://download.watnapahpong.org/data/etipitaka/ios/E_Tipitaka.sqlite.zip"]];
+        AFDownloadRequestOperation *operation = [[AFDownloadRequestOperation alloc] initWithRequest:request targetPath:compressedDBPath shouldResume:YES];
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                ZipArchive *za = [[ZipArchive alloc] init];            
+                ZipArchive *za = [[ZipArchive alloc] init];
                 if ([za UnzipOpenFile:compressedDBPath]) {
                     self.HUD.mode = MBProgressHUDModeIndeterminate;
                     self.HUD.labelText = @"กำลังขยายฐานข้อมูล";
@@ -172,32 +151,44 @@
                         self.HUD.mode = MBProgressHUDModeCustomView;
                     }
                 }
-                [za release];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.HUD hide:YES afterDelay:2];   
+                    [self.HUD hide:YES afterDelay:2];
                     UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"คำเตือน" message:@"ก่อนเปิดโปรแกรมอีกครั้ง\nให้กดปุ่ม Home สองครั้งติดต่อกัน\nแล้วเลือกปิดโปรแกรมที่รันค้างอยู่ทั้งหมดก่อน\nไม่เช่นนั้นโปรแกรมอาจเปิดไม่ขึ้น" delegate:self cancelButtonTitle:@"เริ่มต้นใหม่" otherButtonTitles:nil];
                     alerView.tag = kQuitAlert;
-                    [alerView show];            
-                    [alerView release];
-                });                
+                    [alerView show];
+                });
             });
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_dialog_alert.png"]];
+            self.HUD.mode = MBProgressHUDModeCustomView;
+            self.HUD.labelText = @"Connection Failed";
+            [self.HUD hide:YES afterDelay:2];
+            NSLog(@"%@", [error localizedDescription]);
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Conection Failed" message:error.localizedDescription delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:nil];
+            alerView.tag = kQuitAlert;
+            [alerView show];
         }];
 
-        [request setFailedBlock:^{
-            self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_dialog_alert.png"]];
-            self.HUD.mode = MBProgressHUDModeCustomView;        
-            self.HUD.labelText = @"Connection Failed";            
-            [self.HUD hide:YES afterDelay:2];   
-            NSLog(@"%@", [request.error localizedDescription]);
-            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Conection Failed" message:[request.error localizedDescription] delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:nil];    
-            alerView.tag = kQuitAlert;
-            [alerView show];            
-            [alerView release];
+        [operation setProgressiveDownloadProgressBlock:^(AFDownloadRequestOperation *operation, NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpected, long long totalBytesReadForFile, long long totalBytesExpectedToReadForFile) {
+            float progress = 1.0f * totalBytesReadForFile / totalBytesExpectedToReadForFile;
+            self.HUD.progress = progress;
+            NSLog(@"%f", progress);
         }];
+        
+//        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://download.watnapahpong.org/data/etipitaka/ios/E_Tipitaka.sqlite.zip"]];
+//        request.allowResumeForFileDownloads = YES;
+//        request.allowCompressedResponse = YES;
+//        request.downloadDestinationPath = compressedDBPath;
+//        request.temporaryFileDownloadPath = [compressedDBPath stringByAppendingPathExtension:@"download"];
+//        request.showAccurateProgress = YES;
+//        request.downloadProgressDelegate = self;
+        
+        self.HUD.mode = MBProgressHUDModeDeterminate;
+        self.HUD.labelText = @"กำลังดาว์นโหลดฐานข้อมูล";
+        self.HUD.progress = 0.0f;
+        [self.HUD show:YES];
     }
     
-    [thaiInfo release];
-    [paliInfo release];    
 }
 
 
@@ -244,37 +235,36 @@
             for (NSString *file in files) {
                 if (![[file pathExtension] isEqualToString:@"json"]) { continue; }
                 self.HUD.progress += 1.0f/ jsonFileCount;                
-                NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-                NSManagedObjectContext *ctx = [[NSManagedObjectContext alloc] init];
-                [ctx setUndoManager:nil];
-                [ctx setPersistentStoreCoordinator:[application persistentStoreCoordinator]];
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:ctx];
-                
-                NSError *error = nil;
-                NSString *jsonString = [NSString stringWithContentsOfFile:[resourcePath stringByAppendingPathComponent:file] encoding:NSUTF8StringEncoding error:&error];
-                id jsonObject = [jsonString objectFromJSONString];
-                for (NSString *key in jsonObject) {
-                    NSArray *pageValues = [[jsonObject objectForKey:key] objectForKey:@"value"];
-                    Content *content = [NSEntityDescription insertNewObjectForEntityForName:@"Content" inManagedObjectContext:ctx];
-                    content.page = [NSNumber numberWithInt:[key intValue]];
-                    content.text = [pageValues objectAtIndex:1];
-                    content.volume = [pageValues objectAtIndex:0];;
-                    content.lang = [pageValues objectAtIndex:2];
-                    for (NSArray *itemValues in [[jsonObject objectForKey:key] objectForKey:@"items"]) {
-                        Item *item = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:ctx];
-                        item.section = [itemValues objectAtIndex:0];
-                        item.sut = [itemValues objectAtIndex:1];
-                        item.number = [itemValues objectAtIndex:2];
-                        item.begin = [itemValues objectAtIndex:3];
-                        item.content = content;
+                @autoreleasepool {
+                    NSManagedObjectContext *ctx = [[NSManagedObjectContext alloc] init];
+                    [ctx setUndoManager:nil];
+                    [ctx setPersistentStoreCoordinator:[application persistentStoreCoordinator]];
+                    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:ctx];
+                    
+                    NSError *error = nil;
+                    NSString *jsonString = [NSString stringWithContentsOfFile:[resourcePath stringByAppendingPathComponent:file] encoding:NSUTF8StringEncoding error:&error];
+                    id jsonObject = [jsonString objectFromJSONString];
+                    for (NSString *key in jsonObject) {
+                        NSArray *pageValues = [[jsonObject objectForKey:key] objectForKey:@"value"];
+                        Content *content = [NSEntityDescription insertNewObjectForEntityForName:@"Content" inManagedObjectContext:ctx];
+                        content.page = [NSNumber numberWithInt:[key intValue]];
+                        content.text = [pageValues objectAtIndex:1];
+                        content.volume = [pageValues objectAtIndex:0];;
+                        content.lang = [pageValues objectAtIndex:2];
+                        for (NSArray *itemValues in [[jsonObject objectForKey:key] objectForKey:@"items"]) {
+                            Item *item = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:ctx];
+                            item.section = [itemValues objectAtIndex:0];
+                            item.sut = [itemValues objectAtIndex:1];
+                            item.number = [itemValues objectAtIndex:2];
+                            item.begin = [itemValues objectAtIndex:3];
+                            item.content = content;
+                        }
                     }
-                }
-                error = nil;
-                if (![ctx save:&error]) {
-                    NSLog(@"%@", [error localizedDescription]);
-                }
-                [ctx release];                    
-                [pool drain];                            
+                    error = nil;
+                    if (![ctx save:&error]) {
+                        NSLog(@"%@", [error localizedDescription]);
+                    }
+                }                            
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.HUD hide:YES];                
@@ -284,8 +274,6 @@
         });        
     }
     
-    [thaiInfo release];
-    [paliInfo release];
 }
 
 // this method was rejected by AppStore
@@ -314,12 +302,12 @@
             }
         }
         
-        UIAlertView *dbAlert = [[[UIAlertView alloc] 
+        UIAlertView *dbAlert = [[UIAlertView alloc] 
                                  initWithTitle:@"โปรดรอซักครู่\nโปรแกรมกำลังสร้างฐานข้อมูลเริ่มต้น" 
                                  message:nil
                                  delegate:self 
                                  cancelButtonTitle:nil 
-                                 otherButtonTitles:nil, nil] autorelease];
+                                 otherButtonTitles:nil, nil];
         
         [dbAlert show];
         
@@ -329,7 +317,6 @@
         indicator.center = CGPointMake(dbAlert.bounds.size.width / 2, dbAlert.bounds.size.height - 50);
         [indicator startAnimating];
         [dbAlert addSubview:indicator];
-        [indicator release];        
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             NSError *error;
@@ -400,13 +387,11 @@
 -(void) gotoItem {
     GotoItemCommand *command = [[GotoItemCommand alloc] initWithController:self];
     [command execute];
-    [command release];
 }
 
 -(void) gotoPage {
     GotoPageCommand *command = [[GotoPageCommand alloc] initWithController:self];
     [command execute];
-    [command release];
 }
 
 -(void) showItemOptions:(NSArray *)items withTag:(NSInteger)tagNumber withTitle:(NSString *)titleName {
@@ -442,7 +427,6 @@
     }
     self.itemOptionsActionSheet = actionSheet;
     
-	[actionSheet release];
 	
 }
 
@@ -511,7 +495,6 @@
                           withTag:kItemOptionsActionSheet withTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
         }
     }
-    [info release];
 }
 
 - (void) doCompare:(NSInteger)buttonIndex {
@@ -522,7 +505,6 @@
                               initWithTitle:@"การเทียบเคียงไม่สามารถใช้ในแนวตั้ง" message:@"กรุณาหมุนจอเป็นแนวนอน" 
                               delegate:nil cancelButtonTitle:@"ตกลง" otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
         return;
     }
     
@@ -595,14 +577,13 @@
                 if (self.keywords) {
                     NSString *str = [[NSString alloc] initWithString:self.keywords];
                     controller.keywords = str;
-                    [str release];
                 }
                 
                 controller.savedItemNumber = [comparedItem.number intValue];
                 controller.scrollToItem = YES;
 
                 [self.navigationController pushViewController:controller animated:YES];
-                [controller release], controller = nil;                
+                controller = nil;                
             }
 		} else {
             NSString *message = [[NSString alloc] initWithFormat:@"ไม่พบข้อที่ %@", selectedItem.number];                
@@ -621,19 +602,14 @@
                 title = [[NSString alloc] initWithFormat:@"พระไตรปิฎก เล่มที่ %@ (ภาษาไทย)", volume];                
             }
 
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[Utils arabic2thai:title] 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Utils arabic2thai:title] 
                                                              message:@"\n\n"
                                                             delegate:self cancelButtonTitle:@"ตกลง" 
-                                                   otherButtonTitles:nil] autorelease];
+                                                   otherButtonTitles:nil];
             [alert addSubview:textLabel];
-            [textLabel release];
-            [message release];
-            [title release];
             [alert show];
         }
 	}
-    [info release];
-	[sourceLanguage release];
 }
 
 - (void) saveBookmark:(NSInteger)buttonIndex {
@@ -672,12 +648,9 @@
                                  inView:self.view 
                permittedArrowDirections:UIPopoverArrowDirectionUp 
                                animated:YES];
-            [poc release];
-            [navController release];
         }
-		[controller release], controller = nil;
+		controller = nil;
 	}
-    [info release];    
 }
 
 - (void) selectItem:(NSInteger)buttonIndex {
@@ -738,7 +711,6 @@
                                               userInfo:nil
                                                repeats:NO];
 	[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-    [timer release];
 }
 
 -(void) hideToast:(NSTimer *)theTimer {
@@ -798,9 +770,6 @@
         [poc presentPopoverFromBarButtonItem:self.dataToolsButton
                     permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         self.booklistPopoverController = poc;
-        [poc release];
-        [importListViewController release];
-        [navController release];
     }
 }
 
@@ -818,14 +787,14 @@
 	}
 	
 	[[self navigationController] pushViewController:controller animated:YES];
-	[controller release], controller = nil;	
+	controller = nil;	
 }
 
 - (IBAction)showComments:(id)sender
 {
     CommentViewController *controller = [[CommentViewController alloc] initWithNibName:@"CommentViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];    
-    [controller release], controller = nil;
+    controller = nil;
 }
 
 -(IBAction)gotoButtonClicked:(id)sender {
@@ -910,7 +879,6 @@
                         withTitle:@"โปรดเลือกข้อที่ต้องการจดบันทึก"];
 		}
 	}
-    [info release];
 }
 
 -(void)updateLanguageButtonTitle {
@@ -959,9 +927,6 @@
                                     animated:YES];        
 
         self.searchPopoverController = poc;
-        [poc release];
-        [searchViewController release];
-        [navController release];
     }
 }
 
@@ -989,9 +954,6 @@
                     permittedArrowDirections:UIPopoverArrowDirectionAny
                                     animated:YES];
         self.bookmarkPopoverController = poc;
-        [poc release];
-        [bookmarkListViewController release];
-        [navController release];
     }
 }
 
@@ -1021,9 +983,6 @@
         [poc presentPopoverFromBarButtonItem:booklistButton 
                     permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         self.booklistPopoverController = poc;
-        [poc release];
-        [booklistTableViewController release];
-        [navController release];
     }
 }
 
@@ -1065,7 +1024,6 @@
                                          target:self 
                                          action:@selector(titleTap:)];
         self.navigationItem.rightBarButtonItem = selectButton;
-        [selectButton release];
         
         UIButton *titleNavLabel = [UIButton buttonWithType:UIButtonTypeCustom];
         titleNavLabel.showsTouchWhenHighlighted = YES;
@@ -1082,7 +1040,6 @@
                                            target:self 
                                            action:@selector(toggleLanguage:)];
         self.navigationItem.leftBarButtonItem = langButton;
-        [langButton release];	
         [self reloadData];	
         
         NSString *language = [self.dataDictionary valueForKey:@"Language"];
@@ -1106,7 +1063,6 @@
 	[actionSheet addButtonWithTitle:@"ยกเลิก"];
 	[actionSheet setCancelButtonIndex:2];    
     self.languageActionSheet = actionSheet;    
-	[actionSheet release];
     
     // create action sheet for goto menu
 	actionSheet = [[UIActionSheet alloc] init];	
@@ -1119,7 +1075,6 @@
 	[actionSheet addButtonWithTitle:@"ยกเลิก"];
 	[actionSheet setCancelButtonIndex:2];
     self.gotoActionSheet = actionSheet;
-	[actionSheet release];
     
     // create action sheet for data tools
     actionSheet = [[UIActionSheet alloc] init];
@@ -1130,7 +1085,6 @@
     [actionSheet addButtonWithTitle:@"นำข้อมูลเข้า"];
     [actionSheet addButtonWithTitle:@"นำข้อมูลออก"];
     self.dataToolsActionSheet = actionSheet;
-    [actionSheet release];
 }
 
 - (void)updatePhoneScreenSize {
@@ -1157,9 +1111,7 @@
     
     [self dismissAllPopoverControllers];
     
-    [searchPopoverController release];
     self.searchPopoverController = nil;
-    [bookmarkPopoverController release];
     self.bookmarkPopoverController = nil;
     
     // Release any cached data, images, etc. that aren't in use.
@@ -1227,39 +1179,10 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Facebook Login Request" message:@"คุณต้องใช้การแบ่งปันข้อมูลแบบออนไลน์ผ่าน Facebook หรือไม่?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         alertView.tag = kFacebookAlert;
         [alertView show];
-        [alertView release];
     }
         
 }
 
-- (void)dealloc {
-    
-	[toolbar release];    
-    [_searchPopoverController release];
-    [_bookmarkPopoverController release];
-    [_importFilePopoverController release];
-    [booklistPopoverController release];
-    [searchButton release];
-    [languageButton release];
-    [booklistButton release];
-    [gotoButton release];
-    [noteButton release];
-    [bookmarkButton release];
-    [titleButton release];
-    [dictionaryButton release];
-    [languageActionSheet release];
-    [_dataToolsActionSheet release];
-    [gotoActionSheet release];
-    [itemOptionsActionSheet release];
-    [bottomToolbar release];
-
-    [alterItems release];
-    [_HUD release];
-    [_actionBar release];
-    
-    [_dataToolsButton release];
-    [super dealloc];
-}
 
 #pragma mark - 
 #pragma mark Text Field Delegate Methods 
@@ -1281,7 +1204,6 @@
         [self setCurrentPage:page];        
         [self updateReadingPage];
     }    
-    [info release];
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -1310,14 +1232,12 @@
                         
                         NSArray *array = [[NSArray alloc] initWithArray:items];
                         self.alterItems = array;
-                        [array release];                        
 
                         if ([items count] > 1) {                                    
                             GotoMoreItemsCommand *command = [[GotoMoreItemsCommand alloc] initWithController:self];
                             command.items = items;
                             command.itemNumber = [NSNumber numberWithInt:[inputText intValue]];
                             [command execute];
-                            [command release];
                         } else if ([items count] == 1) {
                             self.scrollToItem = YES;
                             self.scrollToKeyword = NO;
@@ -1326,7 +1246,6 @@
                             [self changePage:item.content.page];
                         } 
                     }
-                    [info release];                                
                 }
             } 
         } else if(alertView.tag == kFacebookAlert) {

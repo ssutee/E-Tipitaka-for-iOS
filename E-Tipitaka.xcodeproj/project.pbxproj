@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21D952BF139445C4827A4B63 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD59BE300AA440D09CC5302B /* libPods.a */; };
 		9E004AE716EF7114004A5225 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E004AE616EF7114004A5225 /* Bookmark.m */; };
 		9E10C31B141A65DD005E60FC /* ContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E10C31A141A65DD005E60FC /* ContentView.xib */; };
 		9E10C570141B183D005E60FC /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C56F141B183D005E60FC /* ContentViewController.m */; };
@@ -72,7 +73,6 @@
 		9E3DA8D9137862D00092521B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D7137862D00092521B /* Icon-Small@2x.png */; };
 		9E3DA8DA137862D00092521B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3DA8D8137862D00092521B /* Icon-Small-50.png */; };
 		9E42DCF1150AFB6D0081D04E /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E42DCEF150AFB380081D04E /* CoreDataTableViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9E4976F514E6BE6C00437B09 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4976F414E6BE6C00437B09 /* JSONKit.m */; };
 		9E4B9C8B1419B571000DD263 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F2134B15CA00B9E0F4 /* UIKit.framework */; };
 		9E4B9C8C1419B571000DD263 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F4134B15CA00B9E0F4 /* Foundation.framework */; };
 		9E4B9C8D1419B571000DD263 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */; };
@@ -149,30 +149,13 @@
 		9EAF954C13D163D30010CABD /* PaliThai.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EAF954B13D163D30010CABD /* PaliThai.plist */; };
 		9EAF955A13D1AD540010CABD /* DictionaryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAF955813D1AD530010CABD /* DictionaryListViewController.m */; };
 		9EAF955B13D1AD540010CABD /* DictionaryListView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EAF955913D1AD540010CABD /* DictionaryListView_iPad.xib */; };
+		9EB2BB9A1745EE7D00E1AA72 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB2BB991745EE7D00E1AA72 /* Security.framework */; };
 		9EC2A854136267FA0082BBB7 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EC2A853136267FA0082BBB7 /* Entitlements.plist */; };
 		9ED7DDB914DADFF90013A5E2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED7DDB814DADFF90013A5E2 /* MBProgressHUD.m */; };
 		9EDEDF5614E770ED00C099E9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EDEDF5514E770ED00C099E9 /* CFNetwork.framework */; };
 		9EDEDF5814E770F900C099E9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EDEDF5714E770F900C099E9 /* SystemConfiguration.framework */; };
 		9EDEDF5A14E7710300C099E9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EDEDF5914E7710300C099E9 /* MobileCoreServices.framework */; };
 		9EDEDF5C14E7711500C099E9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EDEDF5B14E7711500C099E9 /* libz.dylib */; };
-		9EFAFA671745150500E3D5F6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA661745150500E3D5F6 /* Reachability.m */; };
-		9EFAFA681745150500E3D5F6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA661745150500E3D5F6 /* Reachability.m */; };
-		9EFAFA7E1745177D00E3D5F6 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA6B1745177D00E3D5F6 /* ASIAuthenticationDialog.m */; };
-		9EFAFA7F1745177D00E3D5F6 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA6B1745177D00E3D5F6 /* ASIAuthenticationDialog.m */; };
-		9EFAFA801745177D00E3D5F6 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA6E1745177D00E3D5F6 /* ASIDataCompressor.m */; };
-		9EFAFA811745177D00E3D5F6 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA6E1745177D00E3D5F6 /* ASIDataCompressor.m */; };
-		9EFAFA821745177D00E3D5F6 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA701745177D00E3D5F6 /* ASIDataDecompressor.m */; };
-		9EFAFA831745177D00E3D5F6 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA701745177D00E3D5F6 /* ASIDataDecompressor.m */; };
-		9EFAFA841745177D00E3D5F6 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA721745177D00E3D5F6 /* ASIDownloadCache.m */; };
-		9EFAFA851745177D00E3D5F6 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA721745177D00E3D5F6 /* ASIDownloadCache.m */; };
-		9EFAFA861745177D00E3D5F6 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA741745177D00E3D5F6 /* ASIFormDataRequest.m */; };
-		9EFAFA871745177D00E3D5F6 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA741745177D00E3D5F6 /* ASIFormDataRequest.m */; };
-		9EFAFA881745177D00E3D5F6 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA761745177D00E3D5F6 /* ASIHTTPRequest.m */; };
-		9EFAFA891745177D00E3D5F6 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA761745177D00E3D5F6 /* ASIHTTPRequest.m */; };
-		9EFAFA8A1745177D00E3D5F6 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA7A1745177D00E3D5F6 /* ASIInputStream.m */; };
-		9EFAFA8B1745177D00E3D5F6 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA7A1745177D00E3D5F6 /* ASIInputStream.m */; };
-		9EFAFA8C1745177D00E3D5F6 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA7C1745177D00E3D5F6 /* ASINetworkQueue.m */; };
-		9EFAFA8D1745177D00E3D5F6 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAFA7C1745177D00E3D5F6 /* ASINetworkQueue.m */; };
 		9EFAFB6D17452B0900E3D5F6 /* _SZCommentsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFAFA9017452B0900E3D5F6 /* _SZCommentsListViewController.xib */; };
 		9EFAFB6E17452B0900E3D5F6 /* _SZCommentsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFAFA9017452B0900E3D5F6 /* _SZCommentsListViewController.xib */; };
 		9EFAFB6F17452B0900E3D5F6 /* _SZComposeCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFAFA9117452B0900E3D5F6 /* _SZComposeCommentViewController.xib */; };
@@ -619,6 +602,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		9E004ADC16EC3482004A5225 /* E_Tipitaka 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 12.xcdatamodel"; sourceTree = "<group>"; };
 		9E004AE116EF6D48004A5225 /* E_Tipitaka 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 13.xcdatamodel"; sourceTree = "<group>"; };
 		9E004AE516EF7114004A5225 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
@@ -706,8 +690,6 @@
 		9E3DA8D8137862D00092521B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		9E42DCEE150AFB380081D04E /* CoreDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		9E42DCEF150AFB380081D04E /* CoreDataTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
-		9E4976F314E6BE6C00437B09 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		9E4976F414E6BE6C00437B09 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		9E4B9C891419B571000DD263 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E4B9C901419B571000DD263 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		9E4B9C921419B571000DD263 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -808,6 +790,7 @@
 		9EAF955713D1AD530010CABD /* DictionaryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryListViewController.h; sourceTree = "<group>"; };
 		9EAF955813D1AD530010CABD /* DictionaryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryListViewController.m; sourceTree = "<group>"; };
 		9EAF955913D1AD540010CABD /* DictionaryListView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DictionaryListView_iPad.xib; sourceTree = "<group>"; };
+		9EB2BB991745EE7D00E1AA72 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9EC2A853136267FA0082BBB7 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9ED7DDB714DADFF90013A5E2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		9ED7DDB814DADFF90013A5E2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -817,28 +800,6 @@
 		9EDEDF5B14E7711500C099E9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		9EF8919A13E30AD800A7C5B4 /* E_Tipitaka 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 7.xcdatamodel"; sourceTree = "<group>"; };
 		9EF891A413E6D3A900A7C5B4 /* E_Tipitaka 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 8.xcdatamodel"; sourceTree = "<group>"; };
-		9EFAFA651745150500E3D5F6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		9EFAFA661745150500E3D5F6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		9EFAFA6A1745177D00E3D5F6 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
-		9EFAFA6B1745177D00E3D5F6 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
-		9EFAFA6C1745177D00E3D5F6 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
-		9EFAFA6D1745177D00E3D5F6 /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
-		9EFAFA6E1745177D00E3D5F6 /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
-		9EFAFA6F1745177D00E3D5F6 /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
-		9EFAFA701745177D00E3D5F6 /* ASIDataDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataDecompressor.m; sourceTree = "<group>"; };
-		9EFAFA711745177D00E3D5F6 /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
-		9EFAFA721745177D00E3D5F6 /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
-		9EFAFA731745177D00E3D5F6 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
-		9EFAFA741745177D00E3D5F6 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
-		9EFAFA751745177D00E3D5F6 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
-		9EFAFA761745177D00E3D5F6 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
-		9EFAFA771745177D00E3D5F6 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
-		9EFAFA781745177D00E3D5F6 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
-		9EFAFA791745177D00E3D5F6 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
-		9EFAFA7A1745177D00E3D5F6 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
-		9EFAFA7B1745177D00E3D5F6 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
-		9EFAFA7C1745177D00E3D5F6 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
-		9EFAFA7D1745177D00E3D5F6 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		9EFAFA9017452B0900E3D5F6 /* _SZCommentsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _SZCommentsListViewController.xib; sourceTree = "<group>"; };
 		9EFAFA9117452B0900E3D5F6 /* _SZComposeCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _SZComposeCommentViewController.xib; sourceTree = "<group>"; };
 		9EFAFA9217452B0900E3D5F6 /* _SZLinkDialogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _SZLinkDialogViewController.xib; sourceTree = "<group>"; };
@@ -1061,6 +1022,7 @@
 		9EFAFB6B17452B0900E3D5F6 /* SZStatusImageLabelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SZStatusImageLabelView.xib; sourceTree = "<group>"; };
 		9EFAFB6C17452B0900E3D5F6 /* Socialize.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Socialize.framework; sourceTree = "<group>"; };
 		9EFAFD271745304300E3D5F6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		DD59BE300AA440D09CC5302B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1080,6 +1042,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EB2BB9A1745EE7D00E1AA72 /* Security.framework in Frameworks */,
 				9EFAFD281745304300E3D5F6 /* AdSupport.framework in Frameworks */,
 				9E1F6BAD1549976300F1CCD7 /* MessageUI.framework in Frameworks */,
 				9E1F6BAB154996B500F1CCD7 /* CoreLocation.framework in Frameworks */,
@@ -1095,6 +1058,7 @@
 				9E6696F7134B15CA00B9E0F4 /* CoreGraphics.framework in Frameworks */,
 				9E6696F9134B15CA00B9E0F4 /* CoreData.framework in Frameworks */,
 				9EFAFD2517452B0900E3D5F6 /* Socialize.framework in Frameworks */,
+				21D952BF139445C4827A4B63 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1313,15 +1277,6 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
-		9E4976F114E6BE4900437B09 /* JSONKit */ = {
-			isa = PBXGroup;
-			children = (
-				9E4976F314E6BE6C00437B09 /* JSONKit.h */,
-				9E4976F414E6BE6C00437B09 /* JSONKit.m */,
-			);
-			name = JSONKit;
-			sourceTree = "<group>";
-		};
 		9E4B9C8E1419B571000DD263 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1350,6 +1305,7 @@
 				9E4B9C8E1419B571000DD263 /* Tests */,
 				9E6696F1134B15CA00B9E0F4 /* Frameworks */,
 				9E6696EF134B15CA00B9E0F4 /* Products */,
+				0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1365,14 +1321,12 @@
 		9E6696F1134B15CA00B9E0F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9EB2BB991745EE7D00E1AA72 /* Security.framework */,
 				9EFAFD271745304300E3D5F6 /* AdSupport.framework */,
-				9EFAFA8E17452B0900E3D5F6 /* Socialize.embeddedframework */,
 				9E1F6BAC1549976300F1CCD7 /* MessageUI.framework */,
 				9E1F6BAA154996B500F1CCD7 /* CoreLocation.framework */,
 				9E1F6BA8154996A300F1CCD7 /* QuartzCore.framework */,
 				9E1F6BA61549968300F1CCD7 /* MapKit.framework */,
-				9E19431314E7883400D2940B /* libz.1.2.5.dylib */,
-				9EDEDF5B14E7711500C099E9 /* libz.dylib */,
 				9EDEDF5914E7710300C099E9 /* MobileCoreServices.framework */,
 				9EDEDF5714E770F900C099E9 /* SystemConfiguration.framework */,
 				9EDEDF5514E770ED00C099E9 /* CFNetwork.framework */,
@@ -1381,6 +1335,10 @@
 				9E6696F4134B15CA00B9E0F4 /* Foundation.framework */,
 				9E6696F6134B15CA00B9E0F4 /* CoreGraphics.framework */,
 				9E6696F8134B15CA00B9E0F4 /* CoreData.framework */,
+				DD59BE300AA440D09CC5302B /* libPods.a */,
+				9E19431314E7883400D2940B /* libz.1.2.5.dylib */,
+				9EDEDF5B14E7711500C099E9 /* libz.dylib */,
+				9EFAFA8E17452B0900E3D5F6 /* Socialize.embeddedframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1388,9 +1346,7 @@
 		9E6696FA134B15CA00B9E0F4 /* E-Tipitaka */ = {
 			isa = PBXGroup;
 			children = (
-				9EFAFA691745173400E3D5F6 /* ASIHTTPRequest */,
 				9EDEDF5D14E787A500C099E9 /* ZipArchive */,
-				9E4976F114E6BE4900437B09 /* JSONKit */,
 				9E803C3714DB788600EBCEAA /* Settings.bundle */,
 				9ED7DDB614DADFE40013A5E2 /* MBProgressHUD */,
 				9E326FDC138E1CB900ED66AE /* Classes */,
@@ -1470,35 +1426,6 @@
 				9E19430114E787F800D2940B /* minizip */,
 			);
 			name = ZipArchive;
-			sourceTree = "<group>";
-		};
-		9EFAFA691745173400E3D5F6 /* ASIHTTPRequest */ = {
-			isa = PBXGroup;
-			children = (
-				9EFAFA6A1745177D00E3D5F6 /* ASIAuthenticationDialog.h */,
-				9EFAFA6B1745177D00E3D5F6 /* ASIAuthenticationDialog.m */,
-				9EFAFA6C1745177D00E3D5F6 /* ASICacheDelegate.h */,
-				9EFAFA6D1745177D00E3D5F6 /* ASIDataCompressor.h */,
-				9EFAFA6E1745177D00E3D5F6 /* ASIDataCompressor.m */,
-				9EFAFA6F1745177D00E3D5F6 /* ASIDataDecompressor.h */,
-				9EFAFA701745177D00E3D5F6 /* ASIDataDecompressor.m */,
-				9EFAFA711745177D00E3D5F6 /* ASIDownloadCache.h */,
-				9EFAFA721745177D00E3D5F6 /* ASIDownloadCache.m */,
-				9EFAFA731745177D00E3D5F6 /* ASIFormDataRequest.h */,
-				9EFAFA741745177D00E3D5F6 /* ASIFormDataRequest.m */,
-				9EFAFA751745177D00E3D5F6 /* ASIHTTPRequest.h */,
-				9EFAFA761745177D00E3D5F6 /* ASIHTTPRequest.m */,
-				9EFAFA771745177D00E3D5F6 /* ASIHTTPRequestConfig.h */,
-				9EFAFA781745177D00E3D5F6 /* ASIHTTPRequestDelegate.h */,
-				9EFAFA791745177D00E3D5F6 /* ASIInputStream.h */,
-				9EFAFA7A1745177D00E3D5F6 /* ASIInputStream.m */,
-				9EFAFA7B1745177D00E3D5F6 /* ASINetworkQueue.h */,
-				9EFAFA7C1745177D00E3D5F6 /* ASINetworkQueue.m */,
-				9EFAFA7D1745177D00E3D5F6 /* ASIProgressDelegate.h */,
-				9EFAFA651745150500E3D5F6 /* Reachability.h */,
-				9EFAFA661745150500E3D5F6 /* Reachability.m */,
-			);
-			name = ASIHTTPRequest;
 			sourceTree = "<group>";
 		};
 		9EFAFA8E17452B0900E3D5F6 /* Socialize.embeddedframework */ = {
@@ -1761,9 +1688,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E669719134B15CB00B9E0F4 /* Build configuration list for PBXNativeTarget "E-Tipitaka" */;
 			buildPhases = (
+				571C316BE4794B4EA72EC9B2 /* Check Pods Manifest.lock */,
 				9E6696EA134B15CA00B9E0F4 /* Sources */,
 				9E6696EB134B15CA00B9E0F4 /* Frameworks */,
 				9E6696EC134B15CA00B9E0F4 /* Resources */,
+				603C54F2A9E7441C86BADADF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2329,6 +2258,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		571C316BE4794B4EA72EC9B2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+		};
+		603C54F2A9E7441C86BADADF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9E4B9C851419B571000DD263 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2346,15 +2306,6 @@
 				9E13897F141B8E7700C350B0 /* UITextInputAlertView.m in Sources */,
 				9E138984141BA32C00C350B0 /* Command.m in Sources */,
 				9E577720142C817800E27FC9 /* SpecificedLanguageReadViewController.m in Sources */,
-				9EFAFA681745150500E3D5F6 /* Reachability.m in Sources */,
-				9EFAFA7F1745177D00E3D5F6 /* ASIAuthenticationDialog.m in Sources */,
-				9EFAFA811745177D00E3D5F6 /* ASIDataCompressor.m in Sources */,
-				9EFAFA831745177D00E3D5F6 /* ASIDataDecompressor.m in Sources */,
-				9EFAFA851745177D00E3D5F6 /* ASIDownloadCache.m in Sources */,
-				9EFAFA871745177D00E3D5F6 /* ASIFormDataRequest.m in Sources */,
-				9EFAFA891745177D00E3D5F6 /* ASIHTTPRequest.m in Sources */,
-				9EFAFA8B1745177D00E3D5F6 /* ASIInputStream.m in Sources */,
-				9EFAFA8D1745177D00E3D5F6 /* ASINetworkQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2390,7 +2341,6 @@
 				9E138983141BA32C00C350B0 /* Command.m in Sources */,
 				9E57771F142C817800E27FC9 /* SpecificedLanguageReadViewController.m in Sources */,
 				9ED7DDB914DADFF90013A5E2 /* MBProgressHUD.m in Sources */,
-				9E4976F514E6BE6C00437B09 /* JSONKit.m in Sources */,
 				9E19430B14E787F800D2940B /* ioapi.c in Sources */,
 				9E19430C14E787F800D2940B /* mztools.c in Sources */,
 				9E19430D14E787F800D2940B /* unzip.c in Sources */,
@@ -2409,15 +2359,6 @@
 				9E9810CA1661B14F00F74E2E /* ToolsViewController.m in Sources */,
 				9E9810CE1661B79900F74E2E /* ExportTool.m in Sources */,
 				9E004AE716EF7114004A5225 /* Bookmark.m in Sources */,
-				9EFAFA671745150500E3D5F6 /* Reachability.m in Sources */,
-				9EFAFA7E1745177D00E3D5F6 /* ASIAuthenticationDialog.m in Sources */,
-				9EFAFA801745177D00E3D5F6 /* ASIDataCompressor.m in Sources */,
-				9EFAFA821745177D00E3D5F6 /* ASIDataDecompressor.m in Sources */,
-				9EFAFA841745177D00E3D5F6 /* ASIDownloadCache.m in Sources */,
-				9EFAFA861745177D00E3D5F6 /* ASIFormDataRequest.m in Sources */,
-				9EFAFA881745177D00E3D5F6 /* ASIHTTPRequest.m in Sources */,
-				9EFAFA8A1745177D00E3D5F6 /* ASIInputStream.m in Sources */,
-				9EFAFA8C1745177D00E3D5F6 /* ASINetworkQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2576,7 +2517,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2592,7 +2533,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2601,8 +2542,10 @@
 		};
 		9E66971A134B15CB00B9E0F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sutee Sudprasert (36A75C247D)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2614,7 +2557,7 @@
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2626,12 +2569,14 @@
 		};
 		9E66971B134B15CB00B9E0F4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
 					armv6,
 					armv7,
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2641,7 +2586,7 @@
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2662,7 +2607,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2671,12 +2616,14 @@
 		};
 		9EA8F3FD1378507B00BEE728 /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
 					armv7,
 					armv6,
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sutee Sudprasert";
 				COPY_PHASE_STRIP = YES;
@@ -2688,7 +2635,7 @@
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2710,7 +2657,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2719,8 +2666,10 @@
 		};
 		9EC2A852136265CD0082BBB7 /* Ad Hoc Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sutee Sudprasert";
@@ -2733,7 +2682,7 @@
 				GCC_PREFIX_HEADER = "E-Tipitaka/E-Tipitaka-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",

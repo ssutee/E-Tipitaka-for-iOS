@@ -32,7 +32,6 @@
 	if (error) {
         NSLog(@"%@", [error description]);
     }
-	[fetchRequest release];
 	
 	return fetchedObjects;
 }
@@ -53,14 +52,12 @@
     if ([info getType] == (LANGUAGE | VOLUME | BEGIN) ||  [info getType] == (LANGUAGE | VOLUME | PAGE | BEGIN)) {
         NSSortDescriptor *sortByNumber = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
         [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByNumber]];
-        [sortByNumber release];
         
     }
         
 	NSError *error;			
 	NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
 	
-	[fetchRequest release];
     
 	return fetchedObjects;
 }
@@ -85,8 +82,6 @@
 	NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 	NSArray *sortedItems = [array sortedArrayUsingDescriptors:sortDescriptors];
 	
-	[sortDescriptor release];
-	[array release];
 	
 	return sortedItems;
 	

@@ -14,6 +14,6 @@
 	UITabBarController *rootController;     
 }
 
-@property (nonatomic, retain) IBOutlet UITabBarController *rootController;
+@property (nonatomic, strong) IBOutlet UITabBarController *rootController;
 
 @end

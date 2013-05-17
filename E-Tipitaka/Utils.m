@@ -12,7 +12,7 @@
 @implementation Utils
 
 + (NSString *)arabic2thai:(NSString *)text {
-	NSMutableString *result = [[text mutableCopy] autorelease];
+	NSMutableString *result = [text mutableCopy];
 
     [result replaceOccurrencesOfString:@"0" withString:@"๐" 
                                options:NSLiteralSearch range:NSMakeRange(0, [text length])];
@@ -75,7 +75,6 @@
     }
     else {
         NSLog(@"%@",error);
-        [error release];
     }	
 }
 
@@ -228,7 +227,6 @@
 	} else {
 		newTitle = [newTitle initWithFormat:@"%@ เล่มที่ %d", @"พระอภิธรรมปิฎก", [volume intValue] - 33];		
 	}
-    [newTitle autorelease];
     return  newTitle;
 }
 

@@ -13,7 +13,7 @@
 
 @interface ToolsViewController ()<MBProgressHUDDelegate>
 
-@property (nonatomic, retain) MBProgressHUD *HUD;
+@property (nonatomic, strong) MBProgressHUD *HUD;
 
 @end
 
@@ -74,7 +74,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     if (indexPath.section == 0 && indexPath.row == 0) {
@@ -108,7 +108,6 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         ImportListViewController *controller = [[ImportListViewController alloc] initWithNibName:@"ImportListViewController" bundle:nil];
         [self.navigationController pushViewController:controller animated:YES];
-        [controller release];
     } else if (indexPath.section == 0 && indexPath.row == 1) {
         [self exportData];
     }

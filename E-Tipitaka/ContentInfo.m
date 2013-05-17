@@ -25,7 +25,6 @@
 
 -(void) setType:(NSUInteger) typeCode
 {
-    [_type release];
     switch (typeCode) {
         case LANGUAGE | VOLUME:
             _type = [[Language_Volume alloc] init];
@@ -51,11 +50,6 @@
     }
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-    [_type release];
-}
 
 - (NSPredicate *)predicate
 {

@@ -13,10 +13,10 @@
 
 @interface Bookmark : NSManagedObject
 
-@property (nonatomic, retain) NSDate * created;
-@property (nonatomic, retain) NSNumber * important;
-@property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) Item *item;
+@property (nonatomic, strong) NSDate * created;
+@property (nonatomic, strong) NSNumber * important;
+@property (nonatomic, strong) NSString * text;
+@property (nonatomic, strong) NSNumber * order;
+@property (nonatomic, strong) Item *item;
 
 @end

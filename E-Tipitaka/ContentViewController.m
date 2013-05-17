@@ -48,15 +48,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc
-{
-    [_indictor release];
-    [_webView release];
-    [_content release];
-    [_highlightText release];
-    [_entity release];
-    [super dealloc];
-}
 
 - (void)update
 {
@@ -115,7 +106,6 @@
             info.page = page;
             [info setType:(LANGUAGE|VOLUME|PAGE)];
             NSArray *fetchedObjects = [QueryHelper getContents:info];
-            [info release];    
             if (fetchedObjects && fetchedObjects.count == 1) {
                 self.content = [fetchedObjects objectAtIndex:0];
             }
@@ -155,7 +145,7 @@
     
     NSArray *tokens = [self.highlightText componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    for(NSString *token in tokens) {
+    for(__strong NSString *token in tokens) {
         token = [token stringByReplacingOccurrencesOfString:@"+" withString:@" "];
         
         //must use UTF8 for replacing Thai text
@@ -181,7 +171,6 @@
                                                    withString:[NSString
                                                                stringWithFormat:@"<font id=\"i%@\" color=\"#FF0000\">%@</font>", 
                                                                item.number, tmp]];
-            [tmp release];
         }
     }
     return text;
@@ -192,8 +181,8 @@
     NSString *text = [self anchorItemNumber:[self markHighlight:[self convertWhiteSpacesToHTML:self.content.text]]];
     NSString *template = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page" ofType:@"html"] 
                                                    encoding:NSUTF8StringEncoding error:nil];
-    NSString *html = [[[NSString alloc] 
-                      initWithFormat:template, fontSize, text] autorelease];
+    NSString *html = [[NSString alloc] 
+                      initWithFormat:template, fontSize, text];
     return html;
 }
 

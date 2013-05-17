@@ -20,17 +20,17 @@
     BOOL scrollToHighlightText;
 }
 
-@property (nonatomic, retain) Content *content;
-@property (nonatomic, retain) NSString *highlightText;
+@property (nonatomic, strong) Content *content;
+@property (nonatomic, strong) NSString *highlightText;
 @property (assign) NSUInteger itemNumber;
 @property (assign) NSUInteger fontSize;
 @property (assign) NSUInteger scrollPosition;
 @property (assign) BOOL scrollToItemNumber;
 @property (assign) BOOL scrollToHighlightText;
-@property (nonatomic, retain) id<SocializeEntity> entity;
+@property (nonatomic, strong) id<SocializeEntity> entity;
 
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *indictor;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *indictor;
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
 
 - (id)initWithEntity:(id<SocializeEntity>)entity;
 -(NSString *) convertContentToHTML;

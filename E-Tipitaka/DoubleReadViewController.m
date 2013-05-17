@@ -42,25 +42,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [mappingTable release];
-    [sourceLanguage release];
-    [targetLanguage release];
-    [keywords release];
-    [compareButton1 release];
-    [returnButton1 release];
-    [compareButton2 release];
-    [returnButton2 release];
-    [headerButton1 release];
-    [headerButton2 release];
-    [itemOptionsActionSheet release];
-    
-    [_sourceController release];
-    [_targetController release];
-    
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -137,7 +118,6 @@
     
     [actionSheet showFromBarButtonItem:button animated:YES];
     self.itemOptionsActionSheet = actionSheet;
-	[actionSheet release];
 }
 
 -(void) doCompare:(NSInteger)buttonIndex from:(NSString *)fromLanguage to:(NSString *)toLanguage inLanguage:(NSInteger)side
@@ -215,19 +195,15 @@
                 title = [[NSString alloc] initWithFormat:@"พระไตรปิฎก เล่มที่ %@ (ภาษาไทย)", volume];                
             }
             
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:[Utils arabic2thai:title] 
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Utils arabic2thai:title] 
                                                              message:@"\n\n"
                                                             delegate:self cancelButtonTitle:@"ตกลง" 
-                                                   otherButtonTitles:nil] autorelease];
+                                                   otherButtonTitles:nil];
             [alert addSubview:textLabel];
-            [textLabel release];
-            [message release];
-            [title release];
             [alert show];            
         }
 	}
     
-    [info release];
 
 }
 
@@ -290,7 +266,6 @@
                              andTitle:@"โปรดเลือกข้อที่ต้องการเทียบเคียง"];
         }
     }    
-    [info release];
 }
 
 #pragma mark - View lifecycle
@@ -366,9 +341,6 @@
     [self.sourceController initScrollViewWithCurrentPage];
     [self.targetController initScrollViewWithCurrentPage];
     
-    [dict release];
-    [map1 release];
-    [map2 release];
 }
 
 - (void)viewDidUnload

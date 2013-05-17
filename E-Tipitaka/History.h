@@ -13,15 +13,15 @@
 
 @interface History : NSManagedObject
 
-@property (nonatomic, retain) NSString * detail;
-@property (nonatomic, retain) NSNumber * star;
-@property (nonatomic, retain) NSString * lang;
-@property (nonatomic, retain) NSString * keywords;
-@property (nonatomic, retain) NSDate * created;
-@property (nonatomic, retain) NSNumber * state;
-@property (nonatomic, retain) NSData * selected;
-@property (nonatomic, retain) NSData * read;
-@property (nonatomic, retain) NSSet *contents;
+@property (nonatomic, strong) NSString * detail;
+@property (nonatomic, strong) NSNumber * star;
+@property (nonatomic, strong) NSString * lang;
+@property (nonatomic, strong) NSString * keywords;
+@property (nonatomic, strong) NSDate * created;
+@property (nonatomic, strong) NSNumber * state;
+@property (nonatomic, strong) NSData * selected;
+@property (nonatomic, strong) NSData * read;
+@property (nonatomic, strong) NSSet *contents;
 @end
 
 @interface History (CoreDataGeneratedAccessors)

@@ -17,10 +17,10 @@
     UITextView *textView;
 }
 
-@property (nonatomic, retain) Bookmark *bookmark;
-@property (nonatomic, retain) IBOutlet UILabel *label1;
-@property (nonatomic, retain) IBOutlet UILabel *label2;
-@property (nonatomic, retain) IBOutlet UITextView *textView;
+@property (nonatomic, strong) Bookmark *bookmark;
+@property (nonatomic, strong) IBOutlet UILabel *label1;
+@property (nonatomic, strong) IBOutlet UILabel *label2;
+@property (nonatomic, strong) IBOutlet UITextView *textView;
 
 -(IBAction) saveButtonClicked:(id) sender;
 

@@ -19,10 +19,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [viewToObserve release];
-    [super dealloc];
-}
 
 - (void)forwardTap:(id)touch {
     [controllerThatObserves userDidTapView:touch];

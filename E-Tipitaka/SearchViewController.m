@@ -18,7 +18,7 @@
 @interface SearchViewController()
 
 @property (nonatomic, strong) MBProgressHUD *HUD;
-@property (nonatomic, retain) History *selectedHistory;
+@property (nonatomic, strong) History *selectedHistory;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 
 @end
@@ -82,7 +82,7 @@
     }
     
 	[[self navigationController] pushViewController:controller animated:YES];
-	[controller release], controller = nil;
+	controller = nil;
 }
 
 -(void) resetSearch {
@@ -90,7 +90,6 @@
 	NSString *string = [[NSString alloc] initWithString:@""];
 	self.keywords = nil;
 	self.keywords = string;
-	[string release];
 	
 	NSMutableArray *array = [[NSMutableArray alloc] init];
 	self.categories = array;
@@ -99,7 +98,6 @@
 	//[array addObject:@"2"];
 	//[array addObject:@"3"];	
 	
-	[array release];
 
     [self.clickedItems removeAllObjects];
     [self.readItems removeAllObjects];
@@ -116,12 +114,7 @@
 	//self.results = nil;
 	self.results = dict;
 
-	[value0 release];
-	[value1 release];
-	[value2 release];
-	[value3 release];
 	
-	[dict release];
 	
 	[table reloadData];
 //	self.progressBar.hidden = YES;
@@ -141,7 +134,6 @@
 
 	NSString *string = [[NSString alloc] initWithString:history.keywords];
 	self.keywords = string;
-	[string release];    
     
     NSMutableArray *array1 = [[NSMutableArray alloc] init];
     NSMutableArray *array2 = [[NSMutableArray alloc] init];
@@ -156,8 +148,6 @@
     NSArray *sortDescriptors = [NSArray arrayWithObjects:volumeDescriptor,pageDescriptor,nil];
     NSArray *sortedContents = [history.contents sortedArrayUsingDescriptors:sortDescriptors];
     
-    [volumeDescriptor release];    
-    [pageDescriptor release];
     
     for (Content *content in sortedContents) {
         NSInteger volume = [content.volume intValue];
@@ -210,11 +200,6 @@
     
     [table reloadData];
     
-    [array0 release];
-    [array1 release];
-    [array2 release];
-    [array3 release];        
-    [newKeys release];
 }
 
 - (void)unclickedItem:(UIGestureRecognizer *)recognizer
@@ -227,7 +212,6 @@
         NSString *item = [[NSString alloc] initWithFormat:@"%d:%d",section,row];
         [self.clickedItems removeObject:item];        
         [self.readItems removeObject:item];
-        [item release];
         
         [self.table reloadData];
         
@@ -255,7 +239,6 @@
 	
 	NSString *string = [[NSString alloc] initWithString:searchTerm];
 	self.keywords = string;
-	[string release];
 	
 	NSArray *tokens = [searchTerm componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	[self.view.window addSubview:self.HUD];
@@ -312,7 +295,6 @@
 			pred = [NSPredicate
 					predicateWithFormat:predicateFormat argumentArray:predicateArgs];
 			
-			[predicateArgs release];
 
 			[fetchRequest setPredicate:pred];
 
@@ -404,11 +386,6 @@
 			}
 			[results setValue:array0 forKey:@"0"];
 			self.categories = newKeys;
-			[newKeys release];
-			[array0 release];
-			[array1 release];
-			[array2 release];
-			[array3 release];
 			
 			
 			dispatch_async(dispatch_get_main_queue(), ^{
@@ -423,7 +400,6 @@
 				} 
 			});
 		}	
-		[fetchRequest release];
 	});
 	
 }
@@ -459,11 +435,9 @@
     
     NSMutableArray *array1 = [[NSMutableArray alloc] init];
     self.clickedItems = array1;
-    [array1 release];
     
     NSMutableArray *array2 = [[NSMutableArray alloc] init];
     self.readItems = array2;
-    [array2 release];
 
     UIBarButtonItem *languageButton = [[UIBarButtonItem alloc]
                                        initWithTitle:@""
@@ -471,7 +445,6 @@
                                        target:self 
                                        action:@selector(toggleLanguage:)];
     self.navigationItem.leftBarButtonItem = languageButton;
-    [languageButton release];	            
 
     
 	UIBarButtonItem *historyButton = [[UIBarButtonItem alloc]
@@ -480,7 +453,6 @@
 									   target:self 
 									   action:@selector(showSearchHistory:)];
 	self.navigationItem.rightBarButtonItem = historyButton;
-	[historyButton release];	    
 	
     
 	if (self.search.selectedScopeButtonIndex == kThaiScope) {
@@ -508,7 +480,6 @@
     
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(unclickedItem:)];    
     [self.table addGestureRecognizer:longPressGestureRecognizer];    
-    [longPressGestureRecognizer release];	
     [super viewDidLoad];
 }
 
@@ -544,21 +515,6 @@
 }
 
 
-- (void)dealloc {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self 
-//                                                    name:UIKeyboardDidHideNotification 
-//                                                  object:nil];
-	[table release];
-	[search release];
-	[categories release];
-    [clickedItems release];
-	[results release];
-	[keywords release];
-    [readViewController release];
-    [_selectedHistory release];
-    [_readItems release];
-    [super dealloc];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:
 (UIInterfaceOrientation)toInterfaceOrientation {
@@ -615,7 +571,6 @@
         }
     }
 	
-    [item release];
     
 	NSString *category = [categories objectAtIndex:section];
 	NSArray *resultSection = [results objectForKey:category];	
@@ -637,8 +592,6 @@
 	
 	[Utils writeData:plistDict];
 	
-	[dict release];	
-	[plistDict release];
 	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         UINavigationController* firstNavController = [self.tabBarController.viewControllers objectAtIndex:0];
@@ -663,8 +616,7 @@
 		return nil;
 	}
 	
-	NSMutableArray *index = [[NSMutableArray alloc] init];	
-	[index autorelease];
+	NSMutableArray *index = [[NSMutableArray alloc] init];
 	for(NSString *category in self.categories) {
 		if (category == @"0") {
 			[index addObject:UITableViewIndexSearch];
@@ -730,13 +682,13 @@
 	
 	if(cell == nil) {
         if (section == 0 && (row == 3 || row == 4)) {
-            cell = [[[UITableViewCell alloc]
+            cell = [[UITableViewCell alloc]
                      initWithStyle:UITableViewCellStyleDefault
-                     reuseIdentifier:SectionsTableIdentifier] autorelease];
+                     reuseIdentifier:SectionsTableIdentifier];
         } else {
-            cell = [[[UITableViewCell alloc]
+            cell = [[UITableViewCell alloc]
                      initWithStyle:UITableViewCellStyleSubtitle 
-                     reuseIdentifier:SectionsTableIdentifier] autorelease];
+                     reuseIdentifier:SectionsTableIdentifier];
         }
 	}
     
@@ -750,7 +702,6 @@
 		NSString *text = [[NSString alloc] 
                           initWithFormat:@"เล่มที่ %@ หน้าที่ %@", content.volume, content.page];
 		cell.textLabel.text = [Utils arabic2thai:text];
-		[text release];
 
 	} else {
 		NSString *label;
@@ -771,7 +722,6 @@
             if ([tmp count] > 0) {
                 cell.detailTextLabel.text = [Utils arabic2thai:s];            
             }
-			[label release];
             
 			
 		} else if(row == 1) {
@@ -789,7 +739,6 @@
             if ([tmp count] > 0) {
                 cell.detailTextLabel.text = [Utils arabic2thai:s];            
             } 
-			[label release];			
 		} else if(row == 2) {
             s = [NSString stringWithString:@"เล่มที่"];             
             [tmp removeAllObjects];
@@ -805,7 +754,6 @@
             if ([tmp count] > 0) {
                 cell.detailTextLabel.text = [Utils arabic2thai:s];            
             }
-			[label release];
 		} else if(row == 3) {
             
             cell.textLabel.font = [UIFont systemFontOfSize:44];
@@ -820,7 +768,7 @@
                 cell.textLabel.text = @"ในพระไตรปิฎก (ภาษาบาลี)";                
             }
         }
-        [tmp release], tmp = nil;
+        tmp = nil;
 	}
     
     
@@ -844,8 +792,6 @@
 		NSString *label = [[NSString alloc] 
                            initWithFormat:@"ผลลัพธ์คำว่า \"%@\" พบทั้งหมด %d หน้า", self.keywords, count];
 		NSString *newLabel = [[NSString alloc] initWithString:[Utils arabic2thai:label]];
-		[newLabel autorelease];
-		[label release];
 		return newLabel;		
 	}
 	if (category == @"1") {
@@ -886,7 +832,6 @@
     else {
         [cell setBackgroundColor:[UIColor clearColor]];
     }
-    [item release];
 }
 
 #pragma mark -
@@ -930,7 +875,6 @@
         NSError *error;			
         NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];        
         
-        [fetchRequest release];
         
         if (fetchedObjects && [fetchedObjects count] == 0) {
             isNewKeywords = YES;
@@ -998,7 +942,7 @@
     }
 
 	[[self navigationController] pushViewController:controller animated:YES];
-	[controller release], controller = nil;
+	controller = nil;
 	
 }
 
@@ -1039,7 +983,6 @@
                 NSLog(@"%@", error.localizedDescription);
             }
         }                
-        [item release];
     }
     
 }

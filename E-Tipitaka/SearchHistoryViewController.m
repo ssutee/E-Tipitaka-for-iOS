@@ -16,10 +16,10 @@
 
 @interface SearchHistoryViewController()<MBProgressHUDDelegate>
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsSortedByKeywordsController;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsSortedByStateController;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsSortedByCreatedController;
-@property (nonatomic, retain) MBProgressHUD *progressHUD;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsSortedByKeywordsController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsSortedByStateController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsSortedByCreatedController;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @end
 
@@ -56,12 +56,10 @@
         sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"keywords" ascending:YES];
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
         [fetchRequest setSortDescriptors:sortDescriptors];
-        [sortDescriptor release];
         
         _fetchedResultsSortedByKeywordsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
                                                                                         managedObjectContext:appDelegate.managedObjectContext
                                                                                           sectionNameKeyPath:nil cacheName:@"Search History Keywords Cache"];;
-        [fetchRequest release];        
     }
     return _fetchedResultsSortedByKeywordsController;
 }
@@ -85,12 +83,10 @@
         sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"state" ascending:YES];
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
         [fetchRequest setSortDescriptors:sortDescriptors];
-        [sortDescriptor release];
         
         _fetchedResultsSortedByStateController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
                                                                                      managedObjectContext:appDelegate.managedObjectContext
                                                                                        sectionNameKeyPath:nil cacheName:@"Search History State Cache"];
-        [fetchRequest release]; 
     }
     return _fetchedResultsSortedByStateController;
 }
@@ -114,12 +110,10 @@
         sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created" ascending:YES];
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
         [fetchRequest setSortDescriptors:sortDescriptors];
-        [sortDescriptor release];
         
         _fetchedResultsSortedByCreatedController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
                                                                                        managedObjectContext:appDelegate.managedObjectContext
                                                                                          sectionNameKeyPath:nil cacheName:@"Search History Created Cache"];
-        [fetchRequest release];         
     }
     return _fetchedResultsSortedByCreatedController;
 }
@@ -152,21 +146,6 @@
 	return YES;
 }
 
-- (void)dealloc
-{
-    [language release];
-    [historyData release];
-    [loadedData release];
-    [stageImages release];
-    [tableView release];
-    [sortingControl release];
-    [detailTable release];
-    [_fetchedResultsSortedByKeywordsController release];
-    [_fetchedResultsSortedByCreatedController release];
-    [_fetchedResultsSortedByStateController release];
-    [_progressHUD release];
-    [super dealloc];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:
 (UIInterfaceOrientation)toInterfaceOrientation {
@@ -242,7 +221,6 @@
 								   target:self 
 								   action:@selector(toggleEdit:)];
 	self.navigationItem.rightBarButtonItem = editButton;
-	[editButton release];
 
     NSString *stage1, *stage2, *stage3, *stage4;
     
@@ -253,7 +231,6 @@
     
     NSArray *array = [[NSArray alloc] initWithObjects:stage1, stage2, stage3, stage4, nil];
     self.stageImages = array;
-    [array release];
     
     self.fetchedResultsController = self.fetchedResultsSortedByKeywordsController;
 }
@@ -305,7 +282,6 @@
                     NSString *text = [[NSString alloc] initWithFormat:@"%4d หน้า: วิ.(%d) สุต.(%d) อภิ.(%d)",
                                       [history.contents count] ,n1, n2, n3];
                     history.detail = [Utils arabic2thai:text];                
-                    [text release];                                        
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.progressHUD.progress = 1.0 * count / self.fetchedResultsController.fetchedObjects.count;
@@ -354,8 +330,8 @@
     
     UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle 
-                                       reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle 
+                                       reuseIdentifier:CellIdentifier];
     }
     
     History *history = [self.fetchedResultsController.fetchedObjects objectAtIndex:row];
@@ -377,7 +353,6 @@
     [button setImage:buttonStar forState:UIControlStateNormal];
     [button addTarget:self action:@selector(starTapped:) forControlEvents:UIControlEventTouchUpInside];            
     cell.accessoryView = button;
-    [button release];
     
     cell.textLabel.font = [UIFont boldSystemFontOfSize:22];    
     cell.detailTextLabel.font = [UIFont systemFontOfSize:20];  

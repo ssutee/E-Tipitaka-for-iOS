@@ -54,10 +54,8 @@
     info.volume = [readViewController getCurrentVolume];
     [info setType:LANGUAGE|VOLUME];
 	alert.label.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่หน้าที่ ๑ ถึง %d", [QueryHelper getMaximumPageValue:info]]];
-    [info release];
     
     [alert show];
-    [alert autorelease];
     
 }
 
@@ -81,10 +79,8 @@
     info.volume = [readViewController getCurrentVolume];
     [info setType:LANGUAGE|VOLUME];
     alert.label.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่ข้อที่ ๑ ถึง %d", [QueryHelper getMaximumItemValue:info]]];
-    [info release];    
     
     [alert show];
-    [alert autorelease];
 }
 
 @end
@@ -117,7 +113,6 @@
                                   animated:YES];
         readViewController.itemOptionsActionSheet = actionSheet;
     }
-    [actionSheet release];    
 }
 
 @end

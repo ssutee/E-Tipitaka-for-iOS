@@ -37,12 +37,12 @@
 @end
 
 @interface GotoMoreItemsCommand : ReadViewControllerCommand {
-    NSNumber *itemNumber;
-    NSArray *items;
+    NSNumber *__weak itemNumber;
+    NSArray *__weak items;
 }
 
-@property (nonatomic, assign) NSNumber *itemNumber;
-@property (nonatomic, assign) NSArray *items;
+@property (nonatomic, weak) NSNumber *itemNumber;
+@property (nonatomic, weak) NSArray *items;
 
 - (void) execute;
 
