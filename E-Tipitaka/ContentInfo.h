@@ -18,20 +18,14 @@
 
 @interface ContentInfo : NSObject
 {
-    NSString *__weak language;
-    NSNumber *__weak volume;
-    NSNumber *__weak page;
-    NSNumber *__weak section;
-    NSNumber *__weak itemNumber;
-    BOOL begin;
     ContentInfoType *_type;
 }
 
-@property(weak) NSString *language;
-@property(weak) NSNumber *volume;
-@property(weak) NSNumber *page;
-@property(weak) NSNumber *section;
-@property(weak) NSNumber *itemNumber;
+@property(nonatomic, strong) NSString *language;
+@property(nonatomic, strong) NSNumber *volume;
+@property(nonatomic, strong) NSNumber *page;
+@property(nonatomic, strong) NSNumber *section;
+@property(nonatomic, strong) NSNumber *itemNumber;
 @property(assign) BOOL begin;
 
 -(NSPredicate *) predicate;

@@ -11,12 +11,12 @@
 
 @implementation ContentInfo
 
-@synthesize language;
-@synthesize page;
-@synthesize volume;
-@synthesize section;
-@synthesize itemNumber;
-@synthesize begin;
+@synthesize language = _language;
+@synthesize page = _page;
+@synthesize volume = _volume;
+@synthesize section = _section;
+@synthesize itemNumber = _itemNumber;
+@synthesize begin = _begin;
 
 -(NSUInteger) getType
 {

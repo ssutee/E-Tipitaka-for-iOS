@@ -1217,11 +1217,10 @@
                     info.volume = [self getCurrentVolume];
                     NSInteger maxItem = [QueryHelper getMaximumItemValue:info];
                     if([inputText intValue] <= maxItem) {
-                        self.savedItemNumber = [inputText intValue];                        
-                        info.itemNumber = [NSNumber numberWithInt:[inputText intValue]];
-                        [info setType:LANGUAGE|VOLUME|ITEM_NUMBER];
+                        [info setType:LANGUAGE|VOLUME|ITEM_NUMBER];                        
+                        self.savedItemNumber = [inputText intValue];
+                        info.itemNumber = [NSNumber numberWithInt:inputText.intValue];
                         NSArray *items = [QueryHelper getItems:info];
-                        
                         NSArray *array = [[NSArray alloc] initWithArray:items];
                         self.alterItems = array;
 
