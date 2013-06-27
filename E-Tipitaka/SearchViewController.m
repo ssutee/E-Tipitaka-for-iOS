@@ -87,7 +87,7 @@
 
 -(void) resetSearch {
 	
-	NSString *string = [[NSString alloc] initWithString:@""];
+	NSString *string = @"";
 	self.keywords = nil;
 	self.keywords = string;
 	
@@ -132,8 +132,7 @@
         self.readItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.selectedHistory.read];
     }
 
-	NSString *string = [[NSString alloc] initWithString:history.keywords];
-	self.keywords = string;
+	self.keywords = history.keywords;
     
     NSMutableArray *array1 = [[NSMutableArray alloc] init];
     NSMutableArray *array2 = [[NSMutableArray alloc] init];
@@ -237,8 +236,7 @@
 
     self.navigationItem.rightBarButtonItem.enabled = NO;
 	
-	NSString *string = [[NSString alloc] initWithString:searchTerm];
-	self.keywords = string;
+	self.keywords = searchTerm;
 	
 	NSArray *tokens = [searchTerm componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	[self.view.window addSubview:self.HUD];
@@ -275,7 +273,7 @@
 		for (int i=1; i<=45; i++) {
 			NSMutableArray *predicateArgs = [[NSMutableArray alloc] init];
 			NSPredicate *pred;
-			NSString *predicateFormat = [NSString stringWithString:@"(volume = %d"];
+			NSString *predicateFormat = @"(volume = %d";
 			[predicateArgs addObject:[NSNumber numberWithInt:i]];
 			
 			for(NSString *token in tokens) {
@@ -618,13 +616,13 @@
 	
 	NSMutableArray *index = [[NSMutableArray alloc] init];
 	for(NSString *category in self.categories) {
-		if (category == @"0") {
+		if ([category isEqualToString:@"0"]) {
 			[index addObject:UITableViewIndexSearch];
-		} else if (category == @"1") {
+		} else if ([category isEqualToString:@"1"]) {
 			[index addObject:@"วิ."];
-		} else if (category == @"2") {
+		} else if ([category isEqualToString:@"2"]) {
 			[index addObject:@"สุต."];
-		} else if (category == @"3") {
+		} else if ([category isEqualToString:@"3"]) {
 			[index addObject:@"อภิ."];
 		}
 	}
@@ -708,7 +706,7 @@
         NSMutableArray *tmp = [[NSMutableArray alloc] init];
         NSString *s;
 		if(row == 0) {
-            s = [NSString stringWithString:@"เล่มที่"];
+            s = @"เล่มที่";
             [tmp removeAllObjects];
             for (Content *content in [results valueForKey:@"1"]) {
                 if (![tmp containsObject:content.volume]) {
@@ -725,7 +723,7 @@
             
 			
 		} else if(row == 1) {
-            s = [NSString stringWithString:@"เล่มที่"];            
+            s = @"เล่มที่";
             [tmp removeAllObjects];
             for (Content *content in [results valueForKey:@"2"]) {
                 if (![tmp containsObject:content.volume]) {
@@ -740,7 +738,7 @@
                 cell.detailTextLabel.text = [Utils arabic2thai:s];            
             } 
 		} else if(row == 2) {
-            s = [NSString stringWithString:@"เล่มที่"];             
+            s = @"เล่มที่";
             [tmp removeAllObjects];
             for (Content *content in [results valueForKey:@"3"]) {
                 if (![tmp containsObject:content.volume]) {
@@ -754,8 +752,7 @@
             if ([tmp count] > 0) {
                 cell.detailTextLabel.text = [Utils arabic2thai:s];            
             }
-		} else if(row == 3) {
-            
+		} else if(row == 3) {            
             cell.textLabel.font = [UIFont systemFontOfSize:44];
             cell.textLabel.textAlignment = UITextAlignmentCenter;
             cell.textLabel.text = [NSString stringWithFormat:@"ไม่พบคำว่า \"%@\"", keywords];
@@ -770,16 +767,14 @@
         }
         tmp = nil;
 	}
-    
-    
-    
+        
 	return cell;			
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	NSString *category = [categories objectAtIndex:section];
 	int count = 0;
-	if (category == @"0") {
+	if ([category isEqualToString:@"0"]) {
 		if([results valueForKey:@"1"]) {
 			count += [[results valueForKey:@"1"] count];
 		}
@@ -791,25 +786,15 @@
 		}
 		NSString *label = [[NSString alloc] 
                            initWithFormat:@"ผลลัพธ์คำว่า \"%@\" พบทั้งหมด %d หน้า", self.keywords, count];
-		NSString *newLabel = [[NSString alloc] initWithString:[Utils arabic2thai:label]];
-		return newLabel;		
+		return [Utils arabic2thai:label];
 	}
-	if (category == @"1") {
-		//NSString *label = [[NSString alloc] initWithFormat:@"พระวินัยปิฎก (%d หน้า)", [[results valueForKey:category] count]];
-		//[label autorelease];
-		//return label;
+	if ([category isEqualToString:@"1"]) {
 		return @"พระวินัยปิฎก";
 	}
-	if (category == @"2") {
-		//NSString *label = [[NSString alloc] initWithFormat:@"พระสุตตันตปิฎก (%d หน้า)", [[results valueForKey:category] count]];
-		//[label autorelease];
-		//return label;
+	if ([category isEqualToString:@"2"]) {
 		return @"พระสุตตันตปิฎก";
 	}
-	if (category == @"3") {
-		//NSString *label = [[NSString alloc] initWithFormat:@"พระอภิธรรมปิฎก (%d หน้า)", [[results valueForKey:category] count]];
-		//[label autorelease];
-		//return label;
+	if ([category isEqualToString:@"3"]) {
 		return @"พระอภิธรรมปิฎก";
 	}
 	
@@ -948,8 +933,6 @@
 
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
 	self.search.text = @"";
-	//[self resetSearch];
-	//[table reloadData];
 	[searchBar resignFirstResponder];
 }
 

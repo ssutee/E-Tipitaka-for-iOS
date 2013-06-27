@@ -175,18 +175,11 @@
             NSLog(@"%f", progress);
         }];
         
-//        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://download.watnapahpong.org/data/etipitaka/ios/E_Tipitaka.sqlite.zip"]];
-//        request.allowResumeForFileDownloads = YES;
-//        request.allowCompressedResponse = YES;
-//        request.downloadDestinationPath = compressedDBPath;
-//        request.temporaryFileDownloadPath = [compressedDBPath stringByAppendingPathExtension:@"download"];
-//        request.showAccurateProgress = YES;
-//        request.downloadProgressDelegate = self;
-        
         self.HUD.mode = MBProgressHUDModeDeterminate;
         self.HUD.labelText = @"กำลังดาว์นโหลดฐานข้อมูล";
         self.HUD.progress = 0.0f;
         [self.HUD show:YES];
+        [operation start];        
     }
     
 }
@@ -508,7 +501,7 @@
         return;
     }
     
-	NSString *sourceLanguage = [[NSString alloc] initWithString:[self.dataDictionary valueForKey:@"Language"]];
+	NSString *sourceLanguage = [self.dataDictionary valueForKey:@"Language"];
 	NSNumber *volume = [[self.dataDictionary valueForKey:sourceLanguage] valueForKey:@"Volume"];
 	NSNumber *page = [[self.dataDictionary valueForKey:sourceLanguage] valueForKey:@"Page"];			
 	
@@ -575,8 +568,7 @@
                 controller.targetLanguage = targetLanguage;
                 
                 if (self.keywords) {
-                    NSString *str = [[NSString alloc] initWithString:self.keywords];
-                    controller.keywords = str;
+                    controller.keywords = self.keywords;
                 }
                 
                 controller.savedItemNumber = [comparedItem.number intValue];

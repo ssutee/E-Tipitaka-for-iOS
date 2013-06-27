@@ -142,14 +142,14 @@
 -(IBAction)toggleLanguage:(id)sender {
 	NSString *newLanguage;	
 	if([self.language isEqualToString:@"Thai"]) {
-		newLanguage = [[NSString alloc] initWithString:@"Pali"];
+		newLanguage = @"Pali";
 		self.language = newLanguage;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
             self.navigationItem.title = @"ภาษาบาลี";		
         }
 		[self.navigationItem.leftBarButtonItem setTitle:@"ไทย"];
 	} else {
-		newLanguage = [[NSString alloc] initWithString:@"Thai"];		
+		newLanguage = @"Thai";
 		self.language = newLanguage;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
             self.navigationItem.title = @"ภาษาไทย";		
@@ -298,7 +298,7 @@
 	
 	NSDictionary *plistDict = [Utils readData];
 	
-	NSString *text = [[NSString alloc] initWithString:[plistDict valueForKey:@"Language"]];
+	NSString *text = [plistDict valueForKey:@"Language"];
 	self.language = text;
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {

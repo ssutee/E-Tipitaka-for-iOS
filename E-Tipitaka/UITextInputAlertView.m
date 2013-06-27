@@ -34,13 +34,12 @@
         image.frame = CGRectMake(11,79,262,31);
         [self addSubview:image];
         
-        field = [UITextField alloc];
         UIViewController *controller = (UIViewController *)self.delegate;
         if (UIInterfaceOrientationIsPortrait(controller.interfaceOrientation)) {
-            [field initWithFrame:CGRectMake(16, 83, 252, 25)];
+            field = [[UITextField alloc] initWithFrame:CGRectMake(16, 83, 252, 25)];
         }
         else {
-            [field initWithFrame:CGRectMake(16, 68, 252, 25)];
+            field = [[UITextField alloc] initWithFrame:CGRectMake(16, 68, 252, 25)];
         }
         
         field.font = [UIFont systemFontOfSize:18];
