@@ -37,7 +37,7 @@
     BOOL _isDownloadingDatabase;
 }
 @property (nonatomic, strong) MBProgressHUD *HUD;
-@property (nonatomic, strong) SocializeActionBar *actionBar;
+@property (nonatomic, strong) SZActionBar *actionBar;
 
 @end
 
@@ -89,6 +89,13 @@
         _HUD.delegate = self;
     }
     return _HUD;
+}
+
+-(void)setActionBar:(SZActionBar *)actionBar
+{
+    if (![[_actionBar.entity name] isEqualToString:[actionBar.entity name]]) {
+        _actionBar = actionBar;
+    }
 }
 
 #pragma mark - MBProgressHUDDelegate methods
@@ -176,14 +183,13 @@
         }];
         
         self.HUD.mode = MBProgressHUDModeDeterminate;
-        self.HUD.labelText = @"กำลังดาว์นโหลดฐานข้อมูล";
+        self.HUD.labelText = @"กำลังดาวน์โหลดฐานข้อมูล";
         self.HUD.progress = 0.0f;
         [self.HUD show:YES];
         [operation start];        
     }
     
 }
-
 
 - (void)mergeChanges:(NSNotification *)notification
 {
@@ -341,28 +347,25 @@
     }
     
     // http://www.etipitaka.com/read?language=thai&number=1&volume=1
-        
-    if (!self.actionBar) {
-        [self.actionBar.view removeFromSuperview];
-        SocializeActionBar *actionBar = [SocializeActionBar actionBarWithKey:[NSString stringWithFormat:@"http://www.etipitaka.com/read?language=%@&number=%@&volume=%@", [[self getCurrentLanguage] lowercaseString], [self getCurrentPage], [self getCurrentVolume]] name:[Utils arabic2thai:entityName] presentModalInController:self];
-        NSLog(@"%@", actionBar.socialize.delegate);
-        self.actionBar = actionBar;
-        self.actionBar.noAutoLayout = YES;
-    } 
-        
+    
+    SocializeEntity *entity = [SocializeEntity entityWithKey:[NSString stringWithFormat:@"http://www.etipitaka.com/read?language=%@&number=%@&volume=%@", [[self getCurrentLanguage] lowercaseString], [self getCurrentPage], [self getCurrentVolume]] name:entityName];
+
+    [self.actionBar removeFromSuperview];
+    self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectZero entity:entity viewController:self];
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {        
-        self.actionBar.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-        self.actionBar.view.frame = CGRectMake(0, self.view.bounds.size.height-bottomToolbar.bounds.size.height-SOCIALIZE_ACTION_PANE_HEIGHT, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
+        self.actionBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+        self.actionBar.frame = CGRectMake(0, self.view.bounds.size.height-bottomToolbar.bounds.size.height-SOCIALIZE_ACTION_PANE_HEIGHT, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
     } else {
-        self.actionBar.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;        
-        self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
+        self.actionBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;        
+        self.actionBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
     }
 
     if (bottomToolbar && bottomToolbar.hidden) {
-        self.actionBar.view.hidden = YES;
+        self.actionBar.hidden = YES;
     }
     
-    [self.view addSubview:self.actionBar.view];
+    [self.view addSubview:self.actionBar];
     
     NSString *newTitle = [Utils createHeaderTitle:[self getCurrentVolume]];    
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -1091,7 +1094,7 @@
         transView.frame = CGRectMake(0, 0, transView.frame.size.width, transView.frame.size.height - tabBar.frame.size.height);
         self.contentView.frame = CGRectMake(0, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height + toolbar.frame.size.height);
     }
-    self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
+    self.actionBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
 }
 
 #pragma mark -
@@ -1151,7 +1154,7 @@
             transView.frame = CGRectMake(0, 0, transView.frame.size.width, transView.frame.size.height - tabBar.frame.size.height);
             self.contentView.frame = CGRectMake(0, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height + toolbar.frame.size.height);
             toolbar.hidden = YES;
-            self.actionBar.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
+            self.actionBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
             showToolbar = NO;
         }                
         [self updateLanguageButtonTitle];        
@@ -1165,9 +1168,9 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewDidAppear:animated];    
     
-    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kFacebookSharingKey] isEqualToString:@"No"] && ![self.actionBar.socialize isAuthenticatedWithFacebook] && !_isDownloadingDatabase) {
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kFacebookSharingKey] isEqualToString:@"No"] && ![SZFacebookUtils isLinked] && !_isDownloadingDatabase) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Facebook Login Request" message:@"คุณต้องใช้การแบ่งปันข้อมูลแบบออนไลน์ผ่าน Facebook หรือไม่?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         alertView.tag = kFacebookAlert;
         [alertView show];
@@ -1238,9 +1241,11 @@
                         } 
                     }
                 }
-            } 
+            }
         } else if(alertView.tag == kFacebookAlert) {
-            [self.actionBar.socialize authenticateWithApiKey:@"da599d2b-0d97-4ae0-992e-f413e589a53e" apiSecret:@"df7e464e-466e-47bb-b8f8-b06026f1543a" thirdPartyAppId:@"173041622753730" thirdPartyName:SocializeThirdPartyAuthTypeFacebook];
+            [Socialize storeConsumerKey:@"da599d2b-0d97-4ae0-992e-f413e589a53e"];
+            [Socialize storeConsumerSecret:@"df7e464e-466e-47bb-b8f8-b06026f1543a"];
+            [SZFacebookUtils setAppId:@"173041622753730"];
         }
 
     } else if (alertView.tag == kFacebookAlert) {
@@ -1306,10 +1311,10 @@
     } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         // toggle bottom bar and slider                
         if (bottomToolbar.hidden) {
-            self.actionBar.view.hidden = NO;
-            self.actionBar.view.frame = CGRectMake(0, self.view.bounds.size.height-88, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
+            self.actionBar.hidden = NO;
+            self.actionBar.frame = CGRectMake(0, self.view.bounds.size.height-88, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
         } else {
-            self.actionBar.view.hidden = YES;
+            self.actionBar.hidden = YES;
         }
         bottomToolbar.hidden = !bottomToolbar.hidden;        
         _pageSlider.hidden = !_pageSlider.hidden;        
