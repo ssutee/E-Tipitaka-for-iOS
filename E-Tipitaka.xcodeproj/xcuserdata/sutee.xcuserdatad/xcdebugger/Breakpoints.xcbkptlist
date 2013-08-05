@@ -2,37 +2,9 @@
 <Bucket
    type = "1"
    version = "1.0">
-   <FileBreakpoints>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "E-Tipitaka/BaseReadViewController.m"
-         timestampString = "390459167.348121"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
-         landmarkName = "@implementation BaseReadViewController"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "E-Tipitaka/CoreDataTableViewController.m"
-         timestampString = "378127056.97495"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "143"
-         endingLineNumber = "143"
-         landmarkName = "-controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-   </FileBreakpoints>
    <SymbolicBreakpoints>
       <SymbolicBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          symbolName = "malloc_error_break"
