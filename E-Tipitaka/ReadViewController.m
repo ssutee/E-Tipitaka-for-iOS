@@ -1082,21 +1082,6 @@
     self.dataToolsActionSheet = actionSheet;
 }
 
-- (void)updatePhoneScreenSize {
-    UIView *transView = [self.tabBarController.view.subviews objectAtIndex:0];
-    UIView *tabBar = [self.tabBarController.view.subviews objectAtIndex:1];
-    if (showToolbar) {
-        tabBar.hidden = TRUE;
-        transView.frame = CGRectMake(0, 0, transView.frame.size.width, transView.frame.size.height + tabBar.frame.size.height);
-        self.contentView.frame = CGRectMake(0, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height - toolbar.frame.size.height);
-    } else {
-        tabBar.hidden = FALSE;
-        transView.frame = CGRectMake(0, 0, transView.frame.size.width, transView.frame.size.height - tabBar.frame.size.height);
-        self.contentView.frame = CGRectMake(0, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height + toolbar.frame.size.height);
-    }
-    self.actionBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, SOCIALIZE_ACTION_PANE_HEIGHT);
-}
-
 #pragma mark -
 #pragma mark Memory management
 
@@ -1148,7 +1133,8 @@
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         
         UIView *transView = [self.tabBarController.view.subviews objectAtIndex:0];
-        UIView *tabBar = [self.tabBarController.view.subviews objectAtIndex:1];
+        NSLog(@"%@", self.tabBarController.tabBar);
+        UIView *tabBar = self.tabBarController.tabBar;
         if (tabBar.hidden) {
             tabBar.hidden = FALSE;
             transView.frame = CGRectMake(0, 0, transView.frame.size.width, transView.frame.size.height - tabBar.frame.size.height);
@@ -1337,7 +1323,6 @@
         self.contentView.frame = newRect;
     } else {
         showToolbar = !showToolbar;
-        [self updatePhoneScreenSize];
         toolbar.hidden = !showToolbar;
     }
 }
