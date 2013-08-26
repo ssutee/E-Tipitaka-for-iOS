@@ -210,7 +210,7 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     
-    self.searchBar.showsCancelButton = YES;
+    self.searchBar.showsCancelButton = NO;
     
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
 
@@ -425,18 +425,34 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
     NSString *searchTerm = [aSearchBar text];
     [self handleSearchForTerm:searchTerm];
-    [searchBar resignFirstResponder];
+    [aSearchBar resignFirstResponder];
 }
 
 - (void)searchBar:(UISearchBar *)aSearchBar textDidChange:(NSString *)searchTerm {
     [self handleSearchForTerm:searchTerm];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+- (void)searchBarCancelButtonClicked:(UISearchBar *)aSearchBar
 {
-    [self.searchBar resignFirstResponder];
-    self.searchBar.text = @"";
+    [aSearchBar resignFirstResponder];
+    aSearchBar.text = @"";
     [self handleSearchForTerm:@""];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)aSearchBar {
+
+	//[self.navigationController setNavigationBarHidden:YES animated:YES];
+	[aSearchBar setShowsCancelButton:YES animated:YES];
+    
+    for(UIView *subView in aSearchBar.subviews){
+        if([subView isKindOfClass:[UIButton class]]){
+            [(UIButton*)subView setTitle:@"ยกเลิก" forState:UIControlStateNormal];
+        }
+    }
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)aSearchBar {
+	[aSearchBar setShowsCancelButton:NO animated:YES];
 }
 
 @end
