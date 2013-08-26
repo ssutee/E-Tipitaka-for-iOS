@@ -32,7 +32,7 @@
 #import "CommentViewController.h"
 #import "ExportTool.h"
 
-@interface ReadViewController()<SocializeServiceDelegate, ImportListViewControllerDelegate>
+@interface ReadViewController()<SocializeServiceDelegate, ImportListViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     BOOL _isDownloadingDatabase;
 }
@@ -395,7 +395,7 @@
 	
 	actionSheet.title = titleName;
 	actionSheet.delegate = self;
-	actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+	actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	actionSheet.tag = tagNumber;
 
 	for (Item *item in items) {
@@ -981,6 +981,11 @@
     }
 }
 
+- (void)tap:(UITapGestureRecognizer *)recognizer
+{
+    NSLog(@"%@", recognizer);
+}
+
 -(IBAction)dataTools:(id)sender {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self.dataToolsActionSheet showFromToolbar:toolbar];
@@ -1006,8 +1011,12 @@
     [self prepareDatabaseByDownloadingFromInternet];
     
     mWindow = (TapDetectingWindow *)[[UIApplication sharedApplication].windows objectAtIndex:0];
+    
     mWindow.viewToObserve = self.contentView;
-    mWindow.controllerThatObserves = self;	            
+    mWindow.controllerThatObserves = self;
+    
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 
@@ -1051,7 +1060,7 @@
 	actionSheet = [[UIActionSheet alloc] init];
 	actionSheet.title = @"โปรดเลือกคำสั่งที่ต้องการ";
 	actionSheet.delegate = self;
-	actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+	actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	actionSheet.tag = kLanguageActionSheet;
 	[actionSheet addButtonWithTitle:@"สลับภาษา"];
 	[actionSheet addButtonWithTitle:@"เทียบเคียง"];
@@ -1063,7 +1072,7 @@
 	actionSheet = [[UIActionSheet alloc] init];	
 	actionSheet.title = @"โปรดเลือกคำสั่งที่ต้องการ";
 	actionSheet.delegate = self;
-	actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+	actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	actionSheet.tag = kGotoActionSheet;
 	[actionSheet addButtonWithTitle:@"อ่านหน้าที่"];
 	[actionSheet addButtonWithTitle:@"อ่านข้อที่"];
@@ -1075,7 +1084,7 @@
     actionSheet = [[UIActionSheet alloc] init];
     actionSheet.title = @"โปรดเลือกคำสั่งที่ต้องการ";
     actionSheet.delegate = self;
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     actionSheet.tag = kDataToolsActionSheet;
     [actionSheet addButtonWithTitle:@"นำข้อมูลเข้า"];
     [actionSheet addButtonWithTitle:@"นำข้อมูลออก"];

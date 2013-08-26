@@ -242,7 +242,10 @@
 
 
 - (void)viewDidLoad
-{    
+{
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    
     E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     for (Bookmark *bookmark in [Bookmark bookmarksWithoutOrderInManagedObjectContext:appDelegate.managedObjectContext]) {
         bookmark.order = [NSNumber numberWithDouble:[bookmark.created timeIntervalSince1970]];
@@ -370,7 +373,7 @@
     NSUInteger row = indexPath.row;
 	NSUInteger section = indexPath.section;
 	
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Bookmark Cell";
     
     UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {

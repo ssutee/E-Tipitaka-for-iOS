@@ -99,7 +99,7 @@
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
 	actionSheet.title = titleName;
 	actionSheet.delegate = self;
-	actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+	actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	actionSheet.tag = tagNumber;
     
 	for (Item *item in items) {

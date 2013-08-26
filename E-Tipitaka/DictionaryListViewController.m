@@ -206,6 +206,10 @@
 {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"พจนานุกรม บาลี-ไทย";
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    
     self.searchBar.showsCancelButton = YES;
     
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
@@ -304,12 +308,12 @@
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row = [indexPath row];
     
-    static NSString *sectionsTableIdentifier = @"sectionsTableIdentifier";
-    UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier: sectionsTableIdentifier];
+    static NSString *DictionaryCellIdentifier = @"Dictionary Cell";
+    UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier: DictionaryCellIdentifier];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                 reuseIdentifier: sectionsTableIdentifier];
+                 reuseIdentifier: DictionaryCellIdentifier];
     }
 
     cell.textLabel.backgroundColor = [UIColor clearColor];

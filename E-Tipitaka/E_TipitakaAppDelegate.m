@@ -7,6 +7,7 @@
 //
 
 #import "E_TipitakaAppDelegate.h"
+#import "TapDetectingWindow.h"
 #import "ContentViewController.h"
 #import <Socialize/Socialize.h>
 #import <CoreData/CoreData.h>
@@ -21,6 +22,15 @@
 @synthesize managedObjectModel=__managedObjectModel;
 
 @synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
+
+- (TapDetectingWindow *)window
+{
+    static TapDetectingWindow *customWindow = nil;
+    if (!customWindow) {
+        customWindow = [[TapDetectingWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    }
+    return customWindow;
+}
 
 // Creates a writable copy of the bundled default database in the application Documents directory.
 - (void)createEditableCopyOfDatabaseIfNeeded {

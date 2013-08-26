@@ -18,9 +18,9 @@
 {
     // Override point for customization after application launch.
     [application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-    [self.window setRootViewController:rootController];
-    [self.window addSubview:rootController.view]; 
-    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+//    [self.window setRootViewController:rootController];
+//    [self.window addSubview:rootController.view];
+    return YES;
 }
 
 @end

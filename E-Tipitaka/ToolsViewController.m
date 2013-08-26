@@ -20,6 +20,7 @@
 @implementation ToolsViewController
 
 @synthesize HUD = _HUD;
+@synthesize tableView = _tableView;
 
 - (MBProgressHUD *)HUD
 {
@@ -38,7 +39,9 @@
     [super viewDidLoad];
 
     self.title = @"เครื่องมือ";
-    
+    self.navigationItem.title = self.title;
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
 }
 
 - (void)didReceiveMemoryWarning

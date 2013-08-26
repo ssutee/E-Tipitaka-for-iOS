@@ -429,6 +429,9 @@
 //    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 4.0f);
 //    progressBar.transform = transform;
     
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    
     self.contentSizeForViewInPopover = CGSizeMake(660.0, 600.0);
     
     NSMutableArray *array1 = [[NSMutableArray alloc] init];
@@ -675,20 +678,8 @@
 	NSString *category = [categories objectAtIndex:section];
 	NSArray *resultSection = [results objectForKey:category];
 	
-	static NSString *SectionsTableIdentifier = @"SectionsTableIdentifier";
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SectionsTableIdentifier];
-	
-	if(cell == nil) {
-        if (section == 0 && (row == 3 || row == 4)) {
-            cell = [[UITableViewCell alloc]
-                     initWithStyle:UITableViewCellStyleDefault
-                     reuseIdentifier:SectionsTableIdentifier];
-        } else {
-            cell = [[UITableViewCell alloc]
-                     initWithStyle:UITableViewCellStyleSubtitle 
-                     reuseIdentifier:SectionsTableIdentifier];
-        }
-	}
+   	static NSString *ResultCellIdentifier = @"Result Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ResultCellIdentifier];
     
     cell.textLabel.font = [UIFont boldSystemFontOfSize:22];
     cell.textLabel.textAlignment = UITextAlignmentLeft;

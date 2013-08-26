@@ -97,7 +97,7 @@
     actionSheet.title = [Utils arabic2thai: 
                          [NSString stringWithFormat:@"ข้อที่ %@ พบมากกว่าหนึ่งหน้า", itemNumber]];
     actionSheet.delegate = readViewController;
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     for (Item *item in items) {
         [actionSheet addButtonWithTitle:
          [Utils arabic2thai:[NSString stringWithFormat:@"หน้าที่ %@", item.content.page]]];
