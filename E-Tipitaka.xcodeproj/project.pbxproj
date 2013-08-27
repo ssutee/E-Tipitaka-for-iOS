@@ -97,7 +97,6 @@
 		9E669716134B15CB00B9E0F4 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */; };
 		9E669745134C584300B9E0F4 /* TapDetectingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E669744134C584300B9E0F4 /* TapDetectingWindow.m */; };
 		9E66974D134C5AFD00B9E0F4 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66974C134C5AFD00B9E0F4 /* MainWindow_iPhone.xib */; };
-		9E669754134C5C7B00B9E0F4 /* ReadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66974E134C5C7800B9E0F4 /* ReadViewController.xib */; };
 		9E669755134C5C7B00B9E0F4 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E66974F134C5C7800B9E0F4 /* SearchViewController.xib */; };
 		9E669756134C5C7B00B9E0F4 /* BookListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669750134C5C7900B9E0F4 /* BookListTableViewController.xib */; };
 		9E669757134C5C7B00B9E0F4 /* BookmarkAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E669751134C5C7900B9E0F4 /* BookmarkAddViewController.xib */; };
@@ -121,7 +120,6 @@
 		9E669785134C9F7A00B9E0F4 /* 06-magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669782134C9F6D00B9E0F4 /* 06-magnify.png */; };
 		9E669786134C9F7A00B9E0F4 /* 28-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669783134C9F6F00B9E0F4 /* 28-star.png */; };
 		9E669787134C9F7A00B9E0F4 /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E669784134C9F7300B9E0F4 /* 179-notepad.png */; };
-		9E6697CB134CBF1A00B9E0F4 /* ReadView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697CA134CBF1900B9E0F4 /* ReadView_iPad.xib */; };
 		9E6697E3134ECC2400B9E0F4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DC134ECC2400B9E0F4 /* Icon.png */; };
 		9E6697E4134ECC2400B9E0F4 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DD134ECC2400B9E0F4 /* Icon-72.png */; };
 		9E6697E5134ECC2400B9E0F4 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */; };
@@ -728,7 +726,6 @@
 		9E669743134C584300B9E0F4 /* TapDetectingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectingWindow.h; sourceTree = "<group>"; };
 		9E669744134C584300B9E0F4 /* TapDetectingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectingWindow.m; sourceTree = "<group>"; };
 		9E66974C134C5AFD00B9E0F4 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
-		9E66974E134C5C7800B9E0F4 /* ReadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadViewController.xib; sourceTree = "<group>"; };
 		9E66974F134C5C7800B9E0F4 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		9E669750134C5C7900B9E0F4 /* BookListTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookListTableViewController.xib; sourceTree = "<group>"; };
 		9E669751134C5C7900B9E0F4 /* BookmarkAddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkAddViewController.xib; sourceTree = "<group>"; };
@@ -760,7 +757,6 @@
 		9E669782134C9F6D00B9E0F4 /* 06-magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify.png"; sourceTree = "<group>"; };
 		9E669783134C9F6F00B9E0F4 /* 28-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star.png"; sourceTree = "<group>"; };
 		9E669784134C9F7300B9E0F4 /* 179-notepad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad.png"; sourceTree = "<group>"; };
-		9E6697CA134CBF1900B9E0F4 /* ReadView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadView_iPad.xib; sourceTree = "<group>"; };
 		9E6697DC134ECC2400B9E0F4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		9E6697DD134ECC2400B9E0F4 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -1398,7 +1394,6 @@
 				9E66970B134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPhone.m */,
 				9E1F6BB2154A3B2F00F1CCD7 /* SampleEntityLoader.xib */,
 				9E66974C134C5AFD00B9E0F4 /* MainWindow_iPhone.xib */,
-				9E66974E134C5C7800B9E0F4 /* ReadViewController.xib */,
 				9E66974F134C5C7800B9E0F4 /* SearchViewController.xib */,
 				9E669750134C5C7900B9E0F4 /* BookListTableViewController.xib */,
 				9E669751134C5C7900B9E0F4 /* BookmarkAddViewController.xib */,
@@ -1419,7 +1414,6 @@
 				9E669711134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.h */,
 				9E669712134B15CB00B9E0F4 /* E_TipitakaAppDelegate_iPad.m */,
 				9E669714134B15CB00B9E0F4 /* MainWindow_iPad.xib */,
-				9E6697CA134CBF1900B9E0F4 /* ReadView_iPad.xib */,
 				9E326FA6138C03B300ED66AE /* DoubleReadView_iPad.xib */,
 				9E326FE6138E3EE900ED66AE /* DoubleReadViewController.h */,
 				9E326FE7138E3EE900ED66AE /* DoubleReadViewController.m */,
@@ -1988,7 +1982,6 @@
 				9E6696FF134B15CA00B9E0F4 /* InfoPlist.strings in Resources */,
 				9E669716134B15CB00B9E0F4 /* MainWindow_iPad.xib in Resources */,
 				9E66974D134C5AFD00B9E0F4 /* MainWindow_iPhone.xib in Resources */,
-				9E669754134C5C7B00B9E0F4 /* ReadViewController.xib in Resources */,
 				9E669755134C5C7B00B9E0F4 /* SearchViewController.xib in Resources */,
 				9E669756134C5C7B00B9E0F4 /* BookListTableViewController.xib in Resources */,
 				9E669757134C5C7B00B9E0F4 /* BookmarkAddViewController.xib in Resources */,
@@ -2004,7 +1997,6 @@
 				9E669785134C9F7A00B9E0F4 /* 06-magnify.png in Resources */,
 				9E669786134C9F7A00B9E0F4 /* 28-star.png in Resources */,
 				9E669787134C9F7A00B9E0F4 /* 179-notepad.png in Resources */,
-				9E6697CB134CBF1A00B9E0F4 /* ReadView_iPad.xib in Resources */,
 				9E6697E3134ECC2400B9E0F4 /* Icon.png in Resources */,
 				9E6697E4134ECC2400B9E0F4 /* Icon-72.png in Resources */,
 				9E6697E5134ECC2400B9E0F4 /* Icon-Small.png in Resources */,
