@@ -219,6 +219,12 @@
                                             <action selector="gotoButtonClicked:" destination="rx9-wt-Thn" id="MXd-Hs-QOj"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="A5z-sg-TMR"/>
+                                    <barButtonItem image="icon-font3.png" style="plain" id="6lj-k5-Bw1">
+                                        <connections>
+                                            <action selector="fontColor:" destination="rx9-wt-Thn" id="kTu-4w-hao"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="QpC-4v-9b9"/>
                                     <barButtonItem image="icon_refresh.png" style="plain" id="qCn-0u-fpF">
                                         <connections>
@@ -240,6 +246,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="contentView" destination="eM1-lH-AMP" id="wTN-7b-0aJ"/>
+                        <outlet property="fontColorButton" destination="6lj-k5-Bw1" id="PRm-vY-dmm"/>
                         <outlet property="scrollView" destination="Jra-D8-4Uz" id="xhO-4q-RyH"/>
                         <outlet property="titleLabel" destination="c15-KR-rfM" id="pyl-0J-usD"/>
                         <outlet property="toastText" destination="n6M-2b-JBa" id="DHZ-H9-Nap"/>
@@ -457,6 +464,7 @@
         <image name="06-magnify.png" width="24" height="24"/>
         <image name="179-notepad.png" width="22" height="28"/>
         <image name="28-star.png" width="26" height="26"/>
+        <image name="icon-font3.png" width="32" height="22"/>
         <image name="icon_document.png" width="30" height="30"/>
         <image name="icon_refresh.png" width="30" height="30"/>
         <image name="icon_save.png" width="30" height="30"/>

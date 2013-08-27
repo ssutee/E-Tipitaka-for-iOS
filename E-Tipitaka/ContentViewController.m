@@ -29,6 +29,7 @@
 @synthesize indictor=_indictor;
 @synthesize webView=_webView;
 @synthesize entity = _entity;
+@synthesize fontColorIndex = _fontColorIndex;
 
 - (id)initWithEntity:(id<SocializeEntity>)entity
 {
@@ -60,7 +61,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];        
-        
+    
     [self.view bringSubviewToFront:self.indictor];
     for (id subview in self.webView.subviews)
         if ([[subview class] isSubclassOfClass: [UIScrollView class]])
@@ -182,7 +183,7 @@
     NSString *template = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page" ofType:@"html"] 
                                                    encoding:NSUTF8StringEncoding error:nil];
     NSString *html = [[NSString alloc] 
-                      initWithFormat:template, fontSize, text];
+                      initWithFormat:template, fontSize, [self fontColor], [self backgroudColor], text];
     return html;
 }
 
@@ -215,8 +216,59 @@
          [NSString stringWithFormat:@"window.scrollTo(0,%d);", scrollPosition]];        
 	}
     [aWebView scalesPageToFit];
+    
+    NSString *varMySheet = @"var mySheet = document.styleSheets[0];";
+	NSString *addCSSRule =  @"function addCSSRule(selector, newRule) {"
+	"if (mySheet.addRule) {"
+    "mySheet.addRule(selector, newRule);"								// For Internet Explorer
+	"} else {"
+    "ruleIndex = mySheet.cssRules.length;"
+    "mySheet.insertRule(selector + '{' + newRule + ';}', ruleIndex);"   // For Firefox, Chrome, etc.
+    "}"
+	"}";
+
+    [aWebView stringByEvaluatingJavaScriptFromString:varMySheet];
+    [aWebView stringByEvaluatingJavaScriptFromString:addCSSRule];
+    
+    NSString *setThemeColorRule = [NSString stringWithFormat:@"addCSSRule('body', 'background-color: %@; color: %@;')", [self backgroudColor], [self fontColor]];
+    [aWebView stringByEvaluatingJavaScriptFromString:setThemeColorRule];
+    
     [self.indictor stopAnimating];
     self.indictor.hidden = YES;    
+}
+
+- (NSString *)backgroudColor
+{
+     NSString *backgroundColor = @"#FFFFFF";
+    switch (self.fontColorIndex) {
+        case 0:
+             backgroundColor = @"FEFEFE";
+            break;
+        case 1:
+             backgroundColor = @"010101";
+            break;
+        case 2:
+             backgroundColor = @"F9EFD8";
+            break;
+    }
+    return backgroundColor;
+}
+
+- (NSString *)fontColor
+{
+    NSString *fontColor = @"#000000";
+     switch (self.fontColorIndex) {
+        case 0:
+            fontColor = @"010101";
+             break;
+        case 1:
+            fontColor = @"FEFEFE";
+             break;
+        case 2:
+            fontColor = @"5E4933";
+             break;
+    }
+    return fontColor;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView

@@ -10,6 +10,14 @@
 
 @implementation SpecificedLanguageReadViewController
 
+@synthesize toolbar = _toolbar;
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.toolbar.translucent = NO;
+    self.toolbar.barStyle = UIBarStyleBlackOpaque;
+}
 
 -(NSString *) getCurrentLanguage
 {

@@ -170,8 +170,8 @@
             controller.scrollToItemNumber = NO;
             controller.highlightText = self.keywords;  
             controller.scrollPosition = 0;
+            controller.fontColorIndex = [[[NSUserDefaults standardUserDefaults] valueForKey:@"FontColorIndex"] integerValue];
             [controller update];      
-
         }
     }
 }
@@ -203,7 +203,8 @@
             self.contentViewController.scrollToHighlightText = YES;
         } else {                
             self.contentViewController.scrollPosition = [[self.scrollPostion valueForKey:[self getCurrentLanguage]] intValue];                
-        }        
+        }
+        self.contentViewController.fontColorIndex = [[[NSUserDefaults standardUserDefaults] valueForKey:@"FontColorIndex"] integerValue];
         [self.contentViewController update];
 	}    
     [self updatePageTitle:[self getCurrentLanguage]  volume:[self getCurrentVolume] page:[self getCurrentPage]];

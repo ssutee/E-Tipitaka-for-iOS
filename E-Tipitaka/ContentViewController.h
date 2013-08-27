@@ -22,12 +22,13 @@
 
 @property (nonatomic, strong) Content *content;
 @property (nonatomic, strong) NSString *highlightText;
-@property (assign) NSUInteger itemNumber;
-@property (assign) NSUInteger fontSize;
-@property (assign) NSUInteger scrollPosition;
-@property (assign) BOOL scrollToItemNumber;
-@property (assign) BOOL scrollToHighlightText;
+@property (nonatomic, assign) NSUInteger itemNumber;
+@property (nonatomic, assign) NSUInteger fontSize;
+@property (nonatomic, assign) NSUInteger scrollPosition;
+@property (nonatomic, assign) BOOL scrollToItemNumber;
+@property (nonatomic, assign) BOOL scrollToHighlightText;
 @property (nonatomic, strong) id<SocializeEntity> entity;
+@property (nonatomic, assign) NSInteger fontColorIndex;
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *indictor;
 @property (nonatomic, strong) IBOutlet UIWebView *webView;

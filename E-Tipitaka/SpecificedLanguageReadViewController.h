@@ -13,6 +13,8 @@
     NSString *_language;
 }
 
+@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
+
 -(NSString *) getCurrentLanguage;
 -(void) setCurrentLanguage:(NSString *)language;
 

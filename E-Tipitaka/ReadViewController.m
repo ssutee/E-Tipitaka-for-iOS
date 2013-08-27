@@ -38,6 +38,7 @@
 }
 @property (nonatomic, strong) MBProgressHUD *HUD;
 @property (nonatomic, strong) SZActionBar *actionBar;
+@property (nonatomic, strong) UIActionSheet *fontColorActionSheet;
 
 @end
 
@@ -69,6 +70,7 @@
 @synthesize bottomToolbar;
 @synthesize HUD = _HUD;
 @synthesize actionBar = _actionBar;
+@synthesize fontColorActionSheet = _fontColorActionSheet;
 
 #pragma mark - Getter/Setter Methods
 
@@ -681,6 +683,11 @@
         [self.languageActionSheet 
          dismissWithClickedButtonIndex:[self.languageActionSheet cancelButtonIndex] animated:YES];
     }
+    if (self.fontColorActionSheet != nil && [self.fontColorActionSheet isVisible]) {
+        [self.fontColorActionSheet
+         dismissWithClickedButtonIndex:[self.fontColorActionSheet cancelButtonIndex] animated:YES];
+    }
+
     if (gotoActionSheet != nil && [gotoActionSheet isVisible]) {
         [gotoActionSheet
          dismissWithClickedButtonIndex:[gotoActionSheet cancelButtonIndex] animated:YES];
@@ -1000,6 +1007,32 @@
     }
 }
 
+-(IBAction)fontColor:(id)sender
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self.fontColorActionSheet showFromToolbar:toolbar];
+    }
+    else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        if ([self.fontColorActionSheet isVisible]) {
+            [self.fontColorActionSheet dismissWithClickedButtonIndex:[self.fontColorActionSheet cancelButtonIndex]
+                                                           animated:YES];
+        } else {
+            [self dismissAllPopoverControllers];
+            [self.fontColorActionSheet showFromBarButtonItem:self.fontColorButton animated:YES];
+        }
+    }
+
+}
+
+- (void)changeFontColor:(NSInteger)index
+{
+    NSUserDefaults *userDefaults =  [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:[NSNumber numberWithInteger:index] forKey:@"FontColorIndex"];
+    [userDefaults synchronize];
+    [self updateReadingPage];
+}
+
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -1017,6 +1050,12 @@
     
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+
+    self.toolbar.translucent = NO;
+    self.toolbar.barStyle = UIBarStyleBlackOpaque;
+    
+    self.bottomToolbar.translucent = NO;
+    self.bottomToolbar.barStyle = UIBarStyleBlackOpaque;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 
@@ -1089,6 +1128,20 @@
     [actionSheet addButtonWithTitle:@"นำข้อมูลเข้า"];
     [actionSheet addButtonWithTitle:@"นำข้อมูลออก"];
     self.dataToolsActionSheet = actionSheet;
+    
+    // create action sheet for font color
+	actionSheet = [[UIActionSheet alloc] init];
+	actionSheet.title = @"โปรดเลือกสีอักษรที่ต้องการ";
+	actionSheet.delegate = self;
+	actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+	actionSheet.tag = kFontColorActionSheet;
+	[actionSheet addButtonWithTitle:@"ดำ"];
+	[actionSheet addButtonWithTitle:@"ขาว"];
+	[actionSheet addButtonWithTitle:@"น้ำตาล"];
+	[actionSheet addButtonWithTitle:@"ยกเลิก"];
+	[actionSheet setCancelButtonIndex:3];
+    self.fontColorActionSheet = actionSheet;
+    
 }
 
 #pragma mark -
@@ -1122,6 +1175,7 @@
     self.titleButton = nil;
     self.dictionaryButton = nil;
     self.languageActionSheet = nil;
+    self.fontColorActionSheet = nil;
     self.gotoActionSheet = nil;
     self.itemOptionsActionSheet = nil;
     self.dataToolsActionSheet = nil;
@@ -1283,6 +1337,8 @@
         } else if (buttonIndex == 1) {
             [self exportData];
         }
+    } else if (actionSheet.tag == kFontColorActionSheet) {
+        [self changeFontColor:buttonIndex];
     }
 }
 

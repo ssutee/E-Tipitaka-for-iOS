@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4504" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="JUb-EA-54Q">
+    <dependencies>
+        <deployment defaultVersion="1280" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3734.1"/>
+    </dependencies>
+    <scenes>
+        <!--Read View Controller-->
+        <scene sceneID="cD6-Km-5aS">
+            <objects>
+                <viewController id="i0d-HE-z7C" customClass="ReadViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RTa-WN-Qku">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="g4M-pM-mfB">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem title="เลือก" width="44" id="Nth-7g-oI4">
+                                        <connections>
+                                            <action selector="showBooklistTableView:" destination="i0d-HE-z7C" id="dST-Rp-sm5"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="3zi-X6-dmc"/>
+                                    <barButtonItem tag="3" style="plain" systemItem="action" id="g5s-XQ-Y5o" userLabel="Bar Button Item - Action">
+                                        <connections>
+                                            <action selector="gotoButtonClicked:" destination="i0d-HE-z7C" id="EIu-Gv-dgi"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kKo-9J-ahn"/>
+                                    <barButtonItem tag="5" title="พระไตรปิฎก" width="172" style="plain" id="yeV-5M-gEh"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GTd-GU-yau"/>
+                                    <barButtonItem tag="6" image="icon_zoom_out.png" style="plain" id="23F-EZ-TvP">
+                                        <connections>
+                                            <action selector="decreaseFontSize:" destination="i0d-HE-z7C" id="h5y-uB-pWQ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="dJ5-1k-21C"/>
+                                    <barButtonItem tag="7" image="icon_zoom_in.png" style="plain" id="pXl-3f-Rao">
+                                        <connections>
+                                            <action selector="increaseFontSize:" destination="i0d-HE-z7C" id="oWM-k8-UzF"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="E3G-M4-4gC"/>
+                                </items>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </toolbar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="20" id="Dzz-VE-eRg">
+                                <rect key="frame" x="0.0" y="44" width="1024" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.67843137249999996" green="0.72156862749999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="VFS-I9-d8O">
+                                <rect key="frame" x="0.0" y="149" width="1024" height="531"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="asy-Ns-120">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="531"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" text="ข้อมูลถูกบันทึกแล้ว" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="Eyy-Bp-Sqo">
+                                <rect key="frame" x="437" y="372" width="150" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="1" maxValue="100" id="idR-KX-Iag">
+                                <rect key="frame" x="18" y="115" width="988" height="29"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.67843137249999996" green="0.72156862749999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="i0d-HE-z7C" eventType="valueChanged" id="Elj-dZ-z7y"/>
+                                    <action selector="startUpdatingPage:" destination="i0d-HE-z7C" eventType="touchUpInside" id="buX-Rx-5WM"/>
+                                    <action selector="startUpdatingPage:" destination="i0d-HE-z7C" eventType="touchUpOutside" id="zGI-cB-60W"/>
+                                </connections>
+                            </slider>
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="RsU-1H-MBO">
+                                <rect key="frame" x="410" y="82" width="201" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="XVw-A9-Yws">
+                                <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="nvt-jE-DOp"/>
+                                    <barButtonItem tag="1" image="icon_arrow_left.png" style="plain" id="wYI-lV-s28">
+                                        <connections>
+                                            <action selector="backButtonClicked:" destination="i0d-HE-z7C" id="Jk9-F1-GM8"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="WwM-dp-RFH"/>
+                                    <barButtonItem tag="2" image="icon_arrow_right.png" style="plain" id="AaT-oU-7VH">
+                                        <connections>
+                                            <action selector="nextButtonClicked:" destination="i0d-HE-z7C" id="fCD-gy-6OT"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="OqP-BW-ZgM"/>
+                                    <barButtonItem tag="4" image="icon_refresh.png" style="plain" id="mOn-68-jYa">
+                                        <connections>
+                                            <action selector="languageButtonClicked:" destination="i0d-HE-z7C" id="Afk-Xw-N6F"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="bpM-94-kc9"/>
+                                    <barButtonItem image="icon-font3.png" style="plain" id="VXL-i1-gmc">
+                                        <connections>
+                                            <action selector="fontColor:" destination="i0d-HE-z7C" id="o9o-VP-HFC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="4jx-tL-DNb"/>
+                                    <barButtonItem title="พจนานุกรม บาลี-ไทย" id="n9m-dJ-npC">
+                                        <connections>
+                                            <action selector="showDictionary:" destination="i0d-HE-z7C" id="Bwk-gb-hq7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QtP-8V-oCM"/>
+                                    <barButtonItem style="plain" systemItem="organize" id="8td-cd-dEE">
+                                        <connections>
+                                            <action selector="dataTools:" destination="i0d-HE-z7C" id="vTE-LJ-3hd"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="Chh-QM-Gqg"/>
+                                    <barButtonItem tag="8" image="icon_save.png" style="plain" id="u4D-c0-Dbo">
+                                        <connections>
+                                            <action selector="noteButtonClicked:" destination="i0d-HE-z7C" id="gLz-W6-kwd"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="Ehg-bW-fB2"/>
+                                    <barButtonItem tag="9" image="28-star.png" style="plain" id="4dJ-gi-qOh">
+                                        <connections>
+                                            <action selector="showBookmarkListView:" destination="i0d-HE-z7C" id="P0T-zz-VtQ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="ejO-YC-YpR"/>
+                                    <barButtonItem tag="8" style="plain" systemItem="search" id="RBz-QY-Vwo">
+                                        <connections>
+                                            <action selector="showSearchView:" destination="i0d-HE-z7C" id="YpM-Ht-AAD"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="5" style="plain" systemItem="fixedSpace" id="0WL-Rv-cJJ"/>
+                                </items>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.67843137249999996" green="0.72156862749999995" blue="0.75294117650000003" alpha="1" colorSpace="deviceRGB"/>
+                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Uy5-uC-tz2"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="booklistButton" destination="Nth-7g-oI4" id="8Ma-gZ-R3M"/>
+                        <outlet property="bookmarkButton" destination="4dJ-gi-qOh" id="OhG-91-YCV"/>
+                        <outlet property="bottomToolbar" destination="XVw-A9-Yws" id="nA9-jc-m0R"/>
+                        <outlet property="contentView" destination="VFS-I9-d8O" id="Tap-qP-kxG"/>
+                        <outlet property="dataToolsButton" destination="8td-cd-dEE" id="N2G-JU-foN"/>
+                        <outlet property="dictionaryButton" destination="n9m-dJ-npC" id="oV0-6C-ASO"/>
+                        <outlet property="fontColorButton" destination="VXL-i1-gmc" id="0Ct-VF-XNb"/>
+                        <outlet property="gotoButton" destination="g5s-XQ-Y5o" id="a5z-IP-inA"/>
+                        <outlet property="languageButton" destination="mOn-68-jYa" id="cMV-4M-kiP"/>
+                        <outlet property="noteButton" destination="u4D-c0-Dbo" id="rYQ-wN-9iz"/>
+                        <outlet property="pageNumberLabel" destination="RsU-1H-MBO" id="k6q-dF-7cH"/>
+                        <outlet property="pageSlider" destination="idR-KX-Iag" id="5v1-pd-CeR"/>
+                        <outlet property="scrollView" destination="asy-Ns-120" id="5YA-C1-vXr"/>
+                        <outlet property="searchButton" destination="RBz-QY-Vwo" id="JcO-73-YM5"/>
+                        <outlet property="titleButton" destination="yeV-5M-gEh" id="3eX-IA-zGZ"/>
+                        <outlet property="titleLabel" destination="Dzz-VE-eRg" id="q8n-Nb-Q2w"/>
+                        <outlet property="toastText" destination="Eyy-Bp-Sqo" id="QpD-ww-29o"/>
+                        <outlet property="toolbar" destination="g4M-pM-mfB" id="8xB-YU-f8d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1sq-fu-LZL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1328" y="-13"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="P05-1F-E40">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="JUb-EA-54Q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VUH-3h-73O">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="i0d-HE-z7C" kind="relationship" relationship="rootViewController" id="jtb-uu-Ne7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0UU-aE-Rnj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="354" y="-13"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="28-star.png" width="26" height="26"/>
+        <image name="icon-font3.png" width="32" height="22"/>
+        <image name="icon_arrow_left.png" width="30" height="30"/>
+        <image name="icon_arrow_right.png" width="30" height="30"/>
+        <image name="icon_refresh.png" width="30" height="30"/>
+        <image name="icon_save.png" width="30" height="30"/>
+        <image name="icon_zoom_in.png" width="30" height="30"/>
+        <image name="icon_zoom_out.png" width="30" height="30"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="lightContent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

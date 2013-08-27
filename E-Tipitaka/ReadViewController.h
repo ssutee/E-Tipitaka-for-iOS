@@ -20,6 +20,7 @@
 #define kItemOptionsActionSheet 1004
 #define kBookmarkOptionsActionSheet 1005
 #define kDataToolsActionSheet 1006
+#define kFontColorActionSheet 1007
 
 #define kGotoPageAlert 2001
 #define kGotoItemAlert 2002
@@ -80,6 +81,8 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *bookmarkButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *titleButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *dictionaryButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *fontColorButton;
+
 @property (nonatomic, strong) UIActionSheet *languageActionSheet;
 @property (nonatomic, strong) UIActionSheet *gotoActionSheet;
 @property (nonatomic, strong) UIActionSheet *itemOptionsActionSheet;
