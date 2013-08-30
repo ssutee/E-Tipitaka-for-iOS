@@ -350,7 +350,10 @@
     
     // http://www.etipitaka.com/read?language=thai&number=1&volume=1
     
-    SocializeEntity *entity = [SocializeEntity entityWithKey:[NSString stringWithFormat:@"http://www.etipitaka.com/read?language=%@&number=%@&volume=%@", [[self getCurrentLanguage] lowercaseString], [self getCurrentPage], [self getCurrentVolume]] name:entityName];
+    
+    NSString *key = [NSString stringWithFormat:@"http://www.etipitaka.com/read?language=%@&number=%@&volume=%@", [[self getCurrentLanguage] lowercaseString], [self getCurrentPage], [self getCurrentVolume]];
+    
+    SocializeEntity *entity = [SocializeEntity entityWithKey:[key stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] name:entityName];
 
     [self.actionBar removeFromSuperview];
     self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectZero entity:entity viewController:self];
