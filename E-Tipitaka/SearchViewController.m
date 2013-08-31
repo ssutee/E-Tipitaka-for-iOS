@@ -680,6 +680,9 @@
 	
    	static NSString *ResultCellIdentifier = @"Result Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ResultCellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ResultCellIdentifier];
+    }
     
     cell.textLabel.font = [UIFont boldSystemFontOfSize:22];
     cell.textLabel.textAlignment = UITextAlignmentLeft;
