@@ -161,6 +161,8 @@
 		9EDEDF5814E770F900C099E9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EDEDF5714E770F900C099E9 /* SystemConfiguration.framework */; };
 		9EDEDF5A14E7710300C099E9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EDEDF5914E7710300C099E9 /* MobileCoreServices.framework */; };
 		9EDEDF5C14E7711500C099E9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EDEDF5B14E7711500C099E9 /* libz.dylib */; };
+		9EEE957E17D2F19600E71241 /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE957D17D2F19600E71241 /* CoreDataViewController.m */; };
+		9EEE957F17D2F19600E71241 /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE957D17D2F19600E71241 /* CoreDataViewController.m */; };
 		9EFAFB6D17452B0900E3D5F6 /* _SZCommentsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFAFA9017452B0900E3D5F6 /* _SZCommentsListViewController.xib */; };
 		9EFAFB6E17452B0900E3D5F6 /* _SZCommentsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFAFA9017452B0900E3D5F6 /* _SZCommentsListViewController.xib */; };
 		9EFAFB6F17452B0900E3D5F6 /* _SZComposeCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFAFA9117452B0900E3D5F6 /* _SZComposeCommentViewController.xib */; };
@@ -808,6 +810,8 @@
 		9EDEDF5714E770F900C099E9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9EDEDF5914E7710300C099E9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		9EDEDF5B14E7711500C099E9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		9EEE957C17D2F19600E71241 /* CoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataViewController.h; sourceTree = "<group>"; };
+		9EEE957D17D2F19600E71241 /* CoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataViewController.m; sourceTree = "<group>"; };
 		9EF8919A13E30AD800A7C5B4 /* E_Tipitaka 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 7.xcdatamodel"; sourceTree = "<group>"; };
 		9EF891A413E6D3A900A7C5B4 /* E_Tipitaka 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 8.xcdatamodel"; sourceTree = "<group>"; };
 		9EFAFA9017452B0900E3D5F6 /* _SZCommentsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _SZCommentsListViewController.xib; sourceTree = "<group>"; };
@@ -1257,6 +1261,8 @@
 				9E10C56F141B183D005E60FC /* ContentViewController.m */,
 				9E42DCEE150AFB380081D04E /* CoreDataTableViewController.h */,
 				9E42DCEF150AFB380081D04E /* CoreDataTableViewController.m */,
+				9EEE957C17D2F19600E71241 /* CoreDataViewController.h */,
+				9EEE957D17D2F19600E71241 /* CoreDataViewController.m */,
 				9E669766134C5D1800B9E0F4 /* iToast.h */,
 				9E669767134C5D1F00B9E0F4 /* iToast.m */,
 				9E138969141B750C00C350B0 /* BaseReadViewController.h */,
@@ -2326,6 +2332,7 @@
 				9E13897F141B8E7700C350B0 /* UITextInputAlertView.m in Sources */,
 				9E138984141BA32C00C350B0 /* Command.m in Sources */,
 				9E577720142C817800E27FC9 /* SpecificedLanguageReadViewController.m in Sources */,
+				9EEE957F17D2F19600E71241 /* CoreDataViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2379,6 +2386,7 @@
 				9E9810CA1661B14F00F74E2E /* ToolsViewController.m in Sources */,
 				9E9810CE1661B79900F74E2E /* ExportTool.m in Sources */,
 				9E004AE716EF7114004A5225 /* Bookmark.m in Sources */,
+				9EEE957E17D2F19600E71241 /* CoreDataViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

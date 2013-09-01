@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsSortedByStateController;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsSortedByCreatedController;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
+@property (nonatomic, assign) BOOL ascending;
 
 @end
 
@@ -30,7 +31,8 @@
 @synthesize loadedData;
 @synthesize detailTable;
 @synthesize stageImages;
-@synthesize sortingControl;
+@synthesize sortingControl = _sortingControl;
+@synthesize orderingControl = _orderingControl;
 @synthesize backgroundManagedObjectContext = _backgroundManagedObjectContext;
 @synthesize fetchedResultsSortedByCreatedController = _fetchedResultsSortedByCreatedController;
 @synthesize fetchedResultsSortedByKeywordsController = _fetchedResultsSortedByKeywordsController;
@@ -53,7 +55,7 @@
         [fetchRequest setPredicate:pred];
         
         NSSortDescriptor *sortDescriptor;
-        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"keywords" ascending:YES];
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"keywords" ascending:self.ascending];
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
         [fetchRequest setSortDescriptors:sortDescriptors];
         
@@ -80,7 +82,7 @@
         [fetchRequest setPredicate:pred];
         
         NSSortDescriptor *sortDescriptor;
-        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"state" ascending:YES];
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"state" ascending:self.ascending];
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
         [fetchRequest setSortDescriptors:sortDescriptors];
         
@@ -107,7 +109,7 @@
         [fetchRequest setPredicate:pred];
         
         NSSortDescriptor *sortDescriptor;
-        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created" ascending:YES];
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created" ascending:self.ascending];
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
         [fetchRequest setSortDescriptors:sortDescriptors];
         
@@ -180,21 +182,44 @@
     }    
 }
 
+- (IBAction)orderList:(id)sender
+{
+    switch (self.sortingControl.selectedSegmentIndex) {
+        case 0:
+            _fetchedResultsSortedByKeywordsController = nil;
+            break;
+        case 1:
+            _fetchedResultsSortedByStateController = nil;
+            break;
+        case 2:
+            _fetchedResultsSortedByCreatedController = nil;
+            break;
+    }
+    self.ascending = self.orderingControl.selectedSegmentIndex == 1;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:[NSNumber numberWithBool:self.ascending] forKey:@"ascending"];
+    [userDefaults synchronize];
+    [self sortList:self.sortingControl];
+}
+
 -(IBAction)sortList:(id)sender {
-    switch (sortingControl.selectedSegmentIndex) {
+    switch (self.sortingControl.selectedSegmentIndex) {
         case 0:
             sorting = BY_TEXT;
             self.fetchedResultsController = nil;
+            _fetchedResultsSortedByKeywordsController = nil;
             self.fetchedResultsController = [self fetchedResultsSortedByKeywordsController];
             break;
         case 1:
             sorting = BY_PRIORITY;
             self.fetchedResultsController = nil;
+            _fetchedResultsSortedByStateController = nil;
             self.fetchedResultsController = [self fetchedResultsSortedByStateController];
             break;
         case 2:
             sorting = BY_CREATED;
             self.fetchedResultsController = nil;
+            _fetchedResultsSortedByCreatedController = nil;
             self.fetchedResultsController = [self fetchedResultsSortedByCreatedController];
             break;
         default:
@@ -211,9 +236,12 @@
 {
     [super viewDidLoad];
     
-    [NSFetchedResultsController deleteCacheWithName:nil];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.ascending = [[userDefaults valueForKey:@"ascending"] boolValue];
+
+    self.orderingControl.selectedSegmentIndex = self.ascending ? 1 : 0;
     
-    self.tableView = (UITableView *)self.view;
+    [NSFetchedResultsController deleteCacheWithName:nil];
     
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
 								   initWithTitle:@"แก้ไข"
