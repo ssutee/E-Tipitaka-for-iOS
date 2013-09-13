@@ -4,6 +4,26 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-AFDownloadRequestOperation.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Pods-AFNetworking.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Pods-JSONKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Pods-Reachability.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,7 +32,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>09F62959728E4503BD3BD70B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>166CF16898BB4E6C906CF6DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>61FEC3FEFA1447568637DF94</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>72CDE1F4397B47EFB4D4238B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>85601B83AA774EB785A8F553</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AD340E156637428F87D60A1C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
