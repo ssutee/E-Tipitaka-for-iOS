@@ -328,7 +328,7 @@
             });
         });
         
-//        dispatch_release(historyDetailQueue);
+        dispatch_release(historyDetailQueue);
     }
 
 }
