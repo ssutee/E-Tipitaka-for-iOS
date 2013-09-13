@@ -1384,6 +1384,7 @@
 		9E6696FB134B15CA00B9E0F4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9E57771E142C817800E27FC9 /* SpecificedLanguageReadViewController.m */,
 				9E6696FC134B15CA00B9E0F4 /* E-Tipitaka-Info.plist */,
 				9E6696FD134B15CA00B9E0F4 /* InfoPlist.strings */,
 				9E669700134B15CA00B9E0F4 /* E-Tipitaka-Prefix.pch */,
@@ -1425,7 +1426,6 @@
 				9E326FE7138E3EE900ED66AE /* DoubleReadViewController.m */,
 				9EAF955913D1AD540010CABD /* DictionaryListView_iPad.xib */,
 				9E57771D142C817800E27FC9 /* SpecificedLanguageReadViewController.h */,
-				9E57771E142C817800E27FC9 /* SpecificedLanguageReadViewController.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
