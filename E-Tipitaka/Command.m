@@ -7,7 +7,6 @@
 //
 
 #import "Command.h"
-#import "UITextInputAlertView.h"
 #import "ReadViewController.h"
 #import "ContentInfo.h"
 #import "QueryHelper.h"
@@ -42,21 +41,17 @@
 
 - (void) execute
 {
-	UITextInputAlertView *alert = [[UITextInputAlertView alloc] 
-                                   initWithTitle:@"ใส่หน้าที่ต้องการ" 
-                                   message:@"\n\n\n"
-                                   delegate:readViewController 
-                                   cancelButtonTitle:@"ยกเลิก"
-                                   otherButtonTitles:@"ตกลง", nil];	
-	alert.tag = kGotoPageAlert;
 	ContentInfo *info = [[ContentInfo alloc] init];
     info.language = [readViewController getCurrentLanguage];
     info.volume = [readViewController getCurrentVolume];
     [info setType:LANGUAGE|VOLUME];
-	alert.label.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่หน้าที่ ๑ ถึง %d", [QueryHelper getMaximumPageValue:info]]];
-    
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ใส่หน้าที่ต้องการ" message:[Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่หน้าที่ ๑ ถึง %d", [QueryHelper getMaximumPageValue:info]]] delegate:readViewController cancelButtonTitle:@"ยกเลิก" otherButtonTitles:@"ตกลง", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField * alertTextField = [alert textFieldAtIndex:0];
+    alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+	alert.tag = kGotoPageAlert;
     [alert show];
-    
 }
 
 @end
@@ -66,20 +61,16 @@
 
 - (void) execute
 {
-    UITextInputAlertView *alert = [[UITextInputAlertView alloc]
-                                   initWithTitle:@"ใส่ข้อที่ต้องการ" 
-                                   message:@"\n\n\n" 
-                                   delegate:readViewController 
-                                   cancelButtonTitle:@"ยกเลิก" 
-                                   otherButtonTitles:@"ตกลง", nil];
-    alert.tag = kGotoItemAlert;
-    
     ContentInfo *info = [[ContentInfo alloc] init];
     info.language = [readViewController getCurrentLanguage];
     info.volume = [readViewController getCurrentVolume];
     [info setType:LANGUAGE|VOLUME];
-    alert.label.text = [Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่ข้อที่ ๑ ถึง %d", [QueryHelper getMaximumItemValue:info]]];
-    
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ใส่ข้อที่ต้องการ" message:[Utils arabic2thai:[NSString stringWithFormat:@"ตั้งแต่ข้อที่ ๑ ถึง %d", [QueryHelper getMaximumItemValue:info]]] delegate:readViewController cancelButtonTitle:@"ยกเลิก" otherButtonTitles:@"ตกลง", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField * alertTextField = [alert textFieldAtIndex:0];
+    alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+    alert.tag = kGotoItemAlert;
     [alert show];
 }
 

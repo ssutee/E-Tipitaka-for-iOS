@@ -23,7 +23,6 @@
 #import "ContentInfo.h"
 #import "QueryHelper.h"
 #import "ContentViewController.h"
-#import "UITextInputAlertView.h"
 #import "Command.h"
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
@@ -1261,7 +1260,7 @@
         
 	if (buttonIndex != [alertView cancelButtonIndex]) {        
         if (alertView.tag == kGotoItemAlert || alertView.tag == kGotoPageAlert) {
-            NSString *inputText = ((UITextInputAlertView *)alertView).field.text;
+            NSString *inputText = [[alertView textFieldAtIndex:0] text];
             if ([inputText length] > 0 && [inputText intValue]) {
                 if(alertView.tag == kGotoPageAlert) {
                     [self changePage:[NSNumber numberWithInt:[inputText intValue]]];
