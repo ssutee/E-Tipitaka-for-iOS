@@ -425,10 +425,10 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+    if (IS_OS_7_OR_LATER) {
+        self.search.barStyle = UISearchBarStyleDefault;
+    }
 
-//    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 4.0f);
-//    progressBar.transform = transform;
-    
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     

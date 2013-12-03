@@ -206,6 +206,10 @@
 {
     [super viewDidLoad];
     
+    if (IS_OS_7_OR_LATER) {
+        self.searchBar.barStyle = UISearchBarStyleDefault;
+    }
+    
     self.navigationItem.title = @"พจนานุกรม บาลี-ไทย";
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;

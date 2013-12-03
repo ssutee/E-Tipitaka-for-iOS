@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		21D952BF139445C4827A4B63 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD59BE300AA440D09CC5302B /* libPods.a */; };
 		9E004AE716EF7114004A5225 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E004AE616EF7114004A5225 /* Bookmark.m */; };
+		9E07F04E17EDAB9000284308 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E07F04D17EDAB9000284308 /* Images.xcassets */; };
 		9E10C31B141A65DD005E60FC /* ContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E10C31A141A65DD005E60FC /* ContentView.xib */; };
 		9E10C570141B183D005E60FC /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C56F141B183D005E60FC /* ContentViewController.m */; };
 		9E10C571141B183D005E60FC /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E10C56F141B183D005E60FC /* ContentViewController.m */; };
@@ -622,6 +623,7 @@
 		9E004AE116EF6D48004A5225 /* E_Tipitaka 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 13.xcdatamodel"; sourceTree = "<group>"; };
 		9E004AE516EF7114004A5225 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
 		9E004AE616EF7114004A5225 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
+		9E07F04D17EDAB9000284308 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9E0BD4271379794C00228694 /* E_Tipitaka 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "E_Tipitaka 2.xcdatamodel"; sourceTree = "<group>"; };
 		9E10C31A141A65DD005E60FC /* ContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentView.xib; sourceTree = "<group>"; };
 		9E10C56E141B183D005E60FC /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -781,6 +783,7 @@
 		9E6697DE134ECC2400B9E0F4 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		9E6697DF134ECC2400B9E0F4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		9E6851FC142E2D52001D458C /* icon_document.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_document.png; sourceTree = "<group>"; };
+		9E69E098184D6000004B7876 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		9E6D51F017CB433C00600C47 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		9E6D51F217CB4AF500600C47 /* icon_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings.png; sourceTree = "<group>"; };
 		9E6D51F417CC41C600600C47 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
@@ -1400,6 +1403,7 @@
 				9E326FDB138E1BAE00ED66AE /* Resources */,
 				9E669709134B15CB00B9E0F4 /* iPhone */,
 				9E669710134B15CB00B9E0F4 /* iPad */,
+				9E07F04D17EDAB9000284308 /* Images.xcassets */,
 				9E6696FB134B15CA00B9E0F4 /* Supporting Files */,
 			);
 			path = "E-Tipitaka";
@@ -1413,6 +1417,7 @@
 				9E6696FD134B15CA00B9E0F4 /* InfoPlist.strings */,
 				9E669700134B15CA00B9E0F4 /* E-Tipitaka-Prefix.pch */,
 				9E669701134B15CA00B9E0F4 /* main.m */,
+				9E69E098184D6000004B7876 /* Constants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1755,6 +1760,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					9E6696ED134B15CA00B9E0F4 = {
+						DevelopmentTeam = A6DJDJ7527;
+					};
+				};
 			};
 			buildConfigurationList = 9E6696E8134B15C900B9E0F4 /* Build configuration list for PBXProject "E-Tipitaka" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2137,6 +2147,7 @@
 				9E43D31F17E3DEB400F6E381 /* iTunesArtwork.png in Resources */,
 				9EFAFBD917452B0900E3D5F6 /* socialize-activity-cell-icon-like-normal@2x.png in Resources */,
 				9EFAFBDB17452B0900E3D5F6 /* socialize-activity-cell-icon-like.png in Resources */,
+				9E07F04E17EDAB9000284308 /* Images.xcassets in Resources */,
 				9EFAFBDD17452B0900E3D5F6 /* socialize-activity-cell-icon-like@2x.png in Resources */,
 				9EFAFBDF17452B0900E3D5F6 /* socialize-activity-cell-icon-share.png in Resources */,
 				9E6D51FD17CC507300600C47 /* icon-font3~iphone.png in Resources */,
@@ -2604,7 +2615,11 @@
 			baseConfigurationReference = 0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sutee Sudprasert (36A75C247D)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2617,6 +2632,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2632,7 +2648,11 @@
 			baseConfigurationReference = 0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2643,11 +2663,13 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "85A32B1C-D5A8-486F-8820-220783A8BC6D";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -2675,8 +2697,12 @@
 			baseConfigurationReference = 0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sutee Sudprasert";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2688,12 +2714,13 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56BE7FED-BAF3-4420-893E-A0D1CB178FA0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "85A32B1C-D5A8-486F-8820-220783A8BC6D";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -2721,9 +2748,12 @@
 			baseConfigurationReference = 0B1CFE5CC70E4392BD66B832 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sutee Sudprasert";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2735,11 +2765,13 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "E-Tipitaka/E-Tipitaka-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "157EA7CA-391F-418B-B403-E03E65C00DE8";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

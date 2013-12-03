@@ -62,6 +62,8 @@
 {
     [super viewDidLoad];        
     
+    self.webView.scalesPageToFit = YES;
+    
     [self.view bringSubviewToFront:self.indictor];
     for (id subview in self.webView.subviews)
         if ([[subview class] isSubclassOfClass: [UIScrollView class]])
