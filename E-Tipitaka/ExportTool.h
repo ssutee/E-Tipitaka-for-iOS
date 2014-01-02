@@ -12,5 +12,7 @@
 @interface ExportTool : NSObject
 
 + (void)exportData;
++ (NSString *)encodeData;
++ (NSString *)saveDataToFile;
 
 @end

@@ -12,3 +12,6 @@ UserInterfaceState.xcuserstate
 # osx noise
 .DS_Store
 profile
+
+Pods/
+Podfile.lock

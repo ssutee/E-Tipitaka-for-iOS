@@ -21,6 +21,7 @@
 #define kBookmarkOptionsActionSheet 1005
 #define kDataToolsActionSheet 1006
 #define kFontColorActionSheet 1007
+#define kExportingMethodActionSheet 1008
 
 #define kGotoPageAlert 2001
 #define kGotoItemAlert 2002

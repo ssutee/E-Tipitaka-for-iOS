@@ -9,6 +9,7 @@
 #import "E_TipitakaAppDelegate.h"
 #import "TapDetectingWindow.h"
 #import "ContentViewController.h"
+#import "ImportTool.h"
 #import <Socialize/Socialize.h>
 #import <CoreData/CoreData.h>
 
@@ -72,6 +73,40 @@
     NSLog(@"Error: %@", [error localizedDescription]);
 }
 
+- (void)mergeChanges:(NSNotification *)notification
+{
+    E_TipitakaAppDelegate *application = [[UIApplication sharedApplication] delegate];
+    [application.managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:notification waitUntilDone:YES];
+    NSLog(@"mergeChanges called");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:notification.object];
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url
+{
+    if (url && [url isFileURL] && ([[url pathExtension] isEqualToString:@"etz"] || [[url pathExtension] isEqualToString:@"json"])) {
+        E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+        [context setUndoManager:nil];
+        [context setPersistentStoreCoordinator:[appDelegate persistentStoreCoordinator]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:context];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSInteger bookmarksCount, historiesCount;
+            BOOL ret = [ImportTool importDataFromFile:url.path bookmarksCount:&bookmarksCount historiesCount:&historiesCount inContext:context];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView = ret ? [[UIAlertView alloc] initWithTitle:@"นำข้อมูลเข้าสำเร็จ" message:[NSString stringWithFormat:@"การจดจำ %d อัน\nประวัติการค้นหา %d อัน", bookmarksCount, historiesCount] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] : [[UIAlertView alloc] initWithTitle:@"เกิดข้อผิดพลาด" message:@"ไม่สามารถนำเข้าข้อมูลจากโปรแกรมรุ่นใหม่" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                [alertView show];
+            });
+        });
+    }
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    [self handleOpenURL:url];
+    return YES;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -94,12 +129,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(errorNotification:) name:SocializeUIControllerDidFailWithErrorNotification object:nil];
 
     [self.window makeKeyAndVisible];
+    
+    NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
+    [self handleOpenURL:url];
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return [Socialize handleOpenURL:url];
+    return [self handleOpenURL:url] && [Socialize handleOpenURL:url];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken

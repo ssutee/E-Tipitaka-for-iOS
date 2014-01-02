@@ -40,7 +40,7 @@
     NSMutableArray *bookmarkData = [[NSMutableArray alloc] initWithCapacity:fetchedObjects.count];
     NSUInteger position = 0;
     for(Bookmark *bookmark in fetchedObjects) {
-        NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:[dateFormatter stringFromDate:bookmark.created ? bookmark.created : [NSDate date]], @"created", bookmark.text, @"text", bookmark.item.number, @"item_number", bookmark.item.section, @"item_section", bookmark.item.content.lang, @"lang", bookmark.item.content.volume, @"volume", nil];
+        NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:[dateFormatter stringFromDate:bookmark.created ? bookmark.created : [NSDate date]], @"created", bookmark.text, @"text", bookmark.item.number, @"item_number", bookmark.item.section, @"item_section", bookmark.item.content.lang, @"lang", bookmark.item.content.volume, @"volume", bookmark.important, @"important", nil];
         [bookmarkData addObject:data];
         position += 1;
         NSLog(@"%d", position);
@@ -110,13 +110,16 @@
     return historyData;
 }
 
-+ (void)exportData {
++ (NSString *)encodeData {
     NSArray *bookmarks = [self exportBookmark];
-    NSArray *histories = [self exportHistory];
-    
+    NSArray *histories = [self exportHistory];    
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:bookmarks, @"bookmarks", histories, @"histories", nil];
-    NSString *json = [data JSONStringWithOptions:JKSerializeOptionEscapeUnicode error:nil];
-    
+    return [data JSONStringWithOptions:JKSerializeOptionEscapeUnicode error:nil];
+}
+
++ (NSString *)saveDataToFile
+{
+    NSString *json = [self encodeData];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
@@ -126,7 +129,11 @@
     
     NSString *filePath = [NSString stringWithFormat:@"%@/%@.json", documentsDirectory, [dateFormatter stringFromDate:[NSDate date]]];
     [json writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-    
+    return filePath;
+}
+
++ (void)exportData {
+    NSString *filePath = [self saveDataToFile];
     dispatch_async(dispatch_get_main_queue(), ^{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[filePath lastPathComponent] message:@"นำข้อมูลออกสำเร็จ\nข้อมูลอยู่ที่ File Sharing ใน iTunes" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
         [alertView show];

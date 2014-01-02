@@ -14,8 +14,9 @@
 #import "History+Helper.h"
 #import "Content+Helper.h"
 #import "MBProgressHUD.h"
+#import "ImportTool.h"
 
-@interface ImportListViewController ()<MBProgressHUDDelegate>
+@interface ImportListViewController ()<MBProgressHUDDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *jsonFiles;
 @property (nonatomic, strong) MBProgressHUD *HUD;
@@ -144,90 +145,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.view.window addSubview:self.HUD];
-    self.HUD.labelText = @"กำลังนำข้อมูลเข้า";
-    [self.HUD show:YES];
+    E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+    [context setUndoManager:nil];
+    [context setPersistentStoreCoordinator:[appDelegate persistentStoreCoordinator]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:context];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        E_TipitakaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        
-        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
-        [context setUndoManager:nil];
-        [context setPersistentStoreCoordinator:[appDelegate persistentStoreCoordinator]];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChanges:) name:NSManagedObjectContextDidSaveNotification object:context];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"th_TH"]];
-        [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-        
-        NSString *path = [self.jsonFiles objectAtIndex:indexPath.row];
+        NSInteger bookmarksCount, historiesCount;
         NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *jsonString = [NSString stringWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:path] encoding:NSUTF8StringEncoding error:nil];
-        
-        id jsonObject = [jsonString objectFromJSONString];
-        
-        NSArray *bookmarks = [jsonObject objectForKey:@"bookmarks"];
-        self.HUD.progress = 0.0f;
-        int bookmarkPosition = 0;
-        int bookmarksCount = bookmarks.count;
-        for (NSDictionary *bookmark in bookmarks) {
-            Item *item = [Item itemWithSection:[bookmark objectForKey:@"item_section"] number:[bookmark objectForKey:@"item_number"] volume:[bookmark objectForKey:@"volume"] lang:[bookmark objectForKey:@"lang"] inManagedObjectContext:context];
-            if (item) {
-                Bookmark *newBookmark = [Bookmark bookmarkWithItem:item text:[bookmark objectForKey:@"text"] inManagedObjectContext:context];
-                newBookmark.text = [bookmark objectForKey:@"text"];
-                newBookmark.created = [dateFormatter dateFromString:[bookmark objectForKey:@"created"]];
-            }
-            bookmarkPosition += 1;
-            self.HUD.progress = 1.0f * bookmarkPosition/ bookmarksCount;
-        }
-        
-        NSArray *histories = [jsonObject objectForKey:@"histories"];
-        self.HUD.progress = 0.0f;
-        int historyPosition = 0;
-        int historiesCount = histories.count;
-        for (NSDictionary *history in histories) {
-            NSString *lang = [history objectForKey:@"lang"];
-            History *newHistory = [History historyWithKeywords:[history objectForKey:@"keywords"] lang:lang inManagedObjectContext:context];
-            newHistory.detail = [history objectForKey:@"detail"];
-            newHistory.star = [history objectForKey:@"star"];
-            newHistory.created = [dateFormatter dateFromString:[history objectForKey:@"created"]];
-            newHistory.state = [history objectForKey:@"state"];
-            newHistory.read = [NSKeyedArchiver archivedDataWithRootObject:[history objectForKey:@"read"]];
-            newHistory.selected = [NSKeyedArchiver archivedDataWithRootObject:[history objectForKey:@"selected"]];
-            NSMutableSet *contents = [[NSMutableSet alloc] init];
-            NSLog(@"count = %d", [[history objectForKey:@"contents"] count]);
-            if ([[history objectForKey:@"contents"] count] <= 500) {
-                for (NSString *encodedContent in [history objectForKey:@"contents"]) {
-                    NSArray *tokens = [encodedContent componentsSeparatedByString:@":"];
-                    NSNumber *volume = [NSNumber numberWithInt:[[tokens objectAtIndex:0] intValue]];
-                    NSNumber *page = [NSNumber numberWithInt:[[tokens objectAtIndex:1] intValue]];
-                    Content *content = [Content getContentWithLang:lang volume:volume page:page inManagedObjectContext:context];
-                    if (content) {
-                        [contents addObject:content];
-                    }
-                }
-                [newHistory addContents:contents];
-            }
-            historyPosition += 1;
-            self.HUD.progress = 1.0f * historyPosition/ historiesCount;
-        }
-        
-        [context save:nil];
-
+        BOOL ret = [ImportTool importDataFromFile:[documentsDirectory stringByAppendingPathComponent:[self.jsonFiles objectAtIndex:indexPath.row]] bookmarksCount:&bookmarksCount historiesCount:&historiesCount inContext:context];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.HUD hide:YES];
-        });
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"นำข้อมูลเข้าสำเร็จ" message:[NSString stringWithFormat:@"การจดจำ %d อัน\nประวัติการค้นหา %d อัน", bookmarksCount, historiesCount] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+            UIAlertView *alertView = ret ? [[UIAlertView alloc] initWithTitle:@"นำข้อมูลเข้าสำเร็จ" message:[NSString stringWithFormat:@"การจดจำ %d อัน\nประวัติการค้นหา %d อัน", bookmarksCount, historiesCount] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil] : [[UIAlertView alloc] initWithTitle:@"เกิดข้อผิดพลาด" message:@"ไม่สามารถนำเข้าข้อมูลจากโปรแกรมรุ่นใหม่" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
             [alertView show];
-            
             if ([self.delegate respondsToSelector:@selector(impotListViewControllerDidFinish:)]) {
                 [self.delegate impotListViewControllerDidFinish:self];
             }
         });
-
-        
     });
+}
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.cancelButtonIndex == buttonIndex && [self.delegate respondsToSelector:@selector(impotListViewControllerDidFinish:)]) {
+        [self.delegate impotListViewControllerDidFinish:self];
+    }
 }
 
 - (void)viewDidUnload

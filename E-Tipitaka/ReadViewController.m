@@ -28,16 +28,20 @@
 #import "MBProgressHUD.h"
 #import "ZipArchive.h"
 #import <Socialize/Socialize.h>
+#import <MessageUI/MessageUI.h>
 #import "CommentViewController.h"
 #import "ExportTool.h"
+#import "ZipArchive.h"
+#import <AFDownloadRequestOperation/AFDownloadRequestOperation.h>
 
-@interface ReadViewController()<SocializeServiceDelegate, ImportListViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface ReadViewController()<SocializeServiceDelegate, ImportListViewControllerDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
 {
     BOOL _isDownloadingDatabase;
 }
 @property (nonatomic, strong) MBProgressHUD *HUD;
 @property (nonatomic, strong) SZActionBar *actionBar;
 @property (nonatomic, strong) UIActionSheet *fontColorActionSheet;
+@property (nonatomic, strong) UIActionSheet *exportingMethodActionSheet;
 
 @end
 
@@ -70,6 +74,7 @@
 @synthesize HUD = _HUD;
 @synthesize actionBar = _actionBar;
 @synthesize fontColorActionSheet = _fontColorActionSheet;
+@synthesize exportingMethodActionSheet = _exportingMethodActionSheet;
 
 #pragma mark - Getter/Setter Methods
 
@@ -701,6 +706,9 @@
     if (self.dataToolsActionSheet != nil && [self.dataToolsActionSheet isVisible]) {
         [self.dataToolsActionSheet dismissWithClickedButtonIndex:[self.dataToolsActionSheet cancelButtonIndex] animated:YES];
     }
+    if (self.exportingMethodActionSheet != nil && [self.exportingMethodActionSheet isVisible]) {
+        [self.exportingMethodActionSheet dismissWithClickedButtonIndex:[self.exportingMethodActionSheet cancelButtonIndex] animated:YES];
+    }
 }
 
 - (void) showToast {
@@ -748,6 +756,31 @@
         [ExportTool exportData];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.HUD hide:YES];
+        });
+    });
+}
+
+- (void)exportDataByEmail {
+    self.HUD.mode = MBProgressHUDModeIndeterminate;
+    self.HUD.labelText = @"กำลังนำข้อมูลออก";
+    [self.HUD show:YES];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *filePath = [ExportTool saveDataToFile];
+        ZipArchive *zip = [[ZipArchive alloc] init];
+        BOOL ret = NO;
+        if ([zip CreateZipFile2:[filePath stringByAppendingPathExtension:@"etz"]]) {
+            ret = [zip addFileToZip:filePath newname:[filePath lastPathComponent]];
+            [zip CloseZipFile2];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.HUD hide:YES];
+            MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+            mc.mailComposeDelegate = self;
+            [mc setSubject:@"E-Tipitaka Document"];
+            NSString *attachFile = ret ? [filePath stringByAppendingPathExtension:@"etz"] : filePath;
+            [mc addAttachmentData:[NSData dataWithContentsOfFile:attachFile] mimeType:@"application/E-Tipitaka" fileName:[attachFile lastPathComponent]];            
+            [mc setMessageBody:[attachFile lastPathComponent] isHTML:NO];
+            [self presentViewController:mc animated:YES completion:nil];
         });
     });
 }
@@ -998,13 +1031,25 @@
 -(IBAction)dataTools:(id)sender {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self.dataToolsActionSheet showFromToolbar:toolbar];
-    }
-    else if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    } else {
         if ([self.dataToolsActionSheet isVisible]) {
             [self.dataToolsActionSheet dismissWithClickedButtonIndex:[self.dataToolsActionSheet cancelButtonIndex] animated:YES];
         } else {
             [self dismissAllPopoverControllers];
             [self.dataToolsActionSheet showFromBarButtonItem:self.dataToolsButton animated:YES];
+        }
+    }
+}
+
+- (void)chooseExportingMethod {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self.exportingMethodActionSheet showFromToolbar:toolbar];
+    } else {
+        if ([self.exportingMethodActionSheet isVisible]) {
+            [self.exportingMethodActionSheet dismissWithClickedButtonIndex:[self.exportingMethodActionSheet cancelButtonIndex] animated:YES];
+        } else {
+            [self dismissAllPopoverControllers];
+            [self.exportingMethodActionSheet showFromBarButtonItem:self.dataToolsButton animated:YES];
         }
     }
 }
@@ -1131,6 +1176,16 @@
     [actionSheet addButtonWithTitle:@"นำข้อมูลออก"];
     self.dataToolsActionSheet = actionSheet;
     
+    // create action sheet for data tools
+    actionSheet = [[UIActionSheet alloc] init];
+    actionSheet.title = @"โปรดเลือกวิธีการที่ต้องการ";
+    actionSheet.delegate = self;
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    actionSheet.tag = kExportingMethodActionSheet;
+    [actionSheet addButtonWithTitle:@"E-mail"];
+    [actionSheet addButtonWithTitle:@"iTunes"];
+    self.exportingMethodActionSheet = actionSheet;
+    
     // create action sheet for font color
 	actionSheet = [[UIActionSheet alloc] init];
 	actionSheet.title = @"โปรดเลือกสีอักษรที่ต้องการ";
@@ -1181,6 +1236,7 @@
     self.gotoActionSheet = nil;
     self.itemOptionsActionSheet = nil;
     self.dataToolsActionSheet = nil;
+    self.exportingMethodActionSheet = nil;
     self.bottomToolbar = nil;
     self.alterItems = nil;
     self.actionBar = nil;
@@ -1337,10 +1393,16 @@
         if (buttonIndex == 0) {
             [self importData];
         } else if (buttonIndex == 1) {
-            [self exportData];
+            [self chooseExportingMethod];
         }
     } else if (actionSheet.tag == kFontColorActionSheet) {
         [self changeFontColor:buttonIndex];
+    } else if (actionSheet.tag == kExportingMethodActionSheet) {
+        if (buttonIndex == 0) {
+            [self  exportDataByEmail];
+        } else if (buttonIndex == 1) {
+            [self exportData];
+        }
     }
 }
 
@@ -1398,6 +1460,19 @@
 
 - (void)impotListViewControllerDidFinish:(ImportListViewController *)controller {
     [self dismissAllPopoverControllers];
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if (result == MFMailComposeResultSent) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"นำข้อมูลออกสำเร็จ" message:@"อีเมลได้ถูกส่งไปเรียบร้อยแล้ว" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        [alertView show];
+    } else if (result == MFMailComposeResultFailed) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"เกิดข้อผิดพลาด" message:@"ไม่สามารถส่งอีเมลได้ในขณะนี้" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 @end
